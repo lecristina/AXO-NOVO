@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos - Axolutions | Portfolio de Desenvolvimento</title>
+    <meta name="description" content="Confira nosso portfolio de projetos. Sites, aplicativos, sistemas e solucoes digitais desenvolvidas pela Axolutions para empresas de todo o Brasil.">
+    <meta name="keywords" content="portfolio, projetos, desenvolvimento web, aplicativos, sistemas, e-commerce, Axolutions">
+    <meta property="og:title" content="Projetos - Axolutions">
+    <meta property="og:description" content="Portfolio de projetos de desenvolvimento da Axolutions. Sites, apps e sistemas de alto impacto.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="projetos.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradientFlow 4s ease infinite; }
+        @keyframes gradientFlow { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .project-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .project-card:hover { transform: translateY(-6px); }
+        .project-card .project-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .project-card:hover .project-image { transform: scale(1.08); }
+        .project-card .project-overlay { opacity: 0; transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .project-card:hover .project-overlay { opacity: 1; }
+    </style>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "CollectionPage", "name": "Projetos Axolutions", "description": "Portfolio de projetos de desenvolvimento da Axolutions", "publisher": { "@type": "Organization", "name": "Axolutions" } }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-2.5 group">
+                    <img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">
+                    <span class="text-xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">Ax<span class="text-purple-400">olutions</span></span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Inicio</a>
+                    <a href="index.html#servicos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Servicos</a>
+                    <a href="blog.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Blog</a>
+                    <a href="projetos.html" class="nav-link active text-sm font-medium text-white transition-colors">Projetos</a>
+                    <a href="criadores.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Equipe</a>
+                    <a href="index.html#contato" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Contato</a>
+                </div>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="index.html#contato" class="relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-primary hover:border-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">Fale Conosco</a>
+                </div>
+                <button id="menu-btn" class="lg:hidden p-2 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden flex-col lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 gap-4">
+            <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Inicio</a>
+            <a href="index.html#servicos" class="text-sm font-medium text-white/80 hover:text-white py-2">Servicos</a>
+            <a href="blog.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Blog</a>
+            <a href="projetos.html" class="text-sm font-medium text-white py-2">Projetos</a>
+            <a href="criadores.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Equipe</a>
+            <a href="index.html#contato" class="text-sm font-medium text-white/80 hover:text-white py-2">Contato</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-36 pb-16 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <span class="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">Portfolio</span>
+            <h1 class="text-4xl lg:text-6xl font-black mt-2">Nossos <span class="gradient-text">Projetos</span></h1>
+            <p class="text-gray-600 mt-5 max-w-2xl mx-auto text-lg leading-relaxed">Conhca alguns dos projetos que desenvolvemos. Cada solucao e pensada para gerar resultados reais.</p>
+        </div>
+    </section>
+
+    <!-- FILTER -->
+    <section class="pb-8 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-3" id="filter-btns">
+            <button data-filter="all" class="filter-btn active bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">Todos</button>
+        </div>
+    </section>
+
+    <!-- PROJECTS GRID -->
+    <section class="pb-24 px-4">
+        <div id="projects-grid" class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div id="no-results" class="hidden max-w-7xl mx-auto text-center py-16">
+            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <h3 class="text-xl font-bold text-gray-500">Nenhum projeto encontrado</h3>
+            <p class="text-gray-400 mt-2">Nenhum projeto nesta categoria ainda.</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
+            <a href="index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Solicitar Orcamento</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-2.5 mb-5"><img src="images/logo.png" alt="Axolutions" class="h-9 w-auto"><span class="text-xl font-display font-bold text-white">Ax<span class="text-primary">olutions</span></span></div>
+                    <p class="text-sm leading-relaxed text-gray-500">Startup lider em desenvolvimento de softwares inovadores. Transformamos ideias em solucoes digitais de alto impacto.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Paginas</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html" class="hover:text-primary transition-colors">Inicio</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a><a href="projetos.html" class="hover:text-primary transition-colors">Projetos</a><a href="criadores.html" class="hover:text-primary transition-colors">Nossa Equipe</a><a href="admin.html" class="hover:text-primary transition-colors">Painel Admin</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Servicos</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas Web</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Automacoes</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a><a href="index.html#servicos" class="hover:text-primary transition-colors">E-commerce</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Secoes</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Nossos Servicos</a><a href="index.html#global" class="hover:text-primary transition-colors">Alcance Global</a><a href="index.html#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a><a href="index.html#faq" class="hover:text-primary transition-colors">FAQ</a><a href="index.html#contato" class="hover:text-primary transition-colors">Contato</a></nav>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-600">&copy; 2026 Axolutions. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-sm"><a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a><a href="criadores.html" class="hover:text-primary transition-colors">Equipe</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+    (function() {
+        // Navbar scroll effect
+        var navbar = document.getElementById('navbar');
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
+            } else {
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
+            }
+        }
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar();
+
+        // Mobile menu
+        var menuBtn = document.getElementById('menu-btn');
+        var mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+
+        // Scroll animations
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
+            });
+        }, { threshold: 0.1 });
+
+        // Load projects
+        var grid = document.getElementById('projects-grid');
+        var noResults = document.getElementById('no-results');
+        var filterContainer = document.getElementById('filter-btns');
+        var projects = DataManager.getData(DataManager.keys.PROJECTS).filter(function(p) { return p.status !== 'draft'; });
+        var activeFilter = 'all';
+
+        // Build category filters
+        var categories = [];
+        projects.forEach(function(p) {
+            if (p.category && categories.indexOf(p.category) === -1) {
+                categories.push(p.category);
+            }
+        });
+        categories.forEach(function(cat) {
+            var btn = document.createElement('button');
+            btn.setAttribute('data-filter', cat);
+            btn.className = 'filter-btn bg-gray-100 text-gray-600 border border-gray-200 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary';
+            btn.textContent = cat;
+            filterContainer.appendChild(btn);
+        });
+
+        // Filter click handler
+        filterContainer.addEventListener('click', function(e) {
+            var btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            activeFilter = btn.getAttribute('data-filter');
+            filterContainer.querySelectorAll('.filter-btn').forEach(function(b) {
+                b.className = 'filter-btn bg-gray-100 text-gray-600 border border-gray-200 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary';
+            });
+            btn.className = 'filter-btn active bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300';
+            renderProjects();
+        });
+
+        function renderProjects() {
+            var filtered = activeFilter === 'all' ? projects : projects.filter(function(p) { return p.category === activeFilter; });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(function(p, i) {
+                var techHtml = '';
+                if (p.techs && p.techs.length) {
+                    techHtml = '<div class="flex flex-wrap gap-2 mt-4">' + p.techs.map(function(t) {
+                        return '<span class="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">' + t + '</span>';
+                    }).join('') + '</div>';
+                }
+                return '<article class="project-card scroll-animate group" style="transition-delay:' + (i * 100) + 'ms">' +
+                    '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
+                        '<div class="h-56 relative overflow-hidden">' +
+                            (p.image
+                                ? '<img src="' + p.image + '" alt="' + p.title + '" class="project-image w-full h-full object-cover">'
+                                : '<div class="project-image w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-16 h-16 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>') +
+                            '<div class="project-overlay absolute inset-0 bg-primary/60 flex items-center justify-center">' +
+                                '<a href="projeto.html?id=' + p.id + '" class="bg-white text-primary px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all transform hover:scale-105">Ver Projeto</a>' +
+                            '</div>' +
+                            '<div class="absolute top-3 left-3"><span class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold backdrop-blur-sm">' + (p.category || 'Geral') + '</span></div>' +
+                        '</div>' +
+                        '<div class="p-6 flex flex-col flex-1">' +
+                            '<a href="projeto.html?id=' + p.id + '" class="block">' +
+                                '<h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-3">' + p.title + '</h3>' +
+                            '</a>' +
+                            '<p class="text-sm text-gray-500 line-clamp-3 flex-1">' + (p.description || '') + '</p>' +
+                            techHtml +
+                            '<div class="mt-5 pt-4 border-t border-gray-100">' +
+                                '<a href="projeto.html?id=' + p.id + '" class="flex items-center text-primary text-sm font-semibold group/link">' +
+                                    '<span>Ver detalhes</span>' +
+                                    '<svg class="w-4 h-4 ml-1.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>' +
+                                '</a>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</article>';
+            }).join('');
+
+            document.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
+        }
+
+        renderProjects();
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axolutions - Desenvolvimento de Sites, Aplicativos e Sistemas</title>
+    <meta name="description" content="Somos especialistas em desenvolvimento de sites, aplicativos e landing pages que convertem visitantes em clientes. Startup lider em softwares inovadores.">
+    <meta name="keywords" content="desenvolvimento de sites, aplicativos mobile, sistemas web, ERP, landing pages, automacao, e-commerce, Axolutions">
+    <meta property="og:title" content="Axolutions - Softwares Inovadores">
+    <meta property="og:description" content="Especialistas em desenvolvimento de sites, aplicativos e landing pages que convertem visitantes em clientes.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="index.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .scroll-animate-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate-left.animate-in { opacity: 1 !important; transform: translateX(0) !important; }
+        .scroll-animate-right { opacity: 0; transform: translateX(60px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate-right.animate-in { opacity: 1 !important; transform: translateX(0) !important; }
+        .scroll-animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate-scale.animate-in { opacity: 1 !important; transform: scale(1) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradientFlow 4s ease infinite; }
+        @keyframes gradientFlow { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+        .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.85) 100%); }
+        .typing-cursor::after { content: '|'; color: #cc44ff; animation: cursorBlink 0.8s infinite; font-weight: 300; }
+        @keyframes cursorBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+        .service-card { position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #8f00cc, #cc44ff); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card .icon-wrap { transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.3s; }
+        .service-card:hover .icon-wrap { transform: scale(1.15) rotate(-5deg); background: #8f00cc; }
+        .service-card:hover .icon-wrap svg { color: white; }
+        #globe-container canvas { cursor: grab; }
+        #globe-container canvas:active { cursor: grabbing; }
+        .testimonial-card-inner { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .testimonial-card-inner:hover { transform: translateY(-6px); }
+        .cosmos-glow { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(143,0,204,0.12) 0%, transparent 70%); filter: blur(80px); pointer-events: none; }
+        .blog-card .blog-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .blog-card:hover .blog-image { transform: scale(1.08); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), padding 0.3s; }
+        .faq-answer.open { max-height: 400px; }
+        .counter-line { position: relative; }
+        .counter-line::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background: linear-gradient(90deg, #8f00cc, #cc44ff); border-radius: 2px; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    </style>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "Organization", "name": "Axolutions", "description": "Startup lider em desenvolvimento de softwares inovadores", "url": "" }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-2.5 group">
+                    <img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">
+                    <span class="text-xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">Ax<span class="text-purple-400">olutions</span></span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#servicos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Servicos</a>
+                    <a href="#global" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Global</a>
+                    <a href="#depoimentos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Depoimentos</a>
+                    <a href="blog.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Blog</a>
+                    <a href="projetos.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Projetos</a>
+                    <a href="criadores.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Equipe</a>
+                    <a href="#faq" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">FAQ</a>
+                </div>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="#contato" class="relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-primary hover:border-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">Fale Conosco</a>
+                </div>
+                <button id="menu-btn" class="lg:hidden p-2 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden flex-col lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 gap-4">
+            <a href="#servicos" class="text-sm font-medium text-white/80 hover:text-white py-2">Servicos</a>
+            <a href="#global" class="text-sm font-medium text-white/80 hover:text-white py-2">Global</a>
+            <a href="#depoimentos" class="text-sm font-medium text-white/80 hover:text-white py-2">Depoimentos</a>
+            <a href="blog.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Blog</a>
+            <a href="projetos.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Projetos</a>
+            <a href="criadores.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Equipe</a>
+            <a href="#faq" class="text-sm font-medium text-white/80 hover:text-white py-2">FAQ</a>
+        </div>
+    </nav>
+
+    <!-- HERO - Video Background -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"><source src="images/video-hero.mp4" type="video/mp4"></video>
+        <div class="hero-overlay absolute inset-0 z-[1]"></div>
+        <div class="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] z-[2] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] z-[2] pointer-events-none"></div>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center pt-20">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-5 py-2 mb-8 scroll-animate-scale">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="text-sm font-medium text-white/90">Startup Lider em Softwares Inovadores</span>
+            </div>
+            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-display font-bold text-white leading-[1.05] mb-8 scroll-animate">
+                Criamos <span class="block mt-2"><span class="gradient-text" id="typing-text">Sites</span><span class="typing-cursor"></span></span>
+                <span class="block text-white/40 text-3xl sm:text-4xl lg:text-5xl font-sans font-light mt-4">que convertem visitantes em clientes</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light scroll-animate">Somos especialistas em desenvolvimento de sites, aplicativos e landing pages com design premium e tecnologia de ponta.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
+                <a href="#contato" class="group bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center justify-center gap-2">
+                    Solicitar Orcamento
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+                <a href="#servicos" class="border border-white/25 hover:border-white/50 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/5 inline-flex items-center justify-center">Nossos Servicos</a>
+            </div>
+            <div class="flex items-center justify-center gap-8 sm:gap-16 mt-20 scroll-animate">
+                <div class="text-center"><p class="text-4xl sm:text-5xl font-display font-bold text-white counter-line" data-count="50">0</p><p class="text-sm text-white/50 mt-3">Projetos Entregues</p></div>
+                <div class="w-px h-16 bg-white/15"></div>
+                <div class="text-center"><p class="text-4xl sm:text-5xl font-display font-bold text-white counter-line" data-count="98">0</p><p class="text-sm text-white/50 mt-3">% Satisfacao</p></div>
+                <div class="w-px h-16 bg-white/15 hidden sm:block"></div>
+                <div class="text-center hidden sm:block"><p class="text-4xl sm:text-5xl font-display font-bold text-white counter-line">24/7</p><p class="text-sm text-white/50 mt-3">Suporte Online</p></div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"><div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"><div class="w-1.5 h-3 bg-white/60 rounded-full mt-1.5 animate-bounce"></div></div></div>
+    </section>
+
+    <!-- SOBRE - Split layout com numeros animados -->
+    <section id="sobre" class="py-28 lg:py-36 px-4 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="scroll-animate-left">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Sobre a Axolutions</span></div>
+                    <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold leading-tight mb-8">A startup lider em <span class="gradient-text">softwares inovadores</span></h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">Construimos uma reputacao solida pela excelencia dos nossos sistemas. Nossa equipe de especialistas combina criatividade, tecnologia de ponta e estrategia para entregar solucoes que realmente fazem a diferenca no seu negocio.</p>
+                    <p class="text-gray-500 leading-relaxed mb-10">Oferecemos uma gama completa de servicos de altissima qualidade, desde consultoria estrategica ate desenvolvimento, implementacao e suporte continuo.</p>
+                    <a href="#servicos" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">Conheca nossos servicos <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                </div>
+                <div class="grid grid-cols-2 gap-5 scroll-animate-right">
+                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">5+</p><p class="text-gray-600 text-sm">Anos de Experiencia</p></div>
+                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors mt-8 group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">50+</p><p class="text-gray-600 text-sm">Projetos Entregues</p></div>
+                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">30+</p><p class="text-gray-600 text-sm">Clientes Satisfeitos</p></div>
+                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors mt-8 group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">&infin;</p><p class="text-gray-600 text-sm">Inovacao Continua</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICOS - Cards com hover bar + icone animado -->
+    <section id="servicos" class="py-28 lg:py-36 px-4 bg-gray-50/80 relative">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(143,0,204,0.04),transparent_60%)] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="text-center mb-20 scroll-animate">
+                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Nossos Servicos</span></div>
+                <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold"><span class="gradient-text">Solucoes completas</span> para seu negocio</h2>
+                <p class="text-gray-500 mt-5 max-w-2xl mx-auto text-lg">Tudo que sua empresa precisa para dominar o mundo digital.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:0ms">
+                    <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div>
+                    <h3 class="text-xl font-display font-bold mb-3">Desenvolvimento de Sites</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Sites personalizados com design premium, SEO otimizado e alta velocidade de carregamento.</p>
+                </div>
+                <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:80ms">
+                    <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+                    <h3 class="text-xl font-display font-bold mb-3">Sistemas Web</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Plataformas web responsivas, seguras e de alta performance para qualquer necessidade.</p>
+                </div>
+                <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:160ms">
+                    <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></div>
+                    <h3 class="text-xl font-display font-bold mb-3">Automacoes de Atendimento</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">I.A humanizada e chatbots personalizados que atendem seus clientes 24/7.</p>
+                </div>
+                <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:240ms">
+                    <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+                    <h3 class="text-xl font-display font-bold mb-3">Sistemas ERP</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Gestao empresarial integrada que otimiza processos e multiplica os resultados.</p>
+                </div>
+                <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:320ms">
+                    <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+                    <h3 class="text-xl font-display font-bold mb-3">Aplicativos Mobile</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Apps nativos e hibridos com UX excepcional para iOS e Android.</p>
+                </div>
+                <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:400ms">
+                    <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg></div>
+                    <h3 class="text-xl font-display font-bold mb-3">E-commerce</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Lojas online completas que vendem 24 horas por dia, 7 dias por semana.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOBE - Mapa mundi 3D interativo -->
+    <section id="global" class="py-28 lg:py-36 px-4 relative overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 scroll-animate-left">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Alcance Global</span></div>
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold leading-tight mb-8">Conectamos <span class="gradient-text">ideias</span><br>ao mundo inteiro</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">Nossos projetos alcancam usuarios em todos os continentes. Utilizamos tecnologias de ponta para criar solucoes que funcionam globalmente, sem barreiras.</p>
+                    <p class="text-gray-500 leading-relaxed mb-10">Arraste o globo para explorar nossa presenca mundial.</p>
+                    <div class="flex gap-10">
+                        <div><p class="text-4xl font-display font-bold text-primary">14+</p><p class="text-sm text-gray-500 mt-1">Paises Atendidos</p></div>
+                        <div><p class="text-4xl font-display font-bold text-primary">3</p><p class="text-sm text-gray-500 mt-1">Continentes</p></div>
+                        <div><p class="text-4xl font-display font-bold text-primary">99.9%</p><p class="text-sm text-gray-500 mt-1">Uptime</p></div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 scroll-animate-right">
+                    <div id="globe-container" class="h-[500px] lg:h-[600px] w-full rounded-3xl relative">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-10 pointer-events-none rounded-3xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS - Carrossel com autoplay -->
+    <section id="depoimentos" class="py-28 lg:py-36 px-4 bg-gray-50/80 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(143,0,204,0.05),transparent_60%)] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+                <div class="scroll-animate">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Depoimentos</span></div>
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold">O que nossos <span class="gradient-text">clientes</span> dizem</h2>
+                </div>
+                <div class="flex gap-3 mt-6 lg:mt-0 scroll-animate">
+                    <button id="carousel-prev" class="w-12 h-12 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:bg-primary hover:border-primary hover:text-white transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                    <button id="carousel-next" class="w-12 h-12 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:bg-primary hover:border-primary hover:text-white transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+                </div>
+            </div>
+            <div class="overflow-hidden"><div id="carousel-track" class="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></div></div>
+            <div id="carousel-dots" class="flex justify-center gap-2 mt-10"></div>
+        </div>
+    </section>
+
+    <!-- PROJETOS - Cards com overlay ao hover -->
+    <section class="py-28 lg:py-36 px-4 relative bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 scroll-animate">
+                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Portfolio</span></div>
+                <h2 class="text-4xl lg:text-5xl font-display font-bold">Nossos <span class="gradient-text">Projetos</span></h2>
+                <p class="text-gray-500 mt-5 max-w-2xl mx-auto text-lg">Veja alguns dos trabalhos que ja entregamos com excelencia.</p>
+            </div>
+            <div id="projects-preview" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div class="text-center mt-14 scroll-animate">
+                <a href="projetos.html" class="group inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300">Ver Todos os Projetos <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- COSMOS / GEREMEUSITE - Espaco estrelado imersivo -->
+    <section id="cosmos" class="relative py-36 lg:py-44 px-4 bg-[#050510] overflow-hidden">
+        <canvas id="cosmos-canvas" class="absolute inset-0 w-full h-full"></canvas>
+        <div class="cosmos-glow top-0 left-1/4"></div>
+        <div class="cosmos-glow bottom-0 right-1/4"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <div class="scroll-animate-scale">
+                <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-8">
+                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    <span class="text-sm font-medium text-purple-300">Cosmos Digital</span>
+                </div>
+                <h2 class="text-4xl lg:text-6xl xl:text-7xl font-display font-bold text-white mb-8 leading-tight">Seu site brilhando no <span class="gradient-text">universo digital</span></h2>
+                <p class="text-gray-400 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-12">Sites com carregamento ultrarrapido, SEO otimizado e design que conquista. Faca sua empresa brilhar como uma estrela.</p>
+                <a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-3 bg-gradient-to-r from-primary to-purple-500 hover:from-primary-dark hover:to-purple-600 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1">
+                    <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    Gerencie seu Site
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG - Cards com imagem zoom -->
+    <section class="py-28 lg:py-36 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+                <div class="scroll-animate">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Blog</span></div>
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold">Ultimos <span class="gradient-text">artigos</span></h2>
+                </div>
+                <a href="blog.html" class="group inline-flex items-center gap-2 text-primary font-semibold mt-4 lg:mt-0 hover:gap-3 transition-all scroll-animate">Ver todos os artigos <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+            </div>
+            <div id="blog-preview" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- FAQ - Accordion com animacao suave -->
+    <section id="faq" class="py-28 lg:py-36 px-4 bg-gray-50/80 relative">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(143,0,204,0.03),transparent_60%)] pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto relative">
+            <div class="text-center mb-16 scroll-animate">
+                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Duvidas</span></div>
+                <h2 class="text-4xl lg:text-5xl font-display font-bold">Perguntas <span class="gradient-text">frequentes</span></h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Quanto tempo leva para desenvolver um site?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">O prazo varia conforme a complexidade do projeto. Sites institucionais geralmente ficam prontos em 2-4 semanas, enquanto plataformas mais complexas podem levar de 1-3 meses.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Voces oferecem suporte apos a entrega?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim! Oferecemos suporte continuo 24/7 para todos os nossos clientes. Isso inclui manutencao, atualizacoes de seguranca e consultoria tecnica permanente.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Qual o custo de um projeto?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Cada projeto eh unico. Oferecemos orcamentos personalizados e transparentes. Entre em contato para uma proposta sem compromisso.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Voces desenvolvem aplicativos para iOS e Android?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim! Desenvolvemos aplicativos nativos e hibridos para ambas as plataformas, usando React Native e Flutter.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Os sites sao otimizados para SEO?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Absolutamente! Todos os nossos sites seguem as melhores praticas de SEO, incluindo meta tags otimizadas, estrutura semantica e dados estruturados.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Posso acompanhar o desenvolvimento?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Claro! Trabalhamos com metodologias ageis e mantemos comunicacao constante com atualizacoes regulares.</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTATO - Gradiente imersivo -->
+    <section id="contato" class="relative py-32 lg:py-40 px-4 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-purple-600 to-purple-900"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoLTZWMzRoNnptMC0zMHY2aC02VjRoNnptLTMwIDB2NkgwVjRoNnptMCAzMHY2SDB2LTZoNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50"></div>
+        <div class="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl lg:text-6xl font-display font-bold text-white mb-8 scroll-animate">Pronto para transformar sua<br><span class="text-purple-200">ideia em realidade?</span></h2>
+            <p class="text-purple-100/80 text-lg lg:text-xl mb-12 max-w-2xl mx-auto scroll-animate">Entre em contato e descubra como podemos ajudar seu negocio a crescer com tecnologia de ponta.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="group bg-white text-primary px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 inline-flex items-center gap-3 justify-center">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </a>
+                <a href="mailto:contato@axolutions.com.br" class="border-2 border-white/30 hover:border-white text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/10 inline-flex items-center gap-3 justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    E-mail
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-2.5 mb-5"><img src="images/logo.png" alt="Axolutions" class="h-9 w-auto"><span class="text-xl font-display font-bold text-white">Ax<span class="text-primary">olutions</span></span></div>
+                    <p class="text-sm leading-relaxed text-gray-500">Startup lider em desenvolvimento de softwares inovadores. Transformamos ideias em solucoes digitais de alto impacto.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Paginas</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html" class="hover:text-primary transition-colors">Inicio</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a><a href="projetos.html" class="hover:text-primary transition-colors">Projetos</a><a href="criadores.html" class="hover:text-primary transition-colors">Nossa Equipe</a><a href="admin.html" class="hover:text-primary transition-colors">Painel Admin</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Servicos</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a><a href="#servicos" class="hover:text-primary transition-colors">Sistemas Web</a><a href="#servicos" class="hover:text-primary transition-colors">Automacoes</a><a href="#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a><a href="#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a><a href="#servicos" class="hover:text-primary transition-colors">E-commerce</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Secoes</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="#servicos" class="hover:text-primary transition-colors">Nossos Servicos</a><a href="#global" class="hover:text-primary transition-colors">Alcance Global</a><a href="#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a><a href="#cosmos" class="hover:text-primary transition-colors">Cosmos Digital</a><a href="#faq" class="hover:text-primary transition-colors">FAQ</a><a href="#contato" class="hover:text-primary transition-colors">Contato</a></nav>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-600">&copy; 2026 Axolutions. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-sm"><a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a><a href="criadores.html" class="hover:text-primary transition-colors">Equipe</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/globe.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

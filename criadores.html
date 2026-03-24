@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Equipe - Axolutions | Criadores e Desenvolvedores</title>
+    <meta name="description" content="Conheca a equipe por tras da Axolutions. Profissionais apaixonados por tecnologia que transformam ideias em solucoes digitais inovadoras.">
+    <meta name="keywords" content="equipe, desenvolvedores, criadores, Axolutions, time de tecnologia, profissionais">
+    <meta property="og:title" content="Nossa Equipe - Axolutions">
+    <meta property="og:description" content="Conheca os criadores da Axolutions. Uma equipe apaixonada por inovacao e tecnologia.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="criadores.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .scroll-animate-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate-scale.animate-in { opacity: 1 !important; transform: scale(1) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradientFlow 4s ease infinite; }
+        @keyframes gradientFlow { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .team-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .team-card:hover { transform: translateY(-8px) scale(1.02); }
+        .team-avatar { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .team-card:hover .team-avatar { transform: scale(1.08); box-shadow: 0 0 30px rgba(143,0,204,0.3); }
+    </style>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "AboutPage", "name": "Equipe Axolutions", "description": "Conheca a equipe por tras da Axolutions", "publisher": { "@type": "Organization", "name": "Axolutions" } }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-2.5 group">
+                    <img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">
+                    <span class="text-xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">Ax<span class="text-purple-400">olutions</span></span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Inicio</a>
+                    <a href="index.html#servicos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Servicos</a>
+                    <a href="blog.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Blog</a>
+                    <a href="projetos.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Projetos</a>
+                    <a href="criadores.html" class="nav-link active text-sm font-medium text-white transition-colors">Equipe</a>
+                    <a href="index.html#contato" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Contato</a>
+                </div>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="index.html#contato" class="relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-primary hover:border-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">Fale Conosco</a>
+                </div>
+                <button id="menu-btn" class="lg:hidden p-2 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden flex-col lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 gap-4">
+            <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Inicio</a>
+            <a href="index.html#servicos" class="text-sm font-medium text-white/80 hover:text-white py-2">Servicos</a>
+            <a href="blog.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Blog</a>
+            <a href="projetos.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Projetos</a>
+            <a href="criadores.html" class="text-sm font-medium text-white py-2">Equipe</a>
+            <a href="index.html#contato" class="text-sm font-medium text-white/80 hover:text-white py-2">Contato</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-36 pb-16 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-md border border-primary/20 rounded-full px-5 py-2 mb-6 scroll-animate-scale">
+                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span class="text-sm font-semibold text-primary">Nosso Time</span>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-black mt-2 scroll-animate">Nossa <span class="gradient-text">Equipe</span></h1>
+            <p class="text-gray-600 mt-5 max-w-2xl mx-auto text-lg leading-relaxed scroll-animate">Somos uma equipe apaixonada por tecnologia e inovacao. Cada membro traz habilidades unicas para transformar ideias em solucoes digitais extraordinarias.</p>
+        </div>
+    </section>
+
+    <!-- TEAM GRID -->
+    <section class="pb-20 px-4">
+        <div id="team-grid" class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+    </section>
+
+    <!-- VALUES SECTION -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3 scroll-animate">O Que Nos Move</span>
+                <h2 class="text-3xl lg:text-5xl font-black scroll-animate">Nossos <span class="gradient-text">Valores</span></h2>
+                <p class="text-gray-600 mt-4 max-w-xl mx-auto scroll-animate">Os principios que guiam cada decisao e cada linha de codigo que escrevemos.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="scroll-animate bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group" style="transition-delay:0ms">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-7 h-7 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inovacao</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Buscamos constantemente novas tecnologias e abordagens para entregar solucoes que estejam a frente do mercado.</p>
+                </div>
+                <div class="scroll-animate bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group" style="transition-delay:100ms">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-7 h-7 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Qualidade</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Cada projeto e tratado com excelencia. Nao entregamos apenas codigo, entregamos solucoes robustas e bem testadas.</p>
+                </div>
+                <div class="scroll-animate bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group" style="transition-delay:200ms">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-7 h-7 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Colaboracao</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Trabalhamos lado a lado com nossos clientes, garantindo que cada detalhe esteja alinhado com a visao do projeto.</p>
+                </div>
+                <div class="scroll-animate bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group" style="transition-delay:300ms">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-7 h-7 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Compromisso</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Prazos cumpridos e comunicacao transparente. Nosso compromisso e com o resultado e a satisfacao do cliente.</p>
+                </div>
+                <div class="scroll-animate bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group" style="transition-delay:400ms">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-7 h-7 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Paixao</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Amamos o que fazemos. Essa paixao se reflete em cada pixel, cada funcao e cada interacao que criamos.</p>
+                </div>
+                <div class="scroll-animate bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group" style="transition-delay:500ms">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-7 h-7 text-primary group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Criatividade</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Pensamos fora da caixa para encontrar solucoes unicas que destacam nossos clientes no mercado digital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10 scroll-animate">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Quer fazer parte do time?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Estamos sempre em busca de talentos apaixonados por tecnologia e inovacao.</p>
+            <a href="index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Entre em Contato</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-2.5 mb-5"><img src="images/logo.png" alt="Axolutions" class="h-9 w-auto"><span class="text-xl font-display font-bold text-white">Ax<span class="text-primary">olutions</span></span></div>
+                    <p class="text-sm leading-relaxed text-gray-500">Startup lider em desenvolvimento de softwares inovadores. Transformamos ideias em solucoes digitais de alto impacto.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Paginas</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html" class="hover:text-primary transition-colors">Inicio</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a><a href="projetos.html" class="hover:text-primary transition-colors">Projetos</a><a href="criadores.html" class="hover:text-primary transition-colors">Nossa Equipe</a><a href="admin.html" class="hover:text-primary transition-colors">Painel Admin</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Servicos</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas Web</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Automacoes</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a><a href="index.html#servicos" class="hover:text-primary transition-colors">E-commerce</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Secoes</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Nossos Servicos</a><a href="index.html#global" class="hover:text-primary transition-colors">Alcance Global</a><a href="index.html#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a><a href="index.html#faq" class="hover:text-primary transition-colors">FAQ</a><a href="index.html#contato" class="hover:text-primary transition-colors">Contato</a></nav>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-600">&copy; 2026 Axolutions. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-sm"><a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a><a href="criadores.html" class="hover:text-primary transition-colors">Equipe</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+    (function() {
+        // Navbar scroll effect
+        var navbar = document.getElementById('navbar');
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
+            } else {
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
+            }
+        }
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar();
+
+        // Mobile menu
+        var menuBtn = document.getElementById('menu-btn');
+        var mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+
+        // Scroll animations
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-animate, .scroll-animate-scale').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // Load team members
+        var grid = document.getElementById('team-grid');
+        var team = DataManager.getData(DataManager.keys.TEAM);
+
+        // Schema.org Person markup
+        var schemaScript = document.createElement('script');
+        schemaScript.type = 'application/ld+json';
+        var personSchemas = team.map(function(member) {
+            return { "@context": "https://schema.org", "@type": "Person", "name": member.name, "jobTitle": member.role, "description": member.bio, "worksFor": { "@type": "Organization", "name": "Axolutions" } };
+        });
+        schemaScript.textContent = JSON.stringify(personSchemas);
+        document.head.appendChild(schemaScript);
+
+        // Gradient colors for avatars without photo
+        var gradients = [
+            'from-primary via-purple-500 to-pink-500',
+            'from-blue-500 via-primary to-purple-500',
+            'from-primary via-pink-500 to-rose-500',
+            'from-indigo-500 via-primary to-pink-400'
+        ];
+
+        grid.innerHTML = team.map(function(member, i) {
+            var initial = member.name ? member.name.charAt(0).toUpperCase() : '?';
+            var avatarHtml = member.image
+                ? '<img src="' + member.image + '" alt="' + member.name + '" class="team-avatar w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg">'
+                : '<div class="team-avatar w-28 h-28 rounded-full bg-gradient-to-br ' + gradients[i % gradients.length] + ' flex items-center justify-center border-4 border-white shadow-lg"><span class="text-4xl font-bold text-white">' + initial + '</span></div>';
+
+            return '<article class="team-card scroll-animate group" style="transition-delay:' + (i * 120) + 'ms">' +
+                '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col items-center text-center">' +
+                    '<div class="w-full h-24 bg-gradient-to-r from-primary/80 to-purple-600/80 relative">' +
+                        '<div class="absolute -bottom-14 left-1/2 -translate-x-1/2">' + avatarHtml + '</div>' +
+                    '</div>' +
+                    '<div class="pt-16 pb-8 px-6 flex flex-col items-center flex-1">' +
+                        '<h3 class="text-xl font-bold text-gray-900 mb-1">' + member.name + '</h3>' +
+                        '<span class="text-sm font-semibold text-primary mb-4">' + member.role + '</span>' +
+                        '<p class="text-sm text-gray-500 leading-relaxed">' + (member.bio || '') + '</p>' +
+                    '</div>' +
+                '</div>' +
+            '</article>';
+        }).join('');
+
+        // Observe newly created team cards
+        document.querySelectorAll('.scroll-animate').forEach(function(el) {
+            observer.observe(el);
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigo - Axolutions</title>
+    <meta name="description" content="Leia este artigo no blog da Axolutions sobre tecnologia e desenvolvimento.">
+    <meta property="og:type" content="article">
+    <meta name="robots" content="index, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
+                    colors: {
+                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradientFlow 4s ease infinite; }
+        @keyframes gradientFlow { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .blog-card .blog-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .blog-card:hover .blog-image { transform: scale(1.08); }
+        .blog-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .blog-card:hover { transform: translateY(-6px); }
+
+        /* Post content rich text styling */
+        .post-content { font-size: 1.125rem; line-height: 1.85; color: #374151; }
+
+        .post-content h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: #111827; line-height: 1.3; }
+
+        .post-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.375rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #1f2937; line-height: 1.4; }
+
+        .post-content p { margin-bottom: 1.25rem; }
+        .post-content a { color: #8f00cc; text-decoration: underline; text-underline-offset: 2px; }
+        .post-content a:hover { color: #b44ddb; }
+        .post-content ul, .post-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content blockquote { border-left: 4px solid #8f00cc; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #f5e6ff; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; color: #4b5563; }
+
+        .post-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; }
+        .post-content strong { font-weight: 700; color: #111827; }
+
+        .post-content em { font-style: italic; }
+        .post-content pre { background: #1f2937; color: #e5e7eb; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin: 1.5rem 0; font-size: 0.875rem; line-height: 1.7; }
+
+        .post-content code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+
+        .post-content pre code { background: none; padding: 0; }
+    </style>
+    <script id="post-jsonld" type="application/ld+json">{}</script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-2.5 group">
+                    <img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">
+                    <span class="text-xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">Ax<span class="text-purple-400">olutions</span></span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="index.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Inicio</a>
+                    <a href="index.html#servicos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Servicos</a>
+                    <a href="blog.html" class="nav-link active text-sm font-medium text-white transition-colors">Blog</a>
+                    <a href="projetos.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Projetos</a>
+                    <a href="criadores.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Equipe</a>
+                    <a href="index.html#contato" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Contato</a>
+                </div>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="index.html#contato" class="relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-primary hover:border-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">Fale Conosco</a>
+                </div>
+                <button id="menu-btn" class="lg:hidden p-2 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden flex-col lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 gap-4">
+            <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Inicio</a>
+            <a href="index.html#servicos" class="text-sm font-medium text-white/80 hover:text-white py-2">Servicos</a>
+            <a href="blog.html" class="text-sm font-medium text-white py-2">Blog</a>
+            <a href="projetos.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Projetos</a>
+            <a href="criadores.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Equipe</a>
+            <a href="index.html#contato" class="text-sm font-medium text-white/80 hover:text-white py-2">Contato</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="pt-36 pb-10 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <a href="blog.html" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light font-semibold mb-8 group transition-colors">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                Voltar ao Blog
+            </a>
+            <div id="post-meta" class="flex flex-wrap items-center gap-3 mb-5">
+                <span id="post-category" class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold"></span>
+                <span class="text-gray-300">&bull;</span>
+                <span id="post-date" class="text-sm text-gray-500 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </span>
+            </div>
+            <h1 id="post-title" class="text-3xl sm:text-4xl lg:text-5xl font-black font-display leading-tight"></h1>
+        </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <div id="post-image-wrap" class="hidden max-w-5xl mx-auto px-4 mb-12">
+        <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+            <img id="post-image" src="" alt="" class="w-full h-auto max-h-[500px] object-cover">
+        </div>
+    </div>
+
+    <!-- ARTICLE + SIDEBAR -->
+    <section class="pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+            <!-- Article -->
+            <article class="flex-1 max-w-4xl">
+                <div id="post-content" class="post-content scroll-animate"></div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="lg:w-80 shrink-0">
+                <div class="lg:sticky lg:top-28 space-y-8">
+                    <!-- Back to blog -->
+                    <a href="blog.html" class="flex items-center gap-2 text-primary hover:text-primary-light text-sm font-semibold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                        Todos os artigos
+                    </a>
+
+                    <!-- Related posts -->
+                    <div>
+                        <h3 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h3>
+                        <div id="related-posts" class="space-y-4"></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
+            <a href="index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Solicitar Orcamento</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-2.5 mb-5"><img src="images/logo.png" alt="Axolutions" class="h-9 w-auto"><span class="text-xl font-display font-bold text-white">Ax<span class="text-primary">olutions</span></span></div>
+                    <p class="text-sm leading-relaxed text-gray-500">Startup lider em desenvolvimento de softwares inovadores. Transformamos ideias em solucoes digitais de alto impacto.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Paginas</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html" class="hover:text-primary transition-colors">Inicio</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a><a href="projetos.html" class="hover:text-primary transition-colors">Projetos</a><a href="criadores.html" class="hover:text-primary transition-colors">Nossa Equipe</a><a href="admin.html" class="hover:text-primary transition-colors">Painel Admin</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Servicos</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas Web</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Automacoes</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a><a href="index.html#servicos" class="hover:text-primary transition-colors">E-commerce</a></nav>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-semibold mb-5">Secoes</h4>
+                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Nossos Servicos</a><a href="index.html#global" class="hover:text-primary transition-colors">Alcance Global</a><a href="index.html#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a><a href="index.html#faq" class="hover:text-primary transition-colors">FAQ</a><a href="index.html#contato" class="hover:text-primary transition-colors">Contato</a></nav>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-600">&copy; 2026 Axolutions. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-sm"><a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a><a href="criadores.html" class="hover:text-primary transition-colors">Equipe</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+    (function() {
+        // Navbar scroll effect
+        var navbar = document.getElementById('navbar');
+        function updateNavbar() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
+            } else {
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
+            }
+        }
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar();
+
+        // Mobile menu
+        var menuBtn = document.getElementById('menu-btn');
+        var mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+
+        // Scroll animations
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
+
+        // Format date pt-BR
+        function formatDatePtBR(dateStr) {
+            if (!dateStr) return '';
+            var d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
+
+        // Short date for related posts
+        function formatDateShort(dateStr) {
+            if (!dateStr) return '';
+            var d = new Date(dateStr + 'T00:00:00');
+            var months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+        }
+
+        // Get post ID from URL
+        var postId = new URLSearchParams(window.location.search).get('id');
+        if (!postId) { window.location.href = 'blog.html'; return; }
+
+        var post = DataManager.getItem(DataManager.keys.POSTS, postId);
+        if (!post) { window.location.href = 'blog.html'; return; }
+
+        // Populate page
+        document.title = post.title + ' - Blog Axolutions';
+        document.querySelector('meta[name="description"]').setAttribute('content', post.excerpt || post.title);
+        document.querySelector('meta[property="og:type"]').setAttribute('content', 'article');
+
+        document.getElementById('post-category').textContent = post.category || 'Geral';
+        document.getElementById('post-date').innerHTML += formatDatePtBR(post.date);
+        document.getElementById('post-title').textContent = post.title;
+
+        // Featured image
+        if (post.image) {
+            var imageWrap = document.getElementById('post-image-wrap');
+            var imageEl = document.getElementById('post-image');
+            imageEl.src = post.image;
+            imageEl.alt = post.title;
+            imageWrap.classList.remove('hidden');
+        }
+
+        // Post content (rich HTML from Quill)
+        document.getElementById('post-content').innerHTML = post.content || '<p>Conteudo nao disponivel.</p>';
+
+        // JSON-LD structured data
+        var jsonLd = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt || '',
+            "datePublished": post.date || '',
+            "dateModified": post.date || '',
+            "author": { "@type": "Organization", "name": "Axolutions" },
+            "publisher": { "@type": "Organization", "name": "Axolutions" },
+            "mainEntityOfPage": { "@type": "WebPage", "@id": window.location.href }
+        };
+        if (post.image) { jsonLd.image = post.image; }
+        if (post.category) { jsonLd.articleSection = post.category; }
+        document.getElementById('post-jsonld').textContent = JSON.stringify(jsonLd);
+
+        // Related posts
+        var allPosts = DataManager.getData(DataManager.keys.POSTS);
+        var related = allPosts.filter(function(p) {
+            return p.id !== post.id && p.category === post.category;
+        });
+        if (related.length < 2) {
+            var others = allPosts.filter(function(p) {
+                return p.id !== post.id && related.indexOf(p) === -1;
+            });
+            related = related.concat(others);
+        }
+        related = related.slice(0, 3);
+
+        var relatedContainer = document.getElementById('related-posts');
+        if (related.length === 0) {
+            relatedContainer.innerHTML = '<p class="text-sm text-gray-400">Nenhum artigo relacionado.</p>';
+        } else {
+            relatedContainer.innerHTML = related.map(function(r) {
+                return '<a href="post.html?id=' + r.id + '" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">' +
+                    '<div class="h-32 relative overflow-hidden">' +
+                        (r.image
+                            ? '<img src="' + r.image + '" alt="' + r.title + '" class="blog-image w-full h-full object-cover">'
+                            : '<div class="blog-image w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-10 h-10 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg></div>') +
+                    '</div>' +
+                    '<div class="p-4">' +
+                        '<span class="text-xs text-gray-400">' + formatDateShort(r.date) + '</span>' +
+                        '<h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">' + r.title + '</h4>' +
+                    '</div>' +
+                '</a>';
+            }).join('');
+        }
+    })();
+    </script>
+</body>
+</html>
