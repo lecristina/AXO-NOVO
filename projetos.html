@@ -48,37 +48,6 @@
 </head>
 <body class="bg-white text-gray-900 font-sans transition-colors duration-500">
 
-    <!-- NAVBAR -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <a href="index.html" class="flex items-center gap-2.5 group">
-                    <img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">
-                    <span class="text-xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">Ax<span class="text-purple-400">olutions</span></span>
-                </a>
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="index.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Inicio</a>
-                    <a href="index.html#servicos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Servicos</a>
-                    <a href="blog.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Blog</a>
-                    <a href="projetos.html" class="nav-link active text-sm font-medium text-white transition-colors">Projetos</a>
-                    <a href="criadores.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Equipe</a>
-                    <a href="index.html#contato" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Contato</a>
-                </div>
-                <div class="hidden lg:flex items-center gap-3">
-                    <a href="index.html#contato" class="relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-primary hover:border-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">Fale Conosco</a>
-                </div>
-                <button id="menu-btn" class="lg:hidden p-2 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden flex-col lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 gap-4">
-            <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Inicio</a>
-            <a href="index.html#servicos" class="text-sm font-medium text-white/80 hover:text-white py-2">Servicos</a>
-            <a href="blog.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Blog</a>
-            <a href="projetos.html" class="text-sm font-medium text-white py-2">Projetos</a>
-            <a href="criadores.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Equipe</a>
-            <a href="index.html#contato" class="text-sm font-medium text-white/80 hover:text-white py-2">Contato</a>
-        </div>
-    </nav>
 
     <!-- HERO -->
     <section class="pt-36 pb-16 px-4 relative overflow-hidden">
@@ -117,60 +86,13 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <div>
-                    <div class="flex items-center gap-2.5 mb-5"><img src="images/logo.png" alt="Axolutions" class="h-9 w-auto"><span class="text-xl font-display font-bold text-white">Ax<span class="text-primary">olutions</span></span></div>
-                    <p class="text-sm leading-relaxed text-gray-500">Startup lider em desenvolvimento de softwares inovadores. Transformamos ideias em solucoes digitais de alto impacto.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-semibold mb-5">Paginas</h4>
-                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html" class="hover:text-primary transition-colors">Inicio</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a><a href="projetos.html" class="hover:text-primary transition-colors">Projetos</a><a href="criadores.html" class="hover:text-primary transition-colors">Nossa Equipe</a><a href="admin.html" class="hover:text-primary transition-colors">Painel Admin</a></nav>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-semibold mb-5">Servicos</h4>
-                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas Web</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Automacoes</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a><a href="index.html#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a><a href="index.html#servicos" class="hover:text-primary transition-colors">E-commerce</a></nav>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-semibold mb-5">Secoes</h4>
-                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html#servicos" class="hover:text-primary transition-colors">Nossos Servicos</a><a href="index.html#global" class="hover:text-primary transition-colors">Alcance Global</a><a href="index.html#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a><a href="index.html#faq" class="hover:text-primary transition-colors">FAQ</a><a href="index.html#contato" class="hover:text-primary transition-colors">Contato</a></nav>
-                </div>
-            </div>
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-gray-600">&copy; 2026 Axolutions. Todos os direitos reservados.</p>
-                <div class="flex gap-6 text-sm"><a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a><a href="criadores.html" class="hover:text-primary transition-colors">Equipe</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a></div>
-            </div>
-        </div>
-    </footer>
-
+    <script>window.AXO_CONFIG = { page: 'projetos', navMode: 'transparent' };</script>
+    <script src="js/nav.js"></script>
+    <script src="js/footer.js"></script>
     <script src="js/data.js"></script>
     <script src="js/theme.js"></script>
     <script>
     (function() {
-        // Navbar scroll effect
-        var navbar = document.getElementById('navbar');
-        function updateNavbar() {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
-            } else {
-                navbar.classList.remove('bg-white/80', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/5');
-            }
-        }
-        window.addEventListener('scroll', updateNavbar);
-        updateNavbar();
-
-        // Mobile menu
-        var menuBtn = document.getElementById('menu-btn');
-        var mobileMenu = document.getElementById('mobile-menu');
-        if (menuBtn) {
-            menuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                mobileMenu.classList.toggle('flex');
-            });
-        }
-
         // Scroll animations
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {

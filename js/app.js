@@ -2,59 +2,7 @@
 (function() {
     'use strict';
 
-    // ==========================================
-    // Mobile Menu
-    // ==========================================
-    var menuBtn = document.getElementById('menu-btn');
-    var mobileMenu = document.getElementById('mobile-menu');
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', function() {
-            var isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('flex');
-            } else {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-            }
-        });
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-            });
-        });
-    }
-
-    // ==========================================
-    // Navbar scroll effect
-    // ==========================================
-    var navbar = document.getElementById('navbar');
-    var navLinks = navbar ? navbar.querySelectorAll('.nav-link') : [];
-    function updateNavbar() {
-        if (!navbar) return;
-        if (window.scrollY > 80) {
-            navbar.style.background = 'rgba(255,255,255,0.9)';
-            navbar.style.backdropFilter = 'blur(20px)';
-            navbar.style.borderBottom = '1px solid rgba(0,0,0,0.06)';
-            navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
-            navLinks.forEach(function(l) {
-                l.style.color = 'rgba(0,0,0,0.7)';
-            });
-            var brandText = navbar.querySelector('.font-display');
-            if (brandText) brandText.style.color = '#111';
-        } else {
-            navbar.style.background = 'transparent';
-            navbar.style.backdropFilter = 'none';
-            navbar.style.borderBottom = 'none';
-            navbar.style.boxShadow = 'none';
-            navLinks.forEach(function(l) { l.style.color = ''; });
-            var brandText2 = navbar.querySelector('.font-display');
-            if (brandText2) brandText2.style.color = '';
-        }
-    }
-    window.addEventListener('scroll', updateNavbar, { passive: true });
-    updateNavbar();
+    /* Mobile menu + navbar scroll are handled by js/nav.js */
 
     // ==========================================
     // Smooth scroll for anchor links
@@ -92,7 +40,7 @@
     // ==========================================
     var typingEl = document.getElementById('typing-text');
     if (typingEl) {
-        var words = ['Sites', 'Aplicativos', 'Sistemas', 'Landing Pages', 'E-commerce', 'Automacoes'];
+        var words = ['sua automação', 'seu site', 'seu app', 'sua landing page', 'seu e-commerce', 'sua automação'];
         var wordIndex = 0;
         var charIndex = 0;
         var isDeleting = false;
@@ -103,24 +51,24 @@
             if (isDeleting) {
                 typingEl.textContent = current.substring(0, charIndex - 1);
                 charIndex--;
-                typeSpeed = 40;
+                typeSpeed = 35;
             } else {
                 typingEl.textContent = current.substring(0, charIndex + 1);
                 charIndex++;
-                typeSpeed = 100;
+                typeSpeed = 90;
             }
 
             if (!isDeleting && charIndex === current.length) {
-                typeSpeed = 2500;
+                typeSpeed = 2800;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 300;
+                typeSpeed = 400;
             }
             setTimeout(typeEffect, typeSpeed);
         }
-        setTimeout(typeEffect, 1500);
+        setTimeout(typeEffect, 1200);
     }
 
     // ==========================================
@@ -152,125 +100,61 @@
     }
 
     // ==========================================
-    // Testimonials Carousel - Auto-switching
+    // Testimonials Marquee
     // ==========================================
-    function initCarousel() {
-        var track = document.getElementById('carousel-track');
-        var dotsContainer = document.getElementById('carousel-dots');
-        var prevBtn = document.getElementById('carousel-prev');
-        var nextBtn = document.getElementById('carousel-next');
+    function initMarquee() {
+        var track = document.getElementById('marquee-track');
         if (!track) return;
 
-        var testimonials = DataManager.getData(DataManager.keys.TESTIMONIALS);
-        if (!testimonials || testimonials.length === 0) return;
+        var testimonials = (typeof DataManager !== 'undefined') ? DataManager.getData(DataManager.keys.TESTIMONIALS) : null;
 
-        // Build cards
-        track.innerHTML = testimonials.map(function(t) {
+        // Fallback sample testimonials if none exist in storage
+        if (!testimonials || testimonials.length === 0) {
+            testimonials = [
+                { name: 'Ana Carolina', role: 'CEO, StartupBR', rating: 5, text: 'A Axolutions entregou nosso site em tempo recorde. A qualidade é impressionante e o suporte é incrível.' },
+                { name: 'Ricardo Mendes', role: 'Diretor, TechCorp', rating: 5, text: 'O sistema ERP que desenvolveram transformou completamente nossa operação. Recomendo a todos.' },
+                { name: 'Juliana Silva', role: 'Empreendedora', rating: 5, text: 'Recebi a prévia do meu site no mesmo dia que entrei em contato. Superou todas as expectativas!' },
+                { name: 'Carlos Eduardo', role: 'Fundador, InovaBiz', rating: 5, text: 'Profissionalismo, qualidade e entrega rápida. A Axolutions é referência no mercado.' },
+                { name: 'Fernanda Costa', role: 'Marketing Manager', rating: 5, text: 'Nossa landing page aumentou a conversão em 3x depois que a Axolutions redesenhou tudo.' },
+                { name: 'Thiago Alves', role: 'E-commerce Owner', rating: 5, text: 'A loja online ficou perfeita. Vendas aumentaram desde o primeiro mês. Equipe top!' }
+            ];
+        }
+
+        /* Google-reviews style card */
+        var AVATAR_COLORS = ['#ea4335','#4285f4','#34a853','#fbbc04','#ff6d00','#8f00cc'];
+        var AVATAR_TEXT   = ['#fff','#fff','#fff','#111','#fff','#fff'];
+        var _cardIdx = 0;
+
+        function buildCard(t) {
+            var ci    = _cardIdx % AVATAR_COLORS.length;
+            _cardIdx++;
+            var bg    = AVATAR_COLORS[ci];
+            var fg    = AVATAR_TEXT[ci];
             var stars = '';
+            var starPath = 'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
             for (var s = 0; s < 5; s++) {
-                stars += s < (t.rating || 5)
-                    ? '<svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>'
-                    : '<svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+                var filled = s < (t.rating || 5);
+                stars += '<svg class="w-3.5 h-3.5" fill="' + (filled ? '#fabb05' : '#e0e0e0') + '" viewBox="0 0 20 20"><path d="' + starPath + '"/></svg>';
             }
-            var avatar = t.image || '';
-            var avatarHTML = avatar
-                ? '<img src="' + avatar + '" alt="' + (t.name || '') + '" class="w-12 h-12 rounded-full object-cover">'
-                : '<div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center text-white font-bold text-lg">' + (t.name || 'A').charAt(0) + '</div>';
-            return '<div class="carousel-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3">'
-                + '<div class="testimonial-card-inner bg-white rounded-2xl p-8 border border-gray-100 h-full">'
-                + '<div class="flex gap-1 mb-4">' + stars + '</div>'
-                + '<p class="text-gray-600 leading-relaxed mb-6">"' + (t.text || '') + '"</p>'
-                + '<div class="flex items-center gap-3 mt-auto">'
+            var avatarHTML = t.image
+                ? '<img src="' + t.image + '" alt="' + (t.name || '') + '" class="w-11 h-11 rounded-full object-cover flex-shrink-0">'
+                : '<div class="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0" style="background:' + bg + ';color:' + fg + '">' + (t.name || 'A').charAt(0) + '</div>';
+            return '<div class="flex-shrink-0 w-[300px] bg-white rounded-2xl p-5 shadow-[0_2px_14px_rgba(0,0,0,0.08)] border border-gray-100/80 hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-shadow">'
+                + '<div class="flex items-start gap-3 mb-3">'
                 + avatarHTML
-                + '<div><p class="font-display font-semibold text-sm">' + (t.name || '') + '</p><p class="text-xs text-gray-500">' + (t.role || '') + '</p></div>'
-                + '</div></div></div>';
-        }).join('');
-
-        var slides = track.querySelectorAll('.carousel-slide');
-        var currentIndex = 0;
-        var slidesPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-        var maxIndex = Math.max(0, slides.length - slidesPerView);
-
-        // Build dots
-        if (dotsContainer) {
-            dotsContainer.innerHTML = '';
-            for (var d = 0; d <= maxIndex; d++) {
-                var dot = document.createElement('button');
-                dot.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (d === 0 ? 'bg-primary w-6' : 'bg-gray-300');
-                dot.setAttribute('data-index', d);
-                dot.addEventListener('click', function() { goToSlide(parseInt(this.getAttribute('data-index'))); });
-                dotsContainer.appendChild(dot);
-            }
+                + '<div class="flex-1 min-w-0">'
+                + '<p class="font-semibold text-gray-900 text-sm leading-tight truncate">' + (t.name || '') + '</p>'
+                + '<p class="text-gray-500 text-xs truncate">' + (t.role || '') + '</p>'
+                + '<div class="flex gap-0.5 mt-1.5">' + stars + '</div>'
+                + '</div>'
+                + '</div>'
+                + '<p class="text-gray-600 text-sm leading-relaxed line-clamp-4">' + (t.text || '') + '</p>'
+                + '</div>';
         }
 
-        function goToSlide(index) {
-            currentIndex = Math.max(0, Math.min(index, maxIndex));
-            var slideWidth = 100 / slidesPerView;
-            track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + '%)';
-            updateDots();
-        }
-
-        function updateDots() {
-            if (!dotsContainer) return;
-            dotsContainer.querySelectorAll('button').forEach(function(dot, i) {
-                if (i === currentIndex) {
-                    dot.className = 'w-6 h-2 rounded-full bg-primary transition-all duration-300';
-                } else {
-                    dot.className = 'w-2 h-2 rounded-full bg-gray-300 transition-all duration-300';
-                }
-            });
-        }
-
-        if (prevBtn) prevBtn.addEventListener('click', function() { goToSlide(currentIndex - 1); resetAutoplay(); });
-        if (nextBtn) nextBtn.addEventListener('click', function() { goToSlide(currentIndex + 1); resetAutoplay(); });
-
-        // Auto-switch every 4 seconds
-        var autoplayInterval;
-        function startAutoplay() {
-            autoplayInterval = setInterval(function() {
-                if (currentIndex >= maxIndex) {
-                    goToSlide(0);
-                } else {
-                    goToSlide(currentIndex + 1);
-                }
-            }, 4000);
-        }
-        function resetAutoplay() {
-            clearInterval(autoplayInterval);
-            startAutoplay();
-        }
-        startAutoplay();
-
-        // Touch swipe
-        var touchStartX = 0;
-        track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-        track.addEventListener('touchend', function(e) {
-            var diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) goToSlide(currentIndex + 1);
-                else goToSlide(currentIndex - 1);
-                resetAutoplay();
-            }
-        }, { passive: true });
-
-        // Recalculate on resize
-        window.addEventListener('resize', function() {
-            slidesPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-            maxIndex = Math.max(0, slides.length - slidesPerView);
-            goToSlide(Math.min(currentIndex, maxIndex));
-            // Rebuild dots
-            if (dotsContainer) {
-                dotsContainer.innerHTML = '';
-                for (var dd = 0; dd <= maxIndex; dd++) {
-                    var dt = document.createElement('button');
-                    dt.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-gray-300';
-                    dt.setAttribute('data-index', dd);
-                    dt.addEventListener('click', function() { goToSlide(parseInt(this.getAttribute('data-index'))); resetAutoplay(); });
-                    dotsContainer.appendChild(dt);
-                }
-                updateDots();
-            }
-        });
+        // Build two copies of all cards for seamless loop
+        var allCards = testimonials.map(buildCard).join('');
+        track.innerHTML = allCards + allCards; // duplicate for infinite loop
     }
 
     // ==========================================
@@ -437,7 +321,7 @@
     // Initialize everything
     // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
-        initCarousel();
+        initMarquee();
         initFAQ();
         initCosmos();
         loadBlogPreview();

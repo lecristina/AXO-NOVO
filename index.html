@@ -38,7 +38,7 @@
         .scroll-animate-scale.animate-in { opacity: 1 !important; transform: scale(1) !important; }
         .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradientFlow 4s ease infinite; }
         @keyframes gradientFlow { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
-        .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.85) 100%); }
+        .hero-overlay { background: linear-gradient(to bottom, rgba(35,0,60,0.82) 0%, rgba(70,0,110,0.52) 40%, rgba(10,0,25,0.88) 100%); }
         .typing-cursor::after { content: '|'; color: #cc44ff; animation: cursorBlink 0.8s infinite; font-weight: 300; }
         @keyframes cursorBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
         .service-card { position: relative; overflow: hidden; }
@@ -61,101 +61,64 @@
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .marquee-track { display: flex; animation: marquee-scroll 50s linear infinite; width: max-content; }
+        .marquee-track:hover { animation-play-state: paused; }
+        .menu-panel { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+        .idea-input { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: white; border-radius: 16px; padding: 20px 24px; width: 100%; resize: none; font-family: inherit; font-size: 1.05rem; line-height: 1.6; transition: border-color 0.3s, background 0.3s; }
+        .idea-input::placeholder { color: rgba(255,255,255,0.35); }
+        .idea-input:focus { outline: none; border-color: #cc44ff; background: rgba(255,255,255,0.1); }
     </style>
     <script type="application/ld+json">
     { "@context": "https://schema.org", "@type": "Organization", "name": "Axolutions", "description": "Startup lider em desenvolvimento de softwares inovadores", "url": "" }
     </script>
 </head>
 <body class="bg-white text-gray-900 font-sans transition-colors duration-500">
-    <!-- NAVBAR -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <a href="index.html" class="flex items-center gap-2.5 group">
-                    <img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">
-                    <span class="text-xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">Ax<span class="text-purple-400">olutions</span></span>
-                </a>
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="#servicos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Servicos</a>
-                    <a href="#global" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Global</a>
-                    <a href="#depoimentos" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Depoimentos</a>
-                    <a href="blog.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Blog</a>
-                    <a href="projetos.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Projetos</a>
-                    <a href="criadores.html" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">Equipe</a>
-                    <a href="#faq" class="nav-link text-sm font-medium text-white/80 hover:text-white transition-colors">FAQ</a>
-                </div>
-                <div class="hidden lg:flex items-center gap-3">
-                    <a href="#contato" class="relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-primary hover:border-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25">Fale Conosco</a>
-                </div>
-                <button id="menu-btn" class="lg:hidden p-2 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden flex-col lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 gap-4">
-            <a href="#servicos" class="text-sm font-medium text-white/80 hover:text-white py-2">Servicos</a>
-            <a href="#global" class="text-sm font-medium text-white/80 hover:text-white py-2">Global</a>
-            <a href="#depoimentos" class="text-sm font-medium text-white/80 hover:text-white py-2">Depoimentos</a>
-            <a href="blog.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Blog</a>
-            <a href="projetos.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Projetos</a>
-            <a href="criadores.html" class="text-sm font-medium text-white/80 hover:text-white py-2">Equipe</a>
-            <a href="#faq" class="text-sm font-medium text-white/80 hover:text-white py-2">FAQ</a>
-        </div>
-    </nav>
-
-    <!-- HERO - Video Background -->
+    <!-- HERO -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"><source src="images/video-hero.mp4" type="video/mp4"></video>
         <div class="hero-overlay absolute inset-0 z-[1]"></div>
-        <div class="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] z-[2] pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] z-[2] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-primary/25 rounded-full blur-[120px] z-[2] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[100px] z-[2] pointer-events-none"></div>
         <div class="relative z-10 max-w-6xl mx-auto px-4 text-center pt-20">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-5 py-2 mb-8 scroll-animate-scale">
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                <span class="text-sm font-medium text-white/90">Startup Lider em Softwares Inovadores</span>
+                <span class="text-sm font-medium text-white/90">disponível agora para o seu projeto</span>
             </div>
-            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-display font-bold text-white leading-[1.05] mb-8 scroll-animate">
-                Criamos <span class="block mt-2"><span class="gradient-text" id="typing-text">Sites</span><span class="typing-cursor"></span></span>
-                <span class="block text-white/40 text-3xl sm:text-4xl lg:text-5xl font-sans font-light mt-4">que convertem visitantes em clientes</span>
+            <h1 class="font-display font-bold text-white leading-[1.0] mb-6 scroll-animate">
+                <span class="block text-5xl sm:text-7xl lg:text-9xl">criamos</span>
+                <span class="block text-5xl sm:text-7xl lg:text-9xl mt-2"><span class="gradient-text" id="typing-text">sua automação</span><span class="typing-cursor"></span></span>
             </h1>
-            <p class="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light scroll-animate">Somos especialistas em desenvolvimento de sites, aplicativos e landing pages com design premium e tecnologia de ponta.</p>
+            <p class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold gradient-text mb-6 scroll-animate">gratuitamente</p>
+            <p class="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light scroll-animate">tire sua ideia do papel, veja uma prévia e não gaste nada com isso</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
-                <a href="#contato" class="group bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center justify-center gap-2">
-                    Solicitar Orcamento
-                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="group bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    solicitar prévia
                 </a>
-                <a href="#servicos" class="border border-white/25 hover:border-white/50 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/5 inline-flex items-center justify-center">Nossos Servicos</a>
+                <a href="projetos.html" class="border border-white/25 hover:border-white/50 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/5 inline-flex items-center justify-center gap-2">
+                    ver projetos
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
             </div>
             <div class="flex items-center justify-center gap-8 sm:gap-16 mt-20 scroll-animate">
-                <div class="text-center"><p class="text-4xl sm:text-5xl font-display font-bold text-white counter-line" data-count="50">0</p><p class="text-sm text-white/50 mt-3">Projetos Entregues</p></div>
+                <div class="text-center">
+                    <p class="text-4xl sm:text-5xl font-display font-bold text-white">24h</p>
+                    <p class="text-sm text-white/50 mt-3">suporte</p>
+                </div>
                 <div class="w-px h-16 bg-white/15"></div>
-                <div class="text-center"><p class="text-4xl sm:text-5xl font-display font-bold text-white counter-line" data-count="98">0</p><p class="text-sm text-white/50 mt-3">% Satisfacao</p></div>
+                <div class="text-center">
+                    <p class="text-4xl sm:text-5xl font-display font-bold text-white"><span class="counter-line" data-count="500">0</span>+</p>
+                    <p class="text-sm text-white/50 mt-3">projetos entregues</p>
+                </div>
                 <div class="w-px h-16 bg-white/15 hidden sm:block"></div>
-                <div class="text-center hidden sm:block"><p class="text-4xl sm:text-5xl font-display font-bold text-white counter-line">24/7</p><p class="text-sm text-white/50 mt-3">Suporte Online</p></div>
+                <div class="text-center hidden sm:block">
+                    <p class="text-4xl sm:text-5xl font-display font-bold text-white">4+</p>
+                    <p class="text-sm text-white/50 mt-3">anos de experiência</p>
+                </div>
             </div>
         </div>
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"><div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"><div class="w-1.5 h-3 bg-white/60 rounded-full mt-1.5 animate-bounce"></div></div></div>
-    </section>
-
-    <!-- SOBRE - Split layout com numeros animados -->
-    <section id="sobre" class="py-28 lg:py-36 px-4 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="scroll-animate-left">
-                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Sobre a Axolutions</span></div>
-                    <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold leading-tight mb-8">A startup lider em <span class="gradient-text">softwares inovadores</span></h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-6">Construimos uma reputacao solida pela excelencia dos nossos sistemas. Nossa equipe de especialistas combina criatividade, tecnologia de ponta e estrategia para entregar solucoes que realmente fazem a diferenca no seu negocio.</p>
-                    <p class="text-gray-500 leading-relaxed mb-10">Oferecemos uma gama completa de servicos de altissima qualidade, desde consultoria estrategica ate desenvolvimento, implementacao e suporte continuo.</p>
-                    <a href="#servicos" class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">Conheca nossos servicos <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-                </div>
-                <div class="grid grid-cols-2 gap-5 scroll-animate-right">
-                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">5+</p><p class="text-gray-600 text-sm">Anos de Experiencia</p></div>
-                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors mt-8 group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">50+</p><p class="text-gray-600 text-sm">Projetos Entregues</p></div>
-                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">30+</p><p class="text-gray-600 text-sm">Clientes Satisfeitos</p></div>
-                    <div class="bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-3xl p-7 border border-primary/10 hover:border-primary/30 transition-colors mt-8 group"><p class="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform origin-left">&infin;</p><p class="text-gray-600 text-sm">Inovacao Continua</p></div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- SERVICOS - Cards com hover bar + icone animado -->
@@ -163,85 +126,146 @@
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(143,0,204,0.04),transparent_60%)] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto relative">
             <div class="text-center mb-20 scroll-animate">
-                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Nossos Servicos</span></div>
-                <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold"><span class="gradient-text">Solucoes completas</span> para seu negocio</h2>
-                <p class="text-gray-500 mt-5 max-w-2xl mx-auto text-lg">Tudo que sua empresa precisa para dominar o mundo digital.</p>
+                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Nossos Serviços</span></div>
+                <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold">o que podemos fazer para <span class="gradient-text">a sua empresa</span></h2>
+                <p class="text-gray-500 mt-5 max-w-2xl mx-auto text-lg">peça uma prévia das soluções abaixo e receba gratuitamente no mesmo dia</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:0ms">
                     <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div>
                     <h3 class="text-xl font-display font-bold mb-3">Desenvolvimento de Sites</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Sites personalizados com design premium, SEO otimizado e alta velocidade de carregamento.</p>
+                    <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+                        <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                    </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:80ms">
                     <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
                     <h3 class="text-xl font-display font-bold mb-3">Sistemas Web</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Plataformas web responsivas, seguras e de alta performance para qualquer necessidade.</p>
+                    <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+                        <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                    </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:160ms">
                     <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></div>
-                    <h3 class="text-xl font-display font-bold mb-3">Automacoes de Atendimento</h3>
+                    <h3 class="text-xl font-display font-bold mb-3">Automações de Atendimento</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">I.A humanizada e chatbots personalizados que atendem seus clientes 24/7.</p>
+                    <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+                        <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                    </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:240ms">
                     <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
                     <h3 class="text-xl font-display font-bold mb-3">Sistemas ERP</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Gestao empresarial integrada que otimiza processos e multiplica os resultados.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Gestão empresarial integrada que otimiza processos e multiplica os resultados.</p>
+                    <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+                        <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                    </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:320ms">
                     <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
                     <h3 class="text-xl font-display font-bold mb-3">Aplicativos Mobile</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">Apps nativos e hibridos com UX excepcional para iOS e Android.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Apps nativos e híbridos com UX excepcional para iOS e Android.</p>
+                    <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+                        <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                    </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:400ms">
                     <div class="icon-wrap w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6"><svg class="w-7 h-7 text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg></div>
                     <h3 class="text-xl font-display font-bold mb-3">E-commerce</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Lojas online completas que vendem 24 horas por dia, 7 dias por semana.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GLOBE - Mapa mundi 3D interativo -->
-    <section id="global" class="py-28 lg:py-36 px-4 relative overflow-hidden bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 scroll-animate-left">
-                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Alcance Global</span></div>
-                    <h2 class="text-4xl lg:text-5xl font-display font-bold leading-tight mb-8">Conectamos <span class="gradient-text">ideias</span><br>ao mundo inteiro</h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-6">Nossos projetos alcancam usuarios em todos os continentes. Utilizamos tecnologias de ponta para criar solucoes que funcionam globalmente, sem barreiras.</p>
-                    <p class="text-gray-500 leading-relaxed mb-10">Arraste o globo para explorar nossa presenca mundial.</p>
-                    <div class="flex gap-10">
-                        <div><p class="text-4xl font-display font-bold text-primary">14+</p><p class="text-sm text-gray-500 mt-1">Paises Atendidos</p></div>
-                        <div><p class="text-4xl font-display font-bold text-primary">3</p><p class="text-sm text-gray-500 mt-1">Continentes</p></div>
-                        <div><p class="text-4xl font-display font-bold text-primary">99.9%</p><p class="text-sm text-gray-500 mt-1">Uptime</p></div>
-                    </div>
-                </div>
-                <div class="order-1 lg:order-2 scroll-animate-right">
-                    <div id="globe-container" class="h-[500px] lg:h-[600px] w-full rounded-3xl relative">
-                        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white z-10 pointer-events-none rounded-3xl"></div>
+                    <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
+                        <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- DEPOIMENTOS - Carrossel com autoplay -->
-    <section id="depoimentos" class="py-28 lg:py-36 px-4 bg-gray-50/80 relative overflow-hidden">
+    <!-- PRÉVIA EM 2 HORAS -->
+    <section id="previa" class="relative py-28 lg:py-36 px-4 bg-[#0a0014] overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(143,0,204,0.18),transparent_70%)] pointer-events-none"></div>
+        <div class="absolute top-0 left-1/3 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="relative z-10 max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-8">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <span class="text-sm font-medium text-purple-300">prévia gratuita no mesmo dia</span>
+            </div>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
+                nos conte uma ideia e eu mando<br><span class="gradient-text">seu site em duas horas</span>
+            </h2>
+            <p id="time-message" class="text-white/60 text-lg mb-10 leading-relaxed"></p>
+            <div class="mb-6">
+                <textarea id="idea-text" class="idea-input" rows="4" placeholder="me conta sua ideia aqui... não precisa ser elaborada, só me diz o que você precisa"></textarea>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 rounded-full px-4 py-2 text-sm text-white/80">
+                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    domínio gratuito
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 rounded-full px-4 py-2 text-sm text-white/80">
+                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    hospedagem inclusa
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 rounded-full px-4 py-2 text-sm text-white/80">
+                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    prévia completamente gratuita
+                </span>
+            </div>
+            <button onclick="sendIdeaToWhatsApp()" class="group bg-gradient-to-r from-primary to-purple-500 hover:from-primary-dark hover:to-purple-600 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center gap-3">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                solicitar prévia agora
+            </button>
+        </div>
+        <script>
+        (function() {
+            function updateTimeMsg() {
+                var now = new Date();
+                var hNow = now.getHours();
+                var mNow = now.getMinutes();
+                var hDeadline = (hNow + 2) % 24;
+                var nowStr = String(hNow).padStart(2, '0') + ':' + String(mNow).padStart(2, '0');
+                var deadlineStr = String(hDeadline).padStart(2, '0') + ':00';
+                var el = document.getElementById('time-message');
+                if (el) el.innerHTML = 'você não entendeu errado, agora são <strong class="text-white">' + nowStr + '</strong> e vamos colocar seu site às <strong class="text-purple-300">' + deadlineStr + '</strong>';
+            }
+            updateTimeMsg();
+            setInterval(updateTimeMsg, 60000);
+        })();
+        function sendIdeaToWhatsApp() {
+            var ideaEl = document.getElementById('idea-text');
+            var idea = ideaEl ? ideaEl.value.trim() : '';
+            if (!idea) { if (ideaEl) { ideaEl.focus(); ideaEl.style.borderColor = '#cc44ff'; } return; }
+            var msg = encodeURIComponent('Olá! Gostaria de uma prévia gratuita do meu site.\n\nMinha ideia: ' + idea);
+            window.open('https://wa.me/5511999999999?text=' + msg, '_blank', 'noopener,noreferrer');
+        }
+        </script>
+    </section>
+
+    <!-- DEPOIMENTOS - Marquee autoplay -->
+    <section id="depoimentos" class="py-28 lg:py-36 bg-gray-50/80 relative overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(143,0,204,0.05),transparent_60%)] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto relative">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
-                <div class="scroll-animate">
-                    <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Depoimentos</span></div>
-                    <h2 class="text-4xl lg:text-5xl font-display font-bold">O que nossos <span class="gradient-text">clientes</span> dizem</h2>
-                </div>
-                <div class="flex gap-3 mt-6 lg:mt-0 scroll-animate">
-                    <button id="carousel-prev" class="w-12 h-12 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:bg-primary hover:border-primary hover:text-white transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
-                    <button id="carousel-next" class="w-12 h-12 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:bg-primary hover:border-primary hover:text-white transition-all"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 relative">
+            <div class="text-center mb-16 scroll-animate">
+                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Depoimentos</span></div>
+                <h2 class="text-4xl lg:text-5xl font-display font-bold">o que nossos <span class="gradient-text">clientes</span> dizem</h2>
             </div>
-            <div class="overflow-hidden"><div id="carousel-track" class="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></div></div>
-            <div id="carousel-dots" class="flex justify-center gap-2 mt-10"></div>
+        </div>
+        <div class="overflow-hidden">
+            <div id="marquee-track" class="marquee-track gap-6"></div>
+        </div>
+        <div class="text-center mt-14 px-4">
+            <a href="depoimentos.html" class="group inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+                ver todos os depoimentos
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
         </div>
     </section>
 
@@ -336,38 +360,11 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <div>
-                    <div class="flex items-center gap-2.5 mb-5"><img src="images/logo.png" alt="Axolutions" class="h-9 w-auto"><span class="text-xl font-display font-bold text-white">Ax<span class="text-primary">olutions</span></span></div>
-                    <p class="text-sm leading-relaxed text-gray-500">Startup lider em desenvolvimento de softwares inovadores. Transformamos ideias em solucoes digitais de alto impacto.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-semibold mb-5">Paginas</h4>
-                    <nav class="flex flex-col gap-3 text-sm"><a href="index.html" class="hover:text-primary transition-colors">Inicio</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a><a href="projetos.html" class="hover:text-primary transition-colors">Projetos</a><a href="criadores.html" class="hover:text-primary transition-colors">Nossa Equipe</a><a href="admin.html" class="hover:text-primary transition-colors">Painel Admin</a></nav>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-semibold mb-5">Servicos</h4>
-                    <nav class="flex flex-col gap-3 text-sm"><a href="#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a><a href="#servicos" class="hover:text-primary transition-colors">Sistemas Web</a><a href="#servicos" class="hover:text-primary transition-colors">Automacoes</a><a href="#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a><a href="#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a><a href="#servicos" class="hover:text-primary transition-colors">E-commerce</a></nav>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-semibold mb-5">Secoes</h4>
-                    <nav class="flex flex-col gap-3 text-sm"><a href="#servicos" class="hover:text-primary transition-colors">Nossos Servicos</a><a href="#global" class="hover:text-primary transition-colors">Alcance Global</a><a href="#depoimentos" class="hover:text-primary transition-colors">Depoimentos</a><a href="#cosmos" class="hover:text-primary transition-colors">Cosmos Digital</a><a href="#faq" class="hover:text-primary transition-colors">FAQ</a><a href="#contato" class="hover:text-primary transition-colors">Contato</a></nav>
-                </div>
-            </div>
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-gray-600">&copy; 2026 Axolutions. Todos os direitos reservados.</p>
-                <div class="flex gap-6 text-sm"><a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a><a href="criadores.html" class="hover:text-primary transition-colors">Equipe</a><a href="blog.html" class="hover:text-primary transition-colors">Blog</a></div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/data.js"></script>
     <script src="js/theme.js"></script>
-    <script src="js/globe.js"></script>
+    <script>window.AXO_CONFIG = { page: '', navMode: 'cosmos' };</script>
+    <script src="js/nav.js"></script>
+    <script src="js/footer.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
