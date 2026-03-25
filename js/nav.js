@@ -85,7 +85,7 @@
             '<div class="flex items-center justify-between h-20">' +
                 '<a href="index.html" class="flex items-center gap-2.5 group">' +
                     '<img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">' +
-                    '<span id="axo-brand" class="text-xl font-display font-bold ' + brandClass + ' transition-colors">Ax<span class="text-primary">olutions</span></span>' +
+                    '<span id="axo-brand" class="text-xl font-display font-bold ' + brandClass + ' transition-colors">Axolutions</span>' +
                 '</a>' +
                 '<div class="hidden lg:flex items-center gap-8">' + deskLinks + '</div>' +
                 '<div class="hidden lg:flex items-center gap-3">' +
@@ -106,7 +106,7 @@
             '<div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">' +
                 '<a href="index.html" class="flex items-center gap-2">' +
                     '<img src="images/logo.png" alt="Axolutions" class="h-8 w-auto">' +
-                    '<span class="text-lg font-display font-bold text-gray-900">Ax<span class="text-primary">olutions</span></span>' +
+                    '<span class="text-lg font-display font-bold text-gray-900">Axolutions</span>' +
                 '</a>' +
                 '<button id="menu-close" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600">' +
                 SVG_CLOSE + '</button>' +
