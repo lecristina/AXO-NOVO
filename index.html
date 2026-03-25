@@ -61,13 +61,17 @@
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-        @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .marquee-track { display: flex; animation: marquee-scroll 50s linear infinite; width: max-content; }
-        .marquee-track:hover { animation-play-state: paused; }
+        .marquee-track { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 16px 8px; }
         .menu-panel { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
         .idea-input { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: white; border-radius: 16px; padding: 20px 24px; width: 100%; resize: none; font-family: inherit; font-size: 1.05rem; line-height: 1.6; transition: border-color 0.3s, background 0.3s; }
         .idea-input::placeholder { color: rgba(255,255,255,0.35); }
         .idea-input:focus { outline: none; border-color: #cc44ff; background: rgba(255,255,255,0.1); }
+        @keyframes diag-fwd { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+        @keyframes diag-rev { from { transform: translateX(-33.333%); } to { transform: translateX(0); } }
+        .diag-row { display: flex; width: max-content; gap: 20px; }
+        .diag-row.fwd { animation: diag-fwd 55s linear infinite; }
+        .diag-row.rev { animation: diag-rev 60s linear infinite; }
+        .diag-row:hover { animation-play-state: paused; }
     </style>
     <script type="application/ld+json">
     { "@context": "https://schema.org", "@type": "Organization", "name": "Axolutions", "description": "Startup lider em desenvolvimento de softwares inovadores", "url": "" }
@@ -118,7 +122,6 @@
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"><div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"><div class="w-1.5 h-3 bg-white/60 rounded-full mt-1.5 animate-bounce"></div></div></div>
     </section>
 
     <!-- SERVICOS - Cards com hover bar + icone animado -->
@@ -249,36 +252,57 @@
         </script>
     </section>
 
-    <!-- DEPOIMENTOS - Marquee autoplay -->
-    <section id="depoimentos" class="py-28 lg:py-36 bg-gray-50/80 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(143,0,204,0.05),transparent_60%)] pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 relative">
-            <div class="text-center mb-16 scroll-animate">
-                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Depoimentos</span></div>
-                <h2 class="text-4xl lg:text-5xl font-display font-bold">o que nossos <span class="gradient-text">clientes</span> dizem</h2>
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="bg-gray-50 relative overflow-hidden">
+
+        <!-- Banner de destaque -->
+        <div class="pt-12 sm:pt-14 pb-10 px-6">
+            <div class="max-w-7xl mx-auto flex flex-col items-center lg:flex-row lg:justify-between gap-8">
+                <div class="text-center lg:text-left">
+                    <p class="text-sm font-mono tracking-[0.25em] uppercase text-gray-400 mb-3">Google · Brasil</p>
+                    <h2 class="text-[26px] sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-tight text-gray-900">
+                        A agência digital<br><span class="gradient-text">mais bem avaliada</span><br>pelos nossos clientes.
+                    </h2>
+                </div>
+                <div class="flex flex-col items-center shrink-0 text-center gap-2">
+                    <span class="text-6xl md:text-8xl font-bold leading-none text-gray-900">5.0</span>
+                    <div class="flex text-yellow-400 text-2xl sm:text-3xl">★★★★★</div>
+                    <span class="text-sm text-gray-400">+500 projetos entregues</span>
+                </div>
             </div>
         </div>
-        <div class="overflow-hidden">
-            <div id="marquee-track" class="marquee-track gap-6"></div>
+
+        <!-- Cards de depoimentos (estáticos) -->
+        <div class="py-10 px-6 border-t border-gray-200">
+            <div id="marquee-track" class="marquee-track"></div>
         </div>
-        <div class="text-center mt-14 px-4">
-            <a href="depoimentos.html" class="group inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300">
-                ver todos os depoimentos
-                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+
+        <!-- CTA inferior -->
+        <div class="flex justify-center pb-12 px-6">
+            <a href="depoimentos.html" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full text-sm font-semibold hover:scale-105 transition-transform hover:shadow-lg hover:shadow-primary/30">
+                Ver todos os depoimentos
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </a>
         </div>
     </section>
 
-    <!-- PROJETOS - Cards com overlay ao hover -->
-    <section class="py-28 lg:py-36 px-4 relative bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 scroll-animate">
-                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Portfolio</span></div>
-                <h2 class="text-4xl lg:text-5xl font-display font-bold">Nossos <span class="gradient-text">Projetos</span></h2>
-                <p class="text-gray-500 mt-5 max-w-2xl mx-auto text-lg">Veja alguns dos trabalhos que ja entregamos com excelencia.</p>
-            </div>
-            <div id="projects-preview" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-            <div class="text-center mt-14 scroll-animate">
+    <!-- PROJETOS - Diagonal showcase -->
+    <section class="relative bg-white py-36 lg:py-44 overflow-hidden">
+        <!-- gradient fades -->
+        <div class="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-white to-transparent pointer-events-none z-20"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-20"></div>
+        <!-- diagonal rows injected by initDiagonalProjects() -->
+        <div id="diag-projects-wrap" style="position:absolute;top:50%;left:50%;width:300vw;transform:translate(-50%,-50%) rotate(-10deg);display:flex;flex-direction:column;gap:24px;pointer-events:none;z-index:1;opacity:0.35"></div>
+        <!-- content overlay -->
+        <div class="relative z-30 max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-flex flex-col items-center bg-white/75 backdrop-blur-xl rounded-3xl border border-gray-100 shadow-[0_8px_48px_rgba(0,0,0,0.07)] px-10 py-14">
+                <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-6">
+                    <div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                    <span class="text-xs font-semibold text-primary uppercase tracking-widest">Portfolio</span>
+                </div>
+                <h2 class="text-4xl lg:text-6xl font-display font-bold text-gray-900 mb-6">Nossos <span class="gradient-text">Projetos</span></h2>
+                <p class="text-gray-500 text-xl max-w-xl mx-auto mb-10">Cada solução entregue com excelência, inovação e resultado real.</p>
+                <div id="projects-preview" class="hidden" aria-hidden="true"></div>
                 <a href="projetos.html" class="group inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300">Ver Todos os Projetos <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
             </div>
         </div>
@@ -344,6 +368,7 @@
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoLTZWMzRoNnptMC0zMHY2aC02VjRoNnptLTMwIDB2NkgwVjRoNnptMCAzMHY2SDB2LTZoNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50"></div>
         <div class="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
         <div class="relative z-10 max-w-4xl mx-auto text-center">
             <h2 class="text-4xl lg:text-6xl font-display font-bold text-white mb-8 scroll-animate">Pronto para transformar sua<br><span class="text-purple-200">ideia em realidade?</span></h2>
             <p class="text-purple-100/80 text-lg lg:text-xl mb-12 max-w-2xl mx-auto scroll-animate">Entre em contato e descubra como podemos ajudar seu negocio a crescer com tecnologia de ponta.</p>

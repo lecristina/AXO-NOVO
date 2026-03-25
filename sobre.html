@@ -47,17 +47,19 @@
 <body class="bg-white text-gray-900 font-sans">
 
     <!-- HERO DA PÁGINA -->
-    <section class="pt-40 pb-20 px-4 bg-gradient-to-b from-primary/5 to-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/8 rounded-full blur-[120px] pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6 scroll-animate-scale">
-                <div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+    <section class="pt-40 pb-24 px-4 bg-[#07070f] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(143,0,204,0.3),transparent_60%)] pointer-events-none"></div>
+        <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-6 scroll-animate-scale">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
                 <span class="text-xs font-semibold text-primary uppercase tracking-widest">Nossa História</span>
             </div>
-            <h1 class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6 scroll-animate">
+            <h1 class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6 scroll-animate text-white">
                 4 anos transformando<br><span class="gradient-text">ideias em realidade</span>
             </h1>
-            <p class="text-gray-600 text-xl leading-relaxed max-w-2xl mx-auto scroll-animate">
+            <p class="text-white/60 text-xl leading-relaxed max-w-2xl mx-auto scroll-animate">
                 A Axolutions nasceu da crença de que tecnologia de alto nível não deveria ser exclusiva para grandes empresas. Hoje, atendemos desde empreendedores individuais até corporações.
             </p>
         </div>
@@ -220,6 +222,7 @@
     <!-- CTA -->
     <section class="relative py-28 px-4 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary via-purple-600 to-purple-900"></div>
+        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
         <div class="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="relative z-10 max-w-3xl mx-auto text-center">
             <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6 scroll-animate">quer fazer parte dessa história?</h2>
@@ -231,7 +234,7 @@
         </div>
     </section>
 
-    <script>window.AXO_CONFIG = { page: 'sobre', navMode: 'white' };</script>
+    <script>window.AXO_CONFIG = { page: 'sobre', navMode: 'transparent' };</script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

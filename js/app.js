@@ -130,31 +130,26 @@
             _cardIdx++;
             var bg    = AVATAR_COLORS[ci];
             var fg    = AVATAR_TEXT[ci];
-            var stars = '';
-            var starPath = 'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
-            for (var s = 0; s < 5; s++) {
-                var filled = s < (t.rating || 5);
-                stars += '<svg class="w-3.5 h-3.5" fill="' + (filled ? '#fabb05' : '#e0e0e0') + '" viewBox="0 0 20 20"><path d="' + starPath + '"/></svg>';
-            }
             var avatarHTML = t.image
-                ? '<img src="' + t.image + '" alt="' + (t.name || '') + '" class="w-11 h-11 rounded-full object-cover flex-shrink-0">'
-                : '<div class="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0" style="background:' + bg + ';color:' + fg + '">' + (t.name || 'A').charAt(0) + '</div>';
-            return '<div class="flex-shrink-0 w-[300px] bg-white rounded-2xl p-5 shadow-[0_2px_14px_rgba(0,0,0,0.08)] border border-gray-100/80 hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-shadow">'
-                + '<div class="flex items-start gap-3 mb-3">'
+                ? '<img src="' + t.image + '" alt="' + (t.name || '') + '" class="w-10 h-10 rounded-full object-cover shrink-0">'
+                : '<div class="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold shrink-0" style="background:' + bg + ';color:' + fg + '">' + (t.name || 'A').charAt(0) + '</div>';
+            var googleIcon = '<svg class="absolute top-5 right-5 w-5 h-5 opacity-50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+            return '<div class="flex-shrink-0 w-[300px] md:w-[340px] p-7 rounded-3xl bg-white border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.07)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.11)] transition-shadow relative flex flex-col text-left">'
+                + googleIcon
+                + '<div class="flex items-center gap-3 mb-3">'
                 + avatarHTML
-                + '<div class="flex-1 min-w-0">'
-                + '<p class="font-semibold text-gray-900 text-sm leading-tight truncate">' + (t.name || '') + '</p>'
-                + '<p class="text-gray-500 text-xs truncate">' + (t.role || '') + '</p>'
-                + '<div class="flex gap-0.5 mt-1.5">' + stars + '</div>'
+                + '<div>'
+                + '<div class="font-semibold text-sm text-gray-900">' + (t.name || '') + '</div>'
+                + '<div class="text-xs text-gray-400">' + (t.role || '') + '</div>'
                 + '</div>'
                 + '</div>'
-                + '<p class="text-gray-600 text-sm leading-relaxed line-clamp-4">' + (t.text || '') + '</p>'
+                + '<div class="flex text-yellow-400 text-base mb-3">★★★★★</div>'
+                + '<p class="text-gray-600 leading-relaxed text-sm">\u201c' + (t.text || '') + '\u201d</p>'
                 + '</div>';
         }
 
-        // Build two copies of all cards for seamless loop
         var allCards = testimonials.map(buildCard).join('');
-        track.innerHTML = allCards + allCards; // duplicate for infinite loop
+        track.innerHTML = allCards;
     }
 
     // ==========================================
@@ -291,6 +286,76 @@
     }
 
     // ==========================================
+    // Diagonal projects showcase
+    // ==========================================
+    function initDiagonalProjects() {
+        var wrap = document.getElementById('diag-projects-wrap');
+        if (!wrap) return;
+
+        /* ============================================================
+         *  EDITE OS CARDS AQUI — altere title, cat, techs e as cores
+         *  c1 = cor inicial do gradiente | c2 = cor final do gradiente
+         * ============================================================ */
+        var CARDS = [
+            { title: 'E-commerce Premium',    cat: 'E-commerce', techs: 'React · Node.js · MongoDB',        c1: '#6a00b8', c2: '#9b00e0' },
+            { title: 'App de Delivery',        cat: 'Mobile',     techs: 'React Native · Firebase',          c1: '#006630', c2: '#00aa55' },
+            { title: 'Sistema ERP Completo',   cat: 'Sistema',    techs: 'Vue.js · Python · PostgreSQL',     c1: '#00369e', c2: '#0060e0' },
+            { title: 'Landing Page',           cat: 'Marketing',  techs: 'HTML · CSS · JavaScript',          c1: '#aa001a', c2: '#e0003a' },
+            { title: 'Dashboard Analítico',    cat: 'Sistema',    techs: 'React · Chart.js · Node.js',       c1: '#003388', c2: '#0055cc' },
+            { title: 'App Financeiro',         cat: 'Mobile',     techs: 'Flutter · Firebase · Stripe',      c1: '#004d25', c2: '#008844' },
+            { title: 'Site Institucional',     cat: 'Website',    techs: 'Next.js · Tailwind · Vercel',      c1: '#7a0040', c2: '#c40066' },
+            { title: 'Plataforma SaaS',        cat: 'SaaS',       techs: 'React · TypeScript · AWS',         c1: '#440099', c2: '#7700dd' },
+            { title: 'App Mobile',             cat: 'Mobile',     techs: 'React Native · Expo · Redux',      c1: '#003366', c2: '#005599' },
+            { title: 'Portal B2B',             cat: 'Website',    techs: 'Angular · Java · MySQL',           c1: '#552200', c2: '#993300' },
+            { title: 'Automacao WhatsApp',     cat: 'Automacao',  techs: 'Node.js · Baileys · MongoDB',     c1: '#006633', c2: '#25D366' },
+            { title: 'Sistema de Agendamento', cat: 'Sistema',    techs: 'React · Node.js · SQL',           c1: '#1a3a6b', c2: '#2a5ca8' }
+        ];
+        /* ============================================================ */
+
+        var ICONS = [
+            'M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9',
+            'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+            'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
+            'M13 10V3L4 14h7v7l9-11h-7z',
+            'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+            'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+            'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z',
+            'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z',
+            'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+            'M9 5l7 7-7 7',
+            'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+        ];
+
+        function buildDiagCard(c, i) {
+            var iconPath = ICONS[i % ICONS.length];
+            return '<div style="width:220px;flex-shrink:0;background:#ffffff;border:1px solid rgba(0,0,0,0.07);border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.07)">'
+                + '<div style="height:110px;background:linear-gradient(135deg,' + c.c1 + ',' + c.c2 + ');display:flex;align-items:center;justify-content:center">'
+                + '<svg style="width:40px;height:40px;fill:none;stroke:rgba(255,255,255,0.45);stroke-width:1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="' + iconPath + '"/></svg>'
+                + '</div>'
+                + '<div style="padding:14px 14px 16px">'
+                + '<span style="font-size:10px;background:rgba(143,0,204,0.08);color:#8f00cc;padding:3px 10px;border-radius:999px;font-weight:600">' + c.cat + '</span>'
+                + '<p style="color:#111827;font-weight:600;font-size:13px;margin:8px 0 4px;line-height:1.3">' + c.title + '</p>'
+                + '<p style="color:#9ca3af;font-size:11px">' + c.techs + '</p>'
+                + '</div></div>';
+        }
+
+        /* 3 copies → animation translates by -33.333% = exactly 1 copy width = seamless loop */
+        var delays = ['0s', '-22s', '-11s'];
+        var revs   = [false, true, false];
+
+        for (var ri = 0; ri < 3; ri++) {
+            var cards = CARDS.map(buildDiagCard).join('');
+            var row = document.createElement('div');
+            row.className = 'diag-row ' + (revs[ri] ? 'rev' : 'fwd');
+            row.style.animationDelay = delays[ri];
+            /* 3 identical copies — the -33.333% animation moves exactly 1 copy then loops invisibly */
+            row.innerHTML = cards + cards + cards;
+            wrap.appendChild(row);
+        }
+    }
+
+    // ==========================================
     // Load projects preview
     // ==========================================
     function loadProjectsPreview() {
@@ -324,6 +389,7 @@
         initMarquee();
         initFAQ();
         initCosmos();
+        initDiagonalProjects();
         loadBlogPreview();
         loadProjectsPreview();
     });

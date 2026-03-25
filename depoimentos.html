@@ -34,18 +34,6 @@
         .nav-link:hover::after { width: 100%; }
         .menu-panel { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
 
-        /* Marquee rows */
-        @keyframes marquee-fwd { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-        .marquee-row { overflow: hidden; position: relative; }
-        .marquee-row::before, .marquee-row::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
-        .marquee-row::before { left: 0; background: linear-gradient(to right, #111118, transparent); }
-        .marquee-row::after { right: 0; background: linear-gradient(to left, #111118, transparent); }
-        .marquee-inner { display: flex; width: max-content; gap: 20px; }
-        .marquee-inner.fwd { animation: marquee-fwd 50s linear infinite; }
-        .marquee-inner.rev { animation: marquee-rev 55s linear infinite; }
-        .marquee-inner:hover { animation-play-state: paused; }
-
         /* Testimonial card (dark) */
         .dep-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 28px; flex-shrink: 0; width: 340px; transition: background 0.3s, border-color 0.3s, transform 0.3s; cursor: default; }
         .dep-card:hover { background: rgba(143,0,204,0.12); border-color: rgba(143,0,204,0.3); transform: translateY(-4px); }
@@ -105,27 +93,6 @@
         </div>
     </section>
 
-    <!-- MARQUEE ROW 1 (forward) -->
-    <section class="py-6">
-        <div class="marquee-row">
-            <div class="marquee-inner fwd" id="marquee-row1"></div>
-        </div>
-    </section>
-
-    <!-- MARQUEE ROW 2 (reverse) -->
-    <section class="py-6">
-        <div class="marquee-row">
-            <div class="marquee-inner rev" id="marquee-row2"></div>
-        </div>
-    </section>
-
-    <!-- MARQUEE ROW 3 (forward, different speed) -->
-    <section class="py-6 mb-8">
-        <div class="marquee-row">
-            <div class="marquee-inner fwd" style="animation-duration:60s" id="marquee-row3"></div>
-        </div>
-    </section>
-
     <!-- ALL TESTIMONIALS GRID -->
     <section class="py-20 px-4 relative">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(143,0,204,0.08),transparent_50%)] pointer-events-none"></div>
@@ -143,6 +110,7 @@
         <div class="absolute inset-0 bg-gradient-to-br from-primary via-purple-700 to-[#1a0030]"></div>
         <div class="absolute inset-0 opacity-20" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djZoLTZWMzRoNnptMC0zMHY2aC02VjRoNnptLTMwIDB2NkgwVjRoNnptMCAzMHY2SDB2LTZoNnoiLz48L2c+PC9nPjwvc3ZnPg==')"></div>
         <div class="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
         <div class="relative z-10 max-w-3xl mx-auto text-center scroll-animate">
             <h2 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">pronto para virar<br><span class="text-purple-200">o próximo caso de sucesso?</span></h2>
             <p class="text-purple-100/70 text-xl mb-12">Junte-se a centenas de clientes satisfeitos. Receba sua prévia gratuita ainda hoje.</p>
@@ -217,29 +185,6 @@
                 + '<div class="flex items-center gap-3">' + avatarHTML(t)
                 + '<div><p class="text-white font-semibold text-sm">' + (t.name||'') + '</p><p class="text-white/40 text-xs">' + (t.role||'') + '</p></div></div></div>';
         }
-
-        // Distribute testimonials into 3 rows
-        var row1Testimonials = [], row2Testimonials = [], row3Testimonials = [];
-        testimonials.forEach(function(t, i) {
-            if (i % 3 === 0) row1Testimonials.push(t);
-            else if (i % 3 === 1) row2Testimonials.push(t);
-            else row3Testimonials.push(t);
-        });
-        // Make rows equal-ish by cycling if too short
-        while (row1Testimonials.length < 4) row1Testimonials = row1Testimonials.concat(row1Testimonials);
-        while (row2Testimonials.length < 4) row2Testimonials = row2Testimonials.concat(row2Testimonials);
-        while (row3Testimonials.length < 4) row3Testimonials = row3Testimonials.concat(row3Testimonials);
-
-        function fillRow(id, list) {
-            var el = document.getElementById(id);
-            if (!el) return;
-            var cards = list.map(buildDepCard).join('');
-            el.innerHTML = cards + cards; // double for seamless loop
-        }
-
-        fillRow('marquee-row1', row1Testimonials);
-        fillRow('marquee-row2', row2Testimonials);
-        fillRow('marquee-row3', row3Testimonials);
 
         // All testimonials grid
         var grid = document.getElementById('all-testimonials');
