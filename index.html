@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -61,7 +61,8 @@
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #8f00cc; transition: width 0.3s; border-radius: 1px; }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-        .marquee-track { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 16px 8px; }
+        .marquee-track { display: flex; flex-wrap: nowrap; gap: 12px; overflow-x: scroll; padding: 16px 0; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; min-width: 0; }
+        .marquee-track::-webkit-scrollbar { display: none; }
         .menu-panel { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
         .idea-input { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: white; border-radius: 16px; padding: 20px 24px; width: 100%; resize: none; font-family: inherit; font-size: 1.05rem; line-height: 1.6; transition: border-color 0.3s, background 0.3s; }
         .idea-input::placeholder { color: rgba(255,255,255,0.35); }
@@ -72,6 +73,7 @@
         .diag-row.fwd { animation: diag-fwd 55s linear infinite; }
         .diag-row.rev { animation: diag-rev 60s linear infinite; }
         .diag-row:hover { animation-play-state: paused; }
+        @keyframes trust-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     </style>
     <script type="application/ld+json">
     { "@context": "https://schema.org", "@type": "Organization", "name": "Axolutions", "description": "Startup lider em desenvolvimento de softwares inovadores", "url": "" }
@@ -87,39 +89,59 @@
         <div class="relative z-10 max-w-6xl mx-auto px-4 text-center pt-20">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-5 py-2 mb-8 scroll-animate-scale">
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                <span class="text-sm font-medium text-white/90">disponível agora para o seu projeto</span>
+                <span class="text-sm font-medium text-white/90">Colocamos no ar ainda hoje</span>
             </div>
             <h1 class="font-display font-bold text-white leading-[1.0] mb-6 scroll-animate">
-                <span class="block text-5xl sm:text-7xl lg:text-9xl">criamos</span>
+                <span class="block text-5xl sm:text-7xl lg:text-9xl">Criamos</span>
                 <span class="block text-5xl sm:text-7xl lg:text-9xl mt-2"><span class="gradient-text" id="typing-text">sua automação</span><span class="typing-cursor"></span></span>
+                <span class="block text-5xl sm:text-7xl lg:text-8xl">Gratuitamente</span>
             </h1>
-            <p class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold gradient-text mb-6 scroll-animate">gratuitamente</p>
-            <p class="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light scroll-animate">tire sua ideia do papel, veja uma prévia e não gaste nada com isso</p>
+            <p class="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light scroll-animate">Tire sua ideia do papel, veja uma prévia e não gaste nada com isso.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
                 <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="group bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    solicitar prévia
+                    Solicitar prévia
                 </a>
                 <a href="projetos.html" class="border border-white/25 hover:border-white/50 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/5 inline-flex items-center justify-center gap-2">
-                    ver projetos
+                    Ver projetos
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
             </div>
             <div class="flex items-center justify-center gap-8 sm:gap-16 mt-20 scroll-animate">
                 <div class="text-center">
                     <p class="text-4xl sm:text-5xl font-display font-bold text-white">24h</p>
-                    <p class="text-sm text-white/50 mt-3">suporte</p>
+                    <p class="text-sm text-white/50 mt-3">Suporte</p>
                 </div>
                 <div class="w-px h-16 bg-white/15"></div>
                 <div class="text-center">
                     <p class="text-4xl sm:text-5xl font-display font-bold text-white"><span class="counter-line" data-count="500">0</span>+</p>
-                    <p class="text-sm text-white/50 mt-3">projetos entregues</p>
+                    <p class="text-sm text-white/50 mt-3">Projetos entregues</p>
                 </div>
                 <div class="w-px h-16 bg-white/15 hidden sm:block"></div>
                 <div class="text-center hidden sm:block">
                     <p class="text-4xl sm:text-5xl font-display font-bold text-white">4+</p>
-                    <p class="text-sm text-white/50 mt-3">anos de experiência</p>
+                    <p class="text-sm text-white/50 mt-3">Anos de experiência</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EMPRESAS QUE CONFIAM -->
+    <section class="py-8 px-4 bg-white border-b border-gray-100 overflow-hidden">
+        <div class="relative" style="-webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);">
+            <div style="display:flex;width:max-content;gap:20px;animation:trust-scroll 28s linear infinite;">
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa A</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa B</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa C</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa D</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa E</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa F</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa A</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa B</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa C</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa D</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa E</span></div>
+                <div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm"><div class="w-10 h-10 bg-primary/10 rounded-xl flex-shrink-0 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><span class="text-sm font-semibold text-gray-600 whitespace-nowrap">Empresa F</span></div>
             </div>
         </div>
     </section>
@@ -130,7 +152,7 @@
         <div class="max-w-7xl mx-auto relative">
             <div class="text-center mb-20 scroll-animate">
                 <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Nossos Serviços</span></div>
-                <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold">o que podemos fazer para <span class="gradient-text">a sua empresa</span></h2>
+                <h2 class="text-4xl lg:text-5xl xl:text-6xl font-display font-bold">O que podemos fazer para <span class="gradient-text">a sua empresa</span></h2>
                 <p class="text-gray-500 mt-5 max-w-2xl mx-auto text-lg">peça uma prévia das soluções abaixo e receba gratuitamente no mesmo dia</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,7 +162,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed">Sites personalizados com design premium, SEO otimizado e alta velocidade de carregamento.</p>
                     <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
                         <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">Solicitar prévia</a>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:80ms">
@@ -149,7 +171,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed">Plataformas web responsivas, seguras e de alta performance para qualquer necessidade.</p>
                     <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
                         <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">Solicitar prévia</a>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:160ms">
@@ -158,7 +180,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed">I.A humanizada e chatbots personalizados que atendem seus clientes 24/7.</p>
                     <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
                         <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">Solicitar prévia</a>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:240ms">
@@ -167,7 +189,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed">Gestão empresarial integrada que otimiza processos e multiplica os resultados.</p>
                     <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
                         <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">Solicitar prévia</a>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:320ms">
@@ -176,7 +198,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed">Apps nativos e híbridos com UX excepcional para iOS e Android.</p>
                     <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
                         <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">Solicitar prévia</a>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1 scroll-animate" style="transition-delay:400ms">
@@ -185,7 +207,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed">Lojas online completas que vendem 24 horas por dia, 7 dias por semana.</p>
                     <div class="flex gap-3 mt-6 pt-5 border-t border-gray-100">
                         <a href="projetos.html" class="flex-1 text-center text-xs font-medium text-primary border border-primary/30 hover:bg-primary hover:text-white py-2.5 rounded-xl transition-all duration-300">ver portfólio</a>
-                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">solicitar prévia</a>
+                        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="flex-1 text-center text-xs font-semibold bg-primary text-white py-2.5 rounded-xl hover:bg-primary-dark transition-all duration-300">Solicitar prévia</a>
                     </div>
                 </div>
             </div>
@@ -202,11 +224,11 @@
                 <span class="text-sm font-medium text-purple-300">prévia gratuita no mesmo dia</span>
             </div>
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
-                nos conte uma ideia e eu mando<br><span class="gradient-text">seu site em duas horas</span>
+                Conte o que precisa e colocamos<br><span class="gradient-text">no ar em 2 horas</span>
             </h2>
             <p id="time-message" class="text-white/60 text-lg mb-10 leading-relaxed"></p>
             <div class="mb-6">
-                <textarea id="idea-text" class="idea-input" rows="4" placeholder="me conta sua ideia aqui... não precisa ser elaborada, só me diz o que você precisa"></textarea>
+                <textarea id="idea-text" class="idea-input" rows="4" placeholder="Escreva como você imagina seu projeto! Nada elaborado, apenas diga o que precisa e começaremos a fazer gratuitamente!"></textarea>
             </div>
             <div class="flex flex-wrap justify-center gap-3 mb-10">
                 <span class="inline-flex items-center gap-1.5 bg-white/8 border border-white/10 rounded-full px-4 py-2 text-sm text-white/80">
@@ -224,7 +246,7 @@
             </div>
             <button onclick="sendIdeaToWhatsApp()" class="group bg-gradient-to-r from-primary to-purple-500 hover:from-primary-dark hover:to-purple-600 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center gap-3">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                solicitar prévia agora
+                Solicitar prévia agora
             </button>
         </div>
         <script>
@@ -237,7 +259,7 @@
                 var nowStr = String(hNow).padStart(2, '0') + ':' + String(mNow).padStart(2, '0');
                 var deadlineStr = String(hDeadline).padStart(2, '0') + ':00';
                 var el = document.getElementById('time-message');
-                if (el) el.innerHTML = 'você não entendeu errado, agora são <strong class="text-white">' + nowStr + '</strong> e vamos colocar seu site às <strong class="text-purple-300">' + deadlineStr + '</strong>';
+                if (el) el.innerHTML = 'e vamos colocar seu site no ar às <strong class="text-purple-300">' + deadlineStr + '</strong>';
             }
             updateTimeMsg();
             setInterval(updateTimeMsg, 60000);
@@ -261,10 +283,11 @@
                 <div class="text-center lg:text-left">
                     <p class="text-sm font-mono tracking-[0.25em] uppercase text-gray-400 mb-3">Google · Brasil</p>
                     <h2 class="text-[26px] sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-tight text-gray-900">
-                        A agência digital<br><span class="gradient-text">mais bem avaliada</span><br>pelos nossos clientes.
+                        A única agência digital com<br><span class="gradient-text">100% de avaliação positiva</span><br>em 4 anos de mercado.
                     </h2>
                 </div>
                 <div class="flex flex-col items-center shrink-0 text-center gap-2">
+                    <img src="images/google-logo-completa.png" alt="Google" class="h-7 mb-1 object-contain">
                     <span class="text-6xl md:text-8xl font-bold leading-none text-gray-900">5.0</span>
                     <div class="flex text-yellow-400 text-2xl sm:text-3xl">★★★★★</div>
                     <span class="text-sm text-gray-400">+500 projetos entregues</span>
@@ -272,9 +295,19 @@
             </div>
         </div>
 
-        <!-- Cards de depoimentos (estáticos) -->
+        <!-- Cards de depoimentos (carrossel) -->
         <div class="py-10 px-6 border-t border-gray-200">
-            <div id="marquee-track" class="marquee-track"></div>
+            <div class="flex items-center gap-4">
+                <button id="dep-prev" aria-label="Anterior" class="flex-shrink-0 bg-white border border-gray-200 rounded-full w-11 h-11 flex items-center justify-center shadow-md hover:shadow-lg hover:border-primary/30 transition-all hidden sm:flex">
+                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <div class="flex-1 overflow-hidden">
+                    <div id="marquee-track" class="marquee-track"></div>
+                </div>
+                <button id="dep-next" aria-label="Próximo" class="flex-shrink-0 bg-white border border-gray-200 rounded-full w-11 h-11 flex items-center justify-center shadow-md hover:shadow-lg hover:border-primary/30 transition-all hidden sm:flex">
+                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
         </div>
 
         <!-- CTA inferior -->
@@ -323,7 +356,7 @@
                 <p class="text-gray-400 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-12">Sites com carregamento ultrarrapido, SEO otimizado e design que conquista. Faca sua empresa brilhar como uma estrela.</p>
                 <a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-3 bg-gradient-to-r from-primary to-purple-500 hover:from-primary-dark hover:to-purple-600 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1">
                     <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    Gerencie seu Site
+                    Gerar site gratuito
                 </a>
             </div>
         </div>
@@ -335,7 +368,7 @@
             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
                 <div class="scroll-animate">
                     <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Blog</span></div>
-                    <h2 class="text-4xl lg:text-5xl font-display font-bold">Ultimos <span class="gradient-text">artigos</span></h2>
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold">Últimos <span class="gradient-text">artigos</span></h2>
                 </div>
                 <a href="blog.html" class="group inline-flex items-center gap-2 text-primary font-semibold mt-4 lg:mt-0 hover:gap-3 transition-all scroll-animate">Ver todos os artigos <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
             </div>
@@ -348,16 +381,16 @@
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(143,0,204,0.03),transparent_60%)] pointer-events-none"></div>
         <div class="max-w-3xl mx-auto relative">
             <div class="text-center mb-16 scroll-animate">
-                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Duvidas</span></div>
+                <div class="inline-flex items-center gap-2 bg-primary/10 rounded-full px-4 py-1.5 mb-6"><div class="w-1.5 h-1.5 bg-primary rounded-full"></div><span class="text-xs font-semibold text-primary uppercase tracking-widest">Dúvidas</span></div>
                 <h2 class="text-4xl lg:text-5xl font-display font-bold">Perguntas <span class="gradient-text">frequentes</span></h2>
             </div>
             <div class="space-y-4">
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Quanto tempo leva para desenvolver um site?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">O prazo varia conforme a complexidade do projeto. Sites institucionais geralmente ficam prontos em 2-4 semanas, enquanto plataformas mais complexas podem levar de 1-3 meses.</div></div></div>
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Voces oferecem suporte apos a entrega?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim! Oferecemos suporte continuo 24/7 para todos os nossos clientes. Isso inclui manutencao, atualizacoes de seguranca e consultoria tecnica permanente.</div></div></div>
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Qual o custo de um projeto?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Cada projeto eh unico. Oferecemos orcamentos personalizados e transparentes. Entre em contato para uma proposta sem compromisso.</div></div></div>
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Voces desenvolvem aplicativos para iOS e Android?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim! Desenvolvemos aplicativos nativos e hibridos para ambas as plataformas, usando React Native e Flutter.</div></div></div>
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Os sites sao otimizados para SEO?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Absolutamente! Todos os nossos sites seguem as melhores praticas de SEO, incluindo meta tags otimizadas, estrutura semantica e dados estruturados.</div></div></div>
-                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Posso acompanhar o desenvolvimento?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Claro! Trabalhamos com metodologias ageis e mantemos comunicacao constante com atualizacoes regulares.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Quanto tempo leva para desenvolver meu projeto?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Entregamos sua prévia gratuitamente no mesmo dia!<br><br>Geralmente após 1 ou 2 dias de ajustes para alinhar com sua expectativa seu site já estará no ar.<br><br><strong class="text-gray-700">Obs:</strong> Projetos que envolvem automações, sistemas complexos e outras funcionalidades podem levar até 7 dias para serem entregues.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Vocês oferecem suporte após a entrega?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim! Oferecemos suporte contínuo 24/7 para todos os nossos clientes. Isso inclui manutenção, atualizações de segurança e consultoria técnica permanente.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Qual o custo de um projeto?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Oferecemos orçamentos personalizados e transparentes para cada projeto. Entre em contato para uma proposta sem compromisso.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Vocês desenvolvem aplicativos para iOS e Android?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim! Desenvolvemos aplicativos nativos e hibridos para ambas as plataformas, usando React Native e Flutter.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Os sites são otimizados para SEO?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Absolutamente! Todos os nossos sites seguem as melhores práticas de SEO, incluindo meta tags otimizadas, estrutura semântica e dados estruturados.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"><span class="font-display font-semibold text-lg">Posso acompanhar o desenvolvimento?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Claro! Trabalhamos com metodologias ágeis e mantemos comunicação constante com atualizações regulares.</div></div></div>
             </div>
         </div>
     </section>
@@ -371,7 +404,7 @@
         <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
         <div class="relative z-10 max-w-4xl mx-auto text-center">
             <h2 class="text-4xl lg:text-6xl font-display font-bold text-white mb-8 scroll-animate">Pronto para transformar sua<br><span class="text-purple-200">ideia em realidade?</span></h2>
-            <p class="text-purple-100/80 text-lg lg:text-xl mb-12 max-w-2xl mx-auto scroll-animate">Entre em contato e descubra como podemos ajudar seu negocio a crescer com tecnologia de ponta.</p>
+            <p class="text-purple-100/80 text-lg lg:text-xl mb-12 max-w-2xl mx-auto scroll-animate">Entre em contato e descubra como podemos ajudar seu negócio a crescer com tecnologia de ponta.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-animate">
                 <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="group bg-white text-primary px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 inline-flex items-center gap-3 justify-center">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>

@@ -150,6 +150,19 @@
 
         var allCards = testimonials.map(buildCard).join('');
         track.innerHTML = allCards;
+
+        // Arrow navigation
+        var prevBtn = document.getElementById('dep-prev');
+        var nextBtn = document.getElementById('dep-next');
+        if (prevBtn && nextBtn) {
+            var scrollAmount = 364; // card width + gap
+            prevBtn.addEventListener('click', function() {
+                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+            nextBtn.addEventListener('click', function() {
+                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+        }
     }
 
     // ==========================================

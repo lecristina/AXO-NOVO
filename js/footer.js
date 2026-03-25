@@ -31,8 +31,8 @@
                         '<a href="sobre.html"       class="' + ac('sobre') + '">Sobre</a>' +
                         '<a href="blog.html"        class="' + ac('blog') + '">Blog</a>' +
                         '<a href="projetos.html"    class="' + ac('projetos') + '">Projetos</a>' +
-                        '<a href="fundadores.html"  class="' + ac('fundadores') + '">Fundadores</a>' +
                         '<a href="depoimentos.html" class="' + ac('depoimentos') + '">Depoimentos</a>' +
+                        '<a href="criadores.html"   class="' + ac('criadores') + '">Equipe</a>' +
                         '<a href="admin.html"       class="hover:text-primary transition-colors">Painel Admin</a>' +
                     '</nav>' +
                 '</div>' +
@@ -65,7 +65,6 @@
                 '<p class="text-sm text-gray-600">&copy; ' + year + ' Axolutions. Todos os direitos reservados.</p>' +
                 '<div class="flex gap-6 text-sm">' +
                     '<a href="https://geremeusite.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GereMeuSite</a>' +
-                    '<a href="fundadores.html" class="hover:text-primary transition-colors">Equipe</a>' +
                     '<a href="blog.html"       class="hover:text-primary transition-colors">Blog</a>' +
                 '</div>' +
             '</div>' +

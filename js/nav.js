@@ -32,7 +32,6 @@
         { href: 'projetos.html',      label: 'Projetos',    id: 'projetos' },
         { href: 'blog.html',          label: 'Blog',         id: 'blog' },
         { href: 'sobre.html',         label: 'Sobre',        id: 'sobre' },
-        { href: 'fundadores.html',    label: 'Fundadores',   id: 'fundadores' },
         { href: 'depoimentos.html',   label: 'Depoimentos',  id: 'depoimentos' }
     ];
 
@@ -90,7 +89,7 @@
                 '<div class="hidden lg:flex items-center gap-8">' + deskLinks + '</div>' +
                 '<div class="hidden lg:flex items-center gap-3">' +
                     '<a href="' + WA + '" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 inline-flex items-center gap-2">' +
-                    SVG_WA_SM + 'solicitar prévia</a>' +
+                    SVG_WA_SM + 'Solicitar prévia</a>' +
                 '</div>' +
                 '<button id="menu-btn" class="lg:hidden p-2 ' + burgerClass + '">' + SVG_BURGER + '</button>' +
             '</div>' +
