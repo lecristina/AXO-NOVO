@@ -97,11 +97,10 @@
         '</nav>';
 
     var overlayHTML =
-        '<div id="menu-overlay" class="fixed inset-0 bg-black/60 z-[99] opacity-0 pointer-events-none transition-opacity duration-300"></div>';
+        '<div id="menu-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99;opacity:0;pointer-events:none;transition:opacity 0.3s ease"></div>';
 
     var panelHTML =
-        '<div id="mobile-panel" style="transition:transform 0.35s cubic-bezier(0.16,1,0.3,1)" ' +
-             'class="fixed top-0 right-0 h-full w-[300px] bg-white z-[100] transform translate-x-full flex flex-col shadow-2xl">' +
+        '<div id="mobile-panel" style="position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;z-index:100;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,0.25);will-change:transform">' +
             '<div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">' +
                 '<a href="index.html" class="flex items-center gap-2">' +
                     '<img src="images/logo.png" alt="Axolutions" class="h-8 w-auto">' +

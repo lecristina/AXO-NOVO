@@ -5,23 +5,30 @@
 
     var _db  = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    /* ── Multi-layer cache: memory (current page) + localStorage (5 min, cross-tab) ── */
+    /* ── Multi-layer cache: memory + sessionStorage(posts/projects) + localStorage(others) ──
+       posts/projects use sessionStorage because base64 images can exceed 5MB localStorage quota.
+       sessionStorage survives same-tab page navigation (blog → post) and has the same quota
+       but doesn't share data across tabs, avoiding silent save failures for large payloads. */
     var _mem = {};               // in-memory for same-page re-renders
     var _inflight = {};          // in-flight promise deduplication
     var CACHE_TTL = 5 * 60 * 1000;  // 5 minutes
+
+    /* Tables with potentially large images → use sessionStorage */
+    var _SESSION_TABLES = { posts: 1, projects: 1 };
+    function _storeFor(table) { return _SESSION_TABLES[table] ? sessionStorage : localStorage; }
 
     function _cacheGet(table) {
         var k = 'axo_' + table;
         // 1. memory
         if (_mem[k] && Date.now() - _mem[k].ts < CACHE_TTL) return _mem[k].data;
         delete _mem[k];
-        // 2. localStorage (survives tab close, shared across tabs)
+        // 2. sessionStorage or localStorage
         try {
-            var raw = localStorage.getItem(k);
+            var raw = _storeFor(table).getItem(k);
             if (raw) {
                 var p = JSON.parse(raw);
                 if (Date.now() - p.ts < CACHE_TTL) { _mem[k] = p; return p.data; }
-                localStorage.removeItem(k);
+                _storeFor(table).removeItem(k);
             }
         } catch (e) {}
         return null;
@@ -31,13 +38,14 @@
         var k = 'axo_' + table;
         var entry = { data: data, ts: Date.now() };
         _mem[k] = entry;
-        try { localStorage.setItem(k, JSON.stringify(entry)); } catch (e) {}
+        try { _storeFor(table).setItem(k, JSON.stringify(entry)); } catch (e) {}
     }
 
     function _cacheInvalidate(table) {
         delete _mem['axo_' + table];
         delete _inflight['axo_' + table];
         try { localStorage.removeItem('axo_' + table); } catch (e) {}
+        try { sessionStorage.removeItem('axo_' + table); } catch (e) {}
     }
 
     /* Convert JS object → DB row (remove client-only fields, map camelCase) */
@@ -60,9 +68,14 @@
             obj.ogImage = obj.og_image;
             delete obj.og_image;
         }
+        if (table === 'posts') {
+            if (typeof obj.featured === 'undefined' || obj.featured === null) obj.featured = false;
+        }
         if (table === 'projects') {
             if (!Array.isArray(obj.techs))   obj.techs   = obj.techs   ? obj.techs   : [];
             if (!Array.isArray(obj.gallery)) obj.gallery = obj.gallery ? obj.gallery : [];
+            if (!obj.cover) obj.cover = '';
+            if (!obj.gif)   obj.gif   = '';
         }
         return obj;
     }
@@ -75,6 +88,9 @@
             TESTIMONIALS: 'testimonials',
             SETTINGS:     'settings'
         },
+
+        /* Returns cached Array synchronously, or null if cache cold */
+        getDataSync: function(table) { return _cacheGet(table); },
 
         /* Returns Promise<Array> */
         getData: function (table) {

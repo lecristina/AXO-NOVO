@@ -174,8 +174,8 @@
                 return '<article class="project-card scroll-animate group" style="transition-delay:' + (i * 100) + 'ms">' +
                     '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
                         '<div class="h-56 relative overflow-hidden">' +
-                            (p.image
-                                ? '<img src="' + p.image + '" alt="' + p.title + '" class="project-image w-full h-full object-cover">'
+                            (p.cover || p.image
+                                ? '<img src="' + (p.cover || p.image) + '" alt="' + p.title + '" class="project-image w-full h-full object-contain bg-gray-50">'
                                 : '<div class="project-image w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-16 h-16 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>') +
                             '<div class="project-overlay absolute inset-0 bg-primary/60 flex items-center justify-center">' +
                                 '<a href="projeto.html?id=' + p.id + '" class="bg-white text-primary px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all transform hover:scale-105">Ver Projeto</a>' +

@@ -96,6 +96,21 @@ var Admin = {
                 placeholder: 'Escreva o conteudo do post...'
             });
             this.quill.getModule('toolbar').addHandler('image', makeImgHandler(this.quill));
+            /* Fix links: always include protocol */
+            (function(q) {
+                q.getModule('toolbar').addHandler('link', function() {
+                    var sel = q.getSelection();
+                    var current = '';
+                    if (sel) {
+                        var [leaf] = q.getLeaf(sel.index);
+                        if (leaf && leaf.formats && leaf.formats().link) current = leaf.formats().link;
+                    }
+                    var href = prompt('URL do link:', current || 'https://');
+                    if (href === null) return;
+                    if (href && !/^[a-zA-Z][a-zA-Z0-9+\-.]*:\/\//.test(href)) href = 'https://' + href;
+                    q.format('link', href || false);
+                });
+            })(this.quill);
         }
 
         /* ── Project page editor ── */
@@ -119,6 +134,21 @@ var Admin = {
                 placeholder: 'Escreva o conteudo completo da pagina do projeto...'
             });
             this.projQuill.getModule('toolbar').addHandler('image', makeImgHandler(this.projQuill));
+            /* Fix links: always include protocol */
+            (function(q) {
+                q.getModule('toolbar').addHandler('link', function() {
+                    var sel = q.getSelection();
+                    var current = '';
+                    if (sel) {
+                        var [leaf] = q.getLeaf(sel.index);
+                        if (leaf && leaf.formats && leaf.formats().link) current = leaf.formats().link;
+                    }
+                    var href = prompt('URL do link:', current || 'https://');
+                    if (href === null) return;
+                    if (href && !/^[a-zA-Z][a-zA-Z0-9+\-.]*:\/\//.test(href)) href = 'https://' + href;
+                    q.format('link', href || false);
+                });
+            })(this.projQuill);
         }
     },
 
@@ -136,24 +166,48 @@ var Admin = {
         if (sidebar) sidebar.classList.add('-translate-x-full');
     },
 
-    /* ===== IMAGE UPLOAD ===== */
+    /* ===== IMAGE UPLOAD (with canvas compression) ===== */
+    _compressImage: function(file, callback, maxW, maxH, quality) {
+        maxW = maxW || 1200; maxH = maxH || 1200; quality = quality || 0.82;
+        if (file.type === 'image/gif') {
+            /* Don't compress GIFs — preserve animation */
+            var r = new FileReader();
+            r.onload = function(e) { callback(e.target.result); };
+            r.readAsDataURL(file);
+            return;
+        }
+        var r2 = new FileReader();
+        r2.onload = function(e) {
+            var img = new Image();
+            img.onload = function() {
+                var w = img.width, h = img.height;
+                if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+                if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
+                var cv = document.createElement('canvas');
+                cv.width = w; cv.height = h;
+                cv.getContext('2d').drawImage(img, 0, 0, w, h);
+                callback(cv.toDataURL('image/jpeg', quality));
+            };
+            img.src = e.target.result;
+        };
+        r2.readAsDataURL(file);
+    },
+
     handleImageUpload: function(inputId, previewId, dataId) {
         var input = document.getElementById(inputId);
         if (!input || !input.files || !input.files[0]) return;
         var file = input.files[0];
-        if (file.size > 3 * 1024 * 1024) {
-            alert('Imagem deve ter no maximo 3MB');
+        if (file.size > 20 * 1024 * 1024) {
+            alert('Imagem deve ter no maximo 20MB');
             input.value = '';
             return;
         }
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById(dataId).value = e.target.result;
+        this._compressImage(file, function(dataUrl) {
+            document.getElementById(dataId).value = dataUrl;
             var preview = document.getElementById(previewId);
-            preview.src = e.target.result;
+            preview.src = dataUrl;
             preview.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
+        });
     },
 
     /* ===== FORM HELPERS ===== */
@@ -174,6 +228,7 @@ var Admin = {
             document.getElementById('blog-excerpt').value = '';
             document.getElementById('blog-category').value = '';
             document.getElementById('blog-date').value = '';
+            document.getElementById('blog-featured').checked = false;
             document.getElementById('blog-image').value = '';
             document.getElementById('blog-image-data').value = '';
             document.getElementById('blog-image-preview').classList.add('hidden');
@@ -195,6 +250,10 @@ var Admin = {
             document.getElementById('proj-image').value = '';
             document.getElementById('proj-image-data').value = '';
             document.getElementById('proj-image-preview').classList.add('hidden');
+            document.getElementById('proj-cover-data').value = '';
+            document.getElementById('proj-cover-preview').classList.add('hidden');
+            document.getElementById('proj-gif-data').value = '';
+            document.getElementById('proj-gif-preview').classList.add('hidden');
             document.getElementById('proj-edit-id').value = '';
             document.getElementById('projects-form-title').textContent = 'Novo Projeto';
             if (this.projQuill) this.projQuill.setContents([]);
@@ -250,6 +309,7 @@ var Admin = {
             content: this.quill ? this.quill.root.innerHTML : '',
             category: document.getElementById('blog-category').value.trim(),
             date: document.getElementById('blog-date').value,
+            featured: document.getElementById('blog-featured').checked,
             image: document.getElementById('blog-image-data').value,
             ogImage: document.getElementById('blog-og-image-data').value
         };
@@ -275,6 +335,7 @@ var Admin = {
         document.getElementById('blog-excerpt').value = item.excerpt || '';
         document.getElementById('blog-category').value = item.category || '';
         document.getElementById('blog-date').value = item.date || '';
+        document.getElementById('blog-featured').checked = !!item.featured;
         document.getElementById('blog-form-title').textContent = 'Editar Post';
         if (item.image) {
             document.getElementById('blog-image-data').value = item.image;
@@ -299,6 +360,13 @@ var Admin = {
         var container = document.getElementById('blog-list');
         if (container) container.innerHTML = this._listSkeleton();
         var posts = await DataManager.getData(DataManager.keys.POSTS);
+        /* Populate category datalist */
+        var catList = document.getElementById('blog-categories-list');
+        if (catList) {
+            var cats = [];
+            posts.forEach(function(p) { if (p.category && cats.indexOf(p.category) === -1) cats.push(p.category); });
+            catList.innerHTML = cats.map(function(c) { return '<option value="' + c + '">'; }).join('');
+        }
         if (!posts.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum post encontrado</div>';
             return;
@@ -308,6 +376,7 @@ var Admin = {
         posts.forEach(function(post) {
             var safeTitle = self.escapeHtml(post.title);
             var safeCat = self.escapeHtml(post.category);
+            var featuredBadge = post.featured ? '<span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium ml-1">⭐ Destaque</span>' : '';
             html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4">';
             if (post.image) {
                 html += '<img src="' + post.image + '" class="w-16 h-16 rounded-lg object-cover shrink-0" alt="">';
@@ -315,7 +384,7 @@ var Admin = {
                 html += '<div class="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg></div>';
             }
             html += '<div class="flex-1 min-w-0">';
-            html += '<h3 class="font-semibold text-gray-900 truncate">' + safeTitle + '</h3>';
+            html += '<div class="flex items-center gap-1"><h3 class="font-semibold text-gray-900 truncate">' + safeTitle + '</h3>' + featuredBadge + '</div>';
             html += '<p class="text-sm text-gray-500">' + safeCat + ' &bull; ' + (post.date || '') + '</p>';
             html += '</div>';
             html += '<div class="flex gap-1 shrink-0">';
@@ -343,6 +412,8 @@ var Admin = {
             category: document.getElementById('proj-category').value.trim(),
             techs: techs,
             image: document.getElementById('proj-image-data').value,
+            cover: document.getElementById('proj-cover-data').value,
+            gif: document.getElementById('proj-gif-data').value,
             link: document.getElementById('proj-link').value.trim(),
             client: document.getElementById('proj-client').value.trim(),
             date: document.getElementById('proj-date').value,
@@ -382,6 +453,16 @@ var Admin = {
             document.getElementById('proj-image-preview').src = item.image;
             document.getElementById('proj-image-preview').classList.remove('hidden');
         }
+        if (item.cover) {
+            document.getElementById('proj-cover-data').value = item.cover;
+            document.getElementById('proj-cover-preview').src = item.cover;
+            document.getElementById('proj-cover-preview').classList.remove('hidden');
+        }
+        if (item.gif) {
+            document.getElementById('proj-gif-data').value = item.gif;
+            document.getElementById('proj-gif-preview').src = item.gif;
+            document.getElementById('proj-gif-preview').classList.remove('hidden');
+        }
         if (this.projQuill) this.projQuill.root.innerHTML = item.content || '';
         this.projGallery = Array.isArray(item.gallery) ? item.gallery.slice() : [];
         this.renderGalleryPreview();
@@ -397,6 +478,13 @@ var Admin = {
         var container = document.getElementById('projects-list');
         if (container) container.innerHTML = this._listSkeleton();
         var projects = await DataManager.getData(DataManager.keys.PROJECTS);
+        /* Populate category datalist */
+        var projCatList = document.getElementById('proj-categories-list');
+        if (projCatList) {
+            var pcats = [];
+            projects.forEach(function(p) { if (p.category && pcats.indexOf(p.category) === -1) pcats.push(p.category); });
+            projCatList.innerHTML = pcats.map(function(c) { return '<option value="' + c + '">'; }).join('');
+        }
         if (!projects.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum projeto encontrado</div>';
             return;
@@ -713,8 +801,99 @@ var Admin = {
             this.renderProjects(),
             this.renderTeam(),
             this.renderTestimonials(),
-            this.loadSettings()
+            this.loadSettings(),
+            this.renderCompanies()
         ]);
+    },
+
+    /* ===== COMPANIES (stored inside settings.data.companies) ===== */
+    _getCompaniesFromSettings: async function() {
+        var s = await DataManager.getSettings();
+        return Array.isArray(s.companies) ? s.companies : [];
+    },
+
+    renderCompanies: async function() {
+        var container = document.getElementById('companies-list');
+        if (!container) return;
+        container.innerHTML = this._listSkeleton();
+        var companies = await this._getCompaniesFromSettings();
+        if (!companies.length) {
+            container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhuma empresa cadastrada. Adicione empresas para exibir no carrossel.</div>';
+            return;
+        }
+        var self = this;
+        container.innerHTML = companies.map(function(co, i) {
+            var safeName = self.escapeHtml(co.name || '');
+            return '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4">' +
+                (co.logo ? '<img src="' + co.logo + '" class="w-16 h-12 rounded-lg object-contain bg-gray-50 shrink-0" alt="">' :
+                    '<div class="w-16 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 text-2xl font-bold text-primary">' + (safeName.charAt(0) || '?') + '</div>') +
+                '<div class="flex-1 min-w-0"><h3 class="font-semibold text-gray-900 truncate">' + safeName + '</h3></div>' +
+                '<div class="flex gap-1 shrink-0">' +
+                '<button onclick="Admin.editCompany(' + i + ')" class="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition" title="Editar"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>' +
+                '<button onclick="Admin.deleteCompany(' + i + ')" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Excluir"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>' +
+                '</div></div>';
+        }).join('');
+    },
+
+    showCompanyForm: function() {
+        document.getElementById('co-name').value = '';
+        document.getElementById('co-logo-data').value = '';
+        document.getElementById('co-logo-preview').classList.add('hidden');
+        document.getElementById('co-edit-index').value = '';
+        document.getElementById('co-form-title').textContent = 'Nova Empresa';
+        document.getElementById('company-form').classList.remove('hidden');
+        document.getElementById('company-form').scrollIntoView({ behavior: 'smooth' });
+    },
+
+    cancelCompanyForm: function() {
+        document.getElementById('company-form').classList.add('hidden');
+    },
+
+    editCompany: async function(index) {
+        var companies = await this._getCompaniesFromSettings();
+        var co = companies[index];
+        if (!co) return;
+        document.getElementById('co-name').value = co.name || '';
+        document.getElementById('co-logo-data').value = co.logo || '';
+        if (co.logo) {
+            document.getElementById('co-logo-preview').src = co.logo;
+            document.getElementById('co-logo-preview').classList.remove('hidden');
+        } else {
+            document.getElementById('co-logo-preview').classList.add('hidden');
+        }
+        document.getElementById('co-edit-index').value = index;
+        document.getElementById('co-form-title').textContent = 'Editar Empresa';
+        document.getElementById('company-form').classList.remove('hidden');
+        document.getElementById('company-form').scrollIntoView({ behavior: 'smooth' });
+    },
+
+    saveCompany: async function() {
+        var name = document.getElementById('co-name').value.trim();
+        if (!name) { alert('Nome da empresa é obrigatório'); return; }
+        var logo = document.getElementById('co-logo-data').value;
+        var editIndex = document.getElementById('co-edit-index').value;
+        var s = await DataManager.getSettings();
+        var companies = Array.isArray(s.companies) ? s.companies.slice() : [];
+        var entry = { name: name, logo: logo };
+        if (editIndex !== '') {
+            companies[parseInt(editIndex)] = entry;
+        } else {
+            companies.push(entry);
+        }
+        s.companies = companies;
+        await DataManager.saveSettings(s);
+        this.cancelCompanyForm();
+        await this.renderCompanies();
+    },
+
+    deleteCompany: async function(index) {
+        if (!confirm('Remover esta empresa?')) return;
+        var s = await DataManager.getSettings();
+        var companies = Array.isArray(s.companies) ? s.companies.slice() : [];
+        companies.splice(index, 1);
+        s.companies = companies;
+        await DataManager.saveSettings(s);
+        await this.renderCompanies();
     },
 
     /* ===== RESET DATA ===== */
@@ -746,6 +925,7 @@ var Admin = {
             { input: 'blog-image', preview: 'blog-image-preview', data: 'blog-image-data' },
             { input: 'blog-og-image', preview: 'blog-og-image-preview', data: 'blog-og-image-data' },
             { input: 'proj-image', preview: 'proj-image-preview', data: 'proj-image-data' },
+            { input: 'proj-cover', preview: 'proj-cover-preview', data: 'proj-cover-data' },
             { input: 'team-image', preview: 'team-image-preview', data: 'team-image-data' },
             { input: 'team-banner', preview: 'team-banner-preview', data: 'team-banner-data' },
             { input: 'test-image', preview: 'test-image-preview', data: 'test-image-data' },
@@ -754,7 +934,8 @@ var Admin = {
             { input: 'settings-hero-image', preview: 'settings-hero-image-preview', data: 'settings-hero-image-data' },
             { input: 'settings-about-image', preview: 'settings-about-image-preview', data: 'settings-about-image-data' },
             { input: 'settings-og-image', preview: 'settings-og-image-preview', data: 'settings-og-image-data' },
-            { input: 'settings-blog-banner', preview: 'settings-blog-banner-preview', data: 'settings-blog-banner-data' }
+            { input: 'settings-blog-banner', preview: 'settings-blog-banner-preview', data: 'settings-blog-banner-data' },
+            { input: 'co-logo', preview: 'co-logo-preview', data: 'co-logo-data' }
         ];
         imageConfigs.forEach(function(cfg) {
             var el = document.getElementById(cfg.input);
@@ -776,17 +957,34 @@ var Admin = {
             galleryInput.addEventListener('change', function() {
                 if (!galleryInput.files || !galleryInput.files[0]) return;
                 var file = galleryInput.files[0];
-                if (file.size > 2 * 1024 * 1024) {
-                    alert('Imagem deve ter no maximo 2MB');
+                if (file.size > 20 * 1024 * 1024) {
+                    alert('Imagem deve ter no maximo 20MB');
                     galleryInput.value = '';
                     return;
                 }
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    self.addGalleryImage(e.target.result);
+                self._compressImage(file, function(dataUrl) {
+                    self.addGalleryImage(dataUrl);
                     galleryInput.value = '';
+                }, 1200, 1200, 0.82);
+            });
+        }
+
+        /* GIF/animated upload for project */
+        var gifInput = document.getElementById('proj-gif-input');
+        if (gifInput) {
+            gifInput.addEventListener('change', function() {
+                if (!gifInput.files || !gifInput.files[0]) return;
+                var file = gifInput.files[0];
+                if (file.size > 20 * 1024 * 1024) { alert('GIF deve ter no maximo 20MB'); gifInput.value = ''; return; }
+                var r = new FileReader();
+                r.onload = function(e) {
+                    document.getElementById('proj-gif-data').value = e.target.result;
+                    var preview = document.getElementById('proj-gif-preview');
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    gifInput.value = '';
                 };
-                reader.readAsDataURL(file);
+                r.readAsDataURL(file);
             });
         }
     }

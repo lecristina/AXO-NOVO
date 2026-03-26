@@ -143,7 +143,7 @@
         <!-- ── HERO IMAGE ── -->
         <div id="hero-img-wrap" class="hidden max-w-6xl mx-auto px-4 -mt-1 pt-10">
             <div class="rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 scroll-animate" style="transition-delay:140ms">
-                <img id="hero-img" src="" alt="" class="w-full max-h-[540px] object-cover">
+                <img id="hero-img" src="" alt="" class="w-full max-h-[540px] object-contain bg-gray-50">
             </div>
         </div>
         <div id="hero-grad-wrap" class="hidden max-w-6xl mx-auto px-4 pt-10">
@@ -350,8 +350,13 @@
         if (mbParts.length) mb.innerHTML = mbParts.join('');
         else mb.style.display = 'none';
 
-        /* ── Hero image ── */
-        if (proj.image) {
+        /* ── Hero image / GIF ── */
+        if (proj.gif) {
+            var gifWrap = document.getElementById('hero-img-wrap');
+            document.getElementById('hero-img').src = proj.gif;
+            document.getElementById('hero-img').alt = proj.title;
+            gifWrap.classList.remove('hidden');
+        } else if (proj.image) {
             document.getElementById('hero-img').src = proj.image;
             document.getElementById('hero-img').alt = proj.title;
             document.getElementById('hero-img-wrap').classList.remove('hidden');
@@ -397,7 +402,7 @@
             document.getElementById('gallery-grid').innerHTML = proj.gallery.map(function(img, i) {
                 var safe = img.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
                 return '<div class="gal-item shadow-sm hover:shadow-lg transition-shadow" onclick="lbOpen(\'' + safe + '\')">' +
-                    '<img src="' + img + '" alt="Imagem ' + (i+1) + '" class="w-full h-52 object-cover">' +
+                    '<img src="' + img + '" alt="Imagem ' + (i+1) + '" class="w-full h-52 object-contain bg-gray-50">' +
                     '</div>';
             }).join('');
             document.getElementById('gallery-wrap').classList.remove('hidden');
@@ -424,8 +429,8 @@
                 return '<article class="rel-card scroll-animate group" style="transition-delay:' + (i * 100) + 'ms">' +
                     '<a href="projeto.html?id=' + p.id + '" class="block h-full bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl hover:shadow-primary/10 transition-shadow">' +
                         '<div class="h-48 overflow-hidden relative">' +
-                            (p.image
-                                ? '<img src="' + p.image + '" alt="' + esc(p.title) + '" class="rel-thumb w-full h-full object-cover">'
+                            (p.cover || p.image
+                                ? '<img src="' + (p.cover || p.image) + '" alt="' + esc(p.title) + '" class="rel-thumb w-full h-full object-contain bg-gray-50">'
                                 : '<div class="rel-thumb w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-14 h-14 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>') +
                             '<div class="absolute top-3 left-3"><span class="bg-primary/10 backdrop-blur-sm text-primary text-xs px-3 py-1.5 rounded-full font-semibold">' + esc(p.category || 'Projeto') + '</span></div>' +
                         '</div>' +
