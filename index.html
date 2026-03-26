@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -337,7 +337,6 @@
                 </div>
                 <h2 class="text-4xl lg:text-6xl font-display font-bold text-gray-900 mb-6">Nossos <span class="gradient-text">Projetos</span></h2>
                 <p class="text-gray-500 text-xl max-w-xl mx-auto mb-10">Cada solução entregue com excelência, inovação e resultado real.</p>
-                <div id="projects-preview" class="hidden" aria-hidden="true"></div>
                 <a href="projetos.html" class="group inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300">Ver Todos os Projetos <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
             </div>
         </div>
@@ -422,6 +421,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
+    <script>DataManager.getData(DataManager.keys.POSTS);DataManager.getData(DataManager.keys.PROJECTS);</script>
     <script src="js/theme.js"></script>
     <script>window.AXO_CONFIG = { page: '', navMode: 'cosmos' };</script>
     <script src="js/nav.js"></script>

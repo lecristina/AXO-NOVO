@@ -5,20 +5,23 @@
 
     var _db  = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    /* ── Session cache (90 s TTL, survives page navigation within the session) ── */
-    var _mem = {};                // in-memory for same-page re-renders
-    var CACHE_TTL = 90 * 1000;   // 90 seconds
+    /* ── Multi-layer cache: memory (current page) + localStorage (5 min, cross-tab) ── */
+    var _mem = {};               // in-memory for same-page re-renders
+    var _inflight = {};          // in-flight promise deduplication
+    var CACHE_TTL = 5 * 60 * 1000;  // 5 minutes
 
     function _cacheGet(table) {
         var k = 'axo_' + table;
+        // 1. memory
         if (_mem[k] && Date.now() - _mem[k].ts < CACHE_TTL) return _mem[k].data;
         delete _mem[k];
+        // 2. localStorage (survives tab close, shared across tabs)
         try {
-            var raw = sessionStorage.getItem(k);
+            var raw = localStorage.getItem(k);
             if (raw) {
                 var p = JSON.parse(raw);
                 if (Date.now() - p.ts < CACHE_TTL) { _mem[k] = p; return p.data; }
-                sessionStorage.removeItem(k);
+                localStorage.removeItem(k);
             }
         } catch (e) {}
         return null;
@@ -28,12 +31,13 @@
         var k = 'axo_' + table;
         var entry = { data: data, ts: Date.now() };
         _mem[k] = entry;
-        try { sessionStorage.setItem(k, JSON.stringify(entry)); } catch (e) {}
+        try { localStorage.setItem(k, JSON.stringify(entry)); } catch (e) {}
     }
 
     function _cacheInvalidate(table) {
         delete _mem['axo_' + table];
-        try { sessionStorage.removeItem('axo_' + table); } catch (e) {}
+        delete _inflight['axo_' + table];
+        try { localStorage.removeItem('axo_' + table); } catch (e) {}
     }
 
     /* Convert JS object → DB row (remove client-only fields, map camelCase) */
@@ -76,13 +80,19 @@
         getData: function (table) {
             var cached = _cacheGet(table);
             if (cached) return Promise.resolve(cached);
-            return _db.from(table).select('*').order('created_at', { ascending: false })
+            // Return the same in-flight promise if a fetch is already pending
+            var ik = 'axo_' + table;
+            if (_inflight[ik]) return _inflight[ik];
+            var self = this;
+            _inflight[ik] = _db.from(table).select('*').order('created_at', { ascending: false })
                 .then(function (res) {
+                    delete _inflight[ik];
                     if (res.error) { console.error('[DataManager] getData:', res.error.message); return []; }
                     var results = (res.data || []).map(function (row) { return fromRow(table, row); });
                     _cacheSet(table, results);
                     return results;
                 });
+            return _inflight[ik];
         },
 
         /* Returns Promise<Object|null> */

@@ -456,7 +456,6 @@
         initCosmos();
         initDiagonalProjects();
         loadBlogPreview();
-        loadProjectsPreview();
     });
 
 })();
