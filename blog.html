@@ -13,6 +13,8 @@
     <link rel="canonical" href="blog.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -91,10 +93,11 @@
     <script>window.AXO_CONFIG = { page: 'blog', navMode: 'transparent' };</script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
     <script src="js/theme.js"></script>
     <script>
-    (function() {
+    (async function() {
         // Scroll animations
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
@@ -105,7 +108,19 @@
         // Render posts
         var grid = document.getElementById('posts-grid');
         var noResults = document.getElementById('no-results');
-        var posts = DataManager.getData(DataManager.keys.POSTS);
+
+        // Skeleton while loading
+        grid.innerHTML = [0,1,2,3,4,5].map(function() {
+            return '<div class="animate-pulse">' +
+                '<div class="h-52 bg-gray-200 rounded-2xl mb-4"></div>' +
+                '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
+                '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-5/6"></div>' +
+                '</div>';
+        }).join('');
+
+        var posts = await DataManager.getData(DataManager.keys.POSTS);
         posts.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
 
         function formatDate(dateStr) {

@@ -9,6 +9,8 @@
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -61,11 +63,58 @@
         .post-content code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
 
         .post-content pre code { background: none; padding: 0; }
+        /* Quill inline font-family styles render natively — no extra CSS needed.
+           These are kept for any class-based legacy Quill output. */
+        .ql-font-Inter { font-family: 'Inter', sans-serif; }
+        .ql-font-Arial { font-family: Arial, sans-serif; }
+        .ql-font-Georgia { font-family: Georgia, serif; }
+        .ql-font-Verdana { font-family: Verdana, sans-serif; }
+        .ql-font-Tahoma { font-family: Tahoma, sans-serif; }
+        .ql-font-serif { font-family: Georgia, 'Times New Roman', serif; }
+        .ql-font-monospace { font-family: 'Courier New', Courier, monospace; }
+
+        /* Skeleton */
+        @keyframes sk { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .sk { background: #e5e7eb; border-radius: 0.5rem; animation: sk 1.6s ease-in-out infinite; }
     </style>
     <script id="post-jsonld" type="application/ld+json">{}</script>
 </head>
 <body class="bg-white text-gray-900 font-sans transition-colors duration-500">
 
+    <!-- SKELETON (visible while loading) -->
+    <div id="page-skeleton" class="pt-36 pb-20 px-4 max-w-5xl mx-auto">
+        <div class="sk h-4 w-28 mb-8 rounded-full"></div>
+        <div class="flex items-center gap-3 mb-5">
+            <div class="sk h-6 w-20 rounded-full"></div>
+            <div class="sk h-4 w-32"></div>
+        </div>
+        <div class="sk h-12 w-3/4 mb-3"></div>
+        <div class="sk h-10 w-1/2 mb-10"></div>
+        <div class="sk w-full h-72 rounded-2xl mb-12"></div>
+        <div class="space-y-3">
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-5/6"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-4/5"></div>
+            <div class="sk h-4 w-3/4"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-2/3"></div>
+        </div>
+    </div>
+
+    <!-- NOT FOUND (hidden) -->
+    <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
+        <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+        <h2 class="text-2xl font-bold text-gray-500 mb-2">Artigo não encontrado</h2>
+        <p class="text-gray-400 mb-8">O artigo que você procura não existe ou foi removido.</p>
+        <a href="blog.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Voltar ao Blog
+        </a>
+    </div>
+
+    <!-- POST PAGE (hidden until loaded) -->
+    <div id="post-page" class="hidden">
 
     <!-- HEADER -->
     <section class="pt-36 pb-10 px-4 relative overflow-hidden">
@@ -120,6 +169,8 @@
         </div>
     </section>
 
+    </div><!-- end #post-page -->
+
     <!-- CTA -->
     <section class="py-20 px-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
@@ -134,19 +185,22 @@
     <script>window.AXO_CONFIG = { page: 'blog', navMode: 'white' };</script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
     <script src="js/theme.js"></script>
     <script>
-    (function() {
-        // Scroll animations
+    (async function() {
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
-                if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
+                if (entry.isIntersecting) { entry.target.classList.add('animate-in'); observer.unobserve(entry.target); }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
 
-        // Format date pt-BR
+        function showNotFound() {
+            document.getElementById('page-skeleton').classList.add('hidden');
+            document.getElementById('not-found').classList.remove('hidden');
+        }
+
         function formatDatePtBR(dateStr) {
             if (!dateStr) return '';
             var d = new Date(dateStr + 'T00:00:00');
@@ -163,10 +217,10 @@
 
         // Get post ID from URL
         var postId = new URLSearchParams(window.location.search).get('id');
-        if (!postId) { window.location.href = 'blog.html'; return; }
+        if (!postId) { showNotFound(); return; }
 
-        var post = DataManager.getItem(DataManager.keys.POSTS, postId);
-        if (!post) { window.location.href = 'blog.html'; return; }
+        var post = await DataManager.getItem(DataManager.keys.POSTS, postId);
+        if (!post) { showNotFound(); return; }
 
         // Populate page
         document.title = post.title + ' - Blog Axolutions';
@@ -205,8 +259,13 @@
         if (post.category) { jsonLd.articleSection = post.category; }
         document.getElementById('post-jsonld').textContent = JSON.stringify(jsonLd);
 
+        // Show post page, hide skeleton
+        document.getElementById('page-skeleton').classList.add('hidden');
+        document.getElementById('post-page').classList.remove('hidden');
+        document.querySelectorAll('#post-page .scroll-animate').forEach(function(el) { observer.observe(el); });
+
         // Related posts
-        var allPosts = DataManager.getData(DataManager.keys.POSTS);
+        var allPosts = await DataManager.getData(DataManager.keys.POSTS);
         var related = allPosts.filter(function(p) {
             return p.id !== post.id && p.category === post.category;
         });

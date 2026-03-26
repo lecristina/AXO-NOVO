@@ -137,10 +137,11 @@
     <script>window.AXO_CONFIG = { page: '', navMode: 'white' };</script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
     <script src="js/theme.js"></script>
     <script>
-    (function() {
+    (async function() {
         // Scroll animations
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
@@ -154,7 +155,7 @@
 
         // Load team members
         var grid = document.getElementById('team-grid');
-        var team = DataManager.getData(DataManager.keys.TEAM);
+        var team = await DataManager.getData(DataManager.keys.TEAM);
 
         // Schema.org Person markup
         var schemaScript = document.createElement('script');

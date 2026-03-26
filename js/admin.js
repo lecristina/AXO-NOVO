@@ -14,7 +14,7 @@ var Admin = {
 
     login: function() {
         var input = document.getElementById('login-password').value;
-        var codes = [65,100,109,65,54,55,64];
+        var codes = [65,100,109,49,50,51,64];
         var pass = '';
         for (var i = 0; i < codes.length; i++) pass += String.fromCharCode(codes[i]);
         if (input === pass) {
@@ -41,38 +41,84 @@ var Admin = {
     },
 
     initQuill: function() {
+        /* ── Register style-based font & size once ── */
+        if (!Admin._quillReady) {
+            Admin._quillReady = true;
+            var FontAttr = Quill.import('attributors/style/font');
+            FontAttr.whitelist = ['Inter', 'Arial', 'Georgia', 'Verdana', 'Tahoma', 'serif', 'monospace'];
+            Quill.register(FontAttr, true);
+            var SizeAttr = Quill.import('attributors/style/size');
+            SizeAttr.whitelist = ['10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px', '36px', '48px'];
+            Quill.register(SizeAttr, true);
+        }
+
+        /* ── Creates a file-picker image handler for a Quill instance ── */
+        function makeImgHandler(quillInst) {
+            return function() {
+                var fi = document.createElement('input');
+                fi.type = 'file';
+                fi.accept = 'image/*';
+                fi.click();
+                fi.onchange = function() {
+                    var file = fi.files[0];
+                    if (!file) return;
+                    if (file.size > 3 * 1024 * 1024) { alert('Imagem deve ter no maximo 3MB'); return; }
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var sel = quillInst.getSelection(true);
+                        var idx = sel ? sel.index : quillInst.getLength();
+                        quillInst.insertEmbed(idx, 'image', e.target.result);
+                        quillInst.setSelection(idx + 1);
+                    };
+                    reader.readAsDataURL(file);
+                };
+            };
+        }
+
+        /* ── Blog editor ── */
         if (!this.quill) {
             this.quill = new Quill('#blog-editor', {
                 theme: 'snow',
                 modules: {
                     toolbar: [
-                        [{ header: [1, 2, 3, false] }],
+                        [{ font: ['Inter', 'Arial', 'Georgia', 'Verdana', 'Tahoma', 'serif', 'monospace'] }],
+                        [{ size: ['10px', '12px', '14px', false, '18px', '20px', '24px', '28px', '32px', '36px', '48px'] }],
+                        [{ header: [1, 2, 3, 4, false] }],
                         ['bold', 'italic', 'underline', 'strike'],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        ['link', 'image', 'blockquote'],
                         [{ color: [] }, { background: [] }],
+                        [{ align: [] }],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ indent: '-1' }, { indent: '+1' }],
+                        ['link', 'blockquote', 'code-block', 'image'],
                         ['clean']
                     ]
                 },
                 placeholder: 'Escreva o conteudo do post...'
             });
+            this.quill.getModule('toolbar').addHandler('image', makeImgHandler(this.quill));
         }
+
+        /* ── Project page editor ── */
         if (!this.projQuill) {
             this.projQuill = new Quill('#proj-editor', {
                 theme: 'snow',
                 modules: {
                     toolbar: [
-                        [{ header: [1, 2, 3, false] }],
+                        [{ font: ['Inter', 'Arial', 'Georgia', 'Verdana', 'Tahoma', 'serif', 'monospace'] }],
+                        [{ size: ['10px', '12px', '14px', false, '18px', '20px', '24px', '28px', '32px', '36px', '48px'] }],
+                        [{ header: [1, 2, 3, 4, false] }],
                         ['bold', 'italic', 'underline', 'strike'],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        ['link', 'image', 'blockquote', 'code-block'],
                         [{ color: [] }, { background: [] }],
                         [{ align: [] }],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ indent: '-1' }, { indent: '+1' }],
+                        ['link', 'blockquote', 'code-block', 'image'],
                         ['clean']
                     ]
                 },
                 placeholder: 'Escreva o conteudo completo da pagina do projeto...'
             });
+            this.projQuill.getModule('toolbar').addHandler('image', makeImgHandler(this.projQuill));
         }
     },
 
@@ -95,8 +141,8 @@ var Admin = {
         var input = document.getElementById(inputId);
         if (!input || !input.files || !input.files[0]) return;
         var file = input.files[0];
-        if (file.size > 2 * 1024 * 1024) {
-            alert('Imagem deve ter no maximo 2MB');
+        if (file.size > 3 * 1024 * 1024) {
+            alert('Imagem deve ter no maximo 3MB');
             input.value = '';
             return;
         }
@@ -190,9 +236,13 @@ var Admin = {
     },
 
     /* ===== BLOG CRUD ===== */
-    saveBlog: function() {
+    saveBlog: async function() {
+        if (this._saving) return;
         var title = document.getElementById('blog-title').value.trim();
         if (!title) { alert('Titulo e obrigatorio'); return; }
+        this._saving = true;
+        var btn = document.querySelector('#blog-form button[onclick="Admin.saveBlog()"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
         var editId = document.getElementById('blog-edit-id').value;
         var data = {
             title: title,
@@ -204,16 +254,20 @@ var Admin = {
             ogImage: document.getElementById('blog-og-image-data').value
         };
         if (editId) {
-            DataManager.updateItem(DataManager.keys.POSTS, editId, data);
+            await DataManager.updateItem(DataManager.keys.POSTS, editId, data);
         } else {
-            DataManager.addItem(DataManager.keys.POSTS, data);
+            await DataManager.addItem(DataManager.keys.POSTS, data);
         }
+        this._saving = false;
+        if (btn) { btn.disabled = false; btn.textContent = 'Salvar'; }
         this.cancelForm('blog');
-        this.renderBlog();
+        await this.renderBlog();
+        var list = document.getElementById('blog-list');
+        if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
-    editBlog: function(id) {
-        var item = DataManager.getItem(DataManager.keys.POSTS, id);
+    editBlog: async function(id) {
+        var item = await DataManager.getItem(DataManager.keys.POSTS, id);
         if (!item) return;
         this.showForm('blog');
         document.getElementById('blog-edit-id').value = id;
@@ -235,15 +289,16 @@ var Admin = {
         if (this.quill) this.quill.root.innerHTML = item.content || '';
     },
 
-    deleteBlog: function(id) {
+    deleteBlog: async function(id) {
         if (!confirm('Tem certeza que deseja excluir este post?')) return;
-        DataManager.deleteItem(DataManager.keys.POSTS, id);
-        this.renderBlog();
+        await DataManager.deleteItem(DataManager.keys.POSTS, id);
+        await this.renderBlog();
     },
 
-    renderBlog: function() {
-        var posts = DataManager.getData(DataManager.keys.POSTS);
+    renderBlog: async function() {
         var container = document.getElementById('blog-list');
+        if (container) container.innerHTML = this._listSkeleton();
+        var posts = await DataManager.getData(DataManager.keys.POSTS);
         if (!posts.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum post encontrado</div>';
             return;
@@ -272,9 +327,13 @@ var Admin = {
     },
 
     /* ===== PROJECTS CRUD ===== */
-    saveProject: function() {
+    saveProject: async function() {
+        if (this._saving) return;
         var title = document.getElementById('proj-title').value.trim();
         if (!title) { alert('Titulo e obrigatorio'); return; }
+        this._saving = true;
+        var btn = document.querySelector('#projects-form button[onclick="Admin.saveProject()"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
         var editId = document.getElementById('proj-edit-id').value;
         var techsRaw = document.getElementById('proj-techs').value;
         var techs = techsRaw ? techsRaw.split(',').map(function(t) { return t.trim(); }).filter(Boolean) : [];
@@ -292,16 +351,20 @@ var Admin = {
             gallery: this.projGallery.slice()
         };
         if (editId) {
-            DataManager.updateItem(DataManager.keys.PROJECTS, editId, data);
+            await DataManager.updateItem(DataManager.keys.PROJECTS, editId, data);
         } else {
-            DataManager.addItem(DataManager.keys.PROJECTS, data);
+            await DataManager.addItem(DataManager.keys.PROJECTS, data);
         }
+        this._saving = false;
+        if (btn) { btn.disabled = false; btn.textContent = 'Salvar Projeto'; }
         this.cancelForm('projects');
-        this.renderProjects();
+        await this.renderProjects();
+        var list = document.getElementById('projects-list');
+        if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
-    editProject: function(id) {
-        var item = DataManager.getItem(DataManager.keys.PROJECTS, id);
+    editProject: async function(id) {
+        var item = await DataManager.getItem(DataManager.keys.PROJECTS, id);
         if (!item) return;
         this.showForm('projects');
         document.getElementById('proj-edit-id').value = id;
@@ -324,15 +387,16 @@ var Admin = {
         this.renderGalleryPreview();
     },
 
-    deleteProject: function(id) {
+    deleteProject: async function(id) {
         if (!confirm('Tem certeza que deseja excluir este projeto?')) return;
-        DataManager.deleteItem(DataManager.keys.PROJECTS, id);
-        this.renderProjects();
+        await DataManager.deleteItem(DataManager.keys.PROJECTS, id);
+        await this.renderProjects();
     },
 
-    renderProjects: function() {
-        var projects = DataManager.getData(DataManager.keys.PROJECTS);
+    renderProjects: async function() {
         var container = document.getElementById('projects-list');
+        if (container) container.innerHTML = this._listSkeleton();
+        var projects = await DataManager.getData(DataManager.keys.PROJECTS);
         if (!projects.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum projeto encontrado</div>';
             return;
@@ -370,9 +434,13 @@ var Admin = {
     },
 
     /* ===== TEAM CRUD ===== */
-    saveTeam: function() {
+    saveTeam: async function() {
+        if (this._saving) return;
         var name = document.getElementById('team-name').value.trim();
         if (!name) { alert('Nome e obrigatorio'); return; }
+        this._saving = true;
+        var btn = document.querySelector('#team-form button[onclick="Admin.saveTeam()"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
         var editId = document.getElementById('team-edit-id').value;
         var data = {
             name: name,
@@ -385,16 +453,20 @@ var Admin = {
             instagram: document.getElementById('team-instagram').value.trim()
         };
         if (editId) {
-            DataManager.updateItem(DataManager.keys.TEAM, editId, data);
+            await DataManager.updateItem(DataManager.keys.TEAM, editId, data);
         } else {
-            DataManager.addItem(DataManager.keys.TEAM, data);
+            await DataManager.addItem(DataManager.keys.TEAM, data);
         }
+        this._saving = false;
+        if (btn) { btn.disabled = false; btn.textContent = 'Salvar Membro'; }
         this.cancelForm('team');
-        this.renderTeam();
+        await this.renderTeam();
+        var list = document.getElementById('team-list');
+        if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
-    editTeam: function(id) {
-        var item = DataManager.getItem(DataManager.keys.TEAM, id);
+    editTeam: async function(id) {
+        var item = await DataManager.getItem(DataManager.keys.TEAM, id);
         if (!item) return;
         this.showForm('team');
         document.getElementById('team-edit-id').value = id;
@@ -417,15 +489,16 @@ var Admin = {
         document.getElementById('team-instagram').value = item.instagram || '';
     },
 
-    deleteTeam: function(id) {
+    deleteTeam: async function(id) {
         if (!confirm('Tem certeza que deseja excluir este membro?')) return;
-        DataManager.deleteItem(DataManager.keys.TEAM, id);
-        this.renderTeam();
+        await DataManager.deleteItem(DataManager.keys.TEAM, id);
+        await this.renderTeam();
     },
 
-    renderTeam: function() {
-        var team = DataManager.getData(DataManager.keys.TEAM);
+    renderTeam: async function() {
         var container = document.getElementById('team-list');
+        if (container) container.innerHTML = this._listSkeleton();
+        var team = await DataManager.getData(DataManager.keys.TEAM);
         if (!team.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum membro encontrado</div>';
             return;
@@ -454,9 +527,13 @@ var Admin = {
     },
 
     /* ===== TESTIMONIALS CRUD ===== */
-    saveTestimonial: function() {
+    saveTestimonial: async function() {
+        if (this._saving) return;
         var name = document.getElementById('test-name').value.trim();
         if (!name) { alert('Nome e obrigatorio'); return; }
+        this._saving = true;
+        var btn = document.querySelector('#testimonials-form button[onclick="Admin.saveTestimonial()"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
         var editId = document.getElementById('test-edit-id').value;
         var data = {
             name: name,
@@ -466,16 +543,20 @@ var Admin = {
             image: document.getElementById('test-image-data').value
         };
         if (editId) {
-            DataManager.updateItem(DataManager.keys.TESTIMONIALS, editId, data);
+            await DataManager.updateItem(DataManager.keys.TESTIMONIALS, editId, data);
         } else {
-            DataManager.addItem(DataManager.keys.TESTIMONIALS, data);
+            await DataManager.addItem(DataManager.keys.TESTIMONIALS, data);
         }
+        this._saving = false;
+        if (btn) { btn.disabled = false; btn.textContent = 'Salvar Depoimento'; }
         this.cancelForm('testimonials');
-        this.renderTestimonials();
+        await this.renderTestimonials();
+        var list = document.getElementById('testimonials-list');
+        if (list) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
-    editTestimonial: function(id) {
-        var item = DataManager.getItem(DataManager.keys.TESTIMONIALS, id);
+    editTestimonial: async function(id) {
+        var item = await DataManager.getItem(DataManager.keys.TESTIMONIALS, id);
         if (!item) return;
         this.showForm('testimonials');
         document.getElementById('test-edit-id').value = id;
@@ -491,15 +572,16 @@ var Admin = {
         }
     },
 
-    deleteTestimonial: function(id) {
+    deleteTestimonial: async function(id) {
         if (!confirm('Tem certeza que deseja excluir este depoimento?')) return;
-        DataManager.deleteItem(DataManager.keys.TESTIMONIALS, id);
-        this.renderTestimonials();
+        await DataManager.deleteItem(DataManager.keys.TESTIMONIALS, id);
+        await this.renderTestimonials();
     },
 
-    renderTestimonials: function() {
-        var testimonials = DataManager.getData(DataManager.keys.TESTIMONIALS);
+    renderTestimonials: async function() {
         var container = document.getElementById('testimonials-list');
+        if (container) container.innerHTML = this._listSkeleton();
+        var testimonials = await DataManager.getData(DataManager.keys.TESTIMONIALS);
         if (!testimonials.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum depoimento encontrado</div>';
             return;
@@ -569,8 +651,8 @@ var Admin = {
     },
 
     /* ===== SETTINGS ===== */
-    loadSettings: function() {
-        var s = DataManager.getSettings();
+    loadSettings: async function() {
+        var s = await DataManager.getSettings();
         if (!s) return;
         var fields = ['email','phone','address','tagline','instagram','linkedin','github','youtube'];
         fields.forEach(function(f) {
@@ -593,7 +675,7 @@ var Admin = {
         });
     },
 
-    saveSettings: function() {
+    saveSettings: async function() {
         var fields = ['email','phone','address','tagline','instagram','linkedin','github','youtube'];
         var data = {};
         fields.forEach(function(f) {
@@ -606,7 +688,7 @@ var Admin = {
             var dataEl = document.getElementById('settings-' + key + '-data');
             if (dataEl) data[f] = dataEl.value;
         });
-        DataManager.saveSettings(data);
+        await DataManager.saveSettings(data);
         var msg = document.getElementById('settings-saved-msg');
         if (msg) {
             msg.classList.remove('hidden');
@@ -615,24 +697,37 @@ var Admin = {
     },
 
     /* ===== RENDER ALL ===== */
-    renderAll: function() {
-        this.renderBlog();
-        this.renderProjects();
-        this.renderTeam();
-        this.renderTestimonials();
-        this.loadSettings();
+    _listSkeleton: function() {
+        var row = '<div class="animate-pulse bg-white rounded-xl p-4 border border-gray-200 flex items-center gap-4">' +
+            '<div class="w-16 h-16 bg-gray-200 rounded-lg shrink-0"></div>' +
+            '<div class="flex-1"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+            '<div class="h-3 bg-gray-200 rounded w-1/2"></div></div>' +
+            '<div class="w-8 h-8 bg-gray-200 rounded-lg"></div>' +
+            '</div>';
+        return row + row + row;
+    },
+
+    renderAll: async function() {
+        await Promise.all([
+            this.renderBlog(),
+            this.renderProjects(),
+            this.renderTeam(),
+            this.renderTestimonials(),
+            this.loadSettings()
+        ]);
     },
 
     /* ===== RESET DATA ===== */
-    resetData: function() {
-        if (!confirm('Tem certeza? Todos os dados serao restaurados para os valores padrao.')) return;
-        localStorage.removeItem(DataManager.keys.POSTS);
-        localStorage.removeItem(DataManager.keys.PROJECTS);
-        localStorage.removeItem(DataManager.keys.TEAM);
-        localStorage.removeItem(DataManager.keys.TESTIMONIALS);
-        localStorage.removeItem(DataManager.keys.SETTINGS);
-        localStorage.removeItem(DataManager.keys.INIT);
-        location.reload();
+    resetData: async function() {
+        if (!confirm('Tem certeza? Todos os dados serao deletados do Supabase.')) return;
+        await Promise.all([
+            DataManager.deleteAll(DataManager.keys.POSTS),
+            DataManager.deleteAll(DataManager.keys.PROJECTS),
+            DataManager.deleteAll(DataManager.keys.TEAM),
+            DataManager.deleteAll(DataManager.keys.TESTIMONIALS),
+            DataManager.deleteAll(DataManager.keys.SETTINGS)
+        ]);
+        await this.renderAll();
     },
 
     /* ===== EVENTS ===== */

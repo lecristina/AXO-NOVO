@@ -21,18 +21,18 @@
     // Scroll animations (IntersectionObserver)
     // ==========================================
     var animClasses = ['.scroll-animate', '.scroll-animate-left', '.scroll-animate-right', '.scroll-animate-scale'];
-    var animElements = document.querySelectorAll(animClasses.join(','));
-    if (animElements.length > 0 && 'IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
+    var _scrollObs = null;
+    if ('IntersectionObserver' in window) {
+        _scrollObs = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     var delay = entry.target.style.transitionDelay || '0ms';
                     setTimeout(function() { entry.target.classList.add('animate-in'); }, parseInt(delay));
-                    observer.unobserve(entry.target);
+                    _scrollObs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        animElements.forEach(function(el) { observer.observe(el); });
+        document.querySelectorAll(animClasses.join(',')).forEach(function(el) { _scrollObs.observe(el); });
     }
 
     // ==========================================
@@ -102,11 +102,11 @@
     // ==========================================
     // Testimonials Marquee
     // ==========================================
-    function initMarquee() {
+    async function initMarquee() {
         var track = document.getElementById('marquee-track');
         if (!track) return;
 
-        var testimonials = (typeof DataManager !== 'undefined') ? DataManager.getData(DataManager.keys.TESTIMONIALS) : null;
+        var testimonials = (typeof DataManager !== 'undefined') ? await DataManager.getData(DataManager.keys.TESTIMONIALS) : null;
 
         // Fallback sample testimonials if none exist in storage
         if (!testimonials || testimonials.length === 0) {
@@ -278,13 +278,24 @@
     // ==========================================
     // Load blog preview
     // ==========================================
-    function loadBlogPreview() {
+    async function loadBlogPreview() {
         var container = document.getElementById('blog-preview');
         if (!container) return;
-        var posts = DataManager.getData(DataManager.keys.POSTS);
-        if (!posts) return;
+        // Show skeleton while loading
+        container.innerHTML = [0,1,2].map(function() {
+            return '<div class="animate-pulse">'  +
+                '<div class="h-48 bg-gray-200 rounded-xl mb-5"></div>' +
+                '<div class="h-3 bg-gray-200 rounded w-1/3 mb-3"></div>' +
+                '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-5/6"></div>' +
+                '</div>';
+        }).join('');
+        var posts = await DataManager.getData(DataManager.keys.POSTS);
+        if (!posts) { container.innerHTML = ''; return; }
 
         var recent = posts.sort(function(a, b) { return new Date(b.date) - new Date(a.date); }).slice(0, 3);
+        if (!recent.length) { container.innerHTML = ''; return; }
         container.innerHTML = recent.map(function(post, index) {
             var imgHTML = post.image
                 ? '<div class="overflow-hidden rounded-xl mb-5"><img src="' + post.image + '" alt="' + (post.title || '') + '" class="blog-image w-full h-48 object-cover"></div>'
@@ -296,34 +307,25 @@
                 + '<p class="text-gray-500 text-sm leading-relaxed line-clamp-2">' + (post.excerpt || '') + '</p>'
                 + '</article>';
         }).join('');
+        // Observe dynamically injected articles (static observer misses async-added elements)
+        if (_scrollObs) {
+            container.querySelectorAll('.scroll-animate').forEach(function(el) { _scrollObs.observe(el); });
+        }
     }
 
     // ==========================================
     // Diagonal projects showcase
     // ==========================================
-    function initDiagonalProjects() {
+    async function initDiagonalProjects() {
         var wrap = document.getElementById('diag-projects-wrap');
         if (!wrap) return;
 
-        /* ============================================================
-         *  EDITE OS CARDS AQUI — altere title, cat, techs e as cores
-         *  c1 = cor inicial do gradiente | c2 = cor final do gradiente
-         * ============================================================ */
-        var CARDS = [
-            { title: 'E-commerce Premium',    cat: 'E-commerce', techs: 'React · Node.js · MongoDB',        c1: '#6a00b8', c2: '#9b00e0' },
-            { title: 'App de Delivery',        cat: 'Mobile',     techs: 'React Native · Firebase',          c1: '#006630', c2: '#00aa55' },
-            { title: 'Sistema ERP Completo',   cat: 'Sistema',    techs: 'Vue.js · Python · PostgreSQL',     c1: '#00369e', c2: '#0060e0' },
-            { title: 'Landing Page',           cat: 'Marketing',  techs: 'HTML · CSS · JavaScript',          c1: '#aa001a', c2: '#e0003a' },
-            { title: 'Dashboard Analítico',    cat: 'Sistema',    techs: 'React · Chart.js · Node.js',       c1: '#003388', c2: '#0055cc' },
-            { title: 'App Financeiro',         cat: 'Mobile',     techs: 'Flutter · Firebase · Stripe',      c1: '#004d25', c2: '#008844' },
-            { title: 'Site Institucional',     cat: 'Website',    techs: 'Next.js · Tailwind · Vercel',      c1: '#7a0040', c2: '#c40066' },
-            { title: 'Plataforma SaaS',        cat: 'SaaS',       techs: 'React · TypeScript · AWS',         c1: '#440099', c2: '#7700dd' },
-            { title: 'App Mobile',             cat: 'Mobile',     techs: 'React Native · Expo · Redux',      c1: '#003366', c2: '#005599' },
-            { title: 'Portal B2B',             cat: 'Website',    techs: 'Angular · Java · MySQL',           c1: '#552200', c2: '#993300' },
-            { title: 'Automacao WhatsApp',     cat: 'Automacao',  techs: 'Node.js · Baileys · MongoDB',     c1: '#006633', c2: '#25D366' },
-            { title: 'Sistema de Agendamento', cat: 'Sistema',    techs: 'React · Node.js · SQL',           c1: '#1a3a6b', c2: '#2a5ca8' }
+        var GRADIENTS = [
+            ['#6a00b8', '#9b00e0'], ['#006630', '#00aa55'], ['#00369e', '#0060e0'],
+            ['#aa001a', '#e0003a'], ['#003388', '#0055cc'], ['#004d25', '#008844'],
+            ['#7a0040', '#c40066'], ['#440099', '#7700dd'], ['#003366', '#005599'],
+            ['#552200', '#993300'], ['#006633', '#25D366'], ['#1a3a6b', '#2a5ca8']
         ];
-        /* ============================================================ */
 
         var ICONS = [
             'M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9',
@@ -340,12 +342,34 @@
             'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
         ];
 
+        /* Hardcoded fallback — shown when admin has fewer than 4 projects */
+        var HARDCODED = [
+            { title: 'E-commerce Premium',    cat: 'E-commerce', techs: 'React · Node.js · MongoDB',        c1: '#6a00b8', c2: '#9b00e0', image: '' },
+            { title: 'App de Delivery',        cat: 'Mobile',     techs: 'React Native · Firebase',          c1: '#006630', c2: '#00aa55', image: '' },
+            { title: 'Sistema ERP Completo',   cat: 'Sistema',    techs: 'Vue.js · Python · PostgreSQL',     c1: '#00369e', c2: '#0060e0', image: '' },
+            { title: 'Landing Page',           cat: 'Marketing',  techs: 'HTML · CSS · JavaScript',          c1: '#aa001a', c2: '#e0003a', image: '' },
+            { title: 'Dashboard Analítico',    cat: 'Sistema',    techs: 'React · Chart.js · Node.js',       c1: '#003388', c2: '#0055cc', image: '' },
+            { title: 'App Financeiro',         cat: 'Mobile',     techs: 'Flutter · Firebase · Stripe',      c1: '#004d25', c2: '#008844', image: '' },
+            { title: 'Site Institucional',     cat: 'Website',    techs: 'Next.js · Tailwind · Vercel',      c1: '#7a0040', c2: '#c40066', image: '' },
+            { title: 'Plataforma SaaS',        cat: 'SaaS',       techs: 'React · TypeScript · AWS',         c1: '#440099', c2: '#7700dd', image: '' },
+            { title: 'App Mobile',             cat: 'Mobile',     techs: 'React Native · Expo · Redux',      c1: '#003366', c2: '#005599', image: '' },
+            { title: 'Portal B2B',             cat: 'Website',    techs: 'Angular · Java · MySQL',           c1: '#552200', c2: '#993300', image: '' },
+            { title: 'Automacao WhatsApp',     cat: 'Automacao',  techs: 'Node.js · Baileys · MongoDB',      c1: '#006633', c2: '#25D366', image: '' },
+            { title: 'Sistema de Agendamento', cat: 'Sistema',    techs: 'React · Node.js · SQL',            c1: '#1a3a6b', c2: '#2a5ca8', image: '' }
+        ];
+
         function buildDiagCard(c, i) {
-            var iconPath = ICONS[i % ICONS.length];
+            var top;
+            if (c.image) {
+                top = '<div style="height:110px;overflow:hidden;background:#e5e7eb"><img src="' + c.image + '" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>';
+            } else {
+                var iconPath = ICONS[i % ICONS.length];
+                top = '<div style="height:110px;background:linear-gradient(135deg,' + c.c1 + ',' + c.c2 + ');display:flex;align-items:center;justify-content:center">'
+                    + '<svg style="width:40px;height:40px;fill:none;stroke:rgba(255,255,255,0.45);stroke-width:1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="' + iconPath + '"/></svg>'
+                    + '</div>';
+            }
             return '<div style="width:220px;flex-shrink:0;background:#ffffff;border:1px solid rgba(0,0,0,0.07);border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.07)">'
-                + '<div style="height:110px;background:linear-gradient(135deg,' + c.c1 + ',' + c.c2 + ');display:flex;align-items:center;justify-content:center">'
-                + '<svg style="width:40px;height:40px;fill:none;stroke:rgba(255,255,255,0.45);stroke-width:1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="' + iconPath + '"/></svg>'
-                + '</div>'
+                + top
                 + '<div style="padding:14px 14px 16px">'
                 + '<span style="font-size:10px;background:rgba(143,0,204,0.08);color:#8f00cc;padding:3px 10px;border-radius:999px;font-weight:600">' + c.cat + '</span>'
                 + '<p style="color:#111827;font-weight:600;font-size:13px;margin:8px 0 4px;line-height:1.3">' + c.title + '</p>'
@@ -353,45 +377,73 @@
                 + '</div></div>';
         }
 
-        /* 3 copies → animation translates by -33.333% = exactly 1 copy width = seamless loop */
-        var delays = ['0s', '-22s', '-11s'];
-        var revs   = [false, true, false];
+        function buildRows(cards) {
+            wrap.innerHTML = '';
+            /* Ensure enough cards for a visually-full carousel row */
+            var expanded = cards.slice();
+            while (expanded.length < 10) expanded = expanded.concat(cards);
+            var delays = ['0s', '-22s', '-11s'];
+            var revs   = [false, true, false];
+            for (var ri = 0; ri < 3; ri++) {
+                var rowHTML = expanded.map(function(c, i) { return buildDiagCard(c, i); }).join('');
+                var row = document.createElement('div');
+                row.className = 'diag-row ' + (revs[ri] ? 'rev' : 'fwd');
+                row.style.animationDelay = delays[ri];
+                row.innerHTML = rowHTML + rowHTML + rowHTML;
+                wrap.appendChild(row);
+            }
+        }
 
-        for (var ri = 0; ri < 3; ri++) {
-            var cards = CARDS.map(buildDiagCard).join('');
-            var row = document.createElement('div');
-            row.className = 'diag-row ' + (revs[ri] ? 'rev' : 'fwd');
-            row.style.animationDelay = delays[ri];
-            /* 3 identical copies — the -33.333% animation moves exactly 1 copy then loops invisibly */
-            row.innerHTML = cards + cards + cards;
-            wrap.appendChild(row);
+        /* Render hardcoded cards immediately — no async wait, carousel visible at once */
+        buildRows(HARDCODED);
+
+        /* Silently update with DB projects when they arrive */
+        if (typeof DataManager !== 'undefined') {
+            var dbProjects = (await DataManager.getData(DataManager.keys.PROJECTS)).filter(function(p) { return p.status !== 'draft'; });
+            if (dbProjects.length >= 1) {
+                var dbCards = dbProjects.map(function(p, i) {
+                    var g = GRADIENTS[i % GRADIENTS.length];
+                    return {
+                        title: p.title || 'Projeto',
+                        cat:   p.category || 'Projeto',
+                        techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''),
+                        c1:    g[0],
+                        c2:    g[1],
+                        image: p.image || ''
+                    };
+                });
+                buildRows(dbCards);
+            }
         }
     }
 
     // ==========================================
     // Load projects preview
     // ==========================================
-    function loadProjectsPreview() {
+    async function loadProjectsPreview() {
         var container = document.getElementById('projects-preview');
         if (!container) return;
-        var projects = DataManager.getData(DataManager.keys.PROJECTS).filter(function(p) { return p.status !== 'draft'; });
+        var projects = (await DataManager.getData(DataManager.keys.PROJECTS)).filter(function(p) { return p.status !== 'draft'; });
         if (!projects.length) return;
 
         var recent = projects.slice(0, 3);
-        container.innerHTML = recent.map(function(project, index) {
+        container.classList.remove('hidden');
+        container.removeAttribute('aria-hidden');
+        container.className = 'w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-left';
+        container.innerHTML = recent.map(function(project) {
             var imgHTML = project.image
-                ? '<div class="overflow-hidden rounded-xl mb-5"><img src="' + project.image + '" alt="' + (project.title || '') + '" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500"></div>'
-                : '<div class="h-48 bg-gradient-to-br from-primary/20 to-purple-500/10 rounded-xl mb-5 flex items-center justify-center"><svg class="w-12 h-12 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
-            var tags = (project.techs || []).slice(0, 3).map(function(t) {
-                return '<span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">' + t + '</span>';
+                ? '<img src="' + project.image + '" alt="" class="w-full h-36 object-cover">'  
+                : '<div class="w-full h-36 bg-gradient-to-br from-primary/20 to-purple-500/10 flex items-center justify-center"><svg class="w-10 h-10 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
+            var tags = (project.techs || []).slice(0, 2).map(function(t) {
+                return '<span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">' + t + '</span>';
             }).join('');
-            return '<div class="scroll-animate" style="transition-delay:' + (index * 100) + 'ms">'
-                + imgHTML
-                + '<span class="text-xs font-semibold text-primary">' + (project.category || '') + '</span>'
-                + '<h3 class="font-display font-bold text-lg mt-1 mb-2"><a href="projeto.html?id=' + project.id + '" class="hover:text-primary transition-colors">' + (project.title || '') + '</a></h3>'
-                + '<p class="text-gray-500 text-sm mb-3 line-clamp-2">' + (project.description || '') + '</p>'
-                + '<div class="flex flex-wrap gap-1.5">' + tags + '</div>'
-                + '</div>';
+            return '<a href="projeto.html?id=' + project.id + '" class="block bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-primary/40 hover:shadow-md transition-all">' +
+                imgHTML +
+                '<div class="p-3">' +
+                '<p class="font-semibold text-gray-900 text-sm truncate mb-1">' + (project.title || '') + '</p>' +
+                '<div class="flex flex-wrap gap-1">' + tags + '</div>' +
+                '</div>' +
+                '</a>';
         }).join('');
     }
 

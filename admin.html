@@ -43,6 +43,26 @@
         .gallery-thumb { position: relative; }
         .gallery-thumb img { width: 100%; height: 80px; object-fit: cover; border-radius: 0.5rem; }
         .gallery-thumb .remove-btn { position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; background: #ef4444; color: white; border: 2px solid white; border-radius: 50%; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
+        /* Quill custom font display in dropdown & editor */
+        .ql-font-Inter, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Inter"]::before { font-family: 'Inter', sans-serif; content: 'Inter' !important; }
+        .ql-font-Arial, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Arial"]::before { font-family: Arial, sans-serif; content: 'Arial' !important; }
+        .ql-font-Georgia, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Georgia"]::before { font-family: Georgia, serif; content: 'Georgia' !important; }
+        .ql-font-Verdana, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Verdana"]::before { font-family: Verdana, sans-serif; content: 'Verdana' !important; }
+        .ql-font-Tahoma, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="Tahoma"]::before { font-family: Tahoma, sans-serif; content: 'Tahoma' !important; }
+        .ql-font-serif, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before { font-family: Georgia, serif; content: 'Serif' !important; }
+        .ql-font-monospace, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before { font-family: 'Courier New', monospace; content: 'Monospace' !important; }
+        /* Fix size picker: show actual pixel value instead of "Normal" for all custom sizes */
+        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value]::before,
+        .ql-snow .ql-picker.ql-size .ql-picker-label[data-value]::before { content: attr(data-value) !important; }
+        .ql-snow .ql-picker.ql-size .ql-picker-item:not([data-value])::before,
+        .ql-snow .ql-picker.ql-size .ql-picker-label:not([data-value])::before { content: 'Normal' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="Inter"]::before { content: 'Inter' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="Arial"]::before { content: 'Arial' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="Georgia"]::before { content: 'Georgia' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="Verdana"]::before { content: 'Verdana' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="Tahoma"]::before { content: 'Tahoma' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before { content: 'Serif' !important; }
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before { content: 'Mono' !important; }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -365,9 +385,21 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="js/data.js"></script>
 <script src="js/theme.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script src="js/admin.js"></script>
+<script>
+/* Pre-warm: fetch all tables immediately so cache is ready before the user logs in */
+(function() {
+    var K = DataManager.keys;
+    DataManager.getData(K.POSTS);
+    DataManager.getData(K.PROJECTS);
+    DataManager.getData(K.TEAM);
+    DataManager.getData(K.TESTIMONIALS);
+    DataManager.getSettings();
+})();
+</script>
 </body>
 </html>

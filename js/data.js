@@ -1,45 +1,170 @@
-﻿/* data.js - Data Manager with localStorage */
-var DataManager = {
-    keys: { POSTS: 'axo_posts', PROJECTS: 'axo_projects', TEAM: 'axo_team', TESTIMONIALS: 'axo_testimonials', INIT: 'axo_init', SETTINGS: 'axo_settings' },
-    getData: function(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch(e) { return []; } },
-    setData: function(key, data) { localStorage.setItem(key, JSON.stringify(data)); },
-    addItem: function(key, item) { var data = this.getData(key); item.id = Date.now().toString(); data.push(item); this.setData(key, data); return item; },
-    updateItem: function(key, id, updates) { var data = this.getData(key); var idx = data.findIndex(function(i) { return i.id === id; }); if (idx > -1) { Object.assign(data[idx], updates); this.setData(key, data); return true; } return false; },
-    deleteItem: function(key, id) { var data = this.getData(key).filter(function(i) { return i.id !== id; }); this.setData(key, data); },
-    getItem: function(key, id) { return this.getData(key).find(function(i) { return i.id === id; }) || null; },
-    getSettings: function() { try { return JSON.parse(localStorage.getItem(this.keys.SETTINGS)) || {}; } catch(e) { return {}; } },
-    saveSettings: function(data) { localStorage.setItem(this.keys.SETTINGS, JSON.stringify(data)); },
-    init: function() {
-        if (localStorage.getItem(this.keys.INIT)) return;
+﻿/* data.js – DataManager backed by Supabase */
+(function () {
+    var SUPABASE_URL     = 'https://ecgjhahdceocsikbhsot.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s';
 
-        this.setData(this.keys.POSTS, [
-            { id: '1', title: 'Como criar um site que converte em 2025', excerpt: 'Descubra as melhores praticas para criar sites que realmente geram resultados para seu negocio.', content: '<p>Criar um site que converte visitantes em clientes requer uma combinacao de design intuitivo, conteudo relevante e otimizacao tecnica.</p><p>Neste artigo, exploramos as principais estrategias que utilizamos na Axolutions para garantir que cada projeto entregue resultados mensuraveis.</p><h2>1. Design Focado no Usuario</h2><p>O primeiro passo e entender quem e seu publico-alvo e o que ele busca.</p><h2>2. Velocidade de Carregamento</h2><p>Sites lentos perdem visitantes. Otimizamos cada detalhe para garantir carregamento em menos de 3 segundos.</p><h2>3. Call-to-Actions Estrategicos</h2><p>Botoes e formularios posicionados estrategicamente guiam o usuario para a conversao.</p>', category: 'Desenvolvimento', date: '2025-01-15', image: '' },
-            { id: '2', title: 'A importancia de um app mobile para sua empresa', excerpt: 'Entenda por que ter um aplicativo mobile pode ser o diferencial competitivo que sua empresa precisa.', content: '<p>Com mais de 80% do trafego web vindo de dispositivos moveis, ter um aplicativo dedicado pode transformar seu negocio.</p><h2>Vantagens de um App</h2><p>Push notifications, acesso offline e integracao nativa com funcoes do dispositivo.</p>', category: 'Mobile', date: '2025-01-10', image: '' },
-            { id: '3', title: 'SEO: O guia completo para rankear no Google', excerpt: 'Aprenda tecnicas avancadas de SEO para posicionar seu site nas primeiras paginas do Google.', content: '<p>SEO (Search Engine Optimization) e fundamental para qualquer estrategia digital.</p><h2>Palavras-chave</h2><p>A pesquisa de palavras-chave e o ponto de partida para qualquer estrategia de SEO.</p><h2>Conteudo de Qualidade</h2><p>O Google valoriza conteudo original, relevante e atualizado.</p>', category: 'SEO', date: '2025-01-05', image: '' }
-        ]);
+    var _db  = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        this.setData(this.keys.PROJECTS, [
-            { id: '1', title: 'E-commerce Premium', description: 'Loja virtual completa com sistema de pagamento integrado, painel administrativo e design responsivo.', category: 'E-commerce', techs: ['React', 'Node.js', 'MongoDB'], image: '', link: '', client: 'TechStart', date: '2025-01-20', status: 'published', content: '<h2>Sobre o Projeto</h2><p>Desenvolvemos uma plataforma de e-commerce completa e moderna, com foco em performance e experiencia do usuario.</p><h2>Funcionalidades</h2><ul><li>Catalogo de produtos com filtros avancados</li><li>Carrinho de compras inteligente</li><li>Checkout otimizado com multiplas formas de pagamento</li><li>Dashboard administrativo completo</li><li>Integracoes com correios e gateways de pagamento</li></ul><h2>Resultado</h2><p>A plataforma gerou um aumento de 200% nas vendas online do cliente nos primeiros 3 meses de operacao.</p>', gallery: [] },
-            { id: '2', title: 'App de Delivery', description: 'Aplicativo mobile para delivery com rastreamento em tempo real e sistema de avaliacoes.', category: 'Mobile', techs: ['React Native', 'Firebase', 'Maps API'], image: '', link: '', client: 'FoodExpress', date: '2025-01-15', status: 'published', content: '<h2>O Desafio</h2><p>O cliente precisava de um aplicativo de delivery que oferecesse uma experiencia fluida tanto para consumidores quanto para entregadores.</p><h2>Solucao</h2><p>Criamos um app nativo com rastreamento GPS em tempo real, sistema de avaliacoes, notificacoes push e painel administrativo para gestao de pedidos.</p><h2>Tecnologias</h2><p>Utilizamos React Native para desenvolvimento cross-platform, Firebase para backend em tempo real e Google Maps API para rastreamento.</p>', gallery: [] },
-            { id: '3', title: 'Sistema ERP Completo', description: 'Sistema de gestao empresarial com modulos de financeiro, estoque, RH e vendas.', category: 'Sistema', techs: ['Vue.js', 'Python', 'PostgreSQL'], image: '', link: '', client: 'DigiFlow', date: '2025-01-10', status: 'published', content: '<h2>Visao Geral</h2><p>Sistema ERP desenvolvido sob medida para otimizar todos os processos internos da empresa cliente.</p><h2>Modulos</h2><ul><li><strong>Financeiro:</strong> Contas a pagar/receber, fluxo de caixa, DRE</li><li><strong>Estoque:</strong> Controle de entrada/saida, inventario, alertas de reposicao</li><li><strong>RH:</strong> Folha de pagamento, controle de ponto, ferias</li><li><strong>Vendas:</strong> CRM integrado, funil de vendas, relatorios</li></ul><h2>Impacto</h2><p>Reducao de 60% no tempo de processos administrativos e aumento de 40% na produtividade geral.</p>', gallery: [] }
-        ]);
+    /* ── Session cache (90 s TTL, survives page navigation within the session) ── */
+    var _mem = {};                // in-memory for same-page re-renders
+    var CACHE_TTL = 90 * 1000;   // 90 seconds
 
-        this.setData(this.keys.TEAM, [
-            { id: '1', name: 'Cristian', role: 'CEO & Fundador', bio: 'Lider visionario com paixao por tecnologia e inovacao.', image: '', social: {} },
-            { id: '2', name: 'Guilherme', role: 'CTO & Co-Fundador', bio: 'Especialista em arquitetura de software e novas tecnologias.', image: '', social: {} },
-            { id: '3', name: 'Joao Gabriel', role: 'Design Lead', bio: 'Designer premiado focado em experiencias digitais impactantes.', image: '', social: {} },
-            { id: '4', name: 'Henrique', role: 'Dev Full Stack', bio: 'Desenvolvedor versátil com dominio em front-end e back-end.', image: '', social: {} }
-        ]);
-
-        this.setData(this.keys.TESTIMONIALS, [
-            { id: '1', name: 'Maria Silva', role: 'CEO - TechStart', text: 'A Axolutions superou todas as nossas expectativas. O site ficou incrivel e as conversoes aumentaram 150% no primeiro mes.', rating: 5, image: '' },
-            { id: '2', name: 'Carlos Santos', role: 'Diretor - Inovativa', text: 'Profissionalismo e qualidade impecavel. O aplicativo que desenvolveram para nossa empresa ficou perfeito em todos os detalhes.', rating: 5, image: '' },
-            { id: '3', name: 'Ana Oliveira', role: 'Marketing - GrowUp', text: 'Melhor equipe de desenvolvimento que ja trabalhamos. Entregaram tudo no prazo e com qualidade excepcional.', rating: 5, image: '' },
-            { id: '4', name: 'Roberto Lima', role: 'Fundador - DigiFlow', text: 'O sistema ERP que a Axolutions desenvolveu transformou nossa operacao. Automatizamos processos e reduzimos custos significativamente.', rating: 5, image: '' },
-            { id: '5', name: 'Fernanda Costa', role: 'COO - NextLevel', text: 'Desde o primeiro contato, a equipe foi extremamente profissional e atenciosa. O resultado final foi alem do esperado.', rating: 5, image: '' }
-        ]);
-
-        localStorage.setItem(this.keys.INIT, 'true');
+    function _cacheGet(table) {
+        var k = 'axo_' + table;
+        if (_mem[k] && Date.now() - _mem[k].ts < CACHE_TTL) return _mem[k].data;
+        delete _mem[k];
+        try {
+            var raw = sessionStorage.getItem(k);
+            if (raw) {
+                var p = JSON.parse(raw);
+                if (Date.now() - p.ts < CACHE_TTL) { _mem[k] = p; return p.data; }
+                sessionStorage.removeItem(k);
+            }
+        } catch (e) {}
+        return null;
     }
-};
-DataManager.init();
+
+    function _cacheSet(table, data) {
+        var k = 'axo_' + table;
+        var entry = { data: data, ts: Date.now() };
+        _mem[k] = entry;
+        try { sessionStorage.setItem(k, JSON.stringify(entry)); } catch (e) {}
+    }
+
+    function _cacheInvalidate(table) {
+        delete _mem['axo_' + table];
+        try { sessionStorage.removeItem('axo_' + table); } catch (e) {}
+    }
+
+    /* Convert JS object → DB row (remove client-only fields, map camelCase) */
+    function toRow(table, obj) {
+        var row = Object.assign({}, obj);
+        delete row.id;
+        delete row.created_at;
+        if (table === 'posts' && 'ogImage' in row) {
+            row.og_image = row.ogImage;
+            delete row.ogImage;
+        }
+        return row;
+    }
+
+    /* Convert DB row → JS object (map snake_case back to camelCase) */
+    function fromRow(table, row) {
+        if (!row) return null;
+        var obj = Object.assign({}, row);
+        if (table === 'posts' && 'og_image' in obj) {
+            obj.ogImage = obj.og_image;
+            delete obj.og_image;
+        }
+        if (table === 'projects') {
+            if (!Array.isArray(obj.techs))   obj.techs   = obj.techs   ? obj.techs   : [];
+            if (!Array.isArray(obj.gallery)) obj.gallery = obj.gallery ? obj.gallery : [];
+        }
+        return obj;
+    }
+
+    window.DataManager = {
+        keys: {
+            POSTS:        'posts',
+            PROJECTS:     'projects',
+            TEAM:         'team',
+            TESTIMONIALS: 'testimonials',
+            SETTINGS:     'settings'
+        },
+
+        /* Returns Promise<Array> */
+        getData: function (table) {
+            var cached = _cacheGet(table);
+            if (cached) return Promise.resolve(cached);
+            return _db.from(table).select('*').order('created_at', { ascending: false })
+                .then(function (res) {
+                    if (res.error) { console.error('[DataManager] getData:', res.error.message); return []; }
+                    var results = (res.data || []).map(function (row) { return fromRow(table, row); });
+                    _cacheSet(table, results);
+                    return results;
+                });
+        },
+
+        /* Returns Promise<Object|null> */
+        getItem: function (table, id) {
+            /* Check collection cache first */
+            var cached = _cacheGet(table);
+            if (cached) {
+                var sid = String(id);
+                for (var i = 0; i < cached.length; i++) {
+                    if (String(cached[i].id) === sid) return Promise.resolve(cached[i]);
+                }
+            }
+            /* Cache miss — fetch the full table (populates cache for siblings) */
+            var self = this;
+            return self.getData(table).then(function (all) {
+                var sid = String(id);
+                for (var i = 0; i < all.length; i++) {
+                    if (String(all[i].id) === sid) return all[i];
+                }
+                return null;
+            });
+        },
+
+        /* Returns Promise<Object|null> */
+        addItem: function (table, item) {
+            var row = toRow(table, item);
+            return _db.from(table).insert(row).select().single()
+                .then(function (res) {
+                    if (res.error) { console.error('[DataManager] addItem:', res.error.message); return null; }
+                    _cacheInvalidate(table);
+                    return fromRow(table, res.data);
+                });
+        },
+
+        /* Returns Promise<boolean> */
+        updateItem: function (table, id, updates) {
+            var row = toRow(table, updates);
+            return _db.from(table).update(row).eq('id', id)
+                .then(function (res) {
+                    if (res.error) { console.error('[DataManager] updateItem:', res.error.message); return false; }
+                    _cacheInvalidate(table);
+                    return true;
+                });
+        },
+
+        /* Returns Promise<void> */
+        deleteItem: function (table, id) {
+            return _db.from(table).delete().eq('id', id)
+                .then(function (res) {
+                    if (res.error) { console.error('[DataManager] deleteItem:', res.error.message); }
+                    _cacheInvalidate(table);
+                });
+        },
+
+        /* Returns Promise<Object> */
+        getSettings: function () {
+            return _db.from('settings').select('data').limit(1).maybeSingle()
+                .then(function (res) {
+                    if (res.error || !res.data) return {};
+                    return res.data.data || {};
+                });
+        },
+
+        /* Returns Promise<void> */
+        saveSettings: function (data) {
+            return _db.from('settings').select('id').limit(1).maybeSingle()
+                .then(function (res) {
+                    _cacheInvalidate('settings');
+                    if (res.data) {
+                        return _db.from('settings').update({ data: data, updated_at: new Date().toISOString() }).eq('id', res.data.id);
+                    }
+                    return _db.from('settings').insert({ data: data });
+                });
+        },
+
+        /* Delete all rows in a table – used by Admin.resetData() */
+        deleteAll: function (table) {
+            _cacheInvalidate(table);
+            return _db.from(table).delete().gt('created_at', '1970-01-01T00:00:00Z');
+        },
+
+        /* No-op – kept for backward-compat */
+        init: function () {}
+    };
+})();
