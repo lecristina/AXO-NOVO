@@ -157,21 +157,49 @@ var Admin = {
     },
 
     /* ===== IMAGE UPLOAD ===== */
+
+    /* Compress/resize image via canvas before storing as base64.
+       Max dimension 1200px, JPEG quality 0.55 → ~30-80KB instead of 1-5MB */
+    _compressImage: function(dataUrl, maxSize, quality) {
+        maxSize = maxSize || 1200;
+        quality = quality || 0.55;
+        return new Promise(function(resolve) {
+            var img = new Image();
+            img.onload = function() {
+                var w = img.width, h = img.height;
+                if (w > maxSize || h > maxSize) {
+                    if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
+                    else        { w = Math.round(w * maxSize / h); h = maxSize; }
+                }
+                var c = document.createElement('canvas');
+                c.width = w; c.height = h;
+                var ctx = c.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                resolve(c.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = function() { resolve(dataUrl); };
+            img.src = dataUrl;
+        });
+    },
+
     handleImageUpload: function(inputId, previewId, dataId) {
+        var self = this;
         var input = document.getElementById(inputId);
         if (!input || !input.files || !input.files[0]) return;
         var file = input.files[0];
-        if (file.size > 3 * 1024 * 1024) {
-            alert('Imagem deve ter no maximo 3MB');
+        if (file.size > 5 * 1024 * 1024) {
+            alert('Imagem deve ter no maximo 5MB');
             input.value = '';
             return;
         }
         var reader = new FileReader();
         reader.onload = function(e) {
-            document.getElementById(dataId).value = e.target.result;
-            var preview = document.getElementById(previewId);
-            preview.src = e.target.result;
-            preview.classList.remove('hidden');
+            self._compressImage(e.target.result).then(function(compressed) {
+                document.getElementById(dataId).value = compressed;
+                var preview = document.getElementById(previewId);
+                preview.src = compressed;
+                preview.classList.remove('hidden');
+            });
         };
         reader.readAsDataURL(file);
     },

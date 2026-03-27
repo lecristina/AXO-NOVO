@@ -451,9 +451,9 @@
             }
         }
 
-        /* Load DB projects — show real data only; fall back to hardcoded only if DB is empty */
+        /* Load DB projects — light query (no images/cover/content) for instant carousel */
         if (typeof DataManager !== 'undefined') {
-            DataManager.getData(DataManager.keys.PROJECTS).then(function(allProjects) {
+            DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,techs,status,created_at').then(function(allProjects) {
                 var dbProjects = allProjects.filter(function(p) { return p.status !== 'draft'; });
                 var cards = dbProjects.length >= 1
                     ? dbProjects.map(function(p, i) {
@@ -464,7 +464,7 @@
                             techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''),
                             c1:    g[0],
                             c2:    g[1],
-                            image: p.cover || p.image || ''
+                            image: ''
                         };
                     })
                     : HARDCODED;
@@ -479,7 +479,7 @@
     async function loadProjectsPreview() {
         var container = document.getElementById('projects-preview');
         if (!container) return;
-        var projects = (await DataManager.getData(DataManager.keys.PROJECTS)).filter(function(p) { return p.status !== 'draft'; });
+        var projects = (await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,techs,image,status,created_at')).filter(function(p) { return p.status !== 'draft'; });
         if (!projects.length) return;
 
         var recent = projects.slice(0, 3);
