@@ -13,6 +13,7 @@ create table if not exists posts (
   date        text default '',
   image       text default '',
   og_image    text default '',
+  featured    boolean default false,
   created_at  timestamptz default now()
 );
 
@@ -24,6 +25,8 @@ create table if not exists projects (
   category    text default '',
   techs       jsonb default '[]',
   image       text default '',
+  cover       text default '',
+  gif         text default '',
   link        text default '',
   client      text default '',
   date        text default '',
@@ -65,6 +68,14 @@ create table if not exists settings (
   updated_at  timestamptz default now()
 );
 
+-- Empresas do carrossel
+create table if not exists companies (
+  id          uuid primary key default gen_random_uuid(),
+  name        text not null,
+  image       text default '',
+  created_at  timestamptz default now()
+);
+
 -- =====================================================
 -- Row Level Security – permite acesso anônimo total
 -- (a proteção é feita pela senha do painel admin)
@@ -74,9 +85,18 @@ alter table projects    enable row level security;
 alter table team        enable row level security;
 alter table testimonials enable row level security;
 alter table settings    enable row level security;
+alter table companies   enable row level security;
 
 create policy "anon_all" on posts        for all to anon using (true) with check (true);
 create policy "anon_all" on projects     for all to anon using (true) with check (true);
 create policy "anon_all" on team         for all to anon using (true) with check (true);
 create policy "anon_all" on testimonials for all to anon using (true) with check (true);
 create policy "anon_all" on settings     for all to anon using (true) with check (true);
+create policy "anon_all" on companies    for all to anon using (true) with check (true);
+
+-- =====================================================
+-- Migrations (run only if tables already exist)
+-- =====================================================
+alter table posts    add column if not exists featured boolean default false;
+alter table projects add column if not exists cover    text default '';
+alter table projects add column if not exists gif      text default '';

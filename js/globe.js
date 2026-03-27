@@ -44,28 +44,13 @@
         // ── Helper: lat/lon → Vector3 ─────────────────────────────────────────
         function ll(lat, lon, r) {
             var phi   = (90 - lat) * Math.PI / 180;
-            var theta = lon        * Math.PI / 180;
+            var theta = -lon       * Math.PI / 180;
             return new THREE.Vector3(
                 r * Math.sin(phi) * Math.cos(theta),
                 r * Math.cos(phi),
                 r * Math.sin(phi) * Math.sin(theta)
             );
         }
-
-        // ── Background stars ──────────────────────────────────────────────────
-        (function () {
-            var pos = new Float32Array(1800 * 3);
-            for (var i = 0; i < 1800; i++) {
-                pos[i*3]   = (Math.random() - 0.5) * 20;
-                pos[i*3+1] = (Math.random() - 0.5) * 20;
-                pos[i*3+2] = (Math.random() - 0.5) * 20 - 5;
-            }
-            var g = new THREE.BufferGeometry();
-            g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-            scene.add(new THREE.Points(g, new THREE.PointsMaterial({
-                color: 0xffffff, size: 0.011, transparent: true, opacity: 0.50, sizeAttenuation: true
-            })));
-        })();
 
         // ── Purple atmosphere rim ─────────────────────────────────────────────
         globeGroup.add(new THREE.Mesh(
@@ -88,7 +73,43 @@
             })
         ));
 
-        // ── Load Earth texture, build sphere + dot overlay ────────────────────
+        // ── 30 hardcoded country pins (lat, lon) ────────────────────────────────
+        // Brazil gets 8 pins (bright purple), rest of world gets 22 (teal)
+        var PINS = [
+            // Brazil (8)
+            [-23.55, -46.63], [-22.91, -43.17], [-15.78, -47.93], [-12.97, -38.50],
+            [-8.05,  -34.88], [-3.10,  -60.02], [-30.03, -51.23], [-1.46,  -48.50],
+            // South America
+            [-34.61, -58.38], [-33.45, -70.67], [-12.05, -77.04], [4.71, -74.07],
+            // North America
+            [40.71, -74.01], [34.05, -118.24], [41.88, -87.63], [43.65, -79.38], [19.43, -99.13],
+            // Europe
+            [51.51, -0.13], [48.86, 2.35], [52.52, 13.40], [38.72, -9.14],
+            // Africa
+            [30.06, 31.25], [6.52, 3.38], [-1.29, 36.82], [-26.20, 28.04],
+            // Asia
+            [55.75, 37.62], [28.61, 77.21], [19.08, 72.88], [31.23, 121.47], [35.69, 139.69],
+            // Oceania
+            [-33.87, 151.21]
+        ];
+
+        function buildPins() {
+            var pPos = [], pCols = [], rPin = R * 1.012;
+            for (var pi = 0; pi < PINS.length; pi++) {
+                var vp = ll(PINS[pi][0], PINS[pi][1], rPin);
+                pPos.push(vp.x, vp.y, vp.z);
+                if (pi < 8) { pCols.push(0.82, 0.12, 1.00); } // Brazil: bright purple
+                else        { pCols.push(0.00, 0.85, 1.00); } // world: teal
+            }
+            var pg = new THREE.BufferGeometry();
+            pg.setAttribute('position', new THREE.Float32BufferAttribute(pPos, 3));
+            pg.setAttribute('color',    new THREE.Float32BufferAttribute(pCols, 3));
+            globeGroup.add(new THREE.Points(pg, new THREE.PointsMaterial({
+                size: 0.030, vertexColors: true, transparent: true, opacity: 0.95, sizeAttenuation: true
+            })));
+        }
+
+        // ── Load Earth texture, build sphere ──────────────────────────────────
         var TEXTURE_URL = 'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg';
 
         var loader = new THREE.TextureLoader();
@@ -108,74 +129,17 @@
                 });
                 globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(R, 64, 64), sphereMat));
 
-                // — Sample texture on a canvas to detect land vs ocean ——————————
-                var img = texture.image;
-                var CW  = 720, CH = 360;
-                var cv  = document.createElement('canvas');
-                cv.width = CW; cv.height = CH;
-                cv.getContext('2d').drawImage(img, 0, 0, CW, CH);
-                var px = cv.getContext('2d').getImageData(0, 0, CW, CH).data;
-
-                function isLand(lon, lat) {
-                    var x = Math.min(CW - 1, Math.max(0, Math.round((lon + 180) * CW / 360)));
-                    var y = Math.min(CH - 1, Math.max(0, Math.round((90  - lat)  * CH / 180)));
-                    var k = (y * CW + x) * 4;
-                    var r = px[k], g = px[k+1], b = px[k+2];
-                    // Ocean pixels are dark blue: low red, blue dominant
-                    return !(r < 70 && b > g * 1.1 && b > 60);
-                }
-
-                // — Build dot cloud only on land ————————————————————————————————
-                var pos = [], cols = [];
-                var rDot = R * 1.004;
-                var step = 0.9;  // ~100 km
-
-                for (var lat = -90; lat <= 90; lat += step) {
-                    var cosLat  = Math.cos(lat * Math.PI / 180);
-                    var lonStep = cosLat < 0.02 ? 360 : step / cosLat;
-                    lonStep = Math.max(step, Math.min(lonStep, 5));
-
-                    for (var lon = -180; lon <= 180; lon += lonStep) {
-                        if (!isLand(lon, lat)) continue;
-                        var v = ll(lat, lon, rDot);
-                        pos.push(v.x, v.y, v.z);
-                        var t = Math.random();
-                        if      (t < 0.50) cols.push(0.70, 0.10, 1.00);  // bright purple
-                        else if (t < 0.80) cols.push(0.00, 0.90, 1.00);  // teal
-                        else               cols.push(1.00, 1.00, 1.00);  // white
-                    }
-                }
-
-                var geo = new THREE.BufferGeometry();
-                geo.setAttribute('position', new THREE.Float32BufferAttribute(pos,  3));
-                geo.setAttribute('color',    new THREE.Float32BufferAttribute(cols, 3));
-                globeGroup.add(new THREE.Points(geo, new THREE.PointsMaterial({
-                    size: 0.010, vertexColors: true,
-                    transparent: true, opacity: 0.85, sizeAttenuation: true
-                })));
+                // — Add 30 country pins ————————————————————————————————————————
+                buildPins();
             },
             undefined,
             function () {
-                // Fallback: dark sphere + dots everywhere if texture CDN fails
+                // Fallback: dark sphere + pins if texture CDN fails
                 globeGroup.add(new THREE.Mesh(
                     new THREE.SphereGeometry(R, 64, 64),
                     new THREE.MeshPhongMaterial({ color: 0x030712, emissive: 0x03050f })
                 ));
-                var pos = [], cols = [];
-                for (var lat2 = -90; lat2 <= 90; lat2 += 0.9) {
-                    for (var lon2 = -180; lon2 <= 180; lon2 += 0.9) {
-                        var v2 = ll(lat2, lon2, R * 1.004);
-                        pos.push(v2.x, v2.y, v2.z);
-                        var t2 = Math.random();
-                        cols.push(t2 < 0.5 ? 0.7 : 0, t2 < 0.5 ? 0.1 : 0.9, t2 < 0.5 ? 1 : 1);
-                    }
-                }
-                var g2 = new THREE.BufferGeometry();
-                g2.setAttribute('position', new THREE.Float32BufferAttribute(pos,  3));
-                g2.setAttribute('color',    new THREE.Float32BufferAttribute(cols, 3));
-                globeGroup.add(new THREE.Points(g2, new THREE.PointsMaterial({
-                    size: 0.010, vertexColors: true, transparent: true, opacity: 0.80, sizeAttenuation: true
-                })));
+                buildPins();
             }
         );
 

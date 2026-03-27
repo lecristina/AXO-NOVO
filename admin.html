@@ -117,13 +117,13 @@
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                     Depoimentos
                 </a>
-                <a class="sidebar-link" data-section="settings">
-                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    Configuracoes
-                </a>
                 <a class="sidebar-link" data-section="companies">
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     Empresas
+                </a>
+                <a class="sidebar-link" data-section="settings">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Configuracoes
                 </a>
             </nav>
             <div class="p-4 border-t border-gray-700 space-y-2">
@@ -153,12 +153,16 @@
                         <h3 id="blog-form-title" class="text-lg font-semibold text-gray-900 mb-4">Novo Post</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div><label class="block text-sm font-medium text-gray-700 mb-1">Titulo</label><input type="text" id="blog-title" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary"></div>
-                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label><input type="text" id="blog-category" list="blog-categories-list" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary"><datalist id="blog-categories-list"></datalist></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label><input type="text" id="blog-category" list="blog-category-list" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary"><datalist id="blog-category-list"></datalist></div>
                         </div>
                         <div class="mb-4"><label class="block text-sm font-medium text-gray-700 mb-1">Resumo</label><textarea id="blog-excerpt" rows="2" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary"></textarea></div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div><label class="block text-sm font-medium text-gray-700 mb-1">Data</label><input type="date" id="blog-date" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary"></div>
                             <div><label class="block text-sm font-medium text-gray-700 mb-1">Imagem de Capa</label><input type="file" id="blog-image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark"><img id="blog-image-preview" class="hidden mt-2 h-20 rounded-lg object-cover" alt="preview"></div>
+                        </div>
+                        <div class="mb-4 flex items-center gap-3">
+                            <input type="checkbox" id="blog-featured" class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary accent-primary">
+                            <label for="blog-featured" class="text-sm font-medium text-gray-700">Destacar postagem <span class="text-gray-400 text-xs">(aparece primeiro na listagem)</span></label>
                         </div>
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Imagem OG / Redes Sociais</label>
@@ -168,10 +172,6 @@
                         </div>
                         <div class="mb-4"><label class="block text-sm font-medium text-gray-700 mb-1">Conteudo</label><div id="blog-editor"></div></div>
                         <input type="hidden" id="blog-edit-id"><input type="hidden" id="blog-image-data"><input type="hidden" id="blog-og-image-data">
-                        <div class="mb-4 flex items-center gap-3">
-                            <input type="checkbox" id="blog-featured" class="w-4 h-4 accent-primary rounded">
-                            <label for="blog-featured" class="text-sm font-medium text-gray-700 cursor-pointer">&#11088; Destacar este post (aparece primeiro na listagem)</label>
-                        </div>
                         <div class="flex gap-3 mt-4">
                             <button onclick="Admin.saveBlog()" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm font-medium transition">Salvar</button>
                             <button onclick="Admin.cancelForm('blog')" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium transition hover:bg-gray-300">Cancelar</button>
@@ -191,7 +191,7 @@
                         <!-- Title + Category -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div><label class="block text-sm font-medium text-gray-700 mb-1">Titulo *</label><input type="text" id="proj-title" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary"></div>
-                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label><input type="text" id="proj-category" list="proj-categories-list" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: E-commerce, Mobile, Sistema"><datalist id="proj-categories-list"></datalist></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label><input type="text" id="proj-category" list="proj-category-list" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: E-commerce, Mobile, Sistema"><datalist id="proj-category-list"></datalist></div>
                         </div>
                         <!-- Client + Date + Status -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -206,26 +206,29 @@
                             <div><label class="block text-sm font-medium text-gray-700 mb-1">Tecnologias (separadas por virgula)</label><input type="text" id="proj-techs" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary" placeholder="React, Node.js, MongoDB"></div>
                             <div><label class="block text-sm font-medium text-gray-700 mb-1">Link do Projeto</label><input type="text" id="proj-link" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary" placeholder="https://"></div>
                         </div>
-                        <!-- Hero Image + Cover + GIF -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <!-- Hero Image -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Imagem Principal</label>
+                            <p class="text-xs text-gray-400 mb-2">Imagem exibida no topo da pagina do projeto.</p>
+                            <input type="file" id="proj-image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark">
+                            <img id="proj-image-preview" class="hidden mt-2 h-24 rounded-lg object-cover" alt="preview">
+                        </div>
+                        <!-- Cover Image (card thumbnail) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Imagem Principal</label>
-                                <input type="file" id="proj-image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark">
-                                <img id="proj-image-preview" class="hidden mt-2 h-24 w-full rounded-lg object-contain bg-gray-100" alt="preview">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Capa miniatura <span class="text-gray-400 font-normal">(card da listagem)</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Imagem de Capa (Card)</label>
+                                <p class="text-xs text-gray-400 mb-2">Exibida nos cards da listagem de projetos.</p>
                                 <input type="file" id="proj-cover" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-700">
-                                <img id="proj-cover-preview" class="hidden mt-2 h-24 w-full rounded-lg object-contain bg-gray-100" alt="capa preview">
-                                <input type="hidden" id="proj-cover-data">
+                                <img id="proj-cover-preview" class="hidden mt-2 h-24 rounded-lg object-contain bg-gray-100" alt="cover preview">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">GIF demonstracao <span class="text-gray-400 font-normal">(scroll / interacao)</span></label>
-                                <input type="file" id="proj-gif-input" accept="image/gif" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-700">
-                                <img id="proj-gif-preview" class="hidden mt-2 h-24 w-full rounded-lg object-contain bg-gray-100" alt="gif preview">
-                                <input type="hidden" id="proj-gif-data">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">GIF de Preview (Scroll)</label>
+                                <p class="text-xs text-gray-400 mb-2">GIF animado que roda ao clicar no projeto. Pode ser um scroll da pagina.</p>
+                                <input type="file" id="proj-gif" accept="image/gif,image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-700">
+                                <img id="proj-gif-preview" class="hidden mt-2 h-24 rounded-lg object-contain bg-gray-100" alt="gif preview">
                             </div>
                         </div>
+                        <input type="hidden" id="proj-edit-id"><input type="hidden" id="proj-image-data"><input type="hidden" id="proj-cover-data"><input type="hidden" id="proj-gif-data">
                         <!-- Rich Content Editor -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Conteudo da Pagina do Projeto</label>
@@ -239,7 +242,7 @@
                             <input type="file" id="proj-gallery-input" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-700">
                             <div id="proj-gallery-preview" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 mt-3"></div>
                         </div>
-                        <input type="hidden" id="proj-edit-id"><input type="hidden" id="proj-image-data">                        <div class="flex gap-3 mt-6 pt-4 border-t border-gray-100">
+                        <div class="flex gap-3 mt-6 pt-4 border-t border-gray-100">
                             <button onclick="Admin.saveProject()" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm font-medium transition">Salvar Projeto</button>
                             <button onclick="Admin.cancelForm('projects')" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium transition hover:bg-gray-300">Cancelar</button>
                         </div>
@@ -302,6 +305,33 @@
                         <div class="flex gap-3">
                             <button onclick="Admin.saveTestimonial()" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm font-medium transition">Salvar</button>
                             <button onclick="Admin.cancelForm('testimonials')" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium transition hover:bg-gray-300">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EMPRESAS SECTION -->
+                <div id="section-companies" class="admin-section">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-2xl font-bold font-display text-gray-900">Empresas do Carrossel</h1>
+                        <button onclick="Admin.showForm('companies')" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium transition">+ Nova Empresa</button>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">Gerencie as empresas exibidas no carrossel da home e da página Sobre.</p>
+                    <div id="companies-list" class="space-y-3"></div>
+                    <div id="companies-form" class="hidden mt-6 bg-white rounded-xl p-6 shadow-lg border border-gray-200">
+                        <h3 id="companies-form-title" class="text-lg font-semibold text-gray-900 mb-4">Nova Empresa</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div><label class="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa</label><input type="text" id="comp-name" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: Google, Meta, Startup XYZ"></div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Logo / Imagem</label>
+                                <p class="text-xs text-gray-400 mb-1">PNG transparente recomendado (max 2MB)</p>
+                                <input type="file" id="comp-logo" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary-dark">
+                                <img id="comp-logo-preview" class="hidden mt-2 h-16 rounded-lg object-contain bg-gray-50 p-1 border border-gray-100" alt="preview">
+                            </div>
+                        </div>
+                        <input type="hidden" id="comp-edit-id"><input type="hidden" id="comp-logo-data">
+                        <div class="flex gap-3">
+                            <button onclick="Admin.saveCompany()" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm font-medium transition">Salvar</button>
+                            <button onclick="Admin.cancelForm('companies')" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium transition hover:bg-gray-300">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -397,38 +427,6 @@
                         <div class="pt-2">
                             <button onclick="Admin.saveSettings()" class="bg-primary hover:bg-primary-dark text-white px-8 py-2.5 rounded-lg text-sm font-medium transition">Salvar todas as configuracoes</button>
                             <p id="settings-saved-msg" class="hidden inline-block ml-4 text-green-600 text-sm font-medium">&#10003; Salvo com sucesso!</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EMPRESAS SECTION -->
-                <div id="section-companies" class="admin-section">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h1 class="text-2xl font-bold font-display text-gray-900">Empresas Parceiras</h1>
-                            <p class="text-sm text-gray-500 mt-1">Logos exibidos no carrossel da home e da pagina sobre</p>
-                        </div>
-                        <button onclick="Admin.showCompanyForm()" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium transition">+ Adicionar Empresa</button>
-                    </div>
-                    <div id="companies-list" class="space-y-3 mb-6"></div>
-                    <div id="company-form" class="hidden bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                        <h3 id="co-form-title" class="text-base font-semibold text-gray-900 mb-4">Nova Empresa</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa</label>
-                                <input type="text" id="co-name" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: Google, Microsoft">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Logo</label>
-                                <input type="file" id="co-logo" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gray-600 file:text-white hover:file:bg-gray-700">
-                                <img id="co-logo-preview" class="hidden mt-2 h-14 rounded-lg object-contain bg-gray-100 px-2" alt="logo preview">
-                                <input type="hidden" id="co-logo-data">
-                                <input type="hidden" id="co-edit-index" value="-1">
-                            </div>
-                        </div>
-                        <div class="flex gap-3">
-                            <button onclick="Admin.saveCompany()" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm font-medium transition">Salvar</button>
-                            <button onclick="Admin.cancelCompanyForm()" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg text-sm font-medium transition hover:bg-gray-300">Cancelar</button>
                         </div>
                     </div>
                 </div>

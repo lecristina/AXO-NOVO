@@ -100,6 +100,48 @@
     }
 
     // ==========================================
+    // Companies Carousel (infinite auto-scroll)
+    // ==========================================
+    async function initCompaniesCarousel() {
+        var track = document.getElementById('companies-track');
+        if (!track) return;
+
+        var companies = (typeof DataManager !== 'undefined') ? await DataManager.getData(DataManager.keys.COMPANIES) : null;
+
+        // Fallback placeholders if no companies in DB yet
+        if (!companies || companies.length === 0) {
+            companies = [
+                { name: 'Empresa A' },
+                { name: 'Empresa B' },
+                { name: 'Empresa C' },
+                { name: 'Empresa D' },
+                { name: 'Empresa E' },
+                { name: 'Empresa F' }
+            ];
+        }
+
+        var DEFAULT_ICON = '<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>';
+
+        function buildCompanyCard(c) {
+            var iconHTML = c.image
+                ? '<img src="' + c.image + '" alt="' + (c.name || '') + '" class="w-8 h-8 object-contain">'
+                : DEFAULT_ICON;
+            return '<div class="flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 shadow-sm flex-shrink-0">'
+                + '<div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">' + iconHTML + '</div>'
+                + '<span class="text-sm font-semibold text-gray-600 whitespace-nowrap">' + (c.name || '') + '</span>'
+                + '</div>';
+        }
+
+        var cardsHTML = companies.map(buildCompanyCard).join('');
+        // Duplicate for seamless infinite loop (animation translates -50%)
+        track.innerHTML = cardsHTML + cardsHTML;
+
+        // Speed: ~4.5s per item feels smooth
+        var duration = Math.max(companies.length * 4.5, 20);
+        track.style.animation = 'trust-scroll ' + duration + 's linear infinite';
+    }
+
+    // ==========================================
     // Testimonials Marquee
     // ==========================================
     async function initMarquee() {
@@ -294,7 +336,12 @@
         var posts = await DataManager.getData(DataManager.keys.POSTS);
         if (!posts) { container.innerHTML = ''; return; }
 
-        var recent = posts.sort(function(a, b) { return new Date(b.date) - new Date(a.date); }).slice(0, 3);
+        var recent = posts.sort(function(a, b) {
+            // Featured posts first, then by date
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            return new Date(b.date) - new Date(a.date);
+        }).slice(0, 3);
         if (!recent.length) { container.innerHTML = ''; return; }
         container.innerHTML = recent.map(function(post, index) {
             var imgHTML = post.image
@@ -394,26 +441,25 @@
             }
         }
 
-        /* Render hardcoded cards immediately — no async wait, carousel visible at once */
-        buildRows(HARDCODED);
-
-        /* Silently update with DB projects when they arrive */
+        /* Load DB projects — show real data only; fall back to hardcoded only if DB is empty */
         if (typeof DataManager !== 'undefined') {
-            var dbProjects = (await DataManager.getData(DataManager.keys.PROJECTS)).filter(function(p) { return p.status !== 'draft'; });
-            if (dbProjects.length >= 1) {
-                var dbCards = dbProjects.map(function(p, i) {
-                    var g = GRADIENTS[i % GRADIENTS.length];
-                    return {
-                        title: p.title || 'Projeto',
-                        cat:   p.category || 'Projeto',
-                        techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''),
-                        c1:    g[0],
-                        c2:    g[1],
-                        image: p.image || ''
-                    };
-                });
-                buildRows(dbCards);
-            }
+            DataManager.getData(DataManager.keys.PROJECTS).then(function(allProjects) {
+                var dbProjects = allProjects.filter(function(p) { return p.status !== 'draft'; });
+                var cards = dbProjects.length >= 1
+                    ? dbProjects.map(function(p, i) {
+                        var g = GRADIENTS[i % GRADIENTS.length];
+                        return {
+                            title: p.title || 'Projeto',
+                            cat:   p.category || 'Projeto',
+                            techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''),
+                            c1:    g[0],
+                            c2:    g[1],
+                            image: p.cover || p.image || ''
+                        };
+                    })
+                    : HARDCODED;
+                buildRows(cards);
+            });
         }
     }
 
@@ -451,6 +497,7 @@
     // Initialize everything
     // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
+        initCompaniesCarousel();
         initMarquee();
         initFAQ();
         initCosmos();
