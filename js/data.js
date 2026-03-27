@@ -46,6 +46,7 @@
         var k = 'axo_' + table;
         var entry = { data: data, ts: Date.now() };
         _mem[k] = entry;  /* full data always in memory */
+        if (!data || !data.length) return;  /* don't persist empty results to localStorage */
         /* Slim version for localStorage: strip heavy fields, keep images */
         try {
             var slim = data.map(function(item) { return _slimItem(table, item); });
@@ -122,7 +123,7 @@
         getDataSelect: function (table, cols) {
             var cacheKey = table + '_list';
             var cached = _cacheGet(cacheKey);
-            if (cached) return Promise.resolve(cached);
+            if (cached && cached.length) return Promise.resolve(cached);
             var ik = 'axo_' + cacheKey;
             if (_inflight[ik]) return _inflight[ik];
             _inflight[ik] = _db.from(table).select(cols).order('created_at', { ascending: false })
@@ -139,7 +140,7 @@
         /* Returns Promise<Array> */
         getData: function (table) {
             var cached = _cacheGet(table);
-            if (cached) return Promise.resolve(cached);
+            if (cached && cached.length) return Promise.resolve(cached);
             // Return the same in-flight promise if a fetch is already pending
             var ik = 'axo_' + table;
             if (_inflight[ik]) return _inflight[ik];
