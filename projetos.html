@@ -98,49 +98,89 @@
     <script src="js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
-    <script>DataManager.getData(DataManager.keys.PROJECTS);</script>
+    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at');</script>
     <script src="js/theme.js"></script>
     <script>
-    (async function() {
-        // Scroll animations
+    (function() {
+        var grid = document.getElementById('projects-grid');
+        var noResults = document.getElementById('no-results');
+        var filterContainer = document.getElementById('filter-btns');
+        var activeFilter = 'all';
+        var projects = [];
+
+        // Scroll observer
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
             });
         }, { threshold: 0.1 });
 
-        // Load projects
-        var grid = document.getElementById('projects-grid');
-        var noResults = document.getElementById('no-results');
-        var filterContainer = document.getElementById('filter-btns');
+        function _esc(s) {
+            return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
 
-        // Skeleton while loading
-        grid.innerHTML = [0,1,2,3,4,5].map(function() {
-            return '<div class="animate-pulse">' +
-                '<div class="h-52 bg-gray-200 rounded-2xl mb-4"></div>' +
-                '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
-                '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
-                '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
-                '</div>';
-        }).join('');
+        function buildFilters(list) {
+            // Remove category buttons that no longer exist
+            filterContainer.querySelectorAll('.filter-btn[data-filter]:not([data-filter="all"])').forEach(function(b) { b.remove(); });
+            var categories = [];
+            list.forEach(function(p) {
+                if (p.category && categories.indexOf(p.category) === -1) categories.push(p.category);
+            });
+            categories.forEach(function(cat) {
+                var btn = document.createElement('button');
+                btn.setAttribute('data-filter', cat);
+                btn.className = 'filter-btn bg-gray-100 text-gray-600 border border-gray-200 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary';
+                btn.textContent = cat;
+                filterContainer.appendChild(btn);
+            });
+        }
 
-        var projects = (await DataManager.getData(DataManager.keys.PROJECTS)).filter(function(p) { return p.status !== 'draft'; });
-        var activeFilter = 'all';
-
-        // Build category filters
-        var categories = [];
-        projects.forEach(function(p) {
-            if (p.category && categories.indexOf(p.category) === -1) {
-                categories.push(p.category);
+        function renderProjects() {
+            var filtered = activeFilter === 'all' ? projects : projects.filter(function(p) { return p.category === activeFilter; });
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
             }
-        });
-        categories.forEach(function(cat) {
-            var btn = document.createElement('button');
-            btn.setAttribute('data-filter', cat);
-            btn.className = 'filter-btn bg-gray-100 text-gray-600 border border-gray-200 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary';
-            btn.textContent = cat;
-            filterContainer.appendChild(btn);
-        });
+            noResults.classList.add('hidden');
+            grid.innerHTML = filtered.map(function(p, i) {
+                var techHtml = '';
+                if (p.techs && p.techs.length) {
+                    techHtml = '<div class="flex flex-wrap gap-2 mt-4">' + p.techs.map(function(t) {
+                        return '<span class="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">' + _esc(t) + '</span>';
+                    }).join('') + '</div>';
+                }
+                var safeTitle = _esc(p.title);
+                var delay = Math.min(i * 80, 320);
+                return '<article class="project-card scroll-animate group" style="transition-delay:' + delay + 'ms">' +
+                    '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
+                        '<div class="h-56 relative overflow-hidden">' +
+                            (p.image
+                                ? '<img src="' + _esc(p.image) + '" alt="' + safeTitle + '" class="project-image w-full h-full object-cover" loading="lazy" decoding="async">'
+                                : '<div class="project-image w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-16 h-16 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>') +
+                            '<div class="project-overlay absolute inset-0 bg-primary/60 flex items-center justify-center">' +
+                                '<a href="projeto.html?id=' + p.id + '" class="bg-white text-primary px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all transform hover:scale-105">Ver Projeto</a>' +
+                            '</div>' +
+                            '<div class="absolute top-3 left-3"><span class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold backdrop-blur-sm">' + _esc(p.category || 'Geral') + '</span></div>' +
+                        '</div>' +
+                        '<div class="p-6 flex flex-col flex-1">' +
+                            '<a href="projeto.html?id=' + p.id + '" class="block">' +
+                                '<h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-3">' + safeTitle + '</h3>' +
+                            '</a>' +
+                            '<p class="text-sm text-gray-500 line-clamp-3 flex-1">' + _esc(p.description || '') + '</p>' +
+                            techHtml +
+                            '<div class="mt-5 pt-4 border-t border-gray-100">' +
+                                '<a href="projeto.html?id=' + p.id + '" class="flex items-center text-primary text-sm font-semibold group/link">' +
+                                    '<span>Ver detalhes</span>' +
+                                    '<svg class="w-4 h-4 ml-1.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>' +
+                                '</a>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</article>';
+            }).join('');
+            document.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
+        }
 
         // Filter click handler
         filterContainer.addEventListener('click', function(e) {
@@ -154,55 +194,38 @@
             renderProjects();
         });
 
-        function renderProjects() {
-            var filtered = activeFilter === 'all' ? projects : projects.filter(function(p) { return p.category === activeFilter; });
-
-            if (filtered.length === 0) {
-                grid.innerHTML = '';
-                noResults.classList.remove('hidden');
-                return;
-            }
-            noResults.classList.add('hidden');
-
-            grid.innerHTML = filtered.map(function(p, i) {
-                var techHtml = '';
-                if (p.techs && p.techs.length) {
-                    techHtml = '<div class="flex flex-wrap gap-2 mt-4">' + p.techs.map(function(t) {
-                        return '<span class="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">' + t + '</span>';
-                    }).join('') + '</div>';
-                }
-                return '<article class="project-card scroll-animate group" style="transition-delay:' + (i * 100) + 'ms">' +
-                    '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
-                        '<div class="h-56 relative overflow-hidden">' +
-                            (p.image
-                                ? '<img src="' + p.image + '" alt="' + p.title + '" class="project-image w-full h-full object-cover">'
-                                : '<div class="project-image w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-16 h-16 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>') +
-                            '<div class="project-overlay absolute inset-0 bg-primary/60 flex items-center justify-center">' +
-                                '<a href="projeto.html?id=' + p.id + '" class="bg-white text-primary px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all transform hover:scale-105">Ver Projeto</a>' +
-                            '</div>' +
-                            '<div class="absolute top-3 left-3"><span class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold backdrop-blur-sm">' + (p.category || 'Geral') + '</span></div>' +
-                        '</div>' +
-                        '<div class="p-6 flex flex-col flex-1">' +
-                            '<a href="projeto.html?id=' + p.id + '" class="block">' +
-                                '<h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-3">' + p.title + '</h3>' +
-                            '</a>' +
-                            '<p class="text-sm text-gray-500 line-clamp-3 flex-1">' + (p.description || '') + '</p>' +
-                            techHtml +
-                            '<div class="mt-5 pt-4 border-t border-gray-100">' +
-                                '<a href="projeto.html?id=' + p.id + '" class="flex items-center text-primary text-sm font-semibold group/link">' +
-                                    '<span>Ver detalhes</span>' +
-                                    '<svg class="w-4 h-4 ml-1.5 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>' +
-                                '</a>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</article>';
-            }).join('');
-
-            document.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
+        function applyData(raw) {
+            projects = raw.filter(function(p) { return p.status !== 'draft'; });
+            buildFilters(projects);
+            renderProjects();
         }
 
-        renderProjects();
+        // ── Stale-while-revalidate (uses lightweight list cache, no heavy base64 fields) ──
+        // 1. Render instantly from cache (synchronous, no network)
+        var stale = DataManager.getStale('projects_list');
+        if (stale && stale.length) {
+            applyData(stale);
+        } else {
+            // First visit: show skeleton
+            grid.innerHTML = [0,1,2,3,4,5].map(function() {
+                return '<div class="animate-pulse">' +
+                    '<div class="h-52 bg-gray-200 rounded-2xl mb-4"></div>' +
+                    '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
+                    '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+                    '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
+                    '</div>';
+            }).join('');
+        }
+
+        // 2. Always fetch fresh in background; update if changed
+        DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at').then(function(fresh) {
+            var freshPub = fresh.filter(function(p) { return p.status !== 'draft'; });
+            var prevIds = projects.map(function(p) { return p.id; }).join(',');
+            var freshIds = freshPub.map(function(p) { return p.id; }).join(',');
+            if (!stale || prevIds !== freshIds || JSON.stringify(projects) !== JSON.stringify(freshPub)) {
+                applyData(fresh);
+            }
+        });
     })();
     </script>
 </body>

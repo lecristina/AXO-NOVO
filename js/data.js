@@ -31,13 +31,25 @@
         var k = 'axo_' + table;
         var entry = { data: data, ts: Date.now() };
         _mem[k] = entry;
-        try { localStorage.setItem(k, JSON.stringify(entry)); } catch (e) {}
+        try {
+            var str = JSON.stringify(entry);
+            // Skip localStorage for large payloads (base64 images bloat it)
+            if (str.length < 200 * 1024) {
+                localStorage.setItem(k, str);
+            } else {
+                localStorage.removeItem(k); // clear any stale oversized entry
+            }
+        } catch (e) {}
     }
 
     function _cacheInvalidate(table) {
         delete _mem['axo_' + table];
         delete _inflight['axo_' + table];
         try { localStorage.removeItem('axo_' + table); } catch (e) {}
+        // Also invalidate the lightweight list variant
+        delete _mem['axo_' + table + '_list'];
+        delete _inflight['axo_' + table + '_list'];
+        try { localStorage.removeItem('axo_' + table + '_list'); } catch (e) {}
     }
 
     /* Convert JS object → DB row (remove client-only fields, map camelCase) */
@@ -75,6 +87,37 @@
             TESTIMONIALS: 'testimonials',
             SETTINGS:     'settings',
             COMPANIES:    'companies'
+        },
+
+        /* Returns cached data synchronously (ignores TTL) — null if never fetched.
+           Pass optional cacheKey to read a specific cache slot (e.g. 'projects_list'). */
+        getStale: function (tableOrKey) {
+            var k = 'axo_' + tableOrKey;
+            if (_mem[k]) return _mem[k].data;
+            try {
+                var raw = localStorage.getItem(k);
+                if (raw) { var p = JSON.parse(raw); return p.data || null; }
+            } catch (e) {}
+            return null;
+        },
+
+        /* Fetch only specific columns — cached under table + '_list'.
+           Use for list pages to avoid loading heavy fields (content, gallery, cover, gif). */
+        getDataSelect: function (table, cols) {
+            var cacheKey = table + '_list';
+            var cached = _cacheGet(cacheKey);
+            if (cached) return Promise.resolve(cached);
+            var ik = 'axo_' + cacheKey;
+            if (_inflight[ik]) return _inflight[ik];
+            _inflight[ik] = _db.from(table).select(cols).order('created_at', { ascending: false })
+                .then(function (res) {
+                    delete _inflight[ik];
+                    if (res.error) { console.error('[DataManager] getDataSelect:', res.error.message); return []; }
+                    var results = (res.data || []).map(function (row) { return fromRow(table, row); });
+                    _cacheSet(cacheKey, results);
+                    return results;
+                });
+            return _inflight[ik];
         },
 
         /* Returns Promise<Array> */
