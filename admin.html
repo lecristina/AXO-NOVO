@@ -446,7 +446,7 @@
 (function() {
     var K = DataManager.keys;
     DataManager.getData(K.POSTS);
-    DataManager.getData(K.PROJECTS);
+    DataManager.getDataSelect(K.PROJECTS, 'id,title,category,client,date,status,techs,image');
     DataManager.getData(K.TEAM);
     DataManager.getData(K.TESTIMONIALS);
     DataManager.getSettings();

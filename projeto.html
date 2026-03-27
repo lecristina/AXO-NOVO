@@ -409,7 +409,7 @@
         document.querySelectorAll('#project-page .scroll-animate').forEach(function(el) { obs.observe(el); });
 
         /* ── Related projects ── */
-        var all = (await DataManager.getData(DataManager.keys.PROJECTS)).filter(function(p) {
+        var all = (await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,techs,status,created_at')).filter(function(p) {
             return p.status !== 'draft' && String(p.id) !== String(id);
         });
         var sameCat = all.filter(function(p) { return p.category === proj.category; });

@@ -479,7 +479,7 @@ var Admin = {
     renderProjects: async function() {
         var container = document.getElementById('projects-list');
         if (container) container.innerHTML = this._listSkeleton();
-        var projects = await DataManager.getData(DataManager.keys.PROJECTS);
+        var projects = await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,client,date,status,techs,image');
         if (!projects.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum projeto encontrado</div>';
             return;
@@ -495,7 +495,6 @@ var Admin = {
             var statusBadge = isDraft
                 ? '<span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 font-medium">Rascunho</span>'
                 : '<span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Publicado</span>';
-            var hasContent = proj.content && proj.content !== '<p><br></p>';
             html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4' + (isDraft ? ' opacity-75' : '') + '">';
             if (proj.image) {
                 html += '<img src="' + proj.image + '" class="w-16 h-16 rounded-lg object-cover shrink-0" alt="">';
@@ -506,7 +505,6 @@ var Admin = {
             html += '<div class="flex items-center gap-2 mb-0.5"><h3 class="font-semibold text-gray-900 truncate">' + safeTitle + '</h3>' + statusBadge + '</div>';
             html += '<p class="text-sm text-gray-500">' + safeCat + (safeClient ? ' &bull; ' + safeClient : '') + (proj.date ? ' &bull; ' + proj.date : '') + '</p>';
             if (techsStr) html += '<p class="text-xs text-primary mt-0.5">' + techsStr + '</p>';
-            if (hasContent) html += '<p class="text-xs text-gray-400 mt-0.5">&#9998; Pagina com conteudo</p>';
             html += '</div>';
             html += '<div class="flex gap-1 shrink-0">';
             html += '<button onclick="Admin.editProject(\'' + proj.id + '\')" class="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition" title="Editar"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>';

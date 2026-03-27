@@ -158,7 +158,7 @@
 
         /* Returns Promise<Object|null> */
         getItem: function (table, id) {
-            /* Check collection cache first */
+            /* Check memory/localStorage cache first */
             var cached = _cacheGet(table);
             if (cached) {
                 var sid = String(id);
@@ -166,15 +166,20 @@
                     if (String(cached[i].id) === sid) return Promise.resolve(cached[i]);
                 }
             }
-            /* Cache miss — fetch the full table (populates cache for siblings) */
-            var self = this;
-            return self.getData(table).then(function (all) {
+            /* Also check the _list variant */
+            var cachedList = _cacheGet(table + '_list');
+            if (cachedList) {
                 var sid = String(id);
-                for (var i = 0; i < all.length; i++) {
-                    if (String(all[i].id) === sid) return all[i];
+                for (var i = 0; i < cachedList.length; i++) {
+                    if (String(cachedList[i].id) === sid) return Promise.resolve(cachedList[i]);
                 }
-                return null;
-            });
+            }
+            /* Cache miss — fetch single row directly (avoids downloading entire table) */
+            return _db.from(table).select('*').eq('id', id).single()
+                .then(function (res) {
+                    if (res.error) { console.error('[DataManager] getItem:', res.error.message); return null; }
+                    return fromRow(table, res.data);
+                });
         },
 
         /* Returns Promise<Object|null> */
