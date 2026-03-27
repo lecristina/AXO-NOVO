@@ -98,7 +98,7 @@
     <script src="js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
-    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,status,created_at');</script>
+    <script>DataManager.getData(DataManager.keys.PROJECTS);</script>
     <script src="js/theme.js"></script>
     <script>
     (function() {
@@ -176,10 +176,13 @@
                 var delay = Math.min(i * 80, 320);
                 var grad = _CARD_GRADIENTS[i % _CARD_GRADIENTS.length];
                 var icon = _CARD_ICONS[i % _CARD_ICONS.length];
+                var thumbnail = p.image
+                    ? '<img src="' + _esc(p.image) + '" alt="' + safeTitle + '" class="project-image w-full h-full object-cover" loading="lazy" decoding="async">'
+                    : '<div class="project-image w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center"><svg class="w-16 h-16 text-primary/25" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="' + icon + '"/></svg></div>';
                 return '<article class="project-card scroll-animate group" style="transition-delay:' + delay + 'ms">' +
                     '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
                         '<div class="h-56 relative overflow-hidden">' +
-                            '<div class="project-image w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center"><svg class="w-16 h-16 text-primary/25" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="' + icon + '"/></svg></div>' +
+                            thumbnail +
                             '<div class="project-overlay absolute inset-0 bg-primary/60 flex items-center justify-center">' +
                                 '<a href="projeto.html?id=' + p.id + '" class="bg-white text-primary px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all transform hover:scale-105">Ver Projeto</a>' +
                             '</div>' +
@@ -222,13 +225,13 @@
             renderProjects();
         }
 
-        // ── Stale-while-revalidate (uses lightweight list cache, no heavy base64 fields) ──
-        // 1. Render instantly from cache (synchronous, no network)
-        var stale = DataManager.getStale('projects_list');
+        // ── Stale-while-revalidate ──
+        // 1. Render instantly from localStorage cache (synchronous, no network)
+        var stale = DataManager.getStale(DataManager.keys.PROJECTS);
         if (stale && stale.length) {
             applyData(stale);
         } else {
-            // First visit: show skeleton
+            // First ever visit: show skeleton while fetching
             grid.innerHTML = [0,1,2,3,4,5].map(function() {
                 return '<div class="animate-pulse">' +
                     '<div class="h-52 bg-gray-200 rounded-2xl mb-4"></div>' +
@@ -239,12 +242,12 @@
             }).join('');
         }
 
-        // 2. Always fetch fresh in background; update if changed
-        DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,status,created_at').then(function(fresh) {
+        // 2. Always fetch fresh in background; update only if IDs or data changed
+        DataManager.getData(DataManager.keys.PROJECTS).then(function(fresh) {
             var freshPub = fresh.filter(function(p) { return p.status !== 'draft'; });
             var prevIds = projects.map(function(p) { return p.id; }).join(',');
             var freshIds = freshPub.map(function(p) { return p.id; }).join(',');
-            if (!stale || prevIds !== freshIds || JSON.stringify(projects) !== JSON.stringify(freshPub)) {
+            if (!stale || prevIds !== freshIds) {
                 applyData(fresh);
             }
         });

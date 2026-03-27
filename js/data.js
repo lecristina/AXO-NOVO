@@ -27,17 +27,33 @@
         return null;
     }
 
+    /* Heavy fields to strip when persisting to localStorage.  
+       Image thumbnails are kept — only bulk-text / binary-heavy fields are removed. */
+    var _SLIM_STRIP = {
+        projects: ['content', 'gallery', 'cover', 'gif'],
+        posts:    ['content']
+    };
+
+    function _slimItem(table, item) {
+        var strip = _SLIM_STRIP[table];
+        if (!strip) return item;
+        var s = Object.assign({}, item);
+        for (var i = 0; i < strip.length; i++) delete s[strip[i]];
+        return s;
+    }
+
     function _cacheSet(table, data) {
         var k = 'axo_' + table;
         var entry = { data: data, ts: Date.now() };
-        _mem[k] = entry;
+        _mem[k] = entry;  /* full data always in memory */
+        /* Slim version for localStorage: strip heavy fields, keep images */
         try {
-            var str = JSON.stringify(entry);
-            // Skip localStorage for large payloads (base64 images bloat it)
-            if (str.length < 200 * 1024) {
-                localStorage.setItem(k, str);
+            var slim = data.map(function(item) { return _slimItem(table, item); });
+            var slimEntry = JSON.stringify({ data: slim, ts: entry.ts });
+            if (slimEntry.length < 1024 * 1024) {  /* 1 MB cap */
+                localStorage.setItem(k, slimEntry);
             } else {
-                localStorage.removeItem(k); // clear any stale oversized entry
+                localStorage.removeItem(k);
             }
         } catch (e) {}
     }
