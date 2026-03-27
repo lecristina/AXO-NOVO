@@ -98,7 +98,7 @@
     <script src="js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
-    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,status,created_at');</script>
+    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,image,status,created_at');</script>
     <script src="js/theme.js"></script>
     <script>
     (function() {
@@ -176,7 +176,9 @@
                 var delay = Math.min(i * 80, 320);
                 var grad = _CARD_GRADIENTS[i % _CARD_GRADIENTS.length];
                 var icon = _CARD_ICONS[i % _CARD_ICONS.length];
-                var thumbnail = '<div class="project-image w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center"><svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="' + icon + '"/></svg></div>';
+                var thumbnail = p.image
+                    ? '<img src="' + _esc(p.image) + '" alt="' + safeTitle + '" class="project-image w-full h-full object-cover" loading="lazy" decoding="async">'
+                    : '<div class="project-image w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center"><svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="' + icon + '"/></svg></div>';
                 return '<article class="project-card scroll-animate group" style="transition-delay:' + delay + 'ms">' +
                     '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
                         '<div class="h-56 relative overflow-hidden">' +
@@ -238,7 +240,7 @@
             }).join('');
         }
 
-        DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,status,created_at').then(function(fresh) {
+        DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,image,status,created_at').then(function(fresh) {
             if (fresh && fresh.length) {
                 applyData(fresh);
             } else if (!stale) {
