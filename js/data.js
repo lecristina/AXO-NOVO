@@ -240,6 +240,18 @@
             return _db.from(table).delete().gt('created_at', '1970-01-01T00:00:00Z');
         },
 
+        /* Upload a File/Blob to Supabase Storage bucket "agent".
+           Returns Promise<string> — the public URL, or null on error.
+           path: e.g. "projects/abc123.jpg" */
+        uploadFile: function (file, path) {
+            return _db.storage.from('agent').upload(path, file, { upsert: true, contentType: file.type })
+                .then(function (res) {
+                    if (res.error) { console.error('[DataManager] uploadFile:', res.error.message); return null; }
+                    var pub = _db.storage.from('agent').getPublicUrl(path);
+                    return pub.data.publicUrl;
+                });
+        },
+
         /* No-op – kept for backward-compat */
         init: function () {}
     };

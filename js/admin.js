@@ -160,26 +160,34 @@ var Admin = {
 
     /* Compress/resize image via canvas before storing as base64.
        Max dimension 1200px, JPEG quality 0.55 → ~30-80KB instead of 1-5MB */
-    _compressImage: function(dataUrl, maxSize, quality) {
+    /* Compress an image File → returns a Blob (JPEG, max 1200px, 80% quality) */
+    _compressToBlob: function(file, maxSize, quality) {
         maxSize = maxSize || 1200;
-        quality = quality || 0.55;
+        quality = quality || 0.80;
         return new Promise(function(resolve) {
+            var url = URL.createObjectURL(file);
             var img = new Image();
             img.onload = function() {
+                URL.revokeObjectURL(url);
                 var w = img.width, h = img.height;
                 if (w > maxSize || h > maxSize) {
                     if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
-                    else        { w = Math.round(w * maxSize / h); h = maxSize; }
+                    else       { w = Math.round(w * maxSize / h); h = maxSize; }
                 }
                 var c = document.createElement('canvas');
                 c.width = w; c.height = h;
-                var ctx = c.getContext('2d');
-                ctx.drawImage(img, 0, 0, w, h);
-                resolve(c.toDataURL('image/jpeg', quality));
+                c.getContext('2d').drawImage(img, 0, 0, w, h);
+                c.toBlob(function(blob) { resolve(blob || file); }, 'image/jpeg', quality);
             };
-            img.onerror = function() { resolve(dataUrl); };
-            img.src = dataUrl;
+            img.onerror = function() { URL.revokeObjectURL(url); resolve(file); };
+            img.src = url;
         });
+    },
+
+    /* Generate a unique storage path: folder/timestamp-random.ext */
+    _storagePath: function(file, folder) {
+        var ext = file.type === 'image/gif' ? 'gif' : 'jpg';
+        return folder + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
     },
 
     handleImageUpload: function(inputId, previewId, dataId) {
@@ -187,21 +195,39 @@ var Admin = {
         var input = document.getElementById(inputId);
         if (!input || !input.files || !input.files[0]) return;
         var file = input.files[0];
-        if (file.size > 5 * 1024 * 1024) {
-            alert('Imagem deve ter no maximo 5MB');
-            input.value = '';
-            return;
-        }
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            self._compressImage(e.target.result).then(function(compressed) {
-                document.getElementById(dataId).value = compressed;
-                var preview = document.getElementById(previewId);
-                preview.src = compressed;
-                preview.classList.remove('hidden');
-            });
-        };
-        reader.readAsDataURL(file);
+        var isGif = file.type === 'image/gif';
+        var folder = inputId.startsWith('proj') ? 'projects'
+            : inputId.startsWith('team') ? 'team'
+            : inputId.startsWith('comp') ? 'companies'
+            : inputId.startsWith('test') ? 'testimonials'
+            : inputId.startsWith('blog') ? 'blog'
+            : inputId.startsWith('settings') ? 'settings'
+            : 'misc';
+        var preview = document.getElementById(previewId);
+        var dataEl  = document.getElementById(dataId);
+        /* Show local preview immediately while upload happens */
+        var localUrl = URL.createObjectURL(file);
+        preview.src = localUrl;
+        preview.classList.remove('hidden');
+        dataEl.value = '';
+        dataEl.dataset.uploading = '1';
+        var uploadPromise = isGif
+            ? Promise.resolve(file)  /* GIFs: no compression, preserve animation */
+            : self._compressToBlob(file);
+        uploadPromise.then(function(blob) {
+            var path = self._storagePath(file, folder);
+            var uploadFile = new File([blob], path.split('/').pop(), { type: isGif ? 'image/gif' : 'image/jpeg' });
+            return DataManager.uploadFile(uploadFile, path);
+        }).then(function(publicUrl) {
+            delete dataEl.dataset.uploading;
+            if (!publicUrl) { alert('Erro ao fazer upload da imagem. Tente novamente.'); return; }
+            dataEl.value = publicUrl;
+            preview.src = publicUrl;
+        }).catch(function(err) {
+            delete dataEl.dataset.uploading;
+            console.error('Upload error:', err);
+            alert('Erro ao fazer upload da imagem.');
+        });
     },
 
     /* ===== FORM HELPERS ===== */
@@ -303,6 +329,7 @@ var Admin = {
         if (this._saving) return;
         var title = document.getElementById('blog-title').value.trim();
         if (!title) { alert('Titulo e obrigatorio'); return; }
+        if (document.querySelectorAll('#blog-form [data-uploading="1"]').length) { alert('Aguarde o upload das imagens terminar.'); return; }
         this._saving = true;
         var btn = document.querySelector('#blog-form button[onclick="Admin.saveBlog()"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
@@ -402,6 +429,9 @@ var Admin = {
         if (this._saving) return;
         var title = document.getElementById('proj-title').value.trim();
         if (!title) { alert('Titulo e obrigatorio'); return; }
+        /* Block save if any image is still uploading */
+        var uploading = document.querySelectorAll('#projects-form [data-uploading="1"]');
+        if (uploading.length) { alert('Aguarde o upload das imagens terminar antes de salvar.'); return; }
         this._saving = true;
         var btn = document.querySelector('#projects-form button[onclick="Admin.saveProject()"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
@@ -524,6 +554,7 @@ var Admin = {
         if (this._saving) return;
         var name = document.getElementById('team-name').value.trim();
         if (!name) { alert('Nome e obrigatorio'); return; }
+        if (document.querySelectorAll('#team-form [data-uploading="1"]').length) { alert('Aguarde o upload das imagens terminar.'); return; }
         this._saving = true;
         var btn = document.querySelector('#team-form button[onclick="Admin.saveTeam()"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
@@ -617,6 +648,7 @@ var Admin = {
         if (this._saving) return;
         var name = document.getElementById('test-name').value.trim();
         if (!name) { alert('Nome e obrigatorio'); return; }
+        if (document.querySelectorAll('#testimonials-form [data-uploading="1"]').length) { alert('Aguarde o upload das imagens terminar.'); return; }
         this._saving = true;
         var btn = document.querySelector('#testimonials-form button[onclick="Admin.saveTestimonial()"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
@@ -708,6 +740,7 @@ var Admin = {
         if (this._saving) return;
         var name = document.getElementById('comp-name').value.trim();
         if (!name) { alert('Nome e obrigatorio'); return; }
+        if (document.querySelectorAll('#companies-form [data-uploading="1"]').length) { alert('Aguarde o upload das imagens terminar.'); return; }
         this._saving = true;
         var btn = document.querySelector('#companies-form button[onclick="Admin.saveCompany()"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
@@ -941,17 +974,33 @@ var Admin = {
             galleryInput.addEventListener('change', function() {
                 if (!galleryInput.files || !galleryInput.files[0]) return;
                 var file = galleryInput.files[0];
-                if (file.size > 2 * 1024 * 1024) {
-                    alert('Imagem deve ter no maximo 2MB');
-                    galleryInput.value = '';
-                    return;
+                var path = self._storagePath(file, 'projects/gallery');
+                var isGif = file.type === 'image/gif';
+                /* Show spinner thumb while uploading */
+                var tempId = 'gal-' + Date.now();
+                var container = document.getElementById('proj-gallery-preview');
+                if (container) {
+                    var div = document.createElement('div');
+                    div.className = 'gallery-thumb';
+                    div.id = tempId;
+                    div.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f3f4f6"><svg class="animate-spin w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg></div>';
+                    container.appendChild(div);
                 }
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    self.addGalleryImage(e.target.result);
-                    galleryInput.value = '';
-                };
-                reader.readAsDataURL(file);
+                var uploadPromise = isGif ? Promise.resolve(file) : self._compressToBlob(file);
+                uploadPromise.then(function(blob) {
+                    var uploadFile = new File([blob], path.split('/').pop(), { type: isGif ? 'image/gif' : 'image/jpeg' });
+                    return DataManager.uploadFile(uploadFile, path);
+                }).then(function(publicUrl) {
+                    var tmp = document.getElementById(tempId);
+                    if (tmp) tmp.remove();
+                    if (!publicUrl) { alert('Erro ao fazer upload da imagem de galeria.'); return; }
+                    self.addGalleryImage(publicUrl);
+                }).catch(function() {
+                    var tmp = document.getElementById(tempId);
+                    if (tmp) tmp.remove();
+                    alert('Erro ao fazer upload da imagem de galeria.');
+                });
+                galleryInput.value = '';
             });
         }
     }

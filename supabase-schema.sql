@@ -100,3 +100,31 @@ create policy "anon_all" on companies    for all to anon using (true) with check
 alter table posts    add column if not exists featured boolean default false;
 alter table projects add column if not exists cover    text default '';
 alter table projects add column if not exists gif      text default '';
+
+-- =====================================================
+-- Storage – bucket "agent" (execute no SQL Editor)
+-- =====================================================
+-- 1. Criar bucket público (só precisa rodar uma vez)
+insert into storage.buckets (id, name, public)
+values ('agent', 'agent', true)
+on conflict (id) do update set public = true;
+
+-- 2. Permitir upload anônimo (admin usa anon key)
+create policy "anon_upload" on storage.objects
+  for insert to anon
+  with check (bucket_id = 'agent');
+
+-- 3. Permitir leitura pública
+create policy "public_read" on storage.objects
+  for select to anon
+  using (bucket_id = 'agent');
+
+-- 4. Permitir sobrescrever (upsert)
+create policy "anon_update" on storage.objects
+  for update to anon
+  using (bucket_id = 'agent');
+
+-- 5. Permitir deletar
+create policy "anon_delete" on storage.objects
+  for delete to anon
+  using (bucket_id = 'agent');
