@@ -102,10 +102,7 @@
     <script>window.AXO_CONFIG = { page: 'projetos', navMode: 'transparent' };</script>
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-    <script src="js/data.js"></script>
-    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,image,status,created_at');</script>
-    <script src="js/theme.js"></script>
+    <!-- ▼ RENDERING runs BEFORE SDK — zero external dependencies ▼ -->
     <script>
     (function() {
         var grid = document.getElementById('projects-grid');
@@ -114,10 +111,9 @@
         var activeFilter = 'all';
         var projects = [];
 
-        // Scroll observer
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
-                if (entry.isIntersecting) { entry.target.classList.add('animate-in'); }
+                if (entry.isIntersecting) entry.target.classList.add('animate-in');
             });
         }, { threshold: 0.1 });
 
@@ -125,7 +121,6 @@
             return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
 
-        /* Varied gradient colors so cards aren't all identical */
         var _CARD_GRADIENTS = [
             'from-purple-600/30 via-violet-500/20 to-fuchsia-500/20',
             'from-blue-600/30 via-cyan-500/20 to-sky-500/20',
@@ -148,7 +143,6 @@
         ];
 
         function buildFilters(list) {
-            // Remove category buttons that no longer exist
             filterContainer.querySelectorAll('.filter-btn[data-filter]:not([data-filter="all"])').forEach(function(b) { b.remove(); });
             var categories = [];
             list.forEach(function(p) {
@@ -179,13 +173,14 @@
                     }).join('') + '</div>';
                 }
                 var safeTitle = _esc(p.title);
-                var delay = Math.min(i * 80, 320);
                 var grad = _CARD_GRADIENTS[i % _CARD_GRADIENTS.length];
                 var icon = _CARD_ICONS[i % _CARD_ICONS.length];
                 var thumbnail = p.image
                     ? '<img src="' + _esc(p.image) + '" alt="' + safeTitle + '" class="project-image w-full h-full object-cover"' + (i < 3 ? ' fetchpriority="high"' : '') + ' decoding="async">'
                     : '<div class="project-image w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center"><svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="' + icon + '"/></svg></div>';
-                return '<article class="project-card scroll-animate group" style="transition-delay:' + delay + 'ms">' +
+                /* First 6 cards (visible viewport) render instantly — no scroll-animate delay */
+                var animClass = i < 6 ? 'group' : 'scroll-animate group';
+                return '<article class="project-card ' + animClass + '">' +
                     '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
                         '<div class="h-56 relative overflow-hidden">' +
                             thumbnail +
@@ -210,10 +205,9 @@
                     '</div>' +
                 '</article>';
             }).join('');
-            document.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
+            grid.querySelectorAll('.scroll-animate').forEach(function(el) { observer.observe(el); });
         }
 
-        // Filter click handler
         filterContainer.addEventListener('click', function(e) {
             var btn = e.target.closest('.filter-btn');
             if (!btn) return;
@@ -226,35 +220,60 @@
         });
 
         function applyData(raw) {
-            projects = raw.filter(function(p) { return p.status !== 'draft'; });
+            projects = (raw || []).filter(function(p) { return p.status !== 'draft'; });
             projects.sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
+            /* Normalize techs (may be JSON string from REST) */
+            projects.forEach(function(p) {
+                if (typeof p.techs === 'string') { try { p.techs = JSON.parse(p.techs); } catch(e) { p.techs = []; } }
+                if (!Array.isArray(p.techs)) p.techs = [];
+            });
             buildFilters(projects);
             renderProjects();
         }
 
-        // Show skeleton immediately
-        grid.innerHTML = [0,1,2,3,4,5].map(function() {
-            return '<div class="animate-pulse">' +
-                '<div class="h-56 bg-gray-200 rounded-2xl mb-4"></div>' +
-                '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
-                '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
-                '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
-                '</div>';
-        }).join('');
+        /* ── Direct localStorage stale read — zero SDK dependency ── */
+        var stale = null;
+        try {
+            var _raw = localStorage.getItem('axo_projects_list');
+            if (_raw) { stale = JSON.parse(_raw).data; }
+        } catch(e) {}
 
-        // Stale-while-revalidate
-        var stale = DataManager.getStale('projects_list');
-        if (stale && stale.length) applyData(stale);
+        if (stale && stale.length) {
+            applyData(stale);
+        } else {
+            grid.innerHTML = [0,1,2,3,4,5].map(function() {
+                return '<div class="animate-pulse">' +
+                    '<div class="h-56 bg-gray-200 rounded-2xl mb-4"></div>' +
+                    '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
+                    '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+                    '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
+                    '</div>';
+            }).join('');
+        }
 
-        // Use head-prefetched promise if available, otherwise DataManager
-        var _pf = (typeof window.__axo_proj_pf !== 'undefined')
-            ? window.__axo_proj_pf
-            : DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at');
-        _pf.then(function(fresh) {
-            if (fresh && fresh.length) applyData(fresh);
-            else if (!stale || !stale.length) applyData([]);
+        /* ── Fresh data from head-prefetch (fires before SDK loads) ── */
+        (window.__axo_proj_pf || Promise.resolve([])).then(function(fresh) {
+            if (fresh && fresh.length) {
+                applyData(fresh);
+                /* Persist slim copy to stale cache → instant on next visit */
+                try {
+                    var slim = fresh.map(function(item) {
+                        var s = {};
+                        for (var k in item) { if (k !== 'content' && k !== 'gallery' && k !== 'cover' && k !== 'gif') s[k] = item[k]; }
+                        return s;
+                    });
+                    var payload = JSON.stringify({ data: slim, ts: Date.now() });
+                    if (payload.length < 1048576) localStorage.setItem('axo_projects_list', payload);
+                } catch(e) {}
+            } else if (!stale || !stale.length) {
+                applyData([]);
+            }
         });
     })();
     </script>
+    <!-- SDK & data layer load AFTER content is already visible -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>

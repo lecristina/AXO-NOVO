@@ -158,12 +158,12 @@ var Admin = {
 
     /* ===== IMAGE UPLOAD ===== */
 
-    /* Compress/resize image via canvas before storing as base64.
-       Max dimension 1200px, JPEG quality 0.55 → ~30-80KB instead of 1-5MB */
-    /* Compress an image File → returns a Blob (JPEG, max 1200px, 80% quality) */
+    /* Compress/resize image via canvas before storing.
+       Max dimension 800px, JPEG quality 0.65 → ~20-60KB for fast page loads */
+    /* Compress an image File → returns a Blob (JPEG, max 800px, 65% quality) */
     _compressToBlob: function(file, maxSize, quality) {
-        maxSize = maxSize || 1200;
-        quality = quality || 0.80;
+        maxSize = maxSize || 800;
+        quality = quality || 0.65;
         return new Promise(function(resolve) {
             var url = URL.createObjectURL(file);
             var img = new Image();
