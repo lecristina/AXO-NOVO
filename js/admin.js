@@ -506,17 +506,38 @@ var Admin = {
         await this.renderProjects();
     },
 
+    moveProject: async function(id, dir) {
+        var projects = await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,client,date,status,techs,image,position');
+        /* Assign sequential positions if none set yet */
+        projects.forEach(function(p, i) { if (p.position == null || isNaN(p.position)) p.position = i; });
+        projects.sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
+        var idx = projects.findIndex(function(p) { return p.id === id; });
+        var swapIdx = idx + dir;
+        if (swapIdx < 0 || swapIdx >= projects.length) return;
+        var posA = projects[idx].position || 0;
+        var posB = projects[swapIdx].position || 0;
+        /* Ensure they are different to avoid a no-op swap */
+        if (posA === posB) { posA = idx; posB = swapIdx; }
+        await Promise.all([
+            DataManager.updateItem(DataManager.keys.PROJECTS, projects[idx].id,    { position: posB }),
+            DataManager.updateItem(DataManager.keys.PROJECTS, projects[swapIdx].id, { position: posA })
+        ]);
+        await this.renderProjects();
+    },
+
     renderProjects: async function() {
         var container = document.getElementById('projects-list');
         if (container) container.innerHTML = this._listSkeleton();
-        var projects = await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,client,date,status,techs,image');
+        var projects = await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,category,client,date,status,techs,image,position');
         if (!projects.length) {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhum projeto encontrado</div>';
             return;
         }
+        /* Sort by position so the list mirrors the public order */
+        projects.sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
         var self = this;
         var html = '';
-        projects.forEach(function(proj) {
+        projects.forEach(function(proj, idx) {
             var safeTitle = self.escapeHtml(proj.title);
             var safeCat = self.escapeHtml(proj.category);
             var safeClient = self.escapeHtml(proj.client);
@@ -526,6 +547,12 @@ var Admin = {
                 ? '<span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 font-medium">Rascunho</span>'
                 : '<span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Publicado</span>';
             html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4' + (isDraft ? ' opacity-75' : '') + '">';
+            /* Order handle */
+            html += '<div class="flex flex-col gap-0.5 shrink-0 mr-1">';
+            html += '<button onclick="Admin.moveProject(\'' + proj.id + '\',-1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para cima"' + (idx === 0 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg></button>';
+            html += '<span class="text-center text-xs font-bold text-gray-300 leading-none">' + (idx + 1) + '</span>';
+            html += '<button onclick="Admin.moveProject(\'' + proj.id + '\',1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para baixo"' + (idx === projects.length - 1 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg></button>';
+            html += '</div>';
             if (proj.image) {
                 html += '<img src="' + proj.image + '" class="w-16 h-16 rounded-lg object-cover shrink-0" alt="">';
             } else {

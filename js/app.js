@@ -451,12 +451,19 @@
             }
         }
 
-        /* Load DB projects with images for the diagonal showcase */
+        /* Show stale/hardcoded immediately, then update with real DB data */
+        var _staleP = (typeof DataManager !== 'undefined') ? DataManager.getStale('projects_list') : null;
+        var _staleF = _staleP ? _staleP.filter(function(p) { return p.status !== 'draft'; }).sort(function(a,b){ return (a.position||0)-(b.position||0); }) : [];
+        buildRows(_staleF.length >= 1 ? _staleF.map(function(p, i) {
+            var g = GRADIENTS[i % GRADIENTS.length];
+            return { title: p.title || 'Projeto', cat: p.category || 'Projeto', techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''), c1: g[0], c2: g[1], image: p.image || '' };
+        }) : HARDCODED);
         if (typeof DataManager !== 'undefined') {
-            DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at').then(function(allProjects) {
-                var dbProjects = allProjects.filter(function(p) { return p.status !== 'draft'; });
-                var cards = dbProjects.length >= 1
-                    ? dbProjects.map(function(p, i) {
+            DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,position,created_at').then(function(allProjects) {
+                var dbProjects = allProjects.filter(function(p) { return p.status !== 'draft'; })
+                    .sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
+                if (dbProjects.length >= 1) {
+                    buildRows(dbProjects.map(function(p, i) {
                         var g = GRADIENTS[i % GRADIENTS.length];
                         return {
                             title: p.title || 'Projeto',
@@ -466,9 +473,8 @@
                             c2:    g[1],
                             image: p.image || ''
                         };
-                    })
-                    : HARDCODED;
-                buildRows(cards);
+                    }));
+                }
             });
         }
     }
@@ -506,13 +512,35 @@
     // ==========================================
     // Initialize everything
     // ==========================================
+    function _hideIndexLoader() {
+        var l = document.getElementById('axo-loader');
+        if (!l || l.dataset.hidden) return;
+        l.dataset.hidden = '1';
+        l.style.opacity = '0';
+        l.style.visibility = 'hidden';
+        setTimeout(function() { if (l && l.parentNode) l.parentNode.removeChild(l); }, 650);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         initCompaniesCarousel();
         initMarquee();
         initFAQ();
         initCosmos();
-        initDiagonalProjects();
         loadBlogPreview();
+
+        // Wait for projects so diagonal renders with images from the start;
+        // fall back after 6s in case of network issues
+        var _loaderTimer = setTimeout(function() {
+            initDiagonalProjects();
+            _hideIndexLoader();
+        }, 6000);
+
+        DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,position,created_at')
+            .then(function() {
+                clearTimeout(_loaderTimer);
+                initDiagonalProjects();
+                _hideIndexLoader();
+            });
     });
 
 })();
