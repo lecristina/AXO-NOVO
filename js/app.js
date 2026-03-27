@@ -418,7 +418,7 @@
         function buildDiagCard(c, i) {
             var top;
             if (c.image) {
-                top = '<div style="height:110px;overflow:hidden;background:#e5e7eb"><img src="' + c.image + '" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>';
+                top = '<div style="height:110px;overflow:hidden;background:#e5e7eb"><img src="' + c.image + '" alt="" style="width:100%;height:100%;object-fit:cover" decoding="async"></div>';
             } else {
                 var iconPath = ICONS[i % ICONS.length];
                 top = '<div style="height:110px;background:linear-gradient(135deg,' + c.c1 + ',' + c.c2 + ');display:flex;align-items:center;justify-content:center">'
@@ -451,7 +451,12 @@
             }
         }
 
-        /* Show stale/hardcoded immediately, then update with real DB data */
+        /* Use head-prefetched promise if available (starts at HTML parse time), else DataManager */
+        var _dataPromise = (typeof window.__axo_projects_pf !== 'undefined')
+            ? window.__axo_projects_pf
+            : DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at');
+
+        /* Show stale/hardcoded immediately while fetch resolves */
         var _staleP = (typeof DataManager !== 'undefined') ? DataManager.getStale('projects_list') : null;
         var _staleF = _staleP ? _staleP.filter(function(p) { return p.status !== 'draft'; }).sort(function(a,b){ return (a.position||0)-(b.position||0); }) : [];
         buildRows(_staleF.length >= 1 ? _staleF.map(function(p, i) {
@@ -459,8 +464,8 @@
             return { title: p.title || 'Projeto', cat: p.category || 'Projeto', techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''), c1: g[0], c2: g[1], image: p.image || '' };
         }) : HARDCODED);
         if (typeof DataManager !== 'undefined') {
-            DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,position,created_at').then(function(allProjects) {
-                var dbProjects = allProjects.filter(function(p) { return p.status !== 'draft'; })
+            _dataPromise.then(function(allProjects) {
+                var dbProjects = (allProjects || []).filter(function(p) { return p.status !== 'draft'; })
                     .sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
                 if (dbProjects.length >= 1) {
                     buildRows(dbProjects.map(function(p, i) {
@@ -512,35 +517,12 @@
     // ==========================================
     // Initialize everything
     // ==========================================
-    function _hideIndexLoader() {
-        var l = document.getElementById('axo-loader');
-        if (!l || l.dataset.hidden) return;
-        l.dataset.hidden = '1';
-        l.style.opacity = '0';
-        l.style.visibility = 'hidden';
-        setTimeout(function() { if (l && l.parentNode) l.parentNode.removeChild(l); }, 650);
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         initCompaniesCarousel();
         initMarquee();
         initFAQ();
         initCosmos();
         loadBlogPreview();
-
-        // Wait for projects so diagonal renders with images from the start;
-        // fall back after 6s in case of network issues
-        var _loaderTimer = setTimeout(function() {
-            initDiagonalProjects();
-            _hideIndexLoader();
-        }, 6000);
-
-        DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,position,created_at')
-            .then(function() {
-                clearTimeout(_loaderTimer);
-                initDiagonalProjects();
-                _hideIndexLoader();
-            });
     });
 
 })();

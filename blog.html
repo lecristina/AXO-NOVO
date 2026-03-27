@@ -15,6 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script" crossorigin>
+    <script>
+    window.__axo_posts_pf = fetch(
+        'https://ecgjhahdceocsikbhsot.supabase.co/rest/v1/posts?select=id,title,excerpt,category,image,featured,created_at&order=created_at.desc',
+        { headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s' } }
+    ).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -47,11 +53,6 @@
     </script>
 </head>
 <body class="bg-white text-gray-900 font-sans transition-colors duration-500">
-    <div id="axo-loader" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.4s ease,visibility 0.4s ease">
-        <span style="font-size:1.75rem;font-weight:800;font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;background:linear-gradient(135deg,#8f00cc,#cc44ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Axolutions</span>
-        <div style="width:32px;height:32px;border:3px solid rgba(143,0,204,0.15);border-top-color:#8f00cc;border-radius:50%;animation:axo-spin 0.7s linear infinite"></div>
-        <style>@keyframes axo-spin{to{transform:rotate(360deg)}}</style>
-    </div>
 
     <!-- HEADER -->
     <section class="pt-40 pb-52 px-4 bg-[#07070f] relative overflow-hidden">
@@ -198,17 +199,29 @@
         function applyPosts(posts) {
             allPosts = sortPosts(posts);
             renderPosts(allPosts);
-            hideLoader();
         }
+
+        // Show skeleton immediately
+        grid.innerHTML = [0,1,2,3,4,5].map(function() {
+            return '<div class="animate-pulse">' +
+                '<div class="h-52 bg-gray-200 rounded-2xl mb-4"></div>' +
+                '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
+                '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-5/6"></div>' +
+                '</div>';
+        }).join('');
 
         // Stale-while-revalidate
         var stale = DataManager.getStale(DataManager.keys.POSTS);
         if (stale && stale.length) applyPosts(stale);
 
-        DataManager.getData(DataManager.keys.POSTS).then(function(fresh) {
+        var _postsPf = (typeof window.__axo_posts_pf !== 'undefined')
+            ? window.__axo_posts_pf
+            : DataManager.getData(DataManager.keys.POSTS);
+        _postsPf.then(function(fresh) {
             if (fresh && fresh.length) applyPosts(fresh);
             else if (!stale || !stale.length) applyPosts([]);
-            else hideLoader();
         });
     })();
     </script>

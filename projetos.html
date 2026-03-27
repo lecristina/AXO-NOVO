@@ -15,6 +15,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script" crossorigin>
+    <!-- Prefetch projects data immediately — before any SDK loads -->
+    <script>
+    window.__axo_proj_pf = fetch(
+        'https://ecgjhahdceocsikbhsot.supabase.co/rest/v1/projects?select=id,title,description,category,techs,image,status,created_at&order=created_at.desc',
+        { headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s' } }
+    ).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -49,11 +56,6 @@
     </script>
 </head>
 <body class="bg-white text-gray-900 font-sans transition-colors duration-500">
-    <div id="axo-loader" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.4s ease,visibility 0.4s ease">
-        <span style="font-size:1.75rem;font-weight:800;font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;background:linear-gradient(135deg,#8f00cc,#cc44ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Axolutions</span>
-        <div style="width:32px;height:32px;border:3px solid rgba(143,0,204,0.15);border-top-color:#8f00cc;border-radius:50%;animation:axo-spin 0.7s linear infinite"></div>
-        <style>@keyframes axo-spin{to{transform:rotate(360deg)}}</style>
-    </div>
 
     <!-- HERO -->
     <section class="pt-40 pb-52 px-4 bg-[#07070f] relative overflow-hidden">
@@ -102,7 +104,7 @@
     <script src="js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="js/data.js"></script>
-    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,image,status,position,created_at');</script>
+    <script>DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,image,status,created_at');</script>
     <script src="js/theme.js"></script>
     <script>
     (function() {
@@ -181,7 +183,7 @@
                 var grad = _CARD_GRADIENTS[i % _CARD_GRADIENTS.length];
                 var icon = _CARD_ICONS[i % _CARD_ICONS.length];
                 var thumbnail = p.image
-                    ? '<img src="' + _esc(p.image) + '" alt="' + safeTitle + '" class="project-image w-full h-full object-cover" loading="lazy" decoding="async">'
+                    ? '<img src="' + _esc(p.image) + '" alt="' + safeTitle + '" class="project-image w-full h-full object-cover"' + (i < 3 ? ' fetchpriority="high"' : '') + ' decoding="async">'
                     : '<div class="project-image w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center"><svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="' + icon + '"/></svg></div>';
                 return '<article class="project-card scroll-animate group" style="transition-delay:' + delay + 'ms">' +
                     '<div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 h-full flex flex-col">' +
@@ -223,29 +225,34 @@
             renderProjects();
         });
 
-        function hideLoader() {
-            var l = document.getElementById('axo-loader');
-            if (!l) return;
-            l.style.opacity = '0'; l.style.visibility = 'hidden';
-            setTimeout(function() { if (l.parentNode) l.parentNode.removeChild(l); }, 420);
-        }
-
         function applyData(raw) {
             projects = raw.filter(function(p) { return p.status !== 'draft'; });
             projects.sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
             buildFilters(projects);
             renderProjects();
-            hideLoader();
         }
 
-        // ── Stale-while-revalidate ──
+        // Show skeleton immediately
+        grid.innerHTML = [0,1,2,3,4,5].map(function() {
+            return '<div class="animate-pulse">' +
+                '<div class="h-56 bg-gray-200 rounded-2xl mb-4"></div>' +
+                '<div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div>' +
+                '<div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>' +
+                '<div class="h-4 bg-gray-200 rounded w-full mb-1"></div>' +
+                '</div>';
+        }).join('');
+
+        // Stale-while-revalidate
         var stale = DataManager.getStale('projects_list');
         if (stale && stale.length) applyData(stale);
 
-        DataManager.getDataSelect(DataManager.keys.PROJECTS,'id,title,description,category,techs,image,status,position,created_at').then(function(fresh) {
+        // Use head-prefetched promise if available, otherwise DataManager
+        var _pf = (typeof window.__axo_proj_pf !== 'undefined')
+            ? window.__axo_proj_pf
+            : DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at');
+        _pf.then(function(fresh) {
             if (fresh && fresh.length) applyData(fresh);
             else if (!stale || !stale.length) applyData([]);
-            else hideLoader();
         });
     })();
     </script>

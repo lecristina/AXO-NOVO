@@ -807,6 +807,24 @@ var Admin = {
         await this.renderCompanies();
     },
 
+    moveCompany: async function(id, dir) {
+        var companies = await DataManager.getData(DataManager.keys.COMPANIES);
+        /* Assign sequential positions if none set yet */
+        companies.forEach(function(c, i) { if (c.position == null || isNaN(c.position)) c.position = i; });
+        companies.sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
+        var idx = companies.findIndex(function(c) { return c.id === id; });
+        var swapIdx = idx + dir;
+        if (swapIdx < 0 || swapIdx >= companies.length) return;
+        var posA = companies[idx].position || 0;
+        var posB = companies[swapIdx].position || 0;
+        if (posA === posB) { posA = idx; posB = swapIdx; }
+        await Promise.all([
+            DataManager.updateItem(DataManager.keys.COMPANIES, companies[idx].id,     { position: posB }),
+            DataManager.updateItem(DataManager.keys.COMPANIES, companies[swapIdx].id, { position: posA })
+        ]);
+        await this.renderCompanies();
+    },
+
     renderCompanies: async function() {
         var container = document.getElementById('companies-list');
         if (!container) return;
@@ -816,11 +834,19 @@ var Admin = {
             container.innerHTML = '<div class="bg-white rounded-xl p-8 text-center text-gray-500 border border-gray-200">Nenhuma empresa encontrada</div>';
             return;
         }
+        /* Sort by position so the list mirrors the public order */
+        companies.sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
         var self = this;
         var html = '';
-        companies.forEach(function(c) {
+        companies.forEach(function(c, idx) {
             var safeName = self.escapeHtml(c.name);
             html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4">';
+            /* Order handle */
+            html += '<div class="flex flex-col gap-0.5 shrink-0 mr-1">';
+            html += '<button onclick="Admin.moveCompany(\'' + c.id + '\',-1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para cima"' + (idx === 0 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg></button>';
+            html += '<span class="text-center text-xs font-bold text-gray-300 leading-none">' + (idx + 1) + '</span>';
+            html += '<button onclick="Admin.moveCompany(\'' + c.id + '\',1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para baixo"' + (idx === companies.length - 1 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg></button>';
+            html += '</div>';
             if (c.image) {
                 html += '<img src="' + c.image + '" class="w-16 h-12 rounded-lg object-contain shrink-0 bg-gray-50 p-1 border border-gray-100" alt="">';
             } else {

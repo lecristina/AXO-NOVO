@@ -101,6 +101,7 @@ alter table posts    add column if not exists featured  boolean default false;
 alter table projects add column if not exists cover     text default '';
 alter table projects add column if not exists gif       text default '';
 alter table projects add column if not exists position  integer default 0;
+alter table companies add column if not exists position integer default 0;
 
 -- =====================================================
 -- Storage – bucket "agent" (execute no SQL Editor)
