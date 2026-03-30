@@ -451,18 +451,39 @@
             }
         }
 
+        function showWhenImagesReady() {
+            var imgs = Array.prototype.slice.call(wrap.querySelectorAll('img'));
+            /* If there are no images (all gradient fallbacks), show immediately */
+            if (!imgs.length) {
+                wrap.style.opacity = '0.4';
+                return;
+            }
+            var loaded = 0;
+            function onLoad() {
+                loaded++;
+                if (loaded >= imgs.length) {
+                    wrap.style.opacity = '0.4';
+                }
+            }
+            imgs.forEach(function(img) {
+                if (img.complete && img.naturalWidth > 0) {
+                    onLoad();
+                } else {
+                    img.addEventListener('load', onLoad, { once: true });
+                    img.addEventListener('error', onLoad, { once: true });
+                }
+            });
+        }
+
+        /* Keep wrap invisible until DB data + images are ready */
+        wrap.style.opacity = '0';
+        wrap.style.transition = 'opacity 0.8s ease';
+
         /* Use head-prefetched promise if available (starts at HTML parse time), else DataManager */
         var _dataPromise = (typeof window.__axo_projects_pf !== 'undefined')
             ? window.__axo_projects_pf
             : DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at');
 
-        /* Show stale/hardcoded immediately while fetch resolves */
-        var _staleP = (typeof DataManager !== 'undefined') ? DataManager.getStale('projects_list') : null;
-        var _staleF = _staleP ? _staleP.filter(function(p) { return p.status !== 'draft'; }).sort(function(a,b){ return (a.position||0)-(b.position||0); }) : [];
-        buildRows(_staleF.length >= 1 ? _staleF.map(function(p, i) {
-            var g = GRADIENTS[i % GRADIENTS.length];
-            return { title: p.title || 'Projeto', cat: p.category || 'Projeto', techs: Array.isArray(p.techs) ? p.techs.join(' · ') : (p.techs || ''), c1: g[0], c2: g[1], image: p.image || '' };
-        }) : HARDCODED);
         if (typeof DataManager !== 'undefined') {
             _dataPromise.then(function(allProjects) {
                 var dbProjects = (allProjects || []).filter(function(p) { return p.status !== 'draft'; })
@@ -479,6 +500,7 @@
                             image: p.image || ''
                         };
                     }));
+                    showWhenImagesReady();
                 }
             });
         }
