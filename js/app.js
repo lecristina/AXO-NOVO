@@ -501,7 +501,7 @@
         /* Use head-prefetched promise if available (starts at HTML parse time), else DataManager */
         var _dataPromise = (typeof window.__axo_projects_pf !== 'undefined')
             ? window.__axo_projects_pf
-            : DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at');
+            : DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at,position');
 
         if (typeof DataManager !== 'undefined') {
             _dataPromise.then(function(allProjects) {
@@ -531,7 +531,7 @@
     async function loadProjectsPreview() {
         var container = document.getElementById('projects-preview');
         if (!container) return;
-        var projects = (await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at')).filter(function(p) { return p.status !== 'draft'; });
+        var projects = (await DataManager.getDataSelect(DataManager.keys.PROJECTS, 'id,title,description,category,techs,image,status,created_at,position')).filter(function(p) { return p.status !== 'draft'; });
         if (!projects.length) return;
 
         var recent = projects.slice(0, 3);

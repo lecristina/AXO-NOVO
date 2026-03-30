@@ -8,7 +8,7 @@
     /* ── Multi-layer cache: memory (current page) + localStorage (5 min, cross-tab) ── */
     var _mem = {};               // in-memory for same-page re-renders
     var _inflight = {};          // in-flight promise deduplication
-    var CACHE_TTL = 5 * 60 * 1000;  // 5 minutes
+    var CACHE_TTL = 90 * 1000;  // 90 seconds — fast updates without hammering the DB
 
     function _cacheGet(table) {
         var k = 'axo_' + table;

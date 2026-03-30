@@ -28,7 +28,8 @@
     <!-- Prefetch projects data immediately — before any SDK loads -->
     <script>
     window.__axo_proj_pf = fetch(
-        'https://ecgjhahdceocsikbhsot.supabase.co/rest/v1/projects?select=id,title,description,category,techs,image,status,created_at&order=created_at.desc',
+        'https://ecgjhahdceocsikbhsot.supabase.co/rest/v1/projects?select=id,title,description,category,techs,image,status,created_at,position&order=position.asc',
+
         { headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s' } }
     ).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
     </script>

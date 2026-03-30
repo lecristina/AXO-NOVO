@@ -407,8 +407,21 @@
 
         /* ── Gallery ── */
         if (proj.gallery && proj.gallery.length) {
-            document.getElementById('gallery-grid').innerHTML = proj.gallery.map(function(img, i) {
-                return '<img src="' + img + '" alt="Seção ' + (i+1) + ' do projeto" class="w-full block" style="display:block" loading="' + (i < 2 ? 'eager' : 'lazy') + '" decoding="async">';
+            function _escG(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+            document.getElementById('gallery-grid').innerHTML = proj.gallery.map(function(item, i) {
+                var url     = typeof item === 'string' ? item : (item.url || '');
+                var caption = typeof item === 'string' ? '' : (item.caption || '');
+                var loading = i < 2 ? 'eager' : 'lazy';
+                var alt     = caption ? _escG(caption) : ('Seção ' + (i + 1) + ' do projeto');
+                var imgTag  = '<img src="' + _escG(url) + '" alt="' + alt + '" class="w-full block" style="display:block" loading="' + loading + '" decoding="async">';
+                if (caption) {
+                    var borderTop = i > 0 ? 'border-t border-gray-100' : '';
+                    return '<div class="' + borderTop + ' pt-6">'
+                        + '<p class="text-sm font-semibold text-gray-700 px-6 mb-4">' + _escG(caption) + '</p>'
+                        + imgTag
+                        + '</div>';
+                }
+                return imgTag;
             }).join('');
             document.getElementById('gallery-wrap').classList.remove('hidden');
         }

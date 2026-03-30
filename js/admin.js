@@ -496,7 +496,10 @@ var Admin = {
             document.getElementById('proj-gif-preview').classList.remove('hidden');
         }
         if (this.projQuill) this.projQuill.root.innerHTML = item.content || '';
-        this.projGallery = Array.isArray(item.gallery) ? item.gallery.slice() : [];
+        this.projGallery = (Array.isArray(item.gallery) ? item.gallery : []).map(function(g) {
+            if (typeof g === 'string') return { url: g, caption: '' };
+            return { url: g.url || '', caption: g.caption || '' };
+        });
         this.renderGalleryPreview();
     },
 
@@ -867,13 +870,17 @@ var Admin = {
             alert('Maximo de 10 imagens na galeria');
             return;
         }
-        this.projGallery.push(dataUrl);
+        this.projGallery.push({ url: dataUrl, caption: '' });
         this.renderGalleryPreview();
     },
 
     removeGalleryImage: function(index) {
         this.projGallery.splice(index, 1);
         this.renderGalleryPreview();
+    },
+
+    updateGalleryCaption: function(index, val) {
+        if (this.projGallery[index]) this.projGallery[index].caption = val;
     },
 
     renderGalleryPreview: function() {
@@ -885,10 +892,13 @@ var Admin = {
             return;
         }
         var html = '';
-        this.projGallery.forEach(function(img, i) {
+        this.projGallery.forEach(function(item, i) {
+            var url = typeof item === 'string' ? item : (item.url || '');
+            var caption = typeof item === 'string' ? '' : (item.caption || '');
             html += '<div class="gallery-thumb">';
-            html += '<img src="' + img + '" alt="Galeria ' + (i + 1) + '">';
+            html += '<img src="' + url + '" alt="Galeria ' + (i + 1) + '">';
             html += '<button type="button" class="remove-btn" onclick="Admin.removeGalleryImage(' + i + ')">&times;</button>';
+            html += '<input type="text" class="gallery-caption-input" placeholder="Descricao (opcional)" value="' + self.escapeHtml(caption) + '" oninput="Admin.updateGalleryCaption(' + i + ', this.value)">';
             html += '</div>';
         });
         container.innerHTML = html;
