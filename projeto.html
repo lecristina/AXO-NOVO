@@ -170,10 +170,12 @@
                         <p id="proj-desc-txt" class="text-gray-600 leading-relaxed text-lg"></p>
                     </div>
 
-                    <!-- Gallery -->
+                    <!-- Gallery - Scrollable page preview -->
                     <div id="gallery-wrap" class="hidden scroll-animate" style="transition-delay:280ms">
-                        <h2 class="text-xl font-display font-bold text-gray-900 mb-5">Galeria do Projeto</h2>
-                        <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+                        <h2 class="text-xl font-display font-bold text-gray-900 mb-5">Preview do Projeto</h2>
+                        <div id="gallery-grid" class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                            <!-- Images stacked vertically, simulating a full page scroll -->
+                        </div>
                     </div>
                 </div>
 
@@ -395,10 +397,7 @@
         /* ── Gallery ── */
         if (proj.gallery && proj.gallery.length) {
             document.getElementById('gallery-grid').innerHTML = proj.gallery.map(function(img, i) {
-                var safe = img.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-                return '<div class="gal-item shadow-sm hover:shadow-lg transition-shadow" onclick="lbOpen(\'' + safe + '\')">' +
-                    '<img src="' + img + '" alt="Imagem ' + (i+1) + '" class="w-full h-52 object-cover">' +
-                    '</div>';
+                return '<img src="' + img + '" alt="Seção ' + (i+1) + ' do projeto" class="w-full block" style="display:block" loading="' + (i < 2 ? 'eager' : 'lazy') + '" decoding="async">';
             }).join('');
             document.getElementById('gallery-wrap').classList.remove('hidden');
         }

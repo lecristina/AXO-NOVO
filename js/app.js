@@ -522,6 +522,7 @@
         initMarquee();
         initFAQ();
         initCosmos();
+        initDiagonalProjects();
         loadBlogPreview();
     });
 
