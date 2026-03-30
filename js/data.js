@@ -158,20 +158,13 @@
 
         /* Returns Promise<Object|null> */
         getItem: function (table, id) {
-            /* Check memory/localStorage cache first */
+            /* Only use the full-table cache — the _list cache is intentionally stripped of
+               heavy fields (gallery, cover, gif, content) and must never be used for editing. */
             var cached = _cacheGet(table);
             if (cached) {
                 var sid = String(id);
                 for (var i = 0; i < cached.length; i++) {
                     if (String(cached[i].id) === sid) return Promise.resolve(cached[i]);
-                }
-            }
-            /* Also check the _list variant */
-            var cachedList = _cacheGet(table + '_list');
-            if (cachedList) {
-                var sid = String(id);
-                for (var i = 0; i < cachedList.length; i++) {
-                    if (String(cachedList[i].id) === sid) return Promise.resolve(cachedList[i]);
                 }
             }
             /* Cache miss — fetch single row directly (avoids downloading entire table) */

@@ -106,20 +106,6 @@
         var track = document.getElementById('companies-track');
         if (!track) return;
 
-        var companies = (typeof DataManager !== 'undefined') ? await DataManager.getData(DataManager.keys.COMPANIES) : null;
-
-        // Fallback placeholders if no companies in DB yet
-        if (!companies || companies.length === 0) {
-            companies = [
-                { name: 'Empresa A' },
-                { name: 'Empresa B' },
-                { name: 'Empresa C' },
-                { name: 'Empresa D' },
-                { name: 'Empresa E' },
-                { name: 'Empresa F' }
-            ];
-        }
-
         var DEFAULT_ICON = '<svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>';
 
         function _escHtml(s) {
@@ -129,26 +115,59 @@
         function buildCompanyCard(c) {
             var safeName = _escHtml(c.name);
             if (c.image) {
-                /* Logo-first: imagem grande centrada, sem fundo colorido */
                 return '<div class="flex flex-col items-center justify-center gap-2 px-8 py-5 bg-white rounded-2xl border border-gray-100 shadow-sm flex-shrink-0 min-w-[140px]">'
                     + '<img src="' + _escHtml(c.image) + '" alt="' + safeName + '" class="h-14 w-auto max-w-[120px] object-contain" loading="lazy" decoding="async">'
                     + '<span class="text-xs font-semibold text-gray-400 whitespace-nowrap">' + safeName + '</span>'
                     + '</div>';
             }
-            /* Fallback: ícone + nome */
             return '<div class="flex items-center gap-3 px-7 py-5 bg-white rounded-2xl border border-gray-100 shadow-sm flex-shrink-0">'
                 + '<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">' + DEFAULT_ICON + '</div>'
                 + '<span class="text-sm font-semibold text-gray-600 whitespace-nowrap">' + safeName + '</span>'
                 + '</div>';
         }
 
-        var cardsHTML = companies.map(buildCompanyCard).join('');
-        // Duplicate for seamless infinite loop (animation translates -50%)
-        track.innerHTML = cardsHTML + cardsHTML;
+        function renderTrack(list) {
+            if (!list || !list.length) return;
+            // Sort by position ascending (matches admin dashboard order)
+            var sorted = list.slice().sort(function(a, b) { return (a.position || 0) - (b.position || 0); });
+            var cardsHTML = sorted.map(buildCompanyCard).join('');
+            track.innerHTML = cardsHTML + cardsHTML; // duplicate for seamless loop
+            var duration = Math.max(sorted.length * 4.5, 20);
+            track.style.animation = 'trust-scroll ' + duration + 's linear infinite';
+        }
 
-        // Speed: ~4.5s per item feels smooth
-        var duration = Math.max(companies.length * 4.5, 20);
-        track.style.animation = 'trust-scroll ' + duration + 's linear infinite';
+        // 1. Render stale data immediately (zero-latency on repeat visits)
+        var stale = null;
+        try {
+            var _raw = localStorage.getItem('axo_companies');
+            if (_raw) stale = JSON.parse(_raw).data;
+        } catch(e) {}
+        if (stale && stale.length) renderTrack(stale);
+
+        // 2. Resolve the head prefetch (started before SDK loaded)
+        var fresh = null;
+        try {
+            if (window.__axo_comp_pf) {
+                fresh = await window.__axo_comp_pf;
+            } else if (typeof DataManager !== 'undefined') {
+                fresh = await DataManager.getData(DataManager.keys.COMPANIES);
+            }
+        } catch(e) {}
+
+        if (fresh && fresh.length) {
+            renderTrack(fresh);
+            // Persist to localStorage so next visit renders instantly
+            try {
+                var payload = JSON.stringify({ data: fresh, ts: Date.now() });
+                if (payload.length < 1048576) localStorage.setItem('axo_companies', payload);
+            } catch(e) {}
+        } else if (!stale || !stale.length) {
+            // Fallback placeholders if DB has no companies yet
+            renderTrack([
+                { name: 'Empresa A' }, { name: 'Empresa B' }, { name: 'Empresa C' },
+                { name: 'Empresa D' }, { name: 'Empresa E' }, { name: 'Empresa F' }
+            ]);
+        }
     }
 
     // ==========================================
