@@ -546,12 +546,10 @@ var Admin = {
             var statusBadge = isDraft
                 ? '<span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 font-medium">Rascunho</span>'
                 : '<span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">Publicado</span>';
-            html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4' + (isDraft ? ' opacity-75' : '') + '">';
-            /* Order handle */
-            html += '<div class="flex flex-col gap-0.5 shrink-0 mr-1">';
-            html += '<button onclick="Admin.moveProject(\'' + proj.id + '\',-1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para cima"' + (idx === 0 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg></button>';
-            html += '<span class="text-center text-xs font-bold text-gray-300 leading-none">' + (idx + 1) + '</span>';
-            html += '<button onclick="Admin.moveProject(\'' + proj.id + '\',1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para baixo"' + (idx === projects.length - 1 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg></button>';
+            html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4' + (isDraft ? ' opacity-75' : '') + '" data-id="' + proj.id + '">';
+            /* Drag handle */
+            html += '<div class="drag-handle shrink-0 flex items-center justify-center w-6" title="Arrastar para reordenar">';
+            html += '<svg class="w-4 h-6 pointer-events-none" fill="currentColor" viewBox="0 0 16 24"><circle cx="5" cy="5" r="1.8"/><circle cx="11" cy="5" r="1.8"/><circle cx="5" cy="12" r="1.8"/><circle cx="11" cy="12" r="1.8"/><circle cx="5" cy="19" r="1.8"/><circle cx="11" cy="19" r="1.8"/></svg>';
             html += '</div>';
             if (proj.image) {
                 html += '<img src="' + proj.image + '" class="w-16 h-16 rounded-lg object-cover shrink-0" alt="">';
@@ -569,6 +567,7 @@ var Admin = {
             html += '</div></div>';
         });
         container.innerHTML = html;
+        this._initDragDrop('projects-list', function(ids) { self._saveProjectsOrder(ids); });
         // Populate project category datalist
         var pcats = [];
         projects.forEach(function(p) { if (p.category && pcats.indexOf(p.category) === -1) pcats.push(p.category); });
@@ -840,12 +839,10 @@ var Admin = {
         var html = '';
         companies.forEach(function(c, idx) {
             var safeName = self.escapeHtml(c.name);
-            html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4">';
-            /* Order handle */
-            html += '<div class="flex flex-col gap-0.5 shrink-0 mr-1">';
-            html += '<button onclick="Admin.moveCompany(\'' + c.id + '\',-1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para cima"' + (idx === 0 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg></button>';
-            html += '<span class="text-center text-xs font-bold text-gray-300 leading-none">' + (idx + 1) + '</span>';
-            html += '<button onclick="Admin.moveCompany(\'' + c.id + '\',1)" class="p-1 text-gray-400 hover:text-primary hover:bg-primary/10 rounded transition disabled:opacity-25" title="Mover para baixo"' + (idx === companies.length - 1 ? ' disabled' : '') + '><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg></button>';
+            html += '<div class="item-card bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex items-center gap-4" data-id="' + c.id + '">';
+            /* Drag handle */
+            html += '<div class="drag-handle shrink-0 flex items-center justify-center w-6" title="Arrastar para reordenar">';
+            html += '<svg class="w-4 h-6 pointer-events-none" fill="currentColor" viewBox="0 0 16 24"><circle cx="5" cy="5" r="1.8"/><circle cx="11" cy="5" r="1.8"/><circle cx="5" cy="12" r="1.8"/><circle cx="11" cy="12" r="1.8"/><circle cx="5" cy="19" r="1.8"/><circle cx="11" cy="19" r="1.8"/></svg>';
             html += '</div>';
             if (c.image) {
                 html += '<img src="' + c.image + '" class="w-16 h-12 rounded-lg object-contain shrink-0 bg-gray-50 p-1 border border-gray-100" alt="">';
@@ -861,6 +858,7 @@ var Admin = {
             html += '</div></div>';
         });
         container.innerHTML = html;
+        this._initDragDrop('companies-list', function(ids) { self._saveCompaniesOrder(ids); });
     },
 
     /* ===== GALLERY ===== */
@@ -940,6 +938,72 @@ var Admin = {
             msg.classList.remove('hidden');
             setTimeout(function() { msg.classList.add('hidden'); }, 3000);
         }
+    },
+
+    /* ===== DRAG AND DROP ===== */
+    _initDragDrop: function(containerId, onNewOrderFn) {
+        var container = document.getElementById(containerId);
+        if (!container) return;
+        var dragging = null;
+
+        function getCards() {
+            return Array.prototype.slice.call(container.querySelectorAll('.item-card[data-id]'));
+        }
+
+        getCards().forEach(function(card) {
+            card.setAttribute('draggable', 'true');
+            card.addEventListener('dragstart', function(e) {
+                dragging = card;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', card.getAttribute('data-id'));
+                setTimeout(function() { card.classList.add('dragging'); }, 0);
+            });
+            card.addEventListener('dragend', function() {
+                card.classList.remove('dragging');
+                getCards().forEach(function(c) { c.classList.remove('drag-over'); });
+                dragging = null;
+            });
+            card.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                if (dragging && card !== dragging) {
+                    getCards().forEach(function(c) { c.classList.remove('drag-over'); });
+                    card.classList.add('drag-over');
+                }
+            });
+            card.addEventListener('dragleave', function(e) {
+                if (!card.contains(e.relatedTarget)) {
+                    card.classList.remove('drag-over');
+                }
+            });
+            card.addEventListener('drop', function(e) {
+                e.preventDefault();
+                card.classList.remove('drag-over');
+                if (!dragging || card === dragging) return;
+                var cards = getCards();
+                var fromIdx = cards.indexOf(dragging);
+                var toIdx = cards.indexOf(card);
+                if (fromIdx < toIdx) {
+                    container.insertBefore(dragging, card.nextSibling);
+                } else {
+                    container.insertBefore(dragging, card);
+                }
+                var newOrder = getCards().map(function(c) { return c.getAttribute('data-id'); });
+                onNewOrderFn(newOrder);
+            });
+        });
+    },
+
+    _saveProjectsOrder: async function(ids) {
+        await Promise.all(ids.map(function(id, i) {
+            return DataManager.updateItem(DataManager.keys.PROJECTS, id, { position: i });
+        }));
+    },
+
+    _saveCompaniesOrder: async function(ids) {
+        await Promise.all(ids.map(function(id, i) {
+            return DataManager.updateItem(DataManager.keys.COMPANIES, id, { position: i });
+        }));
     },
 
     /* ===== RENDER ALL ===== */

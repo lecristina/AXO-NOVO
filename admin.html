@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axolutions - Admin</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -38,8 +40,13 @@
 
         .admin-section { display: none; }
         .admin-section.active { display: block; }
-        .item-card { transition: box-shadow 0.2s; }
+        .item-card { transition: box-shadow 0.2s, opacity 0.2s, border-color 0.2s; }
         .item-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .item-card.dragging { opacity: 0.35; }
+        .item-card.drag-over { border-color: #8f00cc !important; box-shadow: 0 0 0 2px rgba(143,0,204,0.25); }
+        .drag-handle { cursor: grab; color: #9ca3af; }
+        .drag-handle:hover { color: #6b7280; }
+        .item-card.dragging .drag-handle { cursor: grabbing; }
         .gallery-thumb { position: relative; }
         .gallery-thumb img { width: 100%; height: 80px; object-fit: cover; border-radius: 0.5rem; }
         .gallery-thumb .remove-btn { position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; background: #ef4444; color: white; border: 2px solid white; border-radius: 50%; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
