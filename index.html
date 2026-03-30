@@ -259,14 +259,18 @@
                 var now = new Date();
                 var hNow = now.getHours();
                 var mNow = now.getMinutes();
-                var hDeadline = (hNow + 2) % 24;
                 var nowStr = String(hNow).padStart(2, '0') + ':' + String(mNow).padStart(2, '0');
-                var deadlineStr = String(hDeadline).padStart(2, '0') + ':00';
+                // next 30-min boundary at least 60 minutes from now
+                var totalMin = hNow * 60 + mNow + 120;
+                var rounded = Math.ceil(totalMin / 30) * 30;
+                var dH = Math.floor(rounded / 60) % 24;
+                var dM = rounded % 60;
+                var deadlineStr = String(dH).padStart(2, '0') + ':' + String(dM).padStart(2, '0');
                 var el = document.getElementById('time-message');
-                if (el) el.innerHTML = 'e vamos colocar seu site no ar às <strong class="text-purple-300">' + deadlineStr + '</strong>';
+                if (el) el.innerHTML = 'isso mesmo, agora são <strong class="text-purple-300">' + nowStr + '</strong> e vamos colocar seu site no ar às <strong class="text-purple-300">' + deadlineStr + '</strong>';
             }
             updateTimeMsg();
-            setInterval(updateTimeMsg, 60000);
+            setInterval(updateTimeMsg, 1000);
         })();
         function sendIdeaToWhatsApp() {
             var ideaEl = document.getElementById('idea-text');
