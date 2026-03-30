@@ -126,7 +126,14 @@
             if (cached && cached.length) return Promise.resolve(cached);
             var ik = 'axo_' + cacheKey;
             if (_inflight[ik]) return _inflight[ik];
-            _inflight[ik] = _db.from(table).select(cols).order('created_at', { ascending: false })
+            var hasPosition = cols.indexOf('position') !== -1;
+            var query = _db.from(table).select(cols);
+            if (hasPosition) {
+                query = query.order('position', { ascending: true }).order('created_at', { ascending: true });
+            } else {
+                query = query.order('created_at', { ascending: false });
+            }
+            _inflight[ik] = query
                 .then(function (res) {
                     delete _inflight[ik];
                     if (res.error) { console.error('[DataManager] getDataSelect:', res.error.message); return []; }
