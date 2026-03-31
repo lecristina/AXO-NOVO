@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "start": "npx serve . --listen 3000",
-    "dev": "npx live-server --port=3000 --no-browser=false"
+    "dev": "npx live-server --port=3000 --no-browser=false",
+    "css:build": "tailwindcss -i css/tailwind.css -o css/crie.css --content \"crie.html\" --minify",
+    "css:watch": "tailwindcss -i css/tailwind.css -o css/crie.css --content \"crie.html\" --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.19"
   }
 }
