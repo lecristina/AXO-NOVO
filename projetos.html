@@ -33,20 +33,9 @@
         { headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s' } }
     ).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
-                    colors: {
-                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="css/output.css">
     <style>
         .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
         .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
@@ -94,15 +83,15 @@
         <div id="projects-grid" class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         <div id="no-results" class="hidden max-w-7xl mx-auto text-center py-16">
             <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-            <h3 class="text-xl font-bold text-gray-500">Nenhum projeto encontrado</h3>
-            <p class="text-gray-400 mt-2">Nenhum projeto nesta categoria ainda.</p>
+            <h2 class="text-xl font-bold text-gray-500">Nenhum projeto encontrado</h2>
+            <p class="text-gray-600 mt-2">Nenhum projeto nesta categoria ainda.</p>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="py-20 px-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
-        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
+        <img src="images/copa.png" alt="" aria-hidden="true" width="1920" height="1080" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async">
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
             <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
@@ -202,7 +191,7 @@
                         '</div>' +
                         '<div class="p-6 flex flex-col flex-1">' +
                             '<a href="projeto.html?id=' + p.id + '" class="block">' +
-                                '<h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-3">' + safeTitle + '</h3>' +
+                                '<h2 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-3">' + safeTitle + '</h2>' +
                             '</a>' +
                             '<p class="text-sm text-gray-500 line-clamp-3 flex-1">' + _esc(p.description || '') + '</p>' +
                             techHtml +

@@ -18,7 +18,7 @@
                 /* col 1 – brand */
                 '<div>' +
                     '<div class="flex items-center gap-2.5 mb-5">' +
-                        '<img src="images/logo.png" alt="Axolutions" class="h-9 w-auto">' +
+                        '<img src="images/logo.png" alt="Axolutions" width="36" height="36" class="h-9 w-auto">' +
                         '<span class="text-xl font-display font-bold text-white">Axolutions</span>' +
                     '</div>' +
                     '<p class="text-sm leading-relaxed text-gray-500">Startup líder em desenvolvimento de softwares inovadores. Transformamos ideias em soluções digitais de alto impacto.</p>' +

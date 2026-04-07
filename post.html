@@ -20,20 +20,9 @@
     <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script" crossorigin>
     <link rel="dns-prefetch" href="https://ecgjhahdceocsikbhsot.supabase.co">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
-                    colors: {
-                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="css/output.css">
     <style>
         .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
         .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
@@ -120,7 +109,7 @@
     <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
         <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
         <h2 class="text-2xl font-bold text-gray-500 mb-2">Artigo não encontrado</h2>
-        <p class="text-gray-400 mb-8">O artigo que você procura não existe ou foi removido.</p>
+        <p class="text-gray-600 mb-8">O artigo que você procura não existe ou foi removido.</p>
         <a href="blog.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
             Voltar ao Blog
@@ -175,7 +164,7 @@
 
                     <!-- Related posts -->
                     <div>
-                        <h3 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h3>
+                        <h2 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h2>
                         <div id="related-posts" class="space-y-4"></div>
                     </div>
                 </div>
@@ -188,7 +177,7 @@
     <!-- CTA -->
     <section class="py-20 px-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
-        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
+        <img src="images/copa.png" alt="" aria-hidden="true" width="1920" height="1080" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async">
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
             <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
@@ -294,7 +283,7 @@
 
         var relatedContainer = document.getElementById('related-posts');
         if (related.length === 0) {
-            relatedContainer.innerHTML = '<p class="text-sm text-gray-400">Nenhum artigo relacionado.</p>';
+            relatedContainer.innerHTML = '<p class="text-sm text-gray-600">Nenhum artigo relacionado.</p>';
         } else {
             relatedContainer.innerHTML = related.map(function(r) {
                 return '<a href="post.html?id=' + r.id + '" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">' +
@@ -304,7 +293,7 @@
                             : '<div class="blog-image w-full h-full bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center"><svg class="w-10 h-10 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg></div>') +
                     '</div>' +
                     '<div class="p-4">' +
-                        '<span class="text-xs text-gray-400">' + formatDateShort(r.date) + '</span>' +
+                        '<span class="text-xs text-gray-500">' + formatDateShort(r.date) + '</span>' +
                         '<h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">' + r.title + '</h4>' +
                     '</div>' +
                 '</a>';

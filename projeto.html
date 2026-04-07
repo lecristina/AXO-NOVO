@@ -24,20 +24,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
-                    colors: {
-                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="css/output.css">
     <style>
         .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
         .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
@@ -196,13 +185,13 @@
 
                         <!-- Techs -->
                         <div id="techs-card" class="hidden bg-white rounded-2xl border border-gray-100 shadow-sm p-6 scroll-animate" style="transition-delay:240ms">
-                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Tecnologias</p>
+                            <p class="text-xs font-bold text-gray-600 uppercase tracking-widest mb-4">Tecnologias</p>
                             <div id="techs-list" class="flex flex-wrap gap-2"></div>
                         </div>
 
                         <!-- Info -->
                         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 scroll-animate" style="transition-delay:300ms">
-                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Detalhes</p>
+                            <p class="text-xs font-bold text-gray-600 uppercase tracking-widest mb-4">Detalhes</p>
                             <div id="info-list" class="space-y-4"></div>
                         </div>
 
@@ -236,7 +225,7 @@
     <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
         <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
         <h2 class="text-2xl font-bold text-gray-500 mb-2">Projeto não encontrado</h2>
-        <p class="text-gray-400 mb-8">O projeto que você procura não existe ou foi removido.</p>
+        <p class="text-gray-600 mb-8">O projeto que você procura não existe ou foi removido.</p>
         <a href="projetos.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
             Ver todos os projetos
@@ -252,7 +241,7 @@
     <!-- CTA -->
     <section class="py-20 px-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
-        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
+        <img src="images/copa.png" alt="" aria-hidden="true" width="1920" height="1080" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async">
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
             <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>

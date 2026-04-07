@@ -5,8 +5,8 @@
   "scripts": {
     "start": "npx serve . --listen 3000",
     "dev": "npx live-server --port=3000 --no-browser=false",
-    "css:build": "tailwindcss -i css/tailwind.css -o css/crie.css --content \"crie.html\" --minify",
-    "css:watch": "tailwindcss -i css/tailwind.css -o css/crie.css --content \"crie.html\" --watch"
+    "css:build": "tailwindcss -i css/tailwind.css -o css/output.css --minify",
+    "css:watch": "tailwindcss -i css/tailwind.css -o css/output.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "3.4.19"

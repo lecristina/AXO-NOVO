@@ -23,20 +23,9 @@
     <link rel="apple-touch-icon" href="images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] },
-                    colors: {
-                        primary: { DEFAULT: '#8f00cc', light: '#b44ddb', dark: '#6b00a3', 50: '#f5e6ff', 100: '#e6c2ff', 200: '#cc80ff', 300: '#b34dff', 400: '#9f1aff', 500: '#8f00cc', 600: '#7300a6', 700: '#580080', 800: '#3d005a', 900: '#220033' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="css/output.css">
     <style>
         .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
         .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
@@ -136,7 +125,7 @@
     <!-- CTA -->
     <section class="py-20 px-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
-        <img src="images/copa.png" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]">
+        <img src="images/copa.png" alt="" aria-hidden="true" width="1920" height="1080" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async">
         <div class="max-w-4xl mx-auto text-center relative z-10 scroll-animate">
             <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Quer fazer parte do time?</h2>
             <p class="text-purple-100 mb-8 text-lg">Estamos sempre em busca de talentos apaixonados por tecnologia e inovacao.</p>
@@ -196,7 +185,7 @@
                         '<div class="absolute -bottom-14 left-1/2 -translate-x-1/2">' + avatarHtml + '</div>' +
                     '</div>' +
                     '<div class="pt-16 pb-8 px-6 flex flex-col items-center flex-1">' +
-                        '<h3 class="text-xl font-bold text-gray-900 mb-1">' + member.name + '</h3>' +
+                        '<h2 class="text-xl font-bold text-gray-900 mb-1">' + member.name + '</h2>' +
                         '<span class="text-sm font-semibold text-primary mb-4">' + member.role + '</span>' +
                         '<p class="text-sm text-gray-500 leading-relaxed">' + (member.bio || '') + '</p>' +
                     '</div>' +

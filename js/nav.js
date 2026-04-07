@@ -83,7 +83,7 @@
         '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="position:relative;z-index:1">' +
             '<div class="flex items-center justify-between h-20">' +
                 '<a href="index.html" class="flex items-center gap-2.5 group">' +
-                    '<img src="images/logo.png" alt="Axolutions" class="h-10 w-auto">' +
+                    '<img src="images/logo.png" alt="Axolutions" width="40" height="40" class="h-10 w-auto">' +
                     '<span id="axo-brand" class="text-xl font-display font-bold ' + brandClass + ' transition-colors">Axolutions</span>' +
                 '</a>' +
                 '<div class="hidden lg:flex items-center gap-8">' + deskLinks + '</div>' +
@@ -91,7 +91,7 @@
                     '<a href="' + WA + '" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 inline-flex items-center gap-2">' +
                     SVG_WA_SM + 'Solicitar prévia</a>' +
                 '</div>' +
-                '<button id="menu-btn" class="lg:hidden p-2 ' + burgerClass + '">' + SVG_BURGER + '</button>' +
+                '<button id="menu-btn" aria-label="Abrir menu" class="lg:hidden p-2 ' + burgerClass + '">' + SVG_BURGER + '</button>' +
             '</div>' +
         '</div>' +
         '</nav>';
@@ -103,10 +103,10 @@
         '<div id="mobile-panel" style="position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;z-index:100;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,0.25);will-change:transform">' +
             '<div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">' +
                 '<a href="index.html" class="flex items-center gap-2">' +
-                    '<img src="images/logo.png" alt="Axolutions" class="h-8 w-auto">' +
+                    '<img src="images/logo.png" alt="Axolutions" width="32" height="32" class="h-8 w-auto">' +
                     '<span class="text-lg font-display font-bold text-gray-900">Axolutions</span>' +
                 '</a>' +
-                '<button id="menu-close" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600">' +
+                '<button id="menu-close" aria-label="Fechar menu" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600">' +
                 SVG_CLOSE + '</button>' +
             '</div>' +
             '<nav class="flex-1 px-6 py-6 flex flex-col gap-1 overflow-y-auto">' + mobLinks + '</nav>' +
