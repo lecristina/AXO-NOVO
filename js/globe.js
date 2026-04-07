@@ -285,8 +285,10 @@
         }, { passive: true });
 
         // ── Animation loop ────────────────────────────────────────────────────
+        var _globeRafId = null, _globeRunning = false;
         function animate() {
-            requestAnimationFrame(animate);
+            if (!_globeRunning) return;
+            _globeRafId = requestAnimationFrame(animate);
             if (!isDragging) {
                 rotSpeed.x *= 0.92;
                 rotSpeed.y *= 0.92;
@@ -295,7 +297,20 @@
             globeGroup.rotation.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, globeGroup.rotation.x));
             renderer.render(scene, camera);
         }
-        animate();
+        if ('IntersectionObserver' in window) {
+            var globeObs = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) {
+                    if (!_globeRunning) { _globeRunning = true; animate(); }
+                } else {
+                    _globeRunning = false;
+                    if (_globeRafId) { cancelAnimationFrame(_globeRafId); _globeRafId = null; }
+                }
+            }, { threshold: 0.01 });
+            globeObs.observe(container);
+        } else {
+            _globeRunning = true;
+            animate();
+        }
 
         // ── Window resize ─────────────────────────────────────────────────────
         window.addEventListener('resize', function () {

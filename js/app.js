@@ -341,9 +341,22 @@
                 }
             }
 
-            requestAnimationFrame(draw);
+            _rafId = requestAnimationFrame(draw);
         }
-        draw();
+        var _rafId = null;
+        var cosmosSection = document.getElementById('cosmos') || canvas.parentElement;
+        if ('IntersectionObserver' in window && cosmosSection) {
+            var cosmosObs = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) {
+                    if (!_rafId) _rafId = requestAnimationFrame(draw);
+                } else {
+                    if (_rafId) { cancelAnimationFrame(_rafId); _rafId = null; }
+                }
+            }, { threshold: 0.01 });
+            cosmosObs.observe(cosmosSection);
+        } else {
+            _rafId = requestAnimationFrame(draw);
+        }
     }
 
     // ==========================================
@@ -559,12 +572,17 @@
     // Initialize everything
     // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
+        // Critical above-fold init first
         initCompaniesCarousel();
         initMarquee();
         initFAQ();
-        initCosmos();
-        initDiagonalProjects();
-        loadBlogPreview();
+        // Defer non-critical heavy tasks to idle time
+        var rIC = window.requestIdleCallback || function(fn) { setTimeout(fn, 80); };
+        rIC(function() {
+            initCosmos();
+            initDiagonalProjects();
+            loadBlogPreview();
+        });
     });
 
 })();
