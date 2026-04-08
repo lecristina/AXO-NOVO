@@ -32,7 +32,7 @@
     window.__axo_comp_pf = new Promise(function(resolve) {
         function doFetch() {
             fetch(
-                'https://ecgjhahdceocsikbhsot.supabase.co/rest/v1/companies?select=id,name,image,position&order=position.asc&limit=100',
+                'https://ecgjhahdceocsikbhsot.supabase.co/rest/v1/companies?select=id,name,image,position&order=position.asc&image=not.ilike.data%3A%25&limit=50',
                 { headers: { 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZ2poYWhkY2VvY3Npa2Joc290Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NjczNjEsImV4cCI6MjA5MDA0MzM2MX0.yGWwjOkR4Wy-BAfKMweM68sPIZBSiSoXiZSZup62x0s' } }
             ).then(function(r){ return r.ok ? r.json() : []; }).then(resolve).catch(function(){ resolve([]); });
         }
@@ -45,8 +45,8 @@
         }
     });
     </script>
-    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=optional">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=optional"></noscript>
     <link rel="stylesheet" href="css/output.css">
     <style>
         .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
@@ -88,6 +88,16 @@
         .idea-input::placeholder { color: rgba(255,255,255,0.35); }
         .idea-input:focus { outline: none; border-color: #cc44ff; background: rgba(255,255,255,0.1); }
         @keyframes trust-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        /* Size-adjusted fallback for Space Grotesk — reduces CLS on first paint */
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: local('Helvetica Neue'), local('Arial');
+            size-adjust: 96%;
+            ascent-override: 89%;
+            descent-override: 21%;
+            font-weight: 400 700;
+            font-style: normal;
+        }
     </style>
     <script type="application/ld+json">
     { "@context": "https://schema.org", "@type": "Organization", "name": "Axolutions", "description": "Startup lider em desenvolvimento de softwares inovadores", "url": "" }

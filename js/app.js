@@ -5,6 +5,17 @@
     /* Mobile menu + navbar scroll are handled by js/nav.js */
 
     // ==========================================
+    // Supabase image transform helper
+    // Converts /object/public/ → /render/image/public/ with resize params
+    // Falls back to original URL for non-Supabase or data-URI images
+    // ==========================================
+    function _supabaseImgUrl(url, width, quality) {
+        if (!url || url.indexOf('supabase.co/storage/v1/object/public/') === -1) return url;
+        return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
+                  + '?width=' + width + '&quality=' + (quality || 75) + '&resize=contain';
+    }
+
+    // ==========================================
     // Smooth scroll for anchor links
     // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
@@ -114,9 +125,12 @@
 
         function buildCompanyCard(c) {
             var safeName = _escHtml(c.name);
-            if (c.image) {
+            if (c.image && c.image.indexOf('data:') !== 0) {
+                var thumbUrl = _supabaseImgUrl(c.image, 120, 75);
                 return '<div class="flex flex-col items-center justify-center gap-2 px-8 py-5 bg-white rounded-2xl border border-gray-100 shadow-sm flex-shrink-0 min-w-[140px]">'
-                    + '<img src="' + _escHtml(c.image) + '" alt="' + safeName + '" width="120" height="56" class="h-14 w-auto max-w-[120px] object-contain" loading="lazy" decoding="async">'
+                    + '<div style="width:120px;height:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0">'
+                    + '<img src="' + _escHtml(thumbUrl) + '" alt="' + safeName + '" width="120" height="56" style="width:120px;height:56px;object-fit:contain" loading="lazy" decoding="async">'
+                    + '</div>'
                     + '<span class="text-xs font-semibold text-gray-500 whitespace-nowrap">' + safeName + '</span>'
                     + '</div>';
             }
@@ -269,8 +283,9 @@
         var shootingStars = [];
 
         function resize() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            var r = canvas.parentElement.getBoundingClientRect();
+            canvas.width  = r.width  || window.innerWidth;
+            canvas.height = r.height || 700;
         }
         resize();
         window.addEventListener('resize', resize);
@@ -450,7 +465,8 @@
         function buildDiagCard(c, i) {
             var top;
             if (c.image) {
-                top = '<div style="height:110px;overflow:hidden;background:#e5e7eb"><img src="' + c.image + '" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async"></div>';
+                var thumbUrl = _supabaseImgUrl(c.image, 280, 70);
+                top = '<div style="height:110px;overflow:hidden;background:#e5e7eb"><img src="' + thumbUrl + '" alt="" width="220" height="110" style="width:100%;height:110px;object-fit:cover" loading="lazy" decoding="async"></div>';
             } else {
                 var iconPath = ICONS[i % ICONS.length];
                 top = '<div style="height:110px;background:linear-gradient(135deg,' + c.c1 + ',' + c.c2 + ');display:flex;align-items:center;justify-content:center">'
