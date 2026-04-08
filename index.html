@@ -26,7 +26,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" as="script" crossorigin>
     <!-- Prefetch companies data immediately — before any SDK loads -->
     <script>
     window.__axo_comp_pf = fetch(
@@ -95,7 +94,7 @@
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                 <span class="text-sm font-medium text-white/90">Colocamos no ar ainda hoje</span>
             </div>
-            <h1 class="font-display font-bold text-white leading-[1.0] mb-6 scroll-animate">
+            <h1 class="font-display font-bold text-white leading-[1.0] mb-6 scroll-animate animate-in">
                 <span class="block text-5xl sm:text-7xl lg:text-9xl">Criamos</span>
                 <span class="block text-5xl sm:text-7xl lg:text-9xl mt-2"><span class="gradient-text" id="typing-text">sua automação</span><span class="typing-cursor"></span></span>
                 <span class="block text-5xl sm:text-7xl lg:text-8xl">Gratuitamente</span>
@@ -283,7 +282,7 @@
                     </h2>
                 </div>
                 <div class="flex flex-col items-center shrink-0 text-center gap-2">
-                    <img src="images/google-logo-completa.png" alt="Google" width="98" height="28" class="h-7 mb-1 object-contain" loading="lazy" decoding="async">
+                    <picture><source srcset="images/google-logo-completa.webp" type="image/webp"><img src="images/google-logo-completa.png" alt="Google" width="98" height="28" class="h-7 mb-1 object-contain" loading="lazy" decoding="async"></picture>
                     <span class="text-6xl md:text-8xl font-bold leading-none text-gray-900">5.0</span>
                     <div class="flex text-yellow-400 text-2xl sm:text-3xl">★★★★★</div>
                     <span class="text-sm text-gray-500">+500 projetos entregues</span>
@@ -403,7 +402,7 @@
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djZoLTZWMzRoNnptMC0zMHY2aC02VjRoNnptLTMwIDB2NkgwVjRoNnptMCAzMHY2SDB2LTZoNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50"></div>
         <div class="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
-        <img src="images/copa.png" alt="" aria-hidden="true" width="1920" height="1080" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async">
+        <picture><source srcset="images/copa.webp" type="image/webp"><img src="images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
         <div class="relative z-10 max-w-4xl mx-auto text-center">
             <h2 class="text-4xl lg:text-6xl font-display font-bold text-white mb-8 scroll-animate">Pronto para transformar sua<br><span class="text-purple-200">ideia em realidade?</span></h2>
             <p class="text-purple-100/80 text-lg lg:text-xl mb-12 max-w-2xl mx-auto scroll-animate">Entre em contato e descubra como podemos ajudar seu negócio a crescer com tecnologia de ponta.</p>
@@ -420,7 +419,6 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
     <script src="js/data.js" defer></script>
     <script src="js/theme.js" defer></script>
     <script>window.AXO_CONFIG = { page: '', navMode: 'cosmos' };</script>

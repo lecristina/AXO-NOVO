@@ -83,7 +83,7 @@
         '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="position:relative;z-index:1">' +
             '<div class="flex items-center justify-between h-20">' +
                 '<a href="index.html" class="flex items-center gap-2.5 group">' +
-                    '<img src="images/logo.png" alt="Axolutions" width="40" height="40" class="h-10 w-auto">' +
+                    '<picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Axolutions" width="40" height="40" class="h-10 w-auto"></picture>' +
                     '<span id="axo-brand" class="text-xl font-display font-bold ' + brandClass + ' transition-colors">Axolutions</span>' +
                 '</a>' +
                 '<div class="hidden lg:flex items-center gap-8">' + deskLinks + '</div>' +
@@ -103,7 +103,7 @@
         '<div id="mobile-panel" style="position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;z-index:100;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,0.25);will-change:transform">' +
             '<div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">' +
                 '<a href="index.html" class="flex items-center gap-2">' +
-                    '<img src="images/logo.png" alt="Axolutions" width="32" height="32" class="h-8 w-auto">' +
+                    '<picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Axolutions" width="32" height="32" class="h-8 w-auto"></picture>' +
                     '<span class="text-lg font-display font-bold text-gray-900">Axolutions</span>' +
                 '</a>' +
                 '<button id="menu-close" aria-label="Fechar menu" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600">' +

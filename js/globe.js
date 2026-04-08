@@ -1,21 +1,21 @@
 ﻿/* globe.js – Earth globe: real Blue-Marble texture + dot overlay on continents */
 (function () {
 
-    // Wait until the container has real CSS dimensions (Tailwind CDN is async)
-    function waitAndInit() {
+    function init() {
         var container = document.getElementById('globe-container');
         if (!container) return;
-        if (container.clientWidth === 0 || container.clientHeight === 0) {
-            requestAnimationFrame(waitAndInit);
+        // If container has no dimensions yet (rare), wait one frame
+        if (container.clientWidth === 0) {
+            requestAnimationFrame(init);
             return;
         }
         boot(container);
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', waitAndInit);
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        waitAndInit();
+        init();
     }
 
     // ─────────────────────────────────────────────────────────────────────────
