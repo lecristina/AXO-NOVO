@@ -573,7 +573,6 @@
     // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
         // Critical above-fold init first
-        initCompaniesCarousel();
         initMarquee();
         initFAQ();
         // Defer non-critical heavy tasks to idle time
@@ -583,6 +582,11 @@
             initDiagonalProjects();
             loadBlogPreview();
         });
+        // Companies carousel is below-fold and fetches from Supabase after page load
+        // — defer until load so it never touches the LCP critical path
+        window.addEventListener('load', function() {
+            rIC(initCompaniesCarousel);
+        }, { once: true });
     });
 
 })();

@@ -212,8 +212,8 @@
 
         if (ctx) {
             function resize() {
-                canvas.width  = navbar.offsetWidth  || window.innerWidth;
-                canvas.height = navbar.offsetHeight || 80;
+                canvas.width  = window.innerWidth;
+                canvas.height = 80;
             }
             resize();
             window.addEventListener('resize', resize, { passive: true });
