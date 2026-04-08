@@ -207,16 +207,21 @@
         var ctx    = canvas ? canvas.getContext('2d') : null;
         var stars  = [];
         var shoots = [];
-        var active = false;
-        var raf    = null;
+        var active      = false;
+        var raf         = null;
+        var canvasReady = false;
 
         if (ctx) {
             function resize() {
                 canvas.width  = window.innerWidth;
                 canvas.height = 80;
             }
-            resize();
-            window.addEventListener('resize', resize, { passive: true });
+            var _resizeTimer = null;
+            window.addEventListener('resize', function() {
+                clearTimeout(_resizeTimer);
+                _resizeTimer = setTimeout(resize, 150);
+            }, { passive: true });
+            /* No eager resize() — canvas is sized just-in-time on first cosmos activation */
 
             for (var i = 0; i < 140; i++) {
                 stars.push({
@@ -278,7 +283,10 @@
             if (window.scrollY > 80) {
                 if (!active) {
                     active = true;
-                    if (ctx) drawFrame();
+                    if (ctx) {
+                        if (!canvasReady) { canvasReady = true; resize(); }
+                        drawFrame();
+                    }
                 }
                 navbar.style.background     = 'rgba(5,2,18,0.95)';
                 navbar.style.backdropFilter = 'blur(24px)';
