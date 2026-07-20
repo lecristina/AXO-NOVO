@@ -218,8 +218,11 @@
         }
 
         // Resolve post by slug (clean URL) or, as a fallback, by legacy ?id=
+        // Note: Vercel rewrites are invisible to the browser — /blog/slug never
+        // shows up as a query string, so the slug has to be read from the path.
         var params = new URLSearchParams(window.location.search);
-        var slug = params.get('slug');
+        var pathMatch = window.location.pathname.match(/^\/blog\/([a-z0-9-]+)\/?$/);
+        var slug = (pathMatch && pathMatch[1]) || params.get('slug');
         var postId = params.get('id');
         if (!slug && !postId) { showNotFound(); return; }
 
