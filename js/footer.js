@@ -40,12 +40,12 @@
                 '<div>' +
                     '<h4 class="text-white font-display font-semibold mb-5">Serviços</h4>' +
                     '<nav class="flex flex-col gap-3 text-sm">' +
-                        '<a href="/index.html#servicos" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a>' +
-                        '<a href="/index.html#servicos" class="hover:text-primary transition-colors">Sistemas Web</a>' +
-                        '<a href="/index.html#servicos" class="hover:text-primary transition-colors">Automações</a>' +
-                        '<a href="/index.html#servicos" class="hover:text-primary transition-colors">Sistemas ERP</a>' +
-                        '<a href="/index.html#servicos" class="hover:text-primary transition-colors">Aplicativos Mobile</a>' +
-                        '<a href="/index.html#servicos" class="hover:text-primary transition-colors">E-commerce</a>' +
+                        '<a href="/desenvolvimento-de-sites.html" class="hover:text-primary transition-colors">Desenvolvimento de Sites</a>' +
+                        '<a href="/sistemas-web.html" class="hover:text-primary transition-colors">Sistemas Web</a>' +
+                        '<a href="/automacoes.html" class="hover:text-primary transition-colors">Automações</a>' +
+                        '<a href="/sistemas-erp.html" class="hover:text-primary transition-colors">Sistemas ERP</a>' +
+                        '<a href="/aplicativos-mobile.html" class="hover:text-primary transition-colors">Aplicativos Mobile</a>' +
+                        '<a href="/e-commerce.html" class="hover:text-primary transition-colors">E-commerce</a>' +
                     '</nav>' +
                 '</div>' +
                 /* col 4 – seções */

@@ -1,5 +1,8 @@
 {
   "rewrites": [
     { "source": "/blog/:slug", "destination": "/post.html" }
+  ],
+  "redirects": [
+    { "source": "/fundadores.html", "destination": "/criadores.html", "permanent": true }
   ]
 }
