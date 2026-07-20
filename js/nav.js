@@ -28,11 +28,11 @@
 
     /* ── Nav links list ── */
     var LINKS = [
-        { href: 'index.html#servicos', label: 'Serviços',    id: 'servicos' },
-        { href: 'projetos.html',      label: 'Projetos',    id: 'projetos' },
-        { href: 'blog.html',          label: 'Blog',         id: 'blog' },
-        { href: 'sobre.html',         label: 'Sobre',        id: 'sobre' },
-        { href: 'depoimentos.html',   label: 'Depoimentos',  id: 'depoimentos' }
+        { href: '/index.html#servicos', label: 'Serviços',    id: 'servicos' },
+        { href: '/projetos.html',      label: 'Projetos',    id: 'projetos' },
+        { href: '/blog.html',          label: 'Blog',         id: 'blog' },
+        { href: '/sobre.html',         label: 'Sobre',        id: 'sobre' },
+        { href: '/depoimentos.html',   label: 'Depoimentos',  id: 'depoimentos' }
     ];
 
     function deskClass(id) {
@@ -70,7 +70,7 @@
         var homeClass = currentPage === ''
             ? 'flex items-center px-4 py-3 rounded-xl text-primary font-semibold'
             : 'flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors font-medium';
-        var out = '<a href="index.html" class="' + homeClass + '">Home</a>';
+        var out = '<a href="/index.html" class="' + homeClass + '">Home</a>';
         LINKS.forEach(function (l) {
             out += '<a href="' + l.href + '" class="' + mobClass(l.id) + '">' + l.label + '</a>';
         });
@@ -82,8 +82,8 @@
         cosmosCanvas +
         '<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="position:relative;z-index:1">' +
             '<div class="flex items-center justify-between h-20">' +
-                '<a href="index.html" class="flex items-center gap-2.5 group">' +
-                    '<picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Axolutions" width="40" height="40" class="h-10 w-auto"></picture>' +
+                '<a href="/index.html" class="flex items-center gap-2.5 group">' +
+                    '<picture><source srcset="/images/logo.webp" type="image/webp"><img src="/images/logo.png" alt="Axolutions" width="40" height="40" class="h-10 w-auto"></picture>' +
                     '<span id="axo-brand" class="text-xl font-display font-bold ' + brandClass + ' transition-colors">Axolutions</span>' +
                 '</a>' +
                 '<div class="hidden lg:flex items-center gap-8">' + deskLinks + '</div>' +
@@ -102,8 +102,8 @@
     var panelHTML =
         '<div id="mobile-panel" style="position:fixed;top:0;right:0;height:100%;width:300px;background:#fff;z-index:100;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,0.25);will-change:transform">' +
             '<div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">' +
-                '<a href="index.html" class="flex items-center gap-2">' +
-                    '<picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Axolutions" width="32" height="32" class="h-8 w-auto"></picture>' +
+                '<a href="/index.html" class="flex items-center gap-2">' +
+                    '<picture><source srcset="/images/logo.webp" type="image/webp"><img src="/images/logo.png" alt="Axolutions" width="32" height="32" class="h-8 w-auto"></picture>' +
                     '<span class="text-lg font-display font-bold text-gray-900">Axolutions</span>' +
                 '</a>' +
                 '<button id="menu-close" aria-label="Fechar menu" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600">' +
