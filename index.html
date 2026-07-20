@@ -226,7 +226,7 @@
     </section>
 
     <!-- GERAR SITE AGORA COM IA — card caprichado, momento próprio -->
-    <section id="gerar-agora" class="relative py-28 lg:py-36 px-4 bg-[#0a0014] overflow-hidden">
+    <section id="gerar-agora" class="relative pt-28 lg:pt-36 pb-16 lg:pb-20 px-4 bg-[#0a0014] overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(143,0,204,0.2),transparent_70%)] pointer-events-none"></div>
         <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="relative z-10 max-w-3xl mx-auto text-center">
@@ -248,9 +248,18 @@
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
                     <div class="flex flex-wrap justify-center gap-2 mb-8">
-                        <span class="text-xs text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">✅ Pronto em 1 minuto</span>
-                        <span class="text-xs text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">🌐 Já publicado</span>
-                        <span class="text-xs text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">🆓 100% grátis</span>
+                        <span class="inline-flex items-center gap-1.5 text-xs text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
+                            <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            Pronto em 1 minuto
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-xs text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
+                            <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                            Já publicado
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-xs text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
+                            <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                            100% grátis
+                        </span>
                     </div>
                     <a href="crie.html" class="group bg-gradient-to-r from-primary to-purple-500 hover:from-primary-dark hover:to-purple-600 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 inline-flex items-center justify-center gap-2 w-full">
                         <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -261,20 +270,25 @@
         </div>
     </section>
 
+    <!-- CONECTOR — transição entre os dois caminhos -->
+    <div class="relative bg-[#0a0014] px-4">
+        <div class="max-w-3xl mx-auto flex flex-col items-center py-2">
+            <div class="w-px h-10 bg-gradient-to-b from-primary/40 to-white/10"></div>
+            <div class="w-11 h-11 rounded-full bg-white/5 border border-white/15 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </div>
+            <p class="text-white/40 text-sm mt-3 mb-1">ou prefere algo pensado só pra você?</p>
+            <div class="w-px h-10 bg-gradient-to-b from-white/10 to-amber-400/40"></div>
+        </div>
+    </div>
+
     <!-- PRÉVIA EM 2 HORAS -->
-    <section id="previa" class="relative py-28 lg:py-36 px-4 bg-[#0a0014] overflow-hidden">
+    <section id="previa" class="relative pt-12 lg:pt-16 pb-28 lg:pb-36 px-4 bg-[#0a0014] overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(143,0,204,0.18),transparent_70%)] pointer-events-none"></div>
         <div class="absolute top-0 left-1/3 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="relative z-10 max-w-3xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-5 py-2 mb-6">
-                <span class="text-sm font-medium text-white/80">🙋 Opa, não era um site pronto por I.A. que você queria?</span>
-            </div>
-            <div class="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-8">
-                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                <span class="text-sm font-medium text-purple-300">Prévia gratuita no mesmo dia</span>
-            </div>
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
-                Conte o que precisa e colocamos<br><span class="gradient-text">no ar em 2 horas</span>
+                Colocamos sua solução personalizada<br>no ar em <span class="gradient-text">duas horas</span>
             </h2>
             <p id="time-message" class="text-white/60 text-lg mb-10 leading-relaxed"></p>
             <div class="mb-6">
@@ -313,7 +327,7 @@
                 var dM = rounded % 60;
                 var deadlineStr = String(dH).padStart(2, '0') + ':' + String(dM).padStart(2, '0');
                 var el = document.getElementById('time-message');
-                if (el) el.innerHTML = 'isso mesmo, agora são <strong class="text-purple-300">' + nowStr + '</strong> e vamos colocar seu site no ar às <strong class="text-purple-300">' + deadlineStr + '</strong>';
+                if (el) el.innerHTML = 'isso mesmo, agora são <strong class="text-purple-300">' + nowStr + '</strong> e vamos colocar seu sistema no ar às <strong class="text-purple-300">' + deadlineStr + '</strong>';
             }
             updateTimeMsg();
             setInterval(updateTimeMsg, 1000);
