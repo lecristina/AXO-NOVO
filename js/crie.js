@@ -7,6 +7,19 @@
     var POLL_MS   = 3000;
     var MAX_POLLS = 40; // ~2 minutos
 
+    var FAKE_DURATION = 60; // segundos — só cosmético, não reflete o progresso real da API
+    var FAKE_STEPS = [
+        'Iniciando tecnologia Axolutions',
+        'Entendendo o seu negócio',
+        'Montando o layout do site',
+        'Escrevendo os textos (copy)',
+        'Selecionando imagens',
+        'Aplicando otimização de SEO',
+        'Ajustando cores e identidade visual',
+        'Publicando seu site'
+    ];
+    var RING_CIRCUMFERENCE = 276.46; // 2 * PI * 44
+
     var NICHE_KEYWORDS = [
         { value: 'clinics', words: ['clinic', 'saude', 'saúde', 'dentist', 'odont', 'estetic', 'estétic', 'medic', 'hospital', 'fisioterap', 'psicolog', 'nutri', 'consultorio', 'consultório'] },
         { value: 'restaurants', words: ['restaurante', 'comida', 'alimenta', 'lanchonete', 'padaria', 'pizzaria', 'hamburgu', 'cafeteria', 'confeitaria', 'bar', 'churrascaria', 'sorveteria'] },
@@ -33,7 +46,7 @@
         { label: 'Índigo',    css: 'linear-gradient(135deg,#3730a3,#818cf8)', style: 'paleta índigo, tecnológica' }
     ];
 
-    var state = { selectedPalette: null, payload: null, executionId: null, pollCount: 0, pollTimer: null, finalUrl: null };
+    var state = { selectedPalette: null, payload: null, executionId: null, pollCount: 0, pollTimer: null, finalUrl: null, fakeTimer: null, fakeElapsed: 0, fakeDone: false };
 
     function $(id) { return document.getElementById(id); }
 
@@ -85,6 +98,63 @@
         });
     }
 
+    function updateRing(elapsed) {
+        var secondsLeft = Math.max(0, FAKE_DURATION - elapsed);
+        $('timer-seconds').textContent = secondsLeft;
+        var progress = Math.min(1, elapsed / FAKE_DURATION);
+        $('timer-ring').style.strokeDashoffset = RING_CIRCUMFERENCE * progress;
+    }
+
+    function renderFakeSteps(elapsed) {
+        var perStep = FAKE_DURATION / FAKE_STEPS.length;
+        var activeIndex = Math.min(FAKE_STEPS.length - 1, Math.floor(elapsed / perStep));
+        var wrap = $('gen-steps');
+        wrap.innerHTML = FAKE_STEPS.map(function (label, i) {
+            var icon, cls;
+            if (i < activeIndex) {
+                icon = '<svg class="w-4 h-4 text-green-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>';
+                cls = 'gen-step done';
+            } else if (i === activeIndex) {
+                icon = '<span class="w-4 h-4 shrink-0 rounded-full border-2 border-white/20 border-t-purple-400 spin inline-block"></span>';
+                cls = 'gen-step active';
+            } else {
+                icon = '<span class="w-4 h-4 shrink-0 rounded-full border-2 border-white/10 inline-block"></span>';
+                cls = 'gen-step';
+            }
+            return '<div class="' + cls + ' flex items-center gap-2.5 text-sm text-white/75">' + icon + '<span>' + label + '</span></div>';
+        }).join('');
+    }
+
+    function startFakeProgress() {
+        state.fakeElapsed = 0;
+        state.fakeDone = false;
+        $('loading-subtext').textContent = 'Isso leva menos de um minuto. Não feche esta página.';
+        updateRing(0);
+        renderFakeSteps(0);
+        clearInterval(state.fakeTimer);
+        state.fakeTimer = setInterval(function () {
+            if (state.fakeDone) return;
+            state.fakeElapsed++;
+            if (state.fakeElapsed >= FAKE_DURATION) {
+                state.fakeElapsed = FAKE_DURATION;
+                $('loading-subtext').textContent = 'Já estamos quase lá, isso pode levar mais alguns segundos...';
+            }
+            updateRing(state.fakeElapsed);
+            renderFakeSteps(state.fakeElapsed);
+        }, 1000);
+    }
+
+    function finishFakeProgress(callback) {
+        state.fakeDone = true;
+        clearInterval(state.fakeTimer);
+        updateRing(FAKE_DURATION);
+        var wrap = $('gen-steps');
+        wrap.innerHTML = FAKE_STEPS.map(function (label) {
+            return '<div class="gen-step done flex items-center gap-2.5 text-sm text-white/75"><svg class="w-4 h-4 text-green-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>' + label + '</span></div>';
+        }).join('');
+        setTimeout(callback, 500);
+    }
+
     var AxoCrie = {
         submit: function (e) {
             e.preventDefault();
@@ -126,7 +196,7 @@
 
         _submit: function () {
             show('step-loading');
-            $('gen-steps').innerHTML = '<div class="gen-step active text-sm text-white/70">Enviando dados para a I.A...</div>';
+            startFakeProgress();
 
             fetch(API_BASE + '/api/generate', {
                 method: 'POST',
@@ -159,8 +229,6 @@
                     return r.json();
                 })
                 .then(function (data) {
-                    AxoCrie._renderSteps(data.steps || []);
-
                     if (data.status === 'finished') {
                         // publishedUrl is the real, permanent <slug>.axolutions.com.br
                         // site; previewUrl is a temporary render kept only for the
@@ -180,29 +248,18 @@
                 });
         },
 
-        _renderSteps: function (steps) {
-            if (!steps.length) return;
-            var wrap = $('gen-steps');
-            wrap.innerHTML = steps.map(function (s) {
-                var icon = s.status === 'success'
-                    ? '<svg class="w-4 h-4 text-green-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>'
-                    : s.status === 'error'
-                        ? '<svg class="w-4 h-4 text-red-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>'
-                        : '<span class="w-4 h-4 shrink-0 rounded-full border-2 border-white/20 border-t-purple-400 spin inline-block"></span>';
-                var cls = s.status === 'success' ? 'gen-step done' : (s.status === 'running' ? 'gen-step active' : 'gen-step');
-                return '<div class="' + cls + ' flex items-center gap-2.5 text-sm text-white/75">' + icon + '<span>' + (s.name || s.id) + '</span></div>';
-            }).join('');
-        },
-
         _redirect: function () {
             clearTimeout(state.pollTimer);
-            $('ready-link').href = state.finalUrl;
-            show('step-ready');
-            setTimeout(function () { window.location.href = state.finalUrl; }, 1200);
+            finishFakeProgress(function () {
+                $('ready-link').href = state.finalUrl;
+                show('step-ready');
+                setTimeout(function () { window.location.href = state.finalUrl; }, 1200);
+            });
         },
 
         _showError: function () {
             clearTimeout(state.pollTimer);
+            clearInterval(state.fakeTimer);
             var bn = (state.payload && state.payload.businessName) || '';
             var msg = bn
                 ? 'Olá! Tentei gerar uma prévia automática do site da ' + bn + ' mas não deu certo. Podem me ajudar a criar o site?'

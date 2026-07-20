@@ -40,6 +40,7 @@
         .gen-step { opacity: 0.35; transition: opacity 0.3s ease; }
         .gen-step.active { opacity: 1; }
         .gen-step.done { opacity: 0.7; }
+        #timer-ring { transition: stroke-dashoffset 1s linear; }
     </style>
 </head>
 <body class="font-sans text-white">
@@ -103,9 +104,23 @@
 
                 <!-- LOADING -->
                 <div id="step-loading" class="hidden text-center py-6">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full border-4 border-white/10 border-t-primary spin"></div>
+                    <div class="relative w-24 h-24 mx-auto mb-6">
+                        <svg class="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"></circle>
+                            <circle id="timer-ring" cx="50" cy="50" r="44" fill="none" stroke="url(#timerGradient)" stroke-width="6" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="0"></circle>
+                            <defs>
+                                <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#8f00cc"></stop>
+                                    <stop offset="100%" stop-color="#cc44ff"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span id="timer-seconds" class="text-2xl font-display font-bold">60</span>
+                        </div>
+                    </div>
                     <h2 class="text-2xl font-display font-bold mb-2">Criando seu site</h2>
-                    <p class="text-white/45 text-sm mb-8">Isso leva menos de um minuto. Não feche esta página.</p>
+                    <p id="loading-subtext" class="text-white/45 text-sm mb-8">Isso leva menos de um minuto. Não feche esta página.</p>
                     <div id="gen-steps" class="space-y-2.5 text-left max-w-xs mx-auto"></div>
                 </div>
 
