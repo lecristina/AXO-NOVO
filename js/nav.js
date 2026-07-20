@@ -210,12 +210,13 @@
         var active      = false;
         var raf         = null;
         var canvasReady = false;
+        var resize, drawFrame;
 
         if (ctx) {
-            function resize() {
+            resize = function() {
                 canvas.width  = window.innerWidth;
                 canvas.height = 80;
-            }
+            };
             var _resizeTimer = null;
             window.addEventListener('resize', function() {
                 clearTimeout(_resizeTimer);
@@ -232,7 +233,7 @@
                 });
             }
 
-            function drawFrame() {
+            drawFrame = function() {
                 if (!active) return;
                 var w = canvas.width, h = canvas.height;
                 ctx.clearRect(0, 0, w, h);

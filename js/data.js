@@ -101,12 +101,23 @@
             });
     }
 
+    /* ── Slug helper (derives a stable URL slug from a title, no DB column needed) ── */
+    function slugify(str) {
+        var noAccents = (str || '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+        return noAccents
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
     /* ── Public API ─────────────────────────────────────────────────────────── */
     window.DataManager = {
         keys: {
             POSTS: 'posts', PROJECTS: 'projects', TEAM: 'team',
             TESTIMONIALS: 'testimonials', SETTINGS: 'settings', COMPANIES: 'companies'
         },
+
+        slugify: slugify,
 
         getStale: function (tableOrKey) {
             var k = 'axo_' + tableOrKey;
@@ -155,11 +166,24 @@
             var cached = _cacheGet(table);
             if (cached) {
                 var sid = String(id);
+                var strip = _SLIM_STRIP[table] || [];
                 for (var i = 0; i < cached.length; i++) {
-                    if (String(cached[i].id) === sid) return Promise.resolve(cached[i]);
+                    if (String(cached[i].id) === sid) {
+                        var isSlim = strip.some(function (f) { return !(f in cached[i]); });
+                        if (!isSlim) return Promise.resolve(cached[i]);
+                        break;
+                    }
                 }
             }
             return _get(table + '?id=eq.' + encodeURIComponent(id) + '&select=*&limit=1')
+                .then(function (data) {
+                    var row = Array.isArray(data) ? data[0] : null;
+                    return fromRow(table, row);
+                });
+        },
+
+        getItemBySlug: function (table, slug) {
+            return _get(table + '?slug=eq.' + encodeURIComponent(slug) + '&select=*&limit=1')
                 .then(function (data) {
                     var row = Array.isArray(data) ? data[0] : null;
                     return fromRow(table, row);

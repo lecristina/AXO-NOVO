@@ -407,7 +407,7 @@
             return '<article class="blog-card scroll-animate" style="transition-delay:' + (index * 100) + 'ms">'
                 + imgHTML
                 + '<div class="flex items-center gap-3 mb-3"><span class="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">' + (post.category || 'Geral') + '</span><span class="text-xs text-gray-500">' + (post.date ? new Date(post.date).toLocaleDateString('pt-BR') : '') + '</span></div>'
-                + '<h3 class="font-display font-bold text-lg mb-2 hover:text-primary transition-colors"><a href="post.html?id=' + post.id + '">' + (post.title || '') + '</a></h3>'
+                + '<h3 class="font-display font-bold text-lg mb-2 hover:text-primary transition-colors"><a href="blog/' + DataManager.slugify(post.title) + '">' + (post.title || '') + '</a></h3>'
                 + '<p class="text-gray-500 text-sm leading-relaxed line-clamp-2">' + (post.excerpt || '') + '</p>'
                 + '</article>';
         }).join('');

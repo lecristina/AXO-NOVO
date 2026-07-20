@@ -27,9 +27,9 @@
         var camera   = new THREE.PerspectiveCamera(45, W / H, 0.1, 1000);
         camera.position.z = 2.8;
 
-        var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        var renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'low-power' });
         renderer.setSize(W, H);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         container.insertBefore(renderer.domElement, container.firstChild);
 
         var globeGroup = new THREE.Group();
@@ -54,7 +54,7 @@
 
         // ── Purple atmosphere rim ─────────────────────────────────────────────
         globeGroup.add(new THREE.Mesh(
-            new THREE.SphereGeometry(R * 1.08, 64, 64),
+            new THREE.SphereGeometry(R * 1.08, 24, 24),
             new THREE.ShaderMaterial({
                 vertexShader: [
                     'varying vec3 vN;',
@@ -237,7 +237,7 @@
                     // subtle dark tint so it integrates with the dark page
                     color:     new THREE.Color(0.70, 0.70, 0.70)
                 });
-                globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(R, 64, 64), sphereMat));
+                globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(R, 32, 32), sphereMat));
 
                 // — Add 30 country pins ————————————————————————————————————————
                 buildPins();
@@ -246,7 +246,7 @@
             function () {
                 // Fallback: dark sphere + pins if texture CDN fails
                 globeGroup.add(new THREE.Mesh(
-                    new THREE.SphereGeometry(R, 64, 64),
+                    new THREE.SphereGeometry(R, 32, 32),
                     new THREE.MeshPhongMaterial({ color: 0x030712, emissive: 0x03050f })
                 ));
                 buildPins();
