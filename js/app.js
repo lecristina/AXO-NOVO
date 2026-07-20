@@ -405,10 +405,12 @@
                 ? '<div class="overflow-hidden rounded-xl mb-5"><img src="' + post.image + '" alt="' + (post.title || '') + '" class="blog-image w-full h-48 object-cover" loading="lazy" decoding="async"></div>'
                 : '<div class="h-48 bg-gradient-to-br from-primary/20 to-purple-500/10 rounded-xl mb-5 flex items-center justify-center"><svg class="w-12 h-12 text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg></div>';
             return '<article class="blog-card scroll-animate" style="transition-delay:' + (index * 100) + 'ms">'
+                + '<a href="blog/' + DataManager.slugify(post.title) + '" class="block group">'
                 + imgHTML
                 + '<div class="flex items-center gap-3 mb-3"><span class="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">' + (post.category || 'Geral') + '</span><span class="text-xs text-gray-500">' + (post.date ? new Date(post.date).toLocaleDateString('pt-BR') : '') + '</span></div>'
-                + '<h3 class="font-display font-bold text-lg mb-2 hover:text-primary transition-colors"><a href="blog/' + DataManager.slugify(post.title) + '">' + (post.title || '') + '</a></h3>'
+                + '<h3 class="font-display font-bold text-lg mb-2 group-hover:text-primary transition-colors">' + (post.title || '') + '</h3>'
                 + '<p class="text-gray-500 text-sm leading-relaxed line-clamp-2">' + (post.excerpt || '') + '</p>'
+                + '</a>'
                 + '</article>';
         }).join('');
         // Observe dynamically injected articles (static observer misses async-added elements)

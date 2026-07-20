@@ -5,7 +5,7 @@
  * navMode values:
  *   'transparent' (default) — transparent at top, white on scroll
  *   'cosmos'                — transparent at top, starry dark on scroll (index.html)
- *   'white'                 — always white/opaque (sobre, fundadores, post, projeto)
+ *   'white'                 — always white/opaque (sobre, post, projeto)
  *   'dark'                  — always dark/opaque (depoimentos)
  */
 (function () {

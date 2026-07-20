@@ -3,6 +3,7 @@
     { "source": "/blog/:slug", "destination": "/post.html" }
   ],
   "redirects": [
-    { "source": "/fundadores.html", "destination": "/criadores.html", "permanent": true }
+    { "source": "/fundadores.html", "destination": "/sobre.html", "permanent": true },
+    { "source": "/criadores.html", "destination": "/sobre.html", "permanent": true }
   ]
 }

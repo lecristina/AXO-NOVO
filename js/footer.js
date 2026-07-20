@@ -32,7 +32,6 @@
                         '<a href="/blog.html"        class="' + ac('blog') + '">Blog</a>' +
                         '<a href="/projetos.html"    class="' + ac('projetos') + '">Projetos</a>' +
                         '<a href="/depoimentos.html" class="' + ac('depoimentos') + '">Depoimentos</a>' +
-                        '<a href="/criadores.html"   class="' + ac('criadores') + '">Equipe</a>' +
                         '<a href="/admin.html"       class="hover:text-primary transition-colors">Painel Admin</a>' +
                     '</nav>' +
                 '</div>' +
