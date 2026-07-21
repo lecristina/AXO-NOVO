@@ -43,10 +43,22 @@
         { label: 'Grafite',   css: 'linear-gradient(135deg,#1f2937,#64748b)', style: 'paleta grafite e cinza, corporativa' },
         { label: 'Lima',      css: 'linear-gradient(135deg,#4d7c0f,#a3e635)', style: 'paleta verde-limão, vibrante' },
         { label: 'Marrom',    css: 'linear-gradient(135deg,#78350f,#d97706)', style: 'paleta marrom e âmbar, acolhedora' },
-        { label: 'Índigo',    css: 'linear-gradient(135deg,#3730a3,#818cf8)', style: 'paleta índigo, tecnológica' }
+        { label: 'Índigo',    css: 'linear-gradient(135deg,#3730a3,#818cf8)', style: 'paleta índigo, tecnológica' },
+        { label: 'Vinho',     css: 'linear-gradient(135deg,#5b1029,#a8324f)', style: 'paleta vinho e bordô, elegante' },
+        { label: 'Coral',     css: 'linear-gradient(135deg,#e2574c,#ffa38b)', style: 'paleta coral e pêssego, acolhedora' },
+        { label: 'Areia',     css: 'linear-gradient(135deg,#a68a64,#e8d8bf)', style: 'paleta areia e nude, natural' },
+        { label: 'Oliva',     css: 'linear-gradient(135deg,#3f4d29,#8ba05a)', style: 'paleta verde-oliva, orgânica' },
+        { label: 'Petróleo',  css: 'linear-gradient(135deg,#0b3b4a,#14607a)', style: 'paleta azul-petróleo, sóbria' },
+        { label: 'Lavanda',   css: 'linear-gradient(135deg,#7c6bd6,#c9bcf5)', style: 'paleta lavanda e lilás, suave' },
+        { label: 'Menta',     css: 'linear-gradient(135deg,#2f9e75,#9ce8c8)', style: 'paleta verde-menta, leve e fresca' },
+        { label: 'Laranja',   css: 'linear-gradient(135deg,#c2410c,#fb923c)', style: 'paleta laranja, energética' },
+        { label: 'Amarelo',   css: 'linear-gradient(135deg,#ca8a04,#fde047)', style: 'paleta amarela, alegre' },
+        { label: 'Ciano',     css: 'linear-gradient(135deg,#0e7490,#67e8f9)', style: 'paleta ciano e azul-claro, clean' },
+        { label: 'Prata',     css: 'linear-gradient(135deg,#6b7280,#e5e7eb)', style: 'paleta prata e cinza-claro, minimalista' },
+        { label: 'Cobre',     css: 'linear-gradient(135deg,#8a4b23,#e08a4e)', style: 'paleta cobre e terracota, artesanal' }
     ];
 
-    var state = { selectedPalette: null, payload: null, executionId: null, pollCount: 0, pollTimer: null, finalUrl: null, fakeTimer: null, fakeElapsed: 0, fakeDone: false };
+    var state = { selectedPalette: null, customColor: '', payload: null, executionId: null, pollCount: 0, pollTimer: null, finalUrl: null, fakeTimer: null, fakeElapsed: 0, fakeDone: false };
 
     function $(id) { return document.getElementById(id); }
 
@@ -62,8 +74,22 @@
                 if (state.selectedPalette === i) { state.selectedPalette = null; return; }
                 state.selectedPalette = i;
                 el.classList.add('selected');
+                // escolher um swatch limpa a descrição livre — uma coisa ou outra
+                var custom = $('f-color');
+                if (custom && custom.value) { custom.value = ''; state.customColor = ''; }
             });
         });
+
+        var customField = $('f-color');
+        if (customField) {
+            customField.addEventListener('input', function () {
+                state.customColor = customField.value.trim();
+                if (state.customColor) {
+                    state.selectedPalette = null;
+                    wrap.querySelectorAll('.color-swatch').forEach(function (s) { s.classList.remove('selected'); });
+                }
+            });
+        }
     }
 
     function niceToNiche(text) {
@@ -85,7 +111,10 @@
     }
 
     function buildStyleString() {
-        return state.selectedPalette !== null ? 'moderno, premium, ' + PALETTES[state.selectedPalette].style : 'moderno, premium';
+        var base = 'moderno, premium';
+        if (state.customColor) return base + ', cores: ' + state.customColor;
+        if (state.selectedPalette !== null) return base + ', ' + PALETTES[state.selectedPalette].style;
+        return base;
     }
 
     function waLink(number, text) {
