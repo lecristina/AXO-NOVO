@@ -6,7 +6,10 @@
     "start": "npx serve . --listen 3000",
     "dev": "npx live-server --port=3000 --no-browser=false",
     "css:build": "tailwindcss -i css/tailwind.css -o css/output.css --minify",
-    "css:watch": "tailwindcss -i css/tailwind.css -o css/output.css --watch"
+    "css:watch": "tailwindcss -i css/tailwind.css -o css/output.css --watch",
+    "sitemap:build": "node scripts/generate-sitemap.js",
+    "blog:build": "node scripts/generate-blog.js",
+    "content:build": "npm run sitemap:build && npm run blog:build"
   },
   "devDependencies": {
     "sharp": "^0.34.5",
