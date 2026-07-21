@@ -53,7 +53,7 @@
     if (!post) { showNotFound(); return; }
 
     var postSlug = DataManager.slugify(post.title);
-    var postUrl = 'https://axolutions.com.br/blog/' + postSlug;
+    var postUrl = 'https://www.axolutions.com.br/blog/' + postSlug;
 
     // Populate page
     document.title = post.title + ' - Blog Axolutions';

@@ -4,4 +4,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /js/admin.js
 
-Sitemap: https://axolutions.com.br/sitemap.xml
+Sitemap: https://www.axolutions.com.br/sitemap.xml
