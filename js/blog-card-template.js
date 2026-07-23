@@ -8,11 +8,40 @@
         var api = factory();
         root.renderPostCard = api.renderPostCard;
         root.renderRelatedCard = api.renderRelatedCard;
+        root.authorFor = api.authorFor;
+        root.AUTHORS = api.AUTHORS;
     }
 })(typeof self !== 'undefined' ? self : this, function () {
     'use strict';
 
+    /* Autoria: os dois cofundadores, metade dos posts pra cada um. A escolha
+     * é um hash estável do id do post — não muda entre rebuilds nem depende
+     * de nenhuma coluna nova no banco. */
+    var AUTHORS = {
+        gustavo: {
+            key: 'gustavo', name: 'Gustavo Alves Araújo', role: 'Cofundador da Axolutions', initials: 'GA',
+            linkedin: 'https://www.linkedin.com/in/gustavo-alves-3766a5269/'
+        },
+        murilo: {
+            key: 'murilo', name: 'Murilo Ferreira', role: 'Cofundador da Axolutions', initials: 'MF',
+            linkedin: 'https://www.linkedin.com/in/murilo-ferreira-582414241/'
+        }
+    };
+
+    function hashStr(str) {
+        var h = 0;
+        var s = String(str || '');
+        for (var i = 0; i < s.length; i++) { h = ((h << 5) - h + s.charCodeAt(i)) | 0; }
+        return Math.abs(h);
+    }
+
+    function authorFor(post) {
+        var key = post && (post.id != null ? String(post.id) : post.title);
+        return (hashStr(key) % 2 === 0) ? AUTHORS.gustavo : AUTHORS.murilo;
+    }
+
     function renderPostCard(post, slug, formattedDate, index) {
+        var author = authorFor(post);
         var isFeatured = !!post.featured;
         var featuredBadge = isFeatured
             ? '<div class="absolute top-3 right-3 z-20 flex items-center gap-1.5 bg-amber-400 text-amber-900 text-xs px-3 py-1.5 rounded-full font-bold shadow-lg shadow-amber-400/40">' +
@@ -34,6 +63,8 @@
                     '<div class="flex items-center gap-2 text-xs text-gray-500 mb-3">' +
                         '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' +
                         '<span>' + formattedDate + '</span>' +
+                        '<span class="text-gray-300">&bull;</span>' +
+                        '<span>por ' + author.name.split(' ')[0] + '</span>' +
                     '</div>' +
                     '<h2 class="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-3">' + post.title + '</h2>' +
                     '<p class="text-sm text-gray-500 line-clamp-3 flex-1">' + (post.excerpt || '') + '</p>' +
@@ -60,5 +91,5 @@
         '</a>';
     }
 
-    return { renderPostCard: renderPostCard, renderRelatedCard: renderRelatedCard };
+    return { renderPostCard: renderPostCard, renderRelatedCard: renderRelatedCard, authorFor: authorFor, AUTHORS: AUTHORS };
 });

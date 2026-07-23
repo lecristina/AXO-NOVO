@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { renderPostCard, renderRelatedCard } = require('../js/blog-card-template.js');
+const { renderPostCard, renderRelatedCard, authorFor } = require('../js/blog-card-template.js');
 
 const SITE = 'https://www.axolutions.com.br';
 const ROOT = path.join(__dirname, '..');
@@ -99,7 +99,7 @@ function relatedFor(post, all) {
     return related.slice(0, 3);
 }
 
-function jsonLdFor(post, postUrl, date) {
+function jsonLdFor(post, postUrl, date, author) {
     const ld = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -107,7 +107,7 @@ function jsonLdFor(post, postUrl, date) {
         description: post.excerpt || '',
         datePublished: date || '',
         dateModified: date || '',
-        author: { '@type': 'Organization', name: 'Axolutions' },
+        author: { '@type': 'Person', name: author.name, url: author.linkedin, jobTitle: author.role },
         publisher: { '@type': 'Organization', name: 'Axolutions' },
         mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl }
     };
@@ -173,6 +173,7 @@ function buildPostHtml(template, post, all) {
     const slug = slugify(post.title);
     const date = resolveDate(post);
     const postUrl = SITE + '/blog/' + slug;
+    const author = authorFor(post);
     let html = template;
 
     html = html.replace(/<title>[^<]*<\/title>/, '<title>' + escapeHtml(post.title) + ' - Blog Axolutions</title>');
@@ -184,7 +185,7 @@ function buildPostHtml(template, post, all) {
         html = setAttrById(html, 'post-og-image', 'content', post.image);
         html = setAttrById(html, 'post-twitter-image', 'content', post.image);
     }
-    html = setTextById(html, 'post-jsonld', JSON.stringify(jsonLdFor(post, postUrl, date)));
+    html = setTextById(html, 'post-jsonld', JSON.stringify(jsonLdFor(post, postUrl, date, author)));
 
     html = toggleClassById(html, 'page-skeleton', 'hidden', true);
     html = toggleClassById(html, 'post-page', 'hidden', false);
@@ -192,6 +193,11 @@ function buildPostHtml(template, post, all) {
     html = setTextById(html, 'post-category', escapeHtml(post.category || 'Geral'));
     html = appendTextById(html, 'post-date', formatDatePtBR(date));
     html = setTextById(html, 'post-title', escapeHtml(post.title));
+
+    html = setTextById(html, 'post-author-avatar', escapeHtml(author.initials));
+    html = setAttrById(html, 'post-author-link', 'href', author.linkedin);
+    html = setTextById(html, 'post-author-link', escapeHtml(author.name));
+    html = setTextById(html, 'post-author-role', escapeHtml(author.role));
 
     if (post.image) {
         html = toggleClassById(html, 'post-image-wrap', 'hidden', false);

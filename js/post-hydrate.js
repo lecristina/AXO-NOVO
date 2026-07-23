@@ -70,6 +70,13 @@
     document.getElementById('post-date').innerHTML += formatDatePtBR(post.date);
     document.getElementById('post-title').textContent = post.title;
 
+    var author = authorFor(post);
+    document.getElementById('post-author-avatar').textContent = author.initials;
+    var authorLink = document.getElementById('post-author-link');
+    authorLink.href = author.linkedin;
+    authorLink.textContent = author.name;
+    document.getElementById('post-author-role').textContent = author.role;
+
     // Featured image
     if (post.image) {
         var imageWrap = document.getElementById('post-image-wrap');
@@ -90,7 +97,7 @@
         "description": post.excerpt || '',
         "datePublished": post.date || '',
         "dateModified": post.date || '',
-        "author": { "@type": "Organization", "name": "Axolutions" },
+        "author": { "@type": "Person", "name": author.name, "url": author.linkedin, "jobTitle": author.role },
         "publisher": { "@type": "Organization", "name": "Axolutions" },
         "mainEntityOfPage": { "@type": "WebPage", "@id": postUrl }
     };
