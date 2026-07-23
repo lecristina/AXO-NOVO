@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { renderPostCard, renderRelatedCard, authorFor } = require('../js/blog-card-template.js');
+const { renderPostCard, renderRelatedCard, authorFor, serviceLinkFor, renderFaqList, faqJsonLd, breadcrumbJsonLd } = require('../js/blog-card-template.js');
 
 const SITE = 'https://www.axolutions.com.br';
 const ROOT = path.join(__dirname, '..');
@@ -99,6 +99,10 @@ function relatedFor(post, all) {
     return related.slice(0, 3);
 }
 
+function toIsoDateTime(dateStr) {
+    return dateStr ? dateStr + 'T12:00:00-03:00' : '';
+}
+
 function jsonLdFor(post, postUrl, date, author) {
     const ld = {
         '@context': 'https://schema.org',
@@ -176,16 +180,25 @@ function buildPostHtml(template, post, all) {
     const author = authorFor(post);
     let html = template;
 
-    html = html.replace(/<title>[^<]*<\/title>/, '<title>' + escapeHtml(post.title) + ' - Blog Axolutions</title>');
+    html = html.replace(/<title>[^<]*<\/title>/, '<title>' + escapeHtml(post.seo_title || post.title) + ' - Blog Axolutions</title>');
     html = setAttrById(html, 'post-meta-description', 'content', post.excerpt || post.title);
     html = setAttrById(html, 'post-canonical', 'href', postUrl);
     html = setAttrById(html, 'post-og-title', 'content', post.title);
     html = setAttrById(html, 'post-og-url', 'content', postUrl);
+    html = setAttrById(html, 'post-twitter-title', 'content', post.title);
+    html = setAttrById(html, 'post-twitter-description', 'content', post.excerpt || post.title);
+    html = setAttrById(html, 'post-article-published', 'content', toIsoDateTime(date));
+    html = setAttrById(html, 'post-article-modified', 'content', toIsoDateTime(date));
+    html = setAttrById(html, 'post-article-author', 'content', author.linkedin);
+    html = setAttrById(html, 'post-article-section', 'content', post.category || 'Geral');
     if (post.image) {
         html = setAttrById(html, 'post-og-image', 'content', post.image);
         html = setAttrById(html, 'post-twitter-image', 'content', post.image);
     }
     html = setTextById(html, 'post-jsonld', JSON.stringify(jsonLdFor(post, postUrl, date, author)));
+    html = setTextById(html, 'post-breadcrumb-jsonld', JSON.stringify(breadcrumbJsonLd(SITE, post.title, postUrl)));
+    const faqLd = faqJsonLd(post.faq);
+    if (faqLd) html = setTextById(html, 'post-faq-jsonld', JSON.stringify(faqLd));
 
     html = toggleClassById(html, 'page-skeleton', 'hidden', true);
     html = toggleClassById(html, 'post-page', 'hidden', false);
@@ -206,6 +219,18 @@ function buildPostHtml(template, post, all) {
     }
 
     html = setTextById(html, 'post-content', post.content || '<p>Conteudo nao disponivel.</p>');
+
+    if (Array.isArray(post.faq) && post.faq.length) {
+        html = toggleClassById(html, 'post-faq', 'hidden', false);
+        html = setTextById(html, 'post-faq-list', renderFaqList(post.faq));
+    }
+
+    const serviceLink = serviceLinkFor(post.category);
+    if (serviceLink) {
+        html = toggleClassById(html, 'post-service-link', 'hidden', false);
+        html = setAttrById(html, 'post-service-link-anchor', 'href', serviceLink.href);
+        html = setTextById(html, 'post-service-link-label', escapeHtml(serviceLink.label));
+    }
 
     const related = relatedFor(post, all);
     const relatedHtml = related.length

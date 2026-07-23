@@ -56,11 +56,16 @@
     var postUrl = 'https://www.axolutions.com.br/blog/' + postSlug;
 
     // Populate page
-    document.title = post.title + ' - Blog Axolutions';
+    document.title = (post.seo_title || post.title) + ' - Blog Axolutions';
     document.querySelector('meta[name="description"]').setAttribute('content', post.excerpt || post.title);
     document.getElementById('post-canonical').setAttribute('href', postUrl);
     document.getElementById('post-og-title').setAttribute('content', post.title);
     document.getElementById('post-og-url').setAttribute('content', postUrl);
+    document.getElementById('post-twitter-title').setAttribute('content', post.title);
+    document.getElementById('post-twitter-description').setAttribute('content', post.excerpt || post.title);
+    document.getElementById('post-article-published').setAttribute('content', post.date ? post.date + 'T12:00:00-03:00' : '');
+    document.getElementById('post-article-modified').setAttribute('content', post.date ? post.date + 'T12:00:00-03:00' : '');
+    document.getElementById('post-article-section').setAttribute('content', post.category || 'Geral');
     if (post.image) {
         document.getElementById('post-og-image').setAttribute('content', post.image);
         document.getElementById('post-twitter-image').setAttribute('content', post.image);
@@ -76,6 +81,7 @@
     authorLink.href = author.linkedin;
     authorLink.textContent = author.name;
     document.getElementById('post-author-role').textContent = author.role;
+    document.getElementById('post-article-author').setAttribute('content', author.linkedin);
 
     // Featured image
     if (post.image) {
@@ -104,6 +110,23 @@
     if (post.image) { jsonLd.image = post.image; }
     if (post.category) { jsonLd.articleSection = post.category; }
     document.getElementById('post-jsonld').textContent = JSON.stringify(jsonLd);
+    document.getElementById('post-breadcrumb-jsonld').textContent = JSON.stringify(breadcrumbJsonLd('https://www.axolutions.com.br', post.title, postUrl));
+
+    // FAQ (só aparece se o post tiver perguntas cadastradas)
+    var faqLd = faqJsonLd(post.faq);
+    if (faqLd) {
+        document.getElementById('post-faq-list').innerHTML = renderFaqList(post.faq);
+        document.getElementById('post-faq').classList.remove('hidden');
+        document.getElementById('post-faq-jsonld').textContent = JSON.stringify(faqLd);
+    }
+
+    // Link contextual pro serviço relacionado à categoria
+    var serviceLink = serviceLinkFor(post.category);
+    if (serviceLink) {
+        document.getElementById('post-service-link-anchor').href = serviceLink.href;
+        document.getElementById('post-service-link-label').textContent = serviceLink.label;
+        document.getElementById('post-service-link').classList.remove('hidden');
+    }
 
     // Show post page, hide skeleton
     document.getElementById('page-skeleton').classList.add('hidden');

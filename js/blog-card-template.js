@@ -10,6 +10,10 @@
         root.renderRelatedCard = api.renderRelatedCard;
         root.authorFor = api.authorFor;
         root.AUTHORS = api.AUTHORS;
+        root.serviceLinkFor = api.serviceLinkFor;
+        root.renderFaqList = api.renderFaqList;
+        root.faqJsonLd = api.faqJsonLd;
+        root.breadcrumbJsonLd = api.breadcrumbJsonLd;
     }
 })(typeof self !== 'undefined' ? self : this, function () {
     'use strict';
@@ -77,6 +81,64 @@
         '</article>';
     }
 
+    /* Link contextual pra página de serviço relacionada à categoria do post —
+     * só existe pra categorias com um serviço claramente correspondente, pra
+     * não forçar link irrelevante em post que não tem par (ex: Estratégia,
+     * Bastidores). Texto de âncora natural, nunca igual ao título do post. */
+    var CATEGORY_SERVICE_LINKS = {
+        'Aplicativos Mobile': { href: '/aplicativos-mobile.html', label: 'Conheça nosso serviço de aplicativos mobile' },
+        'E-commerce':         { href: '/e-commerce.html', label: 'Veja como criamos lojas virtuais sob medida' },
+        'Sistemas ERP':       { href: '/sistemas-erp.html', label: 'Saiba mais sobre sistemas ERP personalizados' },
+        'Automação':          { href: '/automacoes.html', label: 'Descubra nossas automações de atendimento com IA' },
+        'Segurança':          { href: '/sistemas-web.html', label: 'Veja como desenvolvemos sistemas web seguros' },
+        'Nichos':             { href: '/desenvolvimento-de-sites.html', label: 'Confira nossos sites profissionais por segmento' },
+        'Performance':        { href: '/desenvolvimento-de-sites.html', label: 'Entenda nosso processo de desenvolvimento de sites' }
+    };
+
+    function serviceLinkFor(category) {
+        return CATEGORY_SERVICE_LINKS[category] || null;
+    }
+
+    function renderFaqList(faq) {
+        if (!Array.isArray(faq) || !faq.length) return '';
+        return faq.map(function (item) {
+            return '<details class="group rounded-xl border border-gray-200 p-4">' +
+                '<summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3">' +
+                    '<span>' + (item.q || '') + '</span>' +
+                    '<svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>' +
+                '</summary>' +
+                '<p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">' + (item.a || '') + '</p>' +
+            '</details>';
+        }).join('');
+    }
+
+    function faqJsonLd(faq) {
+        if (!Array.isArray(faq) || !faq.length) return null;
+        return {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faq.map(function (item) {
+                return {
+                    '@type': 'Question',
+                    name: item.q || '',
+                    acceptedAnswer: { '@type': 'Answer', text: item.a || '' }
+                };
+            })
+        };
+    }
+
+    function breadcrumbJsonLd(site, postTitle, postUrl) {
+        return {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Início', item: site + '/' },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: site + '/blog.html' },
+                { '@type': 'ListItem', position: 3, name: postTitle, item: postUrl }
+            ]
+        };
+    }
+
     function renderRelatedCard(post, slug, shortDate) {
         return '<a href="/blog/' + slug + '" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">' +
             '<div class="h-32 relative overflow-hidden">' +
@@ -91,5 +153,14 @@
         '</a>';
     }
 
-    return { renderPostCard: renderPostCard, renderRelatedCard: renderRelatedCard, authorFor: authorFor, AUTHORS: AUTHORS };
+    return {
+        renderPostCard: renderPostCard,
+        renderRelatedCard: renderRelatedCard,
+        authorFor: authorFor,
+        AUTHORS: AUTHORS,
+        serviceLinkFor: serviceLinkFor,
+        renderFaqList: renderFaqList,
+        faqJsonLd: faqJsonLd,
+        breadcrumbJsonLd: breadcrumbJsonLd
+    };
 });

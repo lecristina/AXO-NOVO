@@ -78,6 +78,7 @@
             if (!Array.isArray(obj.techs))   obj.techs   = obj.techs   || [];
             if (!Array.isArray(obj.gallery)) obj.gallery = obj.gallery || [];
         }
+        if (table === 'posts' && !Array.isArray(obj.faq)) obj.faq = obj.faq || [];
         return obj;
     }
 

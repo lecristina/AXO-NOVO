@@ -98,6 +98,8 @@ create policy "anon_all" on companies    for all to anon using (true) with check
 -- Migrations (run only if tables already exist)
 -- =====================================================
 alter table posts    add column if not exists featured  boolean default false;
+alter table posts    add column if not exists seo_title text default '';
+alter table posts    add column if not exists faq       jsonb default '[]';
 alter table projects add column if not exists cover     text default '';
 alter table projects add column if not exists gif       text default '';
 alter table projects add column if not exists position  integer default 0;

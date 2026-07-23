@@ -245,8 +245,10 @@ var Admin = {
     resetForm: function(section) {
         if (section === 'blog') {
             document.getElementById('blog-title').value = '';
+            document.getElementById('blog-seo-title').value = '';
             document.getElementById('blog-excerpt').value = '';
             document.getElementById('blog-category').value = '';
+            document.getElementById('blog-faq').value = '';
             document.getElementById('blog-date').value = '';
             document.getElementById('blog-image').value = '';
             document.getElementById('blog-image-data').value = '';
@@ -324,6 +326,22 @@ var Admin = {
         return div.innerHTML;
     },
 
+    // "Pergunta?|Resposta" por linha <-> [{q,a}] guardado em posts.faq (jsonb)
+    faqTextToArray: function(text) {
+        return String(text || '').split('\n').map(function(line) {
+            var idx = line.indexOf('|');
+            if (idx === -1) return null;
+            var q = line.slice(0, idx).trim();
+            var a = line.slice(idx + 1).trim();
+            return (q && a) ? { q: q, a: a } : null;
+        }).filter(Boolean);
+    },
+
+    faqArrayToText: function(faq) {
+        if (!Array.isArray(faq)) return '';
+        return faq.map(function(item) { return (item.q || '') + '|' + (item.a || ''); }).join('\n');
+    },
+
     /* ===== BLOG CRUD ===== */
     saveBlog: async function() {
         if (this._saving) return;
@@ -336,13 +354,15 @@ var Admin = {
         var editId = document.getElementById('blog-edit-id').value;
         var data = {
             title: title,
+            seo_title: document.getElementById('blog-seo-title').value.trim(),
             excerpt: document.getElementById('blog-excerpt').value.trim(),
             content: this.quill ? this.quill.root.innerHTML : '',
             category: document.getElementById('blog-category').value.trim(),
             date: document.getElementById('blog-date').value,
             image: document.getElementById('blog-image-data').value,
             ogImage: document.getElementById('blog-og-image-data').value,
-            featured: document.getElementById('blog-featured') ? document.getElementById('blog-featured').checked : false
+            featured: document.getElementById('blog-featured') ? document.getElementById('blog-featured').checked : false,
+            faq: this.faqTextToArray(document.getElementById('blog-faq').value)
         };
         if (editId) {
             await DataManager.updateItem(DataManager.keys.POSTS, editId, data);
@@ -363,9 +383,11 @@ var Admin = {
         this.showForm('blog');
         document.getElementById('blog-edit-id').value = id;
         document.getElementById('blog-title').value = item.title || '';
+        document.getElementById('blog-seo-title').value = item.seo_title || '';
         document.getElementById('blog-excerpt').value = item.excerpt || '';
         document.getElementById('blog-category').value = item.category || '';
         document.getElementById('blog-date').value = item.date || '';
+        document.getElementById('blog-faq').value = this.faqArrayToText(item.faq);
         document.getElementById('blog-form-title').textContent = 'Editar Post';
         var featEl = document.getElementById('blog-featured');
         if (featEl) featEl.checked = !!item.featured;
