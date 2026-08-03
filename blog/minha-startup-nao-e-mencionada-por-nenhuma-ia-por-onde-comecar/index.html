@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha startup não aparece em nenhuma IA? Guia do zero para começar - Blog Axolutions</title>
+    <meta name="description" id="post-meta-description" content="Se a sua empresa não aparece em respostas de IA como ChatGPT, Gemini ou Copilot, calma: isso é normal para quem está começando. Veja um passo a passo simples, do zero, para sair da invisibilidade.">
+    <link rel="canonical" id="post-canonical" href="https://www.axolutions.com.br/blog/minha-startup-nao-e-mencionada-por-nenhuma-ia-por-onde-comecar">
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="post-og-title" content="Minha startup não é mencionada por nenhuma IA: por onde começar">
+    <meta property="og:url" id="post-og-url" content="https://www.axolutions.com.br/blog/minha-startup-nao-e-mencionada-por-nenhuma-ia-por-onde-comecar">
+    <meta property="og:image" id="post-og-image" content="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta property="og:site_name" content="Axolutions">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" id="post-article-published" content="2026-07-24T12:00:00-03:00">
+    <meta property="article:modified_time" id="post-article-modified" content="2026-07-24T12:00:00-03:00">
+    <meta property="article:author" id="post-article-author" content="https://www.linkedin.com/in/gustavo-alves-3766a5269/">
+    <meta property="article:section" id="post-article-section" content="IA e Visibilidade">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="post-twitter-title" content="Minha startup não é mencionada por nenhuma IA: por onde começar">
+    <meta name="twitter:description" id="post-twitter-description" content="Se a sua empresa não aparece em respostas de IA como ChatGPT, Gemini ou Copilot, calma: isso é normal para quem está começando. Veja um passo a passo simples, do zero, para sair da invisibilidade.">
+    <meta name="twitter:image" id="post-twitter-image" content="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://ecgjhahdceocsikbhsot.supabase.co">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/output.css">
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #8f00cc; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .blog-card .blog-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .blog-card:hover .blog-image { transform: scale(1.08); }
+        .blog-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .blog-card:hover { transform: translateY(-6px); }
+
+        /* Post content rich text styling */
+        .post-content { font-size: 1.125rem; line-height: 1.85; color: #374151; }
+
+        .post-content h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: #111827; line-height: 1.3; }
+
+        .post-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.375rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #1f2937; line-height: 1.4; }
+
+        .post-content p { margin-bottom: 1.25rem; }
+        .post-content a { color: #8f00cc; text-decoration: underline; text-underline-offset: 2px; }
+        .post-content a:hover { color: #b44ddb; }
+        .post-content ul, .post-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content blockquote { border-left: 4px solid #8f00cc; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #f5e6ff; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; color: #4b5563; }
+
+        .post-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; object-fit: contain; }
+
+        /* Quill alignment classes */
+        .post-content .ql-align-center, .post-content [style*="text-align: center"] { text-align: center !important; }
+        .post-content .ql-align-right, .post-content [style*="text-align: right"] { text-align: right !important; }
+        .post-content .ql-align-justify, .post-content [style*="text-align: justify"] { text-align: justify !important; }
+        .post-content strong { font-weight: 700; color: #111827; }
+
+        .post-content em { font-style: italic; }
+        .post-content pre { background: #1f2937; color: #e5e7eb; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin: 1.5rem 0; font-size: 0.875rem; line-height: 1.7; }
+
+        .post-content code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+
+        .post-content pre code { background: none; padding: 0; }
+        /* Quill inline font-family styles render natively — no extra CSS needed.
+           These are kept for any class-based legacy Quill output. */
+        .ql-font-Inter { font-family: 'Inter', sans-serif; }
+        .ql-font-Arial { font-family: Arial, sans-serif; }
+        .ql-font-Georgia { font-family: Georgia, serif; }
+        .ql-font-Verdana { font-family: Verdana, sans-serif; }
+        .ql-font-Tahoma { font-family: Tahoma, sans-serif; }
+        .ql-font-serif { font-family: Georgia, 'Times New Roman', serif; }
+        .ql-font-monospace { font-family: 'Courier New', Courier, monospace; }
+
+        /* Skeleton */
+        @keyframes sk { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .sk { background: #e5e7eb; border-radius: 0.5rem; animation: sk 1.6s ease-in-out infinite; }
+    </style>
+    <script id="post-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Minha startup não é mencionada por nenhuma IA: por onde começar","description":"Se a sua empresa não aparece em respostas de IA como ChatGPT, Gemini ou Copilot, calma: isso é normal para quem está começando. Veja um passo a passo simples, do zero, para sair da invisibilidade.","datePublished":"2026-07-24","dateModified":"2026-07-24","author":{"@type":"Person","name":"Gustavo Alves Araújo","url":"https://www.linkedin.com/in/gustavo-alves-3766a5269/","jobTitle":"Cofundador da Axolutions"},"publisher":{"@type":"Organization","name":"Axolutions"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axolutions.com.br/blog/minha-startup-nao-e-mencionada-por-nenhuma-ia-por-onde-comecar"},"image":"https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=75","articleSection":"IA e Visibilidade"}</script>
+    <script id="post-breadcrumb-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.axolutions.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.axolutions.com.br/blog.html"},{"@type":"ListItem","position":3,"name":"Minha startup não é mencionada por nenhuma IA: por onde começar","item":"https://www.axolutions.com.br/blog/minha-startup-nao-e-mencionada-por-nenhuma-ia-por-onde-comecar"}]}</script>
+    <script id="post-faq-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Por que minha empresa não aparece em nenhuma IA?","acceptedAnswer":{"@type":"Answer","text":"Na maioria das vezes é porque existem poucas fontes falando sobre ela na internet. A IA aprende lendo sites, perfis e menções. Empresa nova tem pouco material publicado, então a IA ainda não tem o que dizer sobre você. A solução é criar e espalhar informação clara."}},{"@type":"Question","name":"Quanto tempo leva para uma IA começar a citar minha startup?","acceptedAnswer":{"@type":"Answer","text":"Não há prazo fixo, mas normalmente leva de algumas semanas a alguns meses. A IA precisa reencontrar suas novas fontes, processá-las e incorporá-las em suas atualizações. Quanto mais consistente e espalhada estiver a informação sobre você, mais rápido isso tende a acontecer."}},{"@type":"Question","name":"Preciso de blog para aparecer nas IAs?","acceptedAnswer":{"@type":"Answer","text":"Não é obrigatório, mas ajuda muito. Um blog que responde dúvidas reais do seu nicho vira exatamente o tipo de conteúdo que a IA quer citar quando alguém faz uma pergunta parecida. Se não puder ter um blog agora, comece com uma boa seção de perguntas frequentes."}},{"@type":"Question","name":"Aparecer no Google ajuda a aparecer na IA?","acceptedAnswer":{"@type":"Answer","text":"Sim, e bastante. Muitas IAs se apoiam em fontes que já estão bem indexadas na internet, e ter presença sólida no Google, incluindo o Google Meu Negócio, aumenta as chances de ser encontrado e citado. As duas coisas se reforçam."}},{"@type":"Question","name":"Dá para forçar a IA a citar minha empresa?","acceptedAnswer":{"@type":"Answer","text":"Não existe botão mágico nem atalho para obrigar uma IA a te citar, e desconfie de quem promete isso. O caminho honesto é construir informação clara, consistente e confiável sobre o seu negócio em vários lugares. Com o tempo, as menções vêm de forma natural."}}]}</script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- SKELETON (visible while loading) -->
+    <div id="page-skeleton" class="hidden pt-36 pb-20 px-4 max-w-5xl mx-auto">
+        <div class="sk h-4 w-28 mb-8 rounded-full"></div>
+        <div class="flex items-center gap-3 mb-5">
+            <div class="sk h-6 w-20 rounded-full"></div>
+            <div class="sk h-4 w-32"></div>
+        </div>
+        <div class="sk h-12 w-3/4 mb-3"></div>
+        <div class="sk h-10 w-1/2 mb-10"></div>
+        <div class="sk w-full h-72 rounded-2xl mb-12"></div>
+        <div class="space-y-3">
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-5/6"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-4/5"></div>
+            <div class="sk h-4 w-3/4"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-2/3"></div>
+        </div>
+    </div>
+
+    <!-- NOT FOUND (hidden) -->
+    <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
+        <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+        <h2 class="text-2xl font-bold text-gray-500 mb-2">Artigo não encontrado</h2>
+        <p class="text-gray-600 mb-8">O artigo que você procura não existe ou foi removido.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Voltar ao Blog
+        </a>
+    </div>
+
+    <!-- POST PAGE (hidden until loaded) -->
+    <div id="post-page" class="">
+
+    <!-- HEADER -->
+    <section class="pt-36 pb-10 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light font-semibold mb-8 group transition-colors">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                Voltar ao Blog
+            </a>
+            <div id="post-meta" class="flex flex-wrap items-center gap-3 mb-5">
+                <span id="post-category" class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold">IA e Visibilidade</span>
+                <span class="text-gray-300">&bull;</span>
+                <span id="post-date" class="text-sm text-gray-500 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                24 de julho de 2026</span>
+            </div>
+            <h1 id="post-title" class="text-3xl sm:text-4xl lg:text-5xl font-black font-display leading-tight">Minha startup não é mencionada por nenhuma IA: por onde começar</h1>
+
+            <div class="flex items-center gap-3 mt-6">
+                <div id="post-author-avatar" class="w-11 h-11 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-sm shrink-0">GA</div>
+                <div>
+                    <a id="post-author-link" href="https://www.linkedin.com/in/gustavo-alves-3766a5269/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors">Gustavo Alves Araújo</a>
+                    <p id="post-author-role" class="text-xs text-gray-500">Cofundador da Axolutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <div id="post-image-wrap" class="max-w-5xl mx-auto px-4 mb-12">
+        <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+            <img id="post-image" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Minha startup não é mencionada por nenhuma IA: por onde começar" class="w-full h-auto object-contain rounded-xl">
+        </div>
+    </div>
+
+    <!-- ARTICLE + SIDEBAR -->
+    <section class="pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+            <!-- Article -->
+            <article class="flex-1 max-w-4xl">
+                <div id="post-content" class="post-content scroll-animate"><p>Você digitou o nome da sua empresa no ChatGPT, no Gemini ou no Copilot e a resposta veio vazia, genérica ou, pior, citando os concorrentes. Bate aquele frio na barriga: minha startup não é mencionada por nenhuma IA, e agora? Respira. Isso é mais comum do que parece, principalmente para quem acabou de começar.</p><p>A boa notícia é que dá para reverter esse cenário com passos simples e organizados. Neste guia você vai entender por que a sua empresa começa invisível para as inteligências artificiais e o que fazer, do zero, para que elas passem a te conhecer e a te citar.</p><h2>Por que uma empresa nova nasce invisível para a IA</h2><p>As IAs não inventam empresas. Elas aprendem lendo o que já existe na internet: sites, artigos, perfis, diretórios, notícias e menções. Quando o seu negócio é novo, existem pouquíssimas fontes falando sobre ele. Sem fontes, a IA simplesmente não tem o que dizer sobre você.</p><p>Pense assim: se você perguntasse a um amigo sobre uma padaria que abriu ontem em outra cidade, ele não saberia responder, não por má vontade, mas por falta de informação. Com a IA acontece o mesmo. O trabalho, então, é criar e espalhar informação clara sobre quem você é. Vamos ao passo a passo.</p><h2>Passo 1: tenha um site que diz quem você é, o que faz e para quem</h2><p>Esse é o alicerce de tudo. A IA precisa entender o seu negócio em texto simples, sem adivinhação. Um site cheio de frases bonitas mas vazias não ajuda. Seja direto:</p><ul><li><strong>Quem você é:</strong> o nome da empresa, o que ela representa, uma frase clara de apresentação logo no topo.</li><li><strong>O que você faz:</strong> descreva o produto ou serviço em linguagem que uma pessoa leiga entenderia na primeira leitura.</li><li><strong>Para quem:</strong> deixe explícito o seu público. "Ajudamos pequenos restaurantes a organizar pedidos pelo WhatsApp" diz muito mais do que "soluções inovadoras de gestão".</li></ul><p>Se um humano precisa ler três vezes para entender o que você vende, a IA também não vai entender.</p><h2>Passo 2: deixe claro qual categoria a sua empresa é</h2><p>As IAs organizam o mundo em categorias. Elas precisam saber se você é uma agência de marketing, um software de gestão, uma loja de roupas ou uma consultoria financeira. Se essa definição estiver confusa, você não entra em nenhuma resposta.</p><p>No seu site e nos seus perfis, use os termos que o seu setor realmente usa. Diga com todas as letras o que você é. Evite inventar categorias criativas que ninguém pesquisa. Ser claro é mais poderoso do que ser original nesse ponto.</p><h2>Passo 3: mantenha presença consistente em vários lugares</h2><p>Uma menção só não constrói confiança. A IA gosta de ver a mesma informação repetida em fontes diferentes e confiáveis. Isso reforça que a sua empresa existe de verdade. Comece pelos canais gratuitos e essenciais:</p><ul><li><strong>Google Meu Negócio:</strong> cadastre a empresa, com nome, endereço, telefone, categoria e descrição. É uma das fontes que mais pesa.</li><li><strong>LinkedIn:</strong> crie a página da empresa e mantenha o perfil dos fundadores atualizado.</li><li><strong>Diretórios e plataformas do seu nicho:</strong> associações, marketplaces, listas de empresas e catálogos do setor.</li></ul><p>Um detalhe que muita gente ignora: use exatamente a mesma informação em todos os lugares. Mesmo nome, mesma descrição, mesmo telefone. Informação conflitante confunde a IA e enfraquece a sua presença.</p><h2>Passo 4: seja mencionado por outros sites</h2><p>Aqui está o segredo que separa as empresas citadas das invisíveis. Falar bem de si mesmo é esperado. Quando <strong>outros</strong> sites falam de você, isso vira autoridade. É a diferença entre você dizer que é bom e outra pessoa confirmar.</p><p>Formas realistas de conquistar menções quando se está começando:</p><ul><li><strong>Parcerias:</strong> apareça no site de parceiros, fornecedores e clientes.</li><li><strong>Conteúdo de outros:</strong> escreva artigos como convidado, participe de podcasts, dê entrevistas para portais do seu nicho.</li><li><strong>Imprensa local ou setorial:</strong> um lançamento, um dado interessante ou uma história de origem podem virar pauta.</li></ul><p>Cada menção nova é uma fonte a mais que a IA pode ler sobre você.</p><h2>Passo 5: crie conteúdo que responde perguntas do seu nicho</h2><p>As IAs adoram conteúdo que resolve dúvidas reais, porque é exatamente isso que os usuários perguntam a elas. Um blog ou uma seção de perguntas frequentes bem feita transforma o seu site em uma fonte que a IA quer citar.</p><p>Liste as dúvidas mais comuns dos seus clientes e responda cada uma com clareza. Se você vende um software para dentistas, escreva sobre os problemas que dentistas enfrentam. Quando alguém perguntar isso à IA, o seu conteúdo pode ser a resposta, e o seu nome vai junto.</p><h2>Passo 6: adicione dados estruturados no seu site</h2><p>Esse passo é um pouco mais técnico, mas vale conhecer. Dados estruturados são etiquetas invisíveis no código do site que explicam para as máquinas o que é cada coisa: isto é o nome da empresa, isto é o endereço, isto é um produto, isto é uma avaliação.</p><p>Eles funcionam como legendas que ajudam a IA a ler o seu site com muito menos chance de erro. Você não precisa fazer isso sozinho. Uma agência ou uma plataforma de sites resolve rápido, e faz diferença.</p><h2>Passo 7: tenha paciência, a IA leva tempo para te reindexar</h2><p>Este talvez seja o passo mais difícil, porque exige calma. Mesmo fazendo tudo certo, os resultados não aparecem no dia seguinte. A IA precisa reencontrar as novas fontes, ler, processar e, nas próximas atualizações, incorporar essas informações.</p><p>Isso costuma levar de algumas semanas a alguns meses. Não desanime se ainda não for citado na primeira semana. Constância vence: quanto mais fontes consistentes falarem de você ao longo do tempo, mais natural fica para a IA te mencionar.</p><h2>Um resumo para não se perder</h2><p>Sair da invisibilidade não é sorte, é método. Tenha um site claro, defina bem sua categoria, marque presença consistente nos canais certos, conquiste menções de terceiros, produza conteúdo útil, organize seus dados e dê tempo ao tempo. Cada passo soma uma fonte a mais para a IA aprender sobre você.</p><p>Se bateu a sensação de que é muita coisa para fazer sozinho, tudo bem. A gente da Axolutions ajuda startups e empresas novas a montar essa base do zero, do site à presença digital, para que as IAs finalmente comecem a te enxergar. Se quiser trocar uma ideia, chama a gente no WhatsApp: <a href="https://wa.me/5511949360561">wa.me/5511949360561</a>. O primeiro passo é simplesmente começar.</p></div>
+
+                <!-- FAQ (só aparece se o post tiver perguntas cadastradas) -->
+                <div id="post-faq" class="mt-12 pt-10 border-t border-gray-100 scroll-animate">
+                    <h2 class="text-2xl font-bold font-display text-gray-900 mb-6">Perguntas frequentes</h2>
+                    <div id="post-faq-list" class="space-y-3"><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Por que minha empresa não aparece em nenhuma IA?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Na maioria das vezes é porque existem poucas fontes falando sobre ela na internet. A IA aprende lendo sites, perfis e menções. Empresa nova tem pouco material publicado, então a IA ainda não tem o que dizer sobre você. A solução é criar e espalhar informação clara.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Quanto tempo leva para uma IA começar a citar minha startup?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Não há prazo fixo, mas normalmente leva de algumas semanas a alguns meses. A IA precisa reencontrar suas novas fontes, processá-las e incorporá-las em suas atualizações. Quanto mais consistente e espalhada estiver a informação sobre você, mais rápido isso tende a acontecer.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Preciso de blog para aparecer nas IAs?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Não é obrigatório, mas ajuda muito. Um blog que responde dúvidas reais do seu nicho vira exatamente o tipo de conteúdo que a IA quer citar quando alguém faz uma pergunta parecida. Se não puder ter um blog agora, comece com uma boa seção de perguntas frequentes.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Aparecer no Google ajuda a aparecer na IA?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Sim, e bastante. Muitas IAs se apoiam em fontes que já estão bem indexadas na internet, e ter presença sólida no Google, incluindo o Google Meu Negócio, aumenta as chances de ser encontrado e citado. As duas coisas se reforçam.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Dá para forçar a IA a citar minha empresa?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Não existe botão mágico nem atalho para obrigar uma IA a te citar, e desconfie de quem promete isso. O caminho honesto é construir informação clara, consistente e confiável sobre o seu negócio em vários lugares. Com o tempo, as menções vêm de forma natural.</p></details></div>
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="lg:w-80 shrink-0">
+                <div class="lg:sticky lg:top-28 space-y-8">
+                    <!-- Back to blog -->
+                    <a href="/blog.html" class="flex items-center gap-2 text-primary hover:text-primary-light text-sm font-semibold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                        Todos os artigos
+                    </a>
+
+                    <!-- Related posts -->
+                    <div>
+                        <h2 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h2>
+                        <div id="related-posts" class="space-y-4"><a href="/blog/como-fazer-minha-empresa-aparecer-no-chatgpt" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1681460590033-67b0d1413550?auto=format&fit=crop&w=1200&q=75" alt="Como fazer minha empresa aparecer no ChatGPT?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">4 Jul 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Como fazer minha empresa aparecer no ChatGPT?</h4></div></a><a href="/blog/o-que-e-llms-txt" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=75" alt="O que é llms.txt?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">27 Jun 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">O que é llms.txt?</h4></div></a><a href="/blog/como-saber-se-minha-empresa-ja-e-citada-pelo-chatgpt" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1746014601552-4ed3d01da7e8?auto=format&fit=crop&w=1200&q=75" alt="Como saber se minha empresa já é citada pelo ChatGPT?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">13 Jun 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Como saber se minha empresa já é citada pelo ChatGPT?</h4></div></a></div>
+                    </div>
+
+                    <!-- Link contextual pro serviço relacionado à categoria (só aparece se houver correspondência) -->
+                    <div id="post-service-link" class="hidden bg-primary/5 border border-primary/10 rounded-xl p-5">
+                        <p class="text-sm text-gray-700 mb-3">Precisa disso na prática?</p>
+                        <a id="post-service-link-anchor" href="#" class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:text-primary-light transition-colors">
+                            <span id="post-service-link-label"></span>
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    </div><!-- end #post-page -->
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <picture><source srcset="/images/copa.webp" type="image/webp"><img src="/images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
+            <a href="/index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Solicitar Orçamento</a>
+        </div>
+    </section>
+
+    <script>window.AXO_CONFIG = { page: 'blog', navMode: 'white' };</script>
+    <script src="/js/nav.js" defer></script>
+    <script src="/js/footer.js" defer></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/blog-card-template.js"></script>
+    <script src="/js/post-hydrate.js"></script>
+</body>
+</html>

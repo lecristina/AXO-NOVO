@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens pesadas deixam o site lento: como otimizar certo - Blog Axolutions</title>
+    <meta name="description" id="post-meta-description" content="Imagens grandes são a causa número um de site lento. Veja como otimizar tamanho, formato e carregamento sem perder qualidade visual.">
+    <link rel="canonical" id="post-canonical" href="https://www.axolutions.com.br/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo">
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="post-og-title" content="Imagens pesadas deixam seu site lento: como otimizar do jeito certo">
+    <meta property="og:url" id="post-og-url" content="https://www.axolutions.com.br/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo">
+    <meta property="og:image" id="post-og-image" content="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta property="og:site_name" content="Axolutions">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" id="post-article-published" content="2026-07-28T12:00:00-03:00">
+    <meta property="article:modified_time" id="post-article-modified" content="2026-07-28T12:00:00-03:00">
+    <meta property="article:author" id="post-article-author" content="https://www.linkedin.com/in/murilo-ferreira-582414241/">
+    <meta property="article:section" id="post-article-section" content="Performance">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="post-twitter-title" content="Imagens pesadas deixam seu site lento: como otimizar do jeito certo">
+    <meta name="twitter:description" id="post-twitter-description" content="Imagens grandes são a causa número um de site lento. Veja como otimizar tamanho, formato e carregamento sem perder qualidade visual.">
+    <meta name="twitter:image" id="post-twitter-image" content="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://ecgjhahdceocsikbhsot.supabase.co">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/output.css">
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #8f00cc; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .blog-card .blog-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .blog-card:hover .blog-image { transform: scale(1.08); }
+        .blog-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .blog-card:hover { transform: translateY(-6px); }
+
+        /* Post content rich text styling */
+        .post-content { font-size: 1.125rem; line-height: 1.85; color: #374151; }
+
+        .post-content h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: #111827; line-height: 1.3; }
+
+        .post-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.375rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #1f2937; line-height: 1.4; }
+
+        .post-content p { margin-bottom: 1.25rem; }
+        .post-content a { color: #8f00cc; text-decoration: underline; text-underline-offset: 2px; }
+        .post-content a:hover { color: #b44ddb; }
+        .post-content ul, .post-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content blockquote { border-left: 4px solid #8f00cc; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #f5e6ff; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; color: #4b5563; }
+
+        .post-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; object-fit: contain; }
+
+        /* Quill alignment classes */
+        .post-content .ql-align-center, .post-content [style*="text-align: center"] { text-align: center !important; }
+        .post-content .ql-align-right, .post-content [style*="text-align: right"] { text-align: right !important; }
+        .post-content .ql-align-justify, .post-content [style*="text-align: justify"] { text-align: justify !important; }
+        .post-content strong { font-weight: 700; color: #111827; }
+
+        .post-content em { font-style: italic; }
+        .post-content pre { background: #1f2937; color: #e5e7eb; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin: 1.5rem 0; font-size: 0.875rem; line-height: 1.7; }
+
+        .post-content code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+
+        .post-content pre code { background: none; padding: 0; }
+        /* Quill inline font-family styles render natively — no extra CSS needed.
+           These are kept for any class-based legacy Quill output. */
+        .ql-font-Inter { font-family: 'Inter', sans-serif; }
+        .ql-font-Arial { font-family: Arial, sans-serif; }
+        .ql-font-Georgia { font-family: Georgia, serif; }
+        .ql-font-Verdana { font-family: Verdana, sans-serif; }
+        .ql-font-Tahoma { font-family: Tahoma, sans-serif; }
+        .ql-font-serif { font-family: Georgia, 'Times New Roman', serif; }
+        .ql-font-monospace { font-family: 'Courier New', Courier, monospace; }
+
+        /* Skeleton */
+        @keyframes sk { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .sk { background: #e5e7eb; border-radius: 0.5rem; animation: sk 1.6s ease-in-out infinite; }
+    </style>
+    <script id="post-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Imagens pesadas deixam seu site lento: como otimizar do jeito certo","description":"Imagens grandes são a causa número um de site lento. Veja como otimizar tamanho, formato e carregamento sem perder qualidade visual.","datePublished":"2026-07-28","dateModified":"2026-07-28","author":{"@type":"Person","name":"Murilo Ferreira","url":"https://www.linkedin.com/in/murilo-ferreira-582414241/","jobTitle":"Cofundador da Axolutions"},"publisher":{"@type":"Organization","name":"Axolutions"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axolutions.com.br/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo"},"image":"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=75","articleSection":"Performance"}</script>
+    <script id="post-breadcrumb-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.axolutions.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.axolutions.com.br/blog.html"},{"@type":"ListItem","position":3,"name":"Imagens pesadas deixam seu site lento: como otimizar do jeito certo","item":"https://www.axolutions.com.br/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo"}]}</script>
+    <script id="post-faq-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual o tamanho ideal de uma imagem no site?","acceptedAnswer":{"@type":"Answer","text":"Depende do uso, mas como regra: fotos de conteúdo abaixo de 200 KB e banners abaixo de 400 KB, sempre em WebP e no tamanho real de exibição. Logos e ícones ficam melhores em SVG."}},{"@type":"Question","name":"Comprimir imagem estraga a qualidade?","acceptedAnswer":{"@type":"Answer","text":"Feito do jeito certo, não. Dá pra reduzir 60 a 80% do peso sem diferença visível a olho nu. Só é preciso evitar compressões agressivas demais, que criam manchas na foto."}},{"@type":"Question","name":"Preciso saber programar pra otimizar imagens?","acceptedAnswer":{"@type":"Answer","text":"Não. Ferramentas gratuitas como Squoosh e TinyPNG resolvem redimensionamento e compressão pelo navegador. Em sites feitos por nós, isso já acontece automaticamente."}}]}</script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- SKELETON (visible while loading) -->
+    <div id="page-skeleton" class="hidden pt-36 pb-20 px-4 max-w-5xl mx-auto">
+        <div class="sk h-4 w-28 mb-8 rounded-full"></div>
+        <div class="flex items-center gap-3 mb-5">
+            <div class="sk h-6 w-20 rounded-full"></div>
+            <div class="sk h-4 w-32"></div>
+        </div>
+        <div class="sk h-12 w-3/4 mb-3"></div>
+        <div class="sk h-10 w-1/2 mb-10"></div>
+        <div class="sk w-full h-72 rounded-2xl mb-12"></div>
+        <div class="space-y-3">
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-5/6"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-4/5"></div>
+            <div class="sk h-4 w-3/4"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-2/3"></div>
+        </div>
+    </div>
+
+    <!-- NOT FOUND (hidden) -->
+    <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
+        <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+        <h2 class="text-2xl font-bold text-gray-500 mb-2">Artigo não encontrado</h2>
+        <p class="text-gray-600 mb-8">O artigo que você procura não existe ou foi removido.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Voltar ao Blog
+        </a>
+    </div>
+
+    <!-- POST PAGE (hidden until loaded) -->
+    <div id="post-page" class="">
+
+    <!-- HEADER -->
+    <section class="pt-36 pb-10 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light font-semibold mb-8 group transition-colors">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                Voltar ao Blog
+            </a>
+            <div id="post-meta" class="flex flex-wrap items-center gap-3 mb-5">
+                <span id="post-category" class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold">Performance</span>
+                <span class="text-gray-300">&bull;</span>
+                <span id="post-date" class="text-sm text-gray-500 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                28 de julho de 2026</span>
+            </div>
+            <h1 id="post-title" class="text-3xl sm:text-4xl lg:text-5xl font-black font-display leading-tight">Imagens pesadas deixam seu site lento: como otimizar do jeito certo</h1>
+
+            <div class="flex items-center gap-3 mt-6">
+                <div id="post-author-avatar" class="w-11 h-11 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-sm shrink-0">MF</div>
+                <div>
+                    <a id="post-author-link" href="https://www.linkedin.com/in/murilo-ferreira-582414241/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors">Murilo Ferreira</a>
+                    <p id="post-author-role" class="text-xs text-gray-500">Cofundador da Axolutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <div id="post-image-wrap" class="max-w-5xl mx-auto px-4 mb-12">
+        <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+            <img id="post-image" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Imagens pesadas deixam seu site lento: como otimizar do jeito certo" class="w-full h-auto object-contain rounded-xl">
+        </div>
+    </div>
+
+    <!-- ARTICLE + SIDEBAR -->
+    <section class="pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+            <!-- Article -->
+            <article class="flex-1 max-w-4xl">
+                <div id="post-content" class="post-content scroll-animate"><p>Na maioria dos sites lentos, o vilão é o mesmo: <strong>imagens grandes demais</strong>. Uma única foto exportada direto do celular pode pesar 5 ou 8 MB, o equivalente a uma página inteira bem feita. Multiplique por um banner, alguns produtos e um logo mal salvo, e o visitante fica olhando pra uma tela em branco. A boa notícia é que otimizar imagem é um dos ganhos mais rápidos que existem.</p>
+<h2>1. Redimensione antes de subir</h2>
+<p>O erro mais comum é subir uma imagem de 4000 pixels de largura pra exibir num espaço de 800. O navegador baixa a imagem gigante e encolhe na marra, desperdiçando tempo e dados. Regra prática: <strong>a imagem não precisa ser maior do que o espaço onde ela aparece.</strong> Redimensione pro tamanho real de exibição (com uma folga pra telas de alta resolução).</p>
+<h2>2. Use o formato certo</h2>
+<ul>
+<li><strong>WebP (ou AVIF):</strong> formatos modernos que entregam a mesma qualidade com arquivos muito menores. É o padrão hoje, e o que a gente usa nos sites da Axolutions.</li>
+<li><strong>JPG:</strong> ainda serve pra fotos, mas pesa mais que o WebP.</li>
+<li><strong>PNG:</strong> só pra imagens com transparência ou logos simples. Foto em PNG vira um arquivo enorme sem motivo.</li>
+<li><strong>SVG:</strong> ideal pra logos e ícones, porque é vetor e não perde qualidade em nenhum tamanho.</li>
+</ul>
+<h2>3. Comprima sem medo</h2>
+<p>Dá pra reduzir o peso de uma imagem em 60 a 80% sem que o olho perceba diferença. Ferramentas gratuitas como Squoosh e TinyPNG fazem isso em segundos. Quem desenvolve costuma usar bibliotecas como o Sharp pra comprimir tudo automaticamente. O objetivo é chegar em <strong>fotos abaixo de 200 KB</strong> na maioria dos casos.</p>
+<h2>4. Carregue sob demanda (lazy loading)</h2>
+<p>Não faz sentido carregar de uma vez as vinte imagens de uma página se o visitante só vê as duas primeiras. O <strong>lazy loading</strong> deixa as imagens de baixo carregarem só quando a pessoa chega perto delas. Em HTML é tão simples quanto adicionar <code>loading="lazy"</code>, e o ganho na primeira impressão é enorme.</p>
+<h2>5. Defina largura e altura</h2>
+<p>Quando a imagem não tem tamanho reservado, o layout "pula" na hora que ela carrega, piorando o seu CLS (um dos <a href="/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste">Core Web Vitals</a>). Definir largura e altura, ou reservar o espaço por CSS, deixa a página estável enquanto carrega.</p>
+<h2>O impacto disso tudo</h2>
+<p>Só arrumando as imagens, muitos sites saem de 6 ou 7 segundos de carregamento pra menos de 2. E site rápido não é vaidade: é <a href="/blog/como-deixar-seu-site-mais-rapido-e-parar-de-perder-cliente">menos cliente perdido</a> e melhor posicionamento no Google. Se o seu segue lento mesmo depois das imagens, o problema pode estar em outro lugar, veja <a href="/blog/por-que-meu-site-esta-lento-e-como-resolver-isso">por que meu site está lento e como resolver</a>.</p>
+<h2>Deixa que a gente cuida</h2>
+<p>Nos sites que criamos com o <a href="/cosmos.html">Cosmos</a>, a otimização de imagens já vem embutida: tudo entra em WebP, comprimido e com lazy loading, sem você pensar nisso. Quer um site leve de verdade? <a href="https://wa.me/5511949360561">Fale com a Axolutions no WhatsApp</a>.</p></div>
+
+                <!-- FAQ (só aparece se o post tiver perguntas cadastradas) -->
+                <div id="post-faq" class="mt-12 pt-10 border-t border-gray-100 scroll-animate">
+                    <h2 class="text-2xl font-bold font-display text-gray-900 mb-6">Perguntas frequentes</h2>
+                    <div id="post-faq-list" class="space-y-3"><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Qual o tamanho ideal de uma imagem no site?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Depende do uso, mas como regra: fotos de conteúdo abaixo de 200 KB e banners abaixo de 400 KB, sempre em WebP e no tamanho real de exibição. Logos e ícones ficam melhores em SVG.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Comprimir imagem estraga a qualidade?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Feito do jeito certo, não. Dá pra reduzir 60 a 80% do peso sem diferença visível a olho nu. Só é preciso evitar compressões agressivas demais, que criam manchas na foto.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Preciso saber programar pra otimizar imagens?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Não. Ferramentas gratuitas como Squoosh e TinyPNG resolvem redimensionamento e compressão pelo navegador. Em sites feitos por nós, isso já acontece automaticamente.</p></details></div>
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="lg:w-80 shrink-0">
+                <div class="lg:sticky lg:top-28 space-y-8">
+                    <!-- Back to blog -->
+                    <a href="/blog.html" class="flex items-center gap-2 text-primary hover:text-primary-light text-sm font-semibold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                        Todos os artigos
+                    </a>
+
+                    <!-- Related posts -->
+                    <div>
+                        <h2 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h2>
+                        <div id="related-posts" class="space-y-4"><a href="/blog/por-que-meu-site-esta-lento-e-como-resolver-isso" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1606814540563-5c02d62fd409?auto=format&fit=crop&w=1200&q=75" alt="Por que meu site está lento e como resolver isso?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">10 Jun 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Por que meu site está lento e como resolver isso?</h4></div></a><a href="/blog/como-deixar-seu-site-mais-rapido-e-parar-de-perder-cliente" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1678845536613-5cf0ec5245cd?auto=format&fit=crop&w=1200&q=75" alt="Como deixar seu site mais rápido e parar de perder cliente" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">20 Jul 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Como deixar seu site mais rápido e parar de perder cliente</h4></div></a><a href="/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=75" alt="Core Web Vitals: o que são e como saber se o seu site passa no teste" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">29 Jul 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Core Web Vitals: o que são e como saber se o seu site passa no teste</h4></div></a></div>
+                    </div>
+
+                    <!-- Link contextual pro serviço relacionado à categoria (só aparece se houver correspondência) -->
+                    <div id="post-service-link" class="bg-primary/5 border border-primary/10 rounded-xl p-5">
+                        <p class="text-sm text-gray-700 mb-3">Precisa disso na prática?</p>
+                        <a id="post-service-link-anchor" href="/desenvolvimento-de-sites.html" class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:text-primary-light transition-colors">
+                            <span id="post-service-link-label">Entenda nosso processo de desenvolvimento de sites</span>
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    </div><!-- end #post-page -->
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <picture><source srcset="/images/copa.webp" type="image/webp"><img src="/images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
+            <a href="/index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Solicitar Orçamento</a>
+        </div>
+    </section>
+
+    <script>window.AXO_CONFIG = { page: 'blog', navMode: 'white' };</script>
+    <script src="/js/nav.js" defer></script>
+    <script src="/js/footer.js" defer></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/blog-card-template.js"></script>
+    <script src="/js/post-hydrate.js"></script>
+</body>
+</html>

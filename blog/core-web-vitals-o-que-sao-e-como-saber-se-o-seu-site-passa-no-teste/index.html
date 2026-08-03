@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Web Vitals: o que são e como saber se seu site passa - Blog Axolutions</title>
+    <meta name="description" id="post-meta-description" content="Core Web Vitals são as notas de experiência que o Google dá pro seu site. Entenda LCP, INP e CLS em português e como medir os seus.">
+    <link rel="canonical" id="post-canonical" href="https://www.axolutions.com.br/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste">
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="post-og-title" content="Core Web Vitals: o que são e como saber se o seu site passa no teste">
+    <meta property="og:url" id="post-og-url" content="https://www.axolutions.com.br/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste">
+    <meta property="og:image" id="post-og-image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta property="og:site_name" content="Axolutions">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" id="post-article-published" content="2026-07-29T12:00:00-03:00">
+    <meta property="article:modified_time" id="post-article-modified" content="2026-07-29T12:00:00-03:00">
+    <meta property="article:author" id="post-article-author" content="https://www.linkedin.com/in/murilo-ferreira-582414241/">
+    <meta property="article:section" id="post-article-section" content="Performance">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="post-twitter-title" content="Core Web Vitals: o que são e como saber se o seu site passa no teste">
+    <meta name="twitter:description" id="post-twitter-description" content="Core Web Vitals são as notas de experiência que o Google dá pro seu site. Entenda LCP, INP e CLS em português e como medir os seus.">
+    <meta name="twitter:image" id="post-twitter-image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://ecgjhahdceocsikbhsot.supabase.co">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/output.css">
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #8f00cc; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .blog-card .blog-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .blog-card:hover .blog-image { transform: scale(1.08); }
+        .blog-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .blog-card:hover { transform: translateY(-6px); }
+
+        /* Post content rich text styling */
+        .post-content { font-size: 1.125rem; line-height: 1.85; color: #374151; }
+
+        .post-content h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: #111827; line-height: 1.3; }
+
+        .post-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.375rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #1f2937; line-height: 1.4; }
+
+        .post-content p { margin-bottom: 1.25rem; }
+        .post-content a { color: #8f00cc; text-decoration: underline; text-underline-offset: 2px; }
+        .post-content a:hover { color: #b44ddb; }
+        .post-content ul, .post-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content blockquote { border-left: 4px solid #8f00cc; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #f5e6ff; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; color: #4b5563; }
+
+        .post-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; object-fit: contain; }
+
+        /* Quill alignment classes */
+        .post-content .ql-align-center, .post-content [style*="text-align: center"] { text-align: center !important; }
+        .post-content .ql-align-right, .post-content [style*="text-align: right"] { text-align: right !important; }
+        .post-content .ql-align-justify, .post-content [style*="text-align: justify"] { text-align: justify !important; }
+        .post-content strong { font-weight: 700; color: #111827; }
+
+        .post-content em { font-style: italic; }
+        .post-content pre { background: #1f2937; color: #e5e7eb; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin: 1.5rem 0; font-size: 0.875rem; line-height: 1.7; }
+
+        .post-content code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+
+        .post-content pre code { background: none; padding: 0; }
+        /* Quill inline font-family styles render natively — no extra CSS needed.
+           These are kept for any class-based legacy Quill output. */
+        .ql-font-Inter { font-family: 'Inter', sans-serif; }
+        .ql-font-Arial { font-family: Arial, sans-serif; }
+        .ql-font-Georgia { font-family: Georgia, serif; }
+        .ql-font-Verdana { font-family: Verdana, sans-serif; }
+        .ql-font-Tahoma { font-family: Tahoma, sans-serif; }
+        .ql-font-serif { font-family: Georgia, 'Times New Roman', serif; }
+        .ql-font-monospace { font-family: 'Courier New', Courier, monospace; }
+
+        /* Skeleton */
+        @keyframes sk { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .sk { background: #e5e7eb; border-radius: 0.5rem; animation: sk 1.6s ease-in-out infinite; }
+    </style>
+    <script id="post-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Core Web Vitals: o que são e como saber se o seu site passa no teste","description":"Core Web Vitals são as notas de experiência que o Google dá pro seu site. Entenda LCP, INP e CLS em português e como medir os seus.","datePublished":"2026-07-29","dateModified":"2026-07-29","author":{"@type":"Person","name":"Murilo Ferreira","url":"https://www.linkedin.com/in/murilo-ferreira-582414241/","jobTitle":"Cofundador da Axolutions"},"publisher":{"@type":"Organization","name":"Axolutions"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axolutions.com.br/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste"},"image":"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=75","articleSection":"Performance"}</script>
+    <script id="post-breadcrumb-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.axolutions.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.axolutions.com.br/blog.html"},{"@type":"ListItem","position":3,"name":"Core Web Vitals: o que são e como saber se o seu site passa no teste","item":"https://www.axolutions.com.br/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste"}]}</script>
+    <script id="post-faq-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Core Web Vitals afetam meu ranking no Google?","acceptedAnswer":{"@type":"Answer","text":"Sim, são um dos fatores de posicionamento. Não são o mais importante sozinhos, mas entre dois sites parecidos o mais rápido e estável leva vantagem, e a boa experiência ainda melhora conversão."}},{"@type":"Question","name":"Qual a nota ideal?","acceptedAnswer":{"@type":"Answer","text":"De forma simples: LCP até 2,5s, INP até 200ms e CLS abaixo de 0,1, medidos principalmente no celular. Ficar dentro dessas três faixas significa que seu site está \"aprovado\"."}},{"@type":"Question","name":"Meu site é antigo, dá pra melhorar sem refazer?","acceptedAnswer":{"@type":"Answer","text":"Muitas vezes sim: otimizar imagens, reduzir scripts e trocar a hospedagem já resolve bastante. Quando o problema é estrutural, reconstruir numa base moderna sai mais barato do que remendar."}}]}</script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- SKELETON (visible while loading) -->
+    <div id="page-skeleton" class="hidden pt-36 pb-20 px-4 max-w-5xl mx-auto">
+        <div class="sk h-4 w-28 mb-8 rounded-full"></div>
+        <div class="flex items-center gap-3 mb-5">
+            <div class="sk h-6 w-20 rounded-full"></div>
+            <div class="sk h-4 w-32"></div>
+        </div>
+        <div class="sk h-12 w-3/4 mb-3"></div>
+        <div class="sk h-10 w-1/2 mb-10"></div>
+        <div class="sk w-full h-72 rounded-2xl mb-12"></div>
+        <div class="space-y-3">
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-5/6"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-4/5"></div>
+            <div class="sk h-4 w-3/4"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-2/3"></div>
+        </div>
+    </div>
+
+    <!-- NOT FOUND (hidden) -->
+    <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
+        <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+        <h2 class="text-2xl font-bold text-gray-500 mb-2">Artigo não encontrado</h2>
+        <p class="text-gray-600 mb-8">O artigo que você procura não existe ou foi removido.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Voltar ao Blog
+        </a>
+    </div>
+
+    <!-- POST PAGE (hidden until loaded) -->
+    <div id="post-page" class="">
+
+    <!-- HEADER -->
+    <section class="pt-36 pb-10 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light font-semibold mb-8 group transition-colors">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                Voltar ao Blog
+            </a>
+            <div id="post-meta" class="flex flex-wrap items-center gap-3 mb-5">
+                <span id="post-category" class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold">Performance</span>
+                <span class="text-gray-300">&bull;</span>
+                <span id="post-date" class="text-sm text-gray-500 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                29 de julho de 2026</span>
+            </div>
+            <h1 id="post-title" class="text-3xl sm:text-4xl lg:text-5xl font-black font-display leading-tight">Core Web Vitals: o que são e como saber se o seu site passa no teste</h1>
+
+            <div class="flex items-center gap-3 mt-6">
+                <div id="post-author-avatar" class="w-11 h-11 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-sm shrink-0">MF</div>
+                <div>
+                    <a id="post-author-link" href="https://www.linkedin.com/in/murilo-ferreira-582414241/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors">Murilo Ferreira</a>
+                    <p id="post-author-role" class="text-xs text-gray-500">Cofundador da Axolutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <div id="post-image-wrap" class="max-w-5xl mx-auto px-4 mb-12">
+        <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+            <img id="post-image" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="Core Web Vitals: o que são e como saber se o seu site passa no teste" class="w-full h-auto object-contain rounded-xl">
+        </div>
+    </div>
+
+    <!-- ARTICLE + SIDEBAR -->
+    <section class="pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+            <!-- Article -->
+            <article class="flex-1 max-w-4xl">
+                <div id="post-content" class="post-content scroll-animate"><p>Se você já ouviu que "o Google mede a experiência do seu site" e ficou sem entender, os <strong>Core Web Vitals</strong> são exatamente isso: três notas que medem se o seu site é rápido, responde ao toque e não fica "pulando" enquanto carrega. Elas influenciam seu posicionamento no Google e, principalmente, se o visitante fica ou desiste.</p>
+<h2>As três métricas, em português</h2>
+<h3>LCP, o tempo até a página parecer pronta</h3>
+<p><strong>Largest Contentful Paint</strong> mede quanto tempo leva pro maior elemento da tela (geralmente a imagem ou o título principal) aparecer. É a sua "primeira impressão". <strong>Meta: até 2,5 segundos.</strong> Acima disso, o visitante já sente que o site é lento.</p>
+<h3>INP, o tempo de resposta ao clique</h3>
+<p><strong>Interaction to Next Paint</strong> mede o quanto o site demora pra reagir quando você clica, toca ou digita. Um site que "trava" por um instante ao clicar num botão tem INP ruim. <strong>Meta: até 200 milissegundos.</strong></p>
+<h3>CLS, a estabilidade do layout</h3>
+<p><strong>Cumulative Layout Shift</strong> mede o quanto os elementos se mexem sozinhos enquanto a página carrega. Sabe quando você vai clicar e o botão "pula" porque uma imagem carregou em cima? Isso é CLS alto. <strong>Meta: abaixo de 0,1.</strong></p>
+<h2>Como medir os seus (de graça)</h2>
+<ul>
+<li><strong>PageSpeed Insights</strong> (pagespeed.web.dev): cole a URL do seu site e ele mostra as três notas, no celular e no computador, com sugestões.</li>
+<li><strong>Search Console:</strong> se seu site está cadastrado, a aba "Core Web Vitals" mostra o desempenho com visitantes reais ao longo do tempo.</li>
+<li><strong>Aba Lighthouse</strong> no navegador Chrome, pra um teste rápido durante o desenvolvimento.</li>
+</ul>
+<p>Preste atenção especial na nota do <strong>celular</strong>: é lá que a maioria das pessoas acessa e onde os problemas aparecem primeiro.</p>
+<h2>Passou ou reprovou? O que fazer</h2>
+<p>Se as notas estão vermelhas ou amarelas, os culpados mais comuns são <strong>imagens pesadas</strong>, excesso de scripts e hospedagem lenta. A gente detalha as causas em <a href="/blog/por-que-meu-site-esta-lento-e-como-resolver-isso">por que meu site está lento e como resolver</a> e o caso específico das imagens em <a href="/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo">imagens pesadas deixam seu site lento</a>.</p>
+<h2>Por que isso vale dinheiro</h2>
+<p>Cada segundo a mais de carregamento derruba conversão e aumenta a taxa de desistência. Ou seja, Core Web Vitals ruim não é só uma nota técnica, é <strong>venda perdida</strong>. Falamos disso em <a href="/blog/como-deixar-seu-site-mais-rapido-e-parar-de-perder-cliente">como deixar seu site mais rápido e parar de perder cliente</a>. Pra enxergar onde os visitantes travam ou saem, vale usar um <a href="/analytics.html">analytics com mapa de calor</a>.</p>
+<h2>Quer um site que já nasce passando</h2>
+<p>Os sites que a gente entrega na Axolutions são construídos pra passar nos Core Web Vitals desde o primeiro dia: leves, rápidos e estáveis. Se o seu está reprovando, <a href="https://wa.me/5511949360561">chame a gente no WhatsApp</a> que a gente avalia sem compromisso.</p></div>
+
+                <!-- FAQ (só aparece se o post tiver perguntas cadastradas) -->
+                <div id="post-faq" class="mt-12 pt-10 border-t border-gray-100 scroll-animate">
+                    <h2 class="text-2xl font-bold font-display text-gray-900 mb-6">Perguntas frequentes</h2>
+                    <div id="post-faq-list" class="space-y-3"><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Core Web Vitals afetam meu ranking no Google?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Sim, são um dos fatores de posicionamento. Não são o mais importante sozinhos, mas entre dois sites parecidos o mais rápido e estável leva vantagem, e a boa experiência ainda melhora conversão.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Qual a nota ideal?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">De forma simples: LCP até 2,5s, INP até 200ms e CLS abaixo de 0,1, medidos principalmente no celular. Ficar dentro dessas três faixas significa que seu site está "aprovado".</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Meu site é antigo, dá pra melhorar sem refazer?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Muitas vezes sim: otimizar imagens, reduzir scripts e trocar a hospedagem já resolve bastante. Quando o problema é estrutural, reconstruir numa base moderna sai mais barato do que remendar.</p></details></div>
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="lg:w-80 shrink-0">
+                <div class="lg:sticky lg:top-28 space-y-8">
+                    <!-- Back to blog -->
+                    <a href="/blog.html" class="flex items-center gap-2 text-primary hover:text-primary-light text-sm font-semibold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                        Todos os artigos
+                    </a>
+
+                    <!-- Related posts -->
+                    <div>
+                        <h2 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h2>
+                        <div id="related-posts" class="space-y-4"><a href="/blog/por-que-meu-site-esta-lento-e-como-resolver-isso" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1606814540563-5c02d62fd409?auto=format&fit=crop&w=1200&q=75" alt="Por que meu site está lento e como resolver isso?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">10 Jun 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Por que meu site está lento e como resolver isso?</h4></div></a><a href="/blog/como-deixar-seu-site-mais-rapido-e-parar-de-perder-cliente" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1678845536613-5cf0ec5245cd?auto=format&fit=crop&w=1200&q=75" alt="Como deixar seu site mais rápido e parar de perder cliente" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">20 Jul 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Como deixar seu site mais rápido e parar de perder cliente</h4></div></a><a href="/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=75" alt="Imagens pesadas deixam seu site lento: como otimizar do jeito certo" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">28 Jul 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Imagens pesadas deixam seu site lento: como otimizar do jeito certo</h4></div></a></div>
+                    </div>
+
+                    <!-- Link contextual pro serviço relacionado à categoria (só aparece se houver correspondência) -->
+                    <div id="post-service-link" class="bg-primary/5 border border-primary/10 rounded-xl p-5">
+                        <p class="text-sm text-gray-700 mb-3">Precisa disso na prática?</p>
+                        <a id="post-service-link-anchor" href="/desenvolvimento-de-sites.html" class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:text-primary-light transition-colors">
+                            <span id="post-service-link-label">Entenda nosso processo de desenvolvimento de sites</span>
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    </div><!-- end #post-page -->
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <picture><source srcset="/images/copa.webp" type="image/webp"><img src="/images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
+            <a href="/index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Solicitar Orçamento</a>
+        </div>
+    </section>
+
+    <script>window.AXO_CONFIG = { page: 'blog', navMode: 'white' };</script>
+    <script src="/js/nav.js" defer></script>
+    <script src="/js/footer.js" defer></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/blog-card-template.js"></script>
+    <script src="/js/post-hydrate.js"></script>
+</body>
+</html>

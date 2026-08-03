@@ -29,6 +29,7 @@
     /* ── Nav links list ── */
     var LINKS = [
         { href: '/index.html#servicos', label: 'Serviços',    id: 'servicos' },
+        { href: '/plataforma.html',    label: 'Axoplataforma', id: 'produtos' },
         { href: '/projetos.html',      label: 'Projetos',    id: 'projetos' },
         { href: '/blog.html',          label: 'Blog',         id: 'blog' },
         { href: '/sobre.html',         label: 'Sobre',        id: 'sobre' },

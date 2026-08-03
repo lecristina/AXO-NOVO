@@ -22,6 +22,13 @@ const STATIC_PAGES = [
     { file: 'sistemas-erp.html', loc: '/sistemas-erp.html', changefreq: 'monthly', priority: '0.9' },
     { file: 'aplicativos-mobile.html', loc: '/aplicativos-mobile.html', changefreq: 'monthly', priority: '0.9' },
     { file: 'e-commerce.html', loc: '/e-commerce.html', changefreq: 'monthly', priority: '0.9' },
+    { file: 'plataforma.html', loc: '/plataforma.html', changefreq: 'weekly', priority: '0.9' },
+    { file: 'orbita.html', loc: '/orbita.html', changefreq: 'monthly', priority: '0.9' },
+    { file: 'cosmos.html', loc: '/cosmos.html', changefreq: 'monthly', priority: '0.9' },
+    { file: 'analytics.html', loc: '/analytics.html', changefreq: 'monthly', priority: '0.9' },
+    { file: 'link-na-bio.html', loc: '/link-na-bio.html', changefreq: 'monthly', priority: '0.9' },
+    { file: 'google-meu-negocio.html', loc: '/google-meu-negocio.html', changefreq: 'monthly', priority: '0.9' },
+    { file: 'academy.html', loc: '/academy.html', changefreq: 'monthly', priority: '0.8' },
     { file: 'blog.html', loc: '/blog.html', changefreq: 'weekly', priority: '0.8' },
     { file: 'depoimentos.html', loc: '/depoimentos.html', changefreq: 'monthly', priority: '0.7' },
     { file: 'sobre.html', loc: '/sobre.html', changefreq: 'monthly', priority: '0.7' }

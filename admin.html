@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axolutions - Admin</title>
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,10 +126,6 @@
                 </a>
             </nav>
             <div class="p-4 border-t border-gray-700 space-y-2">
-                <button onclick="Admin.resetData()" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-yellow-400 hover:bg-yellow-400/10 rounded-lg transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    Resetar Dados
-                </button>
                 <button onclick="Admin.logout()" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-red-400/10 rounded-lg transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                     Sair
@@ -444,10 +441,10 @@
     </div>
 </div>
 
-<script src="js/data.js"></script>
+<script src="js/data.js?v=20260727"></script>
 <script src="js/theme.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=20260727d"></script>
 <script>
 /* Pre-warm: fetch all tables immediately so cache is ready before the user logs in */
 (function() {

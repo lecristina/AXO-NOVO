@@ -89,17 +89,24 @@
             .catch(function () { return []; });
     }
 
+    // Escritas passam pela função serverless /api/db (a anon key é somente-leitura;
+    // a service key fica no servidor). Manda a senha do admin, guardada no login.
     function _mutate(method, path, body, prefer) {
-        var hdrs = Object.assign({ 'Content-Type': 'application/json' }, BASE_HDR);
-        if (prefer) hdrs['Prefer'] = prefer;
-        var opts = { method: method, headers: hdrs };
-        if (body !== undefined && body !== null) opts.body = JSON.stringify(body);
-        return fetch(BASE + '/rest/v1/' + path, opts)
-            .then(function (r) {
-                if (!r.ok) return r.json().then(function (e) { throw new Error(e.message || r.status); });
-                var ct = r.headers.get('content-type') || '';
-                return ct.indexOf('json') !== -1 ? r.json() : null;
-            });
+        // Sem senha no cliente: a autorização é o cookie de sessão HttpOnly
+        // (setado no login), enviado automaticamente por ser mesma origem.
+        return fetch('/api/db', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ method: method, path: path, body: body, prefer: prefer })
+        }).then(function (r) {
+            if (!r.ok) {
+                return r.json().then(function (e) { throw new Error(e.message || r.status); },
+                    function () { throw new Error('Erro ' + r.status); });
+            }
+            var ct = r.headers.get('content-type') || '';
+            return ct.indexOf('json') !== -1 ? r.json() : null;
+        });
     }
 
     /* ── Slug helper (derives a stable URL slug from a title, no DB column needed) ── */

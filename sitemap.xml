@@ -58,6 +58,55 @@
   </url>
 
   <url>
+    <loc>https://www.axolutions.com.br/plataforma.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/orbita.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/cosmos.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/analytics.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/link-na-bio.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/google-meu-negocio.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/academy.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.axolutions.com.br/blog.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -156,8 +205,57 @@
   </url>
 
   <url>
+    <loc>https://www.axolutions.com.br/blog/o-que-e-geo-generative-engine-optimization-e-por-onde-comecar</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/como-aparecer-na-visao-geral-com-ia-do-google-ai-overviews</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/por-que-o-chatgpt-recomenda-meus-concorrentes-e-nao-a-minha-empresa</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/core-web-vitals-o-que-sao-e-como-saber-se-o-seu-site-passa-no-teste</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/imagens-pesadas-deixam-seu-site-lento-como-otimizar-do-jeito-certo</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://www.axolutions.com.br/blog/quem-desenvolve-o-seu-sistema-conheca-a-equipe-por-tras-da-axolutions</loc>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/como-aparecer-no-chatgpt-sendo-um-negocio-local</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/como-fazer-minha-empresa-aparecer-nas-respostas-do-perplexity</loc>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -170,7 +268,28 @@
   </url>
 
   <url>
+    <loc>https://www.axolutions.com.br/blog/minha-startup-nao-e-mencionada-por-nenhuma-ia-por-onde-comecar</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/como-aparecer-na-primeira-pagina-do-google-guia-pratico-2026</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://www.axolutions.com.br/blog/quanto-custa-desenvolver-um-sistema-para-minha-empresa</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.axolutions.com.br/blog/como-deixar-seu-site-mais-rapido-e-parar-de-perder-cliente</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

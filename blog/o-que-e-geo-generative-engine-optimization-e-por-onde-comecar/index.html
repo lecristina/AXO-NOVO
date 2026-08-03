@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O que é GEO (Generative Engine Optimization): guia para começar - Blog Axolutions</title>
+    <meta name="description" id="post-meta-description" content="GEO é o novo SEO da era das IAs. Entenda o que significa otimizar seu negócio para ChatGPT, Gemini e Perplexity, e um passo a passo pra começar hoje.">
+    <link rel="canonical" id="post-canonical" href="https://www.axolutions.com.br/blog/o-que-e-geo-generative-engine-optimization-e-por-onde-comecar">
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="post-og-title" content="O que é GEO (Generative Engine Optimization) e por onde começar">
+    <meta property="og:url" id="post-og-url" content="https://www.axolutions.com.br/blog/o-que-e-geo-generative-engine-optimization-e-por-onde-comecar">
+    <meta property="og:image" id="post-og-image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta property="og:site_name" content="Axolutions">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" id="post-article-published" content="2026-07-30T12:00:00-03:00">
+    <meta property="article:modified_time" id="post-article-modified" content="2026-07-30T12:00:00-03:00">
+    <meta property="article:author" id="post-article-author" content="https://www.linkedin.com/in/murilo-ferreira-582414241/">
+    <meta property="article:section" id="post-article-section" content="IA e Visibilidade">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="post-twitter-title" content="O que é GEO (Generative Engine Optimization) e por onde começar">
+    <meta name="twitter:description" id="post-twitter-description" content="GEO é o novo SEO da era das IAs. Entenda o que significa otimizar seu negócio para ChatGPT, Gemini e Perplexity, e um passo a passo pra começar hoje.">
+    <meta name="twitter:image" id="post-twitter-image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&amp;fit=crop&amp;w=1200&amp;q=75">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://ecgjhahdceocsikbhsot.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://ecgjhahdceocsikbhsot.supabase.co">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="/css/output.css">
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #8f00cc; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; border-radius: 1px; }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .blog-card .blog-image { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .blog-card:hover .blog-image { transform: scale(1.08); }
+        .blog-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; }
+        .blog-card:hover { transform: translateY(-6px); }
+
+        /* Post content rich text styling */
+        .post-content { font-size: 1.125rem; line-height: 1.85; color: #374151; }
+
+        .post-content h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: #111827; line-height: 1.3; }
+
+        .post-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.375rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #1f2937; line-height: 1.4; }
+
+        .post-content p { margin-bottom: 1.25rem; }
+        .post-content a { color: #8f00cc; text-decoration: underline; text-underline-offset: 2px; }
+        .post-content a:hover { color: #b44ddb; }
+        .post-content ul, .post-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content blockquote { border-left: 4px solid #8f00cc; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #f5e6ff; border-radius: 0 0.5rem 0.5rem 0; font-style: italic; color: #4b5563; }
+
+        .post-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; object-fit: contain; }
+
+        /* Quill alignment classes */
+        .post-content .ql-align-center, .post-content [style*="text-align: center"] { text-align: center !important; }
+        .post-content .ql-align-right, .post-content [style*="text-align: right"] { text-align: right !important; }
+        .post-content .ql-align-justify, .post-content [style*="text-align: justify"] { text-align: justify !important; }
+        .post-content strong { font-weight: 700; color: #111827; }
+
+        .post-content em { font-style: italic; }
+        .post-content pre { background: #1f2937; color: #e5e7eb; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; margin: 1.5rem 0; font-size: 0.875rem; line-height: 1.7; }
+
+        .post-content code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
+
+        .post-content pre code { background: none; padding: 0; }
+        /* Quill inline font-family styles render natively — no extra CSS needed.
+           These are kept for any class-based legacy Quill output. */
+        .ql-font-Inter { font-family: 'Inter', sans-serif; }
+        .ql-font-Arial { font-family: Arial, sans-serif; }
+        .ql-font-Georgia { font-family: Georgia, serif; }
+        .ql-font-Verdana { font-family: Verdana, sans-serif; }
+        .ql-font-Tahoma { font-family: Tahoma, sans-serif; }
+        .ql-font-serif { font-family: Georgia, 'Times New Roman', serif; }
+        .ql-font-monospace { font-family: 'Courier New', Courier, monospace; }
+
+        /* Skeleton */
+        @keyframes sk { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .sk { background: #e5e7eb; border-radius: 0.5rem; animation: sk 1.6s ease-in-out infinite; }
+    </style>
+    <script id="post-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"O que é GEO (Generative Engine Optimization) e por onde começar","description":"GEO é o novo SEO da era das IAs. Entenda o que significa otimizar seu negócio para ChatGPT, Gemini e Perplexity, e um passo a passo pra começar hoje.","datePublished":"2026-07-30","dateModified":"2026-07-30","author":{"@type":"Person","name":"Murilo Ferreira","url":"https://www.linkedin.com/in/murilo-ferreira-582414241/","jobTitle":"Cofundador da Axolutions"},"publisher":{"@type":"Organization","name":"Axolutions"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.axolutions.com.br/blog/o-que-e-geo-generative-engine-optimization-e-por-onde-comecar"},"image":"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=75","articleSection":"IA e Visibilidade"}</script>
+    <script id="post-breadcrumb-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.axolutions.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.axolutions.com.br/blog.html"},{"@type":"ListItem","position":3,"name":"O que é GEO (Generative Engine Optimization) e por onde começar","item":"https://www.axolutions.com.br/blog/o-que-e-geo-generative-engine-optimization-e-por-onde-comecar"}]}</script>
+    <script id="post-faq-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"GEO é a mesma coisa que SEO?","acceptedAnswer":{"@type":"Answer","text":"Não. SEO foca em aparecer e receber cliques no Google; GEO foca em ser citado e recomendado por inteligências artificiais como ChatGPT, Gemini e Perplexity. Os dois se complementam e compartilham boa parte das boas práticas."}},{"@type":"Question","name":"Preciso de um site novo pra fazer GEO?","acceptedAnswer":{"@type":"Answer","text":"Nem sempre. Dá pra começar arrumando o texto do site atual, o Google Meu Negócio e criando conteúdo que responde perguntas. Mas um site lento ou confuso atrapalha, então às vezes vale reconstruir."}},{"@type":"Question","name":"Em quanto tempo vejo resultado?","acceptedAnswer":{"@type":"Answer","text":"GEO é contínuo. Ajustes no perfil e no site podem aparecer em semanas, mas ganhar consistência nas recomendações das IAs leva alguns meses de trabalho constante."}}]}</script>
+</head>
+<body class="bg-white text-gray-900 font-sans transition-colors duration-500">
+
+    <!-- SKELETON (visible while loading) -->
+    <div id="page-skeleton" class="hidden pt-36 pb-20 px-4 max-w-5xl mx-auto">
+        <div class="sk h-4 w-28 mb-8 rounded-full"></div>
+        <div class="flex items-center gap-3 mb-5">
+            <div class="sk h-6 w-20 rounded-full"></div>
+            <div class="sk h-4 w-32"></div>
+        </div>
+        <div class="sk h-12 w-3/4 mb-3"></div>
+        <div class="sk h-10 w-1/2 mb-10"></div>
+        <div class="sk w-full h-72 rounded-2xl mb-12"></div>
+        <div class="space-y-3">
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-5/6"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-4/5"></div>
+            <div class="sk h-4 w-3/4"></div>
+            <div class="sk h-4 w-full"></div>
+            <div class="sk h-4 w-2/3"></div>
+        </div>
+    </div>
+
+    <!-- NOT FOUND (hidden) -->
+    <div id="not-found" class="hidden pt-40 pb-24 px-4 text-center">
+        <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+        <h2 class="text-2xl font-bold text-gray-500 mb-2">Artigo não encontrado</h2>
+        <p class="text-gray-600 mb-8">O artigo que você procura não existe ou foi removido.</p>
+        <a href="/blog.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Voltar ao Blog
+        </a>
+    </div>
+
+    <!-- POST PAGE (hidden until loaded) -->
+    <div id="post-page" class="">
+
+    <!-- HEADER -->
+    <section class="pt-36 pb-10 px-4 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light font-semibold mb-8 group transition-colors">
+                <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                Voltar ao Blog
+            </a>
+            <div id="post-meta" class="flex flex-wrap items-center gap-3 mb-5">
+                <span id="post-category" class="bg-primary/10 text-primary text-xs px-3 py-1.5 rounded-full font-semibold">IA e Visibilidade</span>
+                <span class="text-gray-300">&bull;</span>
+                <span id="post-date" class="text-sm text-gray-500 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                30 de julho de 2026</span>
+            </div>
+            <h1 id="post-title" class="text-3xl sm:text-4xl lg:text-5xl font-black font-display leading-tight">O que é GEO (Generative Engine Optimization) e por onde começar</h1>
+
+            <div class="flex items-center gap-3 mt-6">
+                <div id="post-author-avatar" class="w-11 h-11 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center text-sm shrink-0">MF</div>
+                <div>
+                    <a id="post-author-link" href="https://www.linkedin.com/in/murilo-ferreira-582414241/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors">Murilo Ferreira</a>
+                    <p id="post-author-role" class="text-xs text-gray-500">Cofundador da Axolutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED IMAGE -->
+    <div id="post-image-wrap" class="max-w-5xl mx-auto px-4 mb-12">
+        <div class="rounded-2xl overflow-hidden shadow-2xl shadow-black/10">
+            <img id="post-image" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&amp;fit=crop&amp;w=1200&amp;q=75" alt="O que é GEO (Generative Engine Optimization) e por onde começar" class="w-full h-auto object-contain rounded-xl">
+        </div>
+    </div>
+
+    <!-- ARTICLE + SIDEBAR -->
+    <section class="pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+            <!-- Article -->
+            <article class="flex-1 max-w-4xl">
+                <div id="post-content" class="post-content scroll-animate"><p>Se você acompanha marketing digital, já ouviu falar de <strong>SEO</strong>, a arte de aparecer no Google. Agora surgiu um primo novo: <strong>GEO</strong>, sigla de <em>Generative Engine Optimization</em>, ou otimização para motores generativos. É o conjunto de práticas pra fazer o seu negócio ser <strong>citado e recomendado pelas inteligências artificiais</strong> como ChatGPT, Google Gemini e Perplexity quando alguém faz uma pergunta.</p>
+<h2>Por que GEO virou assunto agora</h2>
+<p>O comportamento de busca mudou. Em vez de digitar "melhor contador em Campinas" e clicar em dez links azuis, cada vez mais gente pergunta direto pra uma IA e recebe <strong>uma resposta pronta, com poucas indicações</strong>. Se a sua empresa não estiver entre essas indicações, você simplesmente não existe pra esse cliente. GEO é o trabalho de garantir que você esteja lá.</p>
+<p>A diferença central pro SEO tradicional: o Google te manda tráfego (o clique), enquanto a IA te manda <strong>recomendação</strong> (a menção dentro da resposta). São objetivos parecidos, mas o jogo é outro.</p>
+<h2>Como as IAs decidem quem recomendar</h2>
+<p>Modelos como o ChatGPT respondem com base em duas fontes: o que aprenderam no treinamento e, cada vez mais, o que encontram <strong>buscando na web na hora</strong> (o chamado grounding). Pra ser lembrado, você precisa aparecer de forma clara e consistente nos lugares que a IA lê:</p>
+<ul>
+<li><strong>Seu próprio site</strong>, com texto objetivo dizendo o que você faz, pra quem e onde.</li>
+<li><strong>Fontes de terceiros</strong> que a IA considera confiáveis: seu <a href="/google-meu-negocio.html">perfil no Google Meu Negócio</a>, avaliações, diretórios do seu setor, artigos e citações.</li>
+<li><strong>Conteúdo que responde perguntas reais</strong> na linguagem que as pessoas usam, e não em jargão de marketing.</li>
+</ul>
+<h2>Por onde começar: um passo a passo</h2>
+<ol>
+<li><strong>Descubra se você já é citado.</strong> Pergunte pro ChatGPT e pro Gemini algo que um cliente perguntaria (ex: "quais as melhores opções de [seu serviço] em [sua cidade]"). Veja se seu nome aparece. Explicamos isso em <a href="/blog/como-saber-se-minha-empresa-ja-e-citada-pelo-chatgpt">como saber se sua empresa já é citada</a>.</li>
+<li><strong>Deixe claro no site quem você é.</strong> Nome, cidade, serviços e diferenciais em texto simples, logo no começo das páginas. IA não gosta de adivinhar.</li>
+<li><strong>Arrume seu Google Meu Negócio.</strong> É uma das fontes que as IAs mais consultam pra negócios locais. Rode nossa <a href="/google-meu-negocio.html">análise gratuita de perfil</a> pra ver o que falta.</li>
+<li><strong>Crie conteúdo que responde perguntas.</strong> Uma boa página de FAQ e artigos objetivos aumentam muito sua chance de ser citado. Veja <a href="/blog/como-estruturar-uma-pagina-de-faq-que-a-ia-cita">como estruturar um FAQ que a IA cita</a>.</li>
+<li><strong>Adicione dados estruturados.</strong> Eles ajudam a máquina a entender seu conteúdo. Entenda em <a href="/blog/o-que-sao-dados-estruturados-e-para-que-servem">o que são dados estruturados</a>.</li>
+</ol>
+<h2>GEO substitui o SEO?</h2>
+<p>Não. Os dois convivem, e boa parte do trabalho se sobrepõe: conteúdo claro, site rápido e uma reputação sólida ajudam nos dois. A gente detalha isso em <a href="/blog/seo-ainda-funciona-em-2026">SEO ainda funciona em 2026</a>. Pense em GEO como uma camada nova por cima do que você já deveria estar fazendo, e não como um substituto.</p>
+<h2>O jeito rápido de sair na frente</h2>
+<p>A maioria das empresas ainda nem começou a pensar em GEO, então quem age agora larga na frente. Na Axolutions a gente cuida disso de ponta a ponta: site construído pra ser lido por IA, perfil do Google otimizado, conteúdo e dados estruturados. Se quiser um diagnóstico do seu caso, <a href="https://wa.me/5511949360561">fale com a gente no WhatsApp</a> ou comece pela <a href="/google-meu-negocio.html">análise gratuita do seu perfil</a>.</p></div>
+
+                <!-- FAQ (só aparece se o post tiver perguntas cadastradas) -->
+                <div id="post-faq" class="mt-12 pt-10 border-t border-gray-100 scroll-animate">
+                    <h2 class="text-2xl font-bold font-display text-gray-900 mb-6">Perguntas frequentes</h2>
+                    <div id="post-faq-list" class="space-y-3"><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>GEO é a mesma coisa que SEO?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Não. SEO foca em aparecer e receber cliques no Google; GEO foca em ser citado e recomendado por inteligências artificiais como ChatGPT, Gemini e Perplexity. Os dois se complementam e compartilham boa parte das boas práticas.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Preciso de um site novo pra fazer GEO?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">Nem sempre. Dá pra começar arrumando o texto do site atual, o Google Meu Negócio e criando conteúdo que responde perguntas. Mas um site lento ou confuso atrapalha, então às vezes vale reconstruir.</p></details><details class="group rounded-xl border border-gray-200 p-4"><summary class="cursor-pointer font-semibold text-gray-900 list-none flex items-center justify-between gap-3"><span>Em quanto tempo vejo resultado?</span><svg class="w-4 h-4 text-primary shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></summary><p class="mt-3 text-gray-600 text-[0.95rem] leading-relaxed">GEO é contínuo. Ajustes no perfil e no site podem aparecer em semanas, mas ganhar consistência nas recomendações das IAs leva alguns meses de trabalho constante.</p></details></div>
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="lg:w-80 shrink-0">
+                <div class="lg:sticky lg:top-28 space-y-8">
+                    <!-- Back to blog -->
+                    <a href="/blog.html" class="flex items-center gap-2 text-primary hover:text-primary-light text-sm font-semibold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                        Todos os artigos
+                    </a>
+
+                    <!-- Related posts -->
+                    <div>
+                        <h2 class="text-lg font-bold font-display text-gray-900 mb-5">Artigos Relacionados</h2>
+                        <div id="related-posts" class="space-y-4"><a href="/blog/como-fazer-minha-empresa-aparecer-no-chatgpt" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1681460590033-67b0d1413550?auto=format&fit=crop&w=1200&q=75" alt="Como fazer minha empresa aparecer no ChatGPT?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">4 Jul 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Como fazer minha empresa aparecer no ChatGPT?</h4></div></a><a href="/blog/o-que-e-llms-txt" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=75" alt="O que é llms.txt?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">27 Jun 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">O que é llms.txt?</h4></div></a><a href="/blog/como-saber-se-minha-empresa-ja-e-citada-pelo-chatgpt" class="blog-card group block bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"><div class="h-32 relative overflow-hidden"><img src="https://images.unsplash.com/photo-1746014601552-4ed3d01da7e8?auto=format&fit=crop&w=1200&q=75" alt="Como saber se minha empresa já é citada pelo ChatGPT?" class="blog-image w-full h-full object-cover"></div><div class="p-4"><span class="text-xs text-gray-500">13 Jun 2026</span><h4 class="text-sm font-bold text-gray-900 mt-1 line-clamp-2 group-hover:text-primary transition-colors">Como saber se minha empresa já é citada pelo ChatGPT?</h4></div></a></div>
+                    </div>
+
+                    <!-- Link contextual pro serviço relacionado à categoria (só aparece se houver correspondência) -->
+                    <div id="post-service-link" class="hidden bg-primary/5 border border-primary/10 rounded-xl p-5">
+                        <p class="text-sm text-gray-700 mb-3">Precisa disso na prática?</p>
+                        <a id="post-service-link-anchor" href="#" class="inline-flex items-center gap-1.5 text-primary text-sm font-semibold hover:text-primary-light transition-colors">
+                            <span id="post-service-link-label"></span>
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    </div><!-- end #post-page -->
+
+    <!-- CTA -->
+    <section class="py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600"></div>
+        <picture><source srcset="/images/copa.webp" type="image/webp"><img src="/images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-4">Tem um projeto em mente?</h2>
+            <p class="text-purple-100 mb-8 text-lg">Transforme sua ideia em realidade com a Axolutions.</p>
+            <a href="/index.html#contato" class="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-black/20 transition-all inline-block hover:-translate-y-1">Solicitar Orçamento</a>
+        </div>
+    </section>
+
+    <script>window.AXO_CONFIG = { page: 'blog', navMode: 'white' };</script>
+    <script src="/js/nav.js" defer></script>
+    <script src="/js/footer.js" defer></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/blog-card-template.js"></script>
+    <script src="/js/post-hydrate.js"></script>
+</body>
+</html>

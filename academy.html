@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos e Ebooks de Marketing Digital | Axo Academy</title>
+    <meta name="description" content="Curso de marketing digital grátis na Axo Academy: marketing, copy, vendas e Google Meu Negócio, com aula, exercício, prova e certificado. Ebook à parte.">
+    <meta name="keywords" content="curso de marketing digital, curso de marketing digital grátis, curso google meu negócio, ebook de marketing digital, como aprender marketing digital, curso de copywriting, curso de vendas online">
+    <meta property="og:title" content="Cursos e Ebooks de Marketing Digital | Axo Academy">
+    <meta property="og:description" content="Curso de marketing digital grátis na Axo Academy: marketing, copy, vendas e Google Meu Negócio, com aula, exercício, prova e certificado. Ebook à parte.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.axolutions.com.br/academy.html">
+    <meta property="og:image" content="https://www.axolutions.com.br/images/logo.png">
+    <meta property="og:site_name" content="Axolutions">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cursos e Ebooks de Marketing Digital | Axo Academy">
+    <meta name="twitter:description" content="Curso de marketing digital grátis na Axo Academy: marketing, copy, vendas e Google Meu Negócio, com aula, exercício, prova e certificado. Ebook à parte.">
+    <meta name="twitter:image" content="https://www.axolutions.com.br/images/logo.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.axolutions.com.br/academy.html">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="css/output.css">
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #8f00cc; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; border-radius: 1px; }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .menu-panel { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+        .feature-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .feature-card:hover { transform: translateY(-6px); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), padding 0.3s; }
+        .faq-answer.open { max-height: 400px; }
+    </style>
+    <style id="journey-styles">
+        .journey-map { position: relative; }
+        .journey-nodes { display: flex; flex-direction: row; gap: 0; position: relative; }
+        .journey-step { flex: 1 1 0; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 .5rem; }
+        .journey-dot { position: relative; z-index: 2; width: 56px; height: 56px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #8f00cc, #cc44ff); color: #fff; box-shadow: 0 12px 26px -10px rgba(143,0,204,.6); border: 4px solid #fff; opacity: 0; transform: scale(.4); transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1); }
+        .journey-num { position: absolute; top: -8px; right: -8px; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 9999px; background: #fff; color: #8f00cc; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px -4px rgba(0,0,0,.3); border: 1px solid rgba(143,0,204,.15); }
+        .journey-connector { position: absolute; z-index: 1; top: 28px; left: 50%; width: 100%; height: 4px; transform: translateY(-50%); background: #ede9fe; border-radius: 9999px; overflow: hidden; }
+        .journey-connector-fill { width: 100%; height: 100%; border-radius: 9999px; background: linear-gradient(90deg, #8f00cc, #cc44ff); transform: scaleX(0); transform-origin: left; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+        .journey-card { margin-top: 1.4rem; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+        .journey-step:hover .journey-card { transform: translateY(-4px); }
+        .journey-map.go .journey-dot { opacity: 1; transform: scale(1); }
+        .journey-map.go .journey-connector-fill { transform: scaleX(1); }
+        .journey-map.go .journey-step:nth-child(1) .journey-dot { transition-delay: .05s; }
+        .journey-map.go .journey-step:nth-child(2) .journey-dot { transition-delay: .35s; }
+        .journey-map.go .journey-step:nth-child(3) .journey-dot { transition-delay: .65s; }
+        .journey-map.go .journey-step:nth-child(4) .journey-dot { transition-delay: .95s; }
+        .journey-map.go .journey-step:nth-child(5) .journey-dot { transition-delay: 1.25s; }
+        .journey-map.go .journey-step:nth-child(1) .journey-connector-fill { transition-delay: .2s; }
+        .journey-map.go .journey-step:nth-child(2) .journey-connector-fill { transition-delay: .5s; }
+        .journey-map.go .journey-step:nth-child(3) .journey-connector-fill { transition-delay: .8s; }
+        .journey-map.go .journey-step:nth-child(4) .journey-connector-fill { transition-delay: 1.1s; }
+        @media (max-width: 767px) {
+            .journey-nodes { flex-direction: column; gap: 0; }
+            .journey-step { flex-direction: row; align-items: flex-start; text-align: left; gap: 1.1rem; padding: 0 0 2.2rem 0; }
+            .journey-connector { top: 28px; left: 28px; width: 4px; height: 100%; transform: translateX(-50%); }
+            .journey-connector-fill { transform: scaleY(0); transform-origin: top; }
+            .journey-map.go .journey-connector-fill { transform: scaleY(1); }
+            .journey-card { margin-top: 0; flex: 1; }
+            .journey-num { top: -6px; right: auto; left: -6px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .journey-dot, .journey-connector-fill, .journey-card { transition: none !important; }
+            .journey-dot { opacity: 1 !important; transform: scale(1) !important; }
+            .journey-connector-fill { transform: none !important; }
+        }
+    </style>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "Course", "name": "Axo Academy", "description": "Cursos e ebooks de marketing digital, copy e vendas, um curso pra cada produto da plataforma Axolutions, mais uma trilha geral. Aula direta ao ponto, exercício prático, prova e certificado de conclusão.", "provider": { "@type": "Organization", "name": "Axolutions", "url": "https://www.axolutions.com.br/" }, "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }, "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online", "courseWorkload": "PT4H" } }
+    </script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.axolutions.com.br/" }, { "@type": "ListItem", "position": 2, "name": "Academy", "item": "https://www.axolutions.com.br/academy.html" } ] }
+    </script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [ { "@type": "Question", "name": "A Academy é paga?", "acceptedAnswer": { "@type": "Answer", "text": "Os cursos são gratuitos pra quem usa a plataforma Axolutions. O ebook você também pode comprar separado, sem precisar da plataforma." } }, { "@type": "Question", "name": "Onde fazer um curso de marketing digital?", "acceptedAnswer": { "@type": "Answer", "text": "Na Axo Academy. É um curso de marketing digital grátis dentro da plataforma Axolutions, com aula direta ao ponto, exercício, prova e certificado." } }, { "@type": "Question", "name": "Ganho certificado?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Ao concluir o curso e passar na prova final, você recebe um certificado de conclusão." } }, { "@type": "Question", "name": "Quanto tempo leva pra concluir?", "acceptedAnswer": { "@type": "Answer", "text": "As aulas são diretas ao ponto. Dá pra concluir um curso em poucas horas e já aplicar no mesmo dia." } }, { "@type": "Question", "name": "Preciso já ter um negócio?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Os cursos servem pra quem está começando e pra quem já vende e quer vender mais." } }, { "@type": "Question", "name": "Tem curso de Google Meu Negócio?", "acceptedAnswer": { "@type": "Answer", "text": "Tem. Além dele, a trilha traz curso de copywriting, vendas online, Instagram, blog, sites e a estratégia de marketing completa." } }, { "@type": "Question", "name": "Como compro só o ebook?", "acceptedAnswer": { "@type": "Answer", "text": "É só falar com a gente no WhatsApp que enviamos o acesso ao ebook pra você baixar." } } ] }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+    <!-- HERO -->
+    <section class="pt-40 pb-56 lg:pb-64 px-4 bg-[#07070f] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(143,0,204,0.28),transparent_60%)] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-20">
+            <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-6 scroll-animate">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
+                <span class="text-xs font-semibold text-primary uppercase tracking-widest">Axo Academy</span>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6 scroll-animate animate-in text-white">
+                Curso de marketing digital grátis pra <span class="gradient-text">aplicar hoje</span>
+            </h1>
+            <p class="text-white/60 text-xl leading-relaxed max-w-2xl mx-auto scroll-animate">Um curso e um ebook pra cada produto, mais marketing, copy e vendas. Aula direta ao ponto, exercício pra fazer no mesmo dia, prova e certificado no fim. Chega de curso que você compra e nunca aplica.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 scroll-animate">
+                <a href="https://wa.me/5511949360561" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Quero o ebook
+                </a>
+                <a href="https://app.axolutions.com.br" target="_blank" rel="noopener noreferrer" class="border border-white/25 hover:border-white/50 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/5 inline-flex items-center justify-center gap-2">Acessar a Academy</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRINT EM DESTAQUE (janela macOS sobreposta ao hero) -->
+    <section class="px-4 bg-white relative z-20">
+        <div class="max-w-5xl mx-auto -mt-40 lg:-mt-48 scroll-animate">
+            <div class="relative rounded-3xl bg-slate-900/95 p-2.5 lg:p-3 shadow-[0_50px_100px_-30px_rgba(143,0,204,0.55)] ring-1 ring-white/10 lg:rotate-[-1.2deg] hover:rotate-0 transition-transform duration-700">
+                <div class="flex items-center gap-2 px-3 py-2.5">
+                    <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+                    <span class="ml-3 text-[11px] font-medium text-white/40 tracking-wide">Axo Academy: cursos e ebooks ao vivo</span>
+                </div>
+                <img src="images/print-academy.webp" alt="Axo Academy: cursos e ebooks de marketing e vendas" width="1600" height="843" class="rounded-2xl shadow-[0_30px_60px_-25px_rgba(0,0,0,0.4)] w-full h-auto ring-1 ring-slate-200/70" loading="lazy" decoding="async">
+            </div>
+            <p class="text-center text-slate-400 text-sm mt-5">Esta é a Academy de verdade. Curso, ebook, exercício e certificado no mesmo lugar.</p>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="pt-24 pb-24 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 scroll-animate">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-widest mb-4 bg-primary/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>Aprenda e aplique hoje</span>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Como aprender marketing digital sem teoria que não sai <span class="gradient-text">do papel</span></h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">Quatro passos por curso, direto ao ponto. Você aprende de manhã e já muda o seu negócio à tarde.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <span class="text-4xl font-display font-black text-primary/15 leading-none">01</span>
+                    </div>
+                    <h3 class="text-lg font-display font-bold mb-2">Aula + ebook</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Assista à aula direta ao ponto e leve o ebook pra consultar quando bater a dúvida. Sem enrolação, sem preenchimento de linguiça.</p>
+                </div>
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:60ms">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+                        <span class="text-4xl font-display font-black text-primary/15 leading-none">02</span>
+                    </div>
+                    <h3 class="text-lg font-display font-bold mb-2">Exercício prático</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Cada módulo termina com uma tarefa pra você aplicar no seu negócio na hora. Aprendizado que vira ação, não anotação esquecida.</p>
+                </div>
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:120ms">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <span class="text-4xl font-display font-black text-primary/15 leading-none">03</span>
+                    </div>
+                    <h3 class="text-lg font-display font-bold mb-2">Prova e certificado</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Passou na prova final, ganha o certificado de conclusão. O que você aprendeu vira comprovação de que sabe fazer.</p>
+                </div>
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:180ms">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <span class="text-4xl font-display font-black text-primary/15 leading-none">04</span>
+                    </div>
+                    <h3 class="text-lg font-display font-bold mb-2">No seu ritmo</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Estude quando der, seu progresso fica salvo e você continua de onde parou. Sem turma, sem horário, sem pressão.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRILHA DE CURSOS -->
+    <section class="py-24 px-4 bg-gray-50/80 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-14 scroll-animate">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-widest mb-4 bg-primary/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>A trilha completa</span>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Cursos de marketing, copywriting, vendas e Google Meu <span class="gradient-text">Negócio</span></h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">Um curso e um ebook pra cada frente do seu negócio digital. Comece pelo que dói hoje e siga a trilha inteira no seu tempo.</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Sites</h3><p class="text-xs text-gray-400 mt-0.5">Página que vende</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:40ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Blog</h3><p class="text-xs text-gray-400 mt-0.5">Conteúdo que atrai</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:80ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5m6.656-.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Link na Bio</h3><p class="text-xs text-gray-400 mt-0.5">Um link, tudo</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:120ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.3-3.9A7.96 7.96 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Chatbot</h3><p class="text-xs text-gray-400 mt-0.5">Atende no automático</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:160ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Google Meu Negócio</h3><p class="text-xs text-gray-400 mt-0.5">Topo das buscas locais</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:200ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Social Media</h3><p class="text-xs text-gray-400 mt-0.5">Presença que engaja</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:240ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Marketing</h3><p class="text-xs text-gray-400 mt-0.5">A estratégia toda</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:280ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Copywriting</h3><p class="text-xs text-gray-400 mt-0.5">Texto que converte</p></div>
+                </div>
+                <div class="group bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.3)] flex items-center gap-4 scroll-animate hover:border-primary/30 hover:-translate-y-1 transition-all duration-300" style="transition-delay:320ms">
+                    <span class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke-width="1.7"/><circle cx="12" cy="12" r="3.5" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+                    <div><h3 class="font-display font-bold text-slate-900 leading-tight">Instagram</h3><p class="text-xs text-gray-400 mt-0.5">Perfil que vira venda</p></div>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-10 scroll-animate">Mais a <strong class="text-slate-700">trilha geral de marketing, copy e vendas</strong> pra amarrar tudo.</p>
+        </div>
+    </section>
+
+    <!-- SUA JORNADA DE APRENDIZADO (roadmap) -->
+    <section class="py-24 px-4 bg-white relative overflow-hidden">
+        <div class="absolute top-1/4 right-0 w-72 h-72 bg-primary/5 rounded-full blur-[130px] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-16 scroll-animate">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-widest mb-4 bg-primary/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>Sua jornada</span>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Sua jornada de aprendizado, do zero ao <span class="gradient-text">certificado</span></h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">Uma trilha guiada que te leva passo a passo. Cada parada é uma habilidade nova, e no fim vem a sua conquista.</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto scroll-animate">
+                <div class="journey-map" id="journeyMap">
+                    <div class="journey-nodes">
+                        <div class="journey-step">
+                            <div class="journey-connector"><div class="journey-connector-fill"></div></div>
+                            <div class="journey-dot">
+                                <span class="journey-num">1</span>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                            </div>
+                            <div class="journey-card">
+                                <h3 class="font-display font-bold text-slate-900 text-base sm:text-lg">Fundamentos</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-1 leading-relaxed">A base do marketing digital que sustenta todo o resto.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-connector"><div class="journey-connector-fill"></div></div>
+                            <div class="journey-dot">
+                                <span class="journey-num">2</span>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div class="journey-card">
+                                <h3 class="font-display font-bold text-slate-900 text-base sm:text-lg">Google Meu Negócio</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-1 leading-relaxed">Apareça no topo das buscas locais da sua região.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-connector"><div class="journey-connector-fill"></div></div>
+                            <div class="journey-dot">
+                                <span class="journey-num">3</span>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                            </div>
+                            <div class="journey-card">
+                                <h3 class="font-display font-bold text-slate-900 text-base sm:text-lg">Copywriting</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-1 leading-relaxed">Texto que convence e transforma visita em cliente.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-connector"><div class="journey-connector-fill"></div></div>
+                            <div class="journey-dot">
+                                <span class="journey-num">4</span>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+                            </div>
+                            <div class="journey-card">
+                                <h3 class="font-display font-bold text-slate-900 text-base sm:text-lg">Vendas</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-1 leading-relaxed">Feche mais no dia a dia, com método e sem achismo.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="journey-dot">
+                                <span class="journey-num">5</span>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+                            </div>
+                            <div class="journey-card">
+                                <h3 class="font-display font-bold text-slate-900 text-base sm:text-lg">Conclusão</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-1 leading-relaxed">Passou na prova, fecha a trilha e leva o comprovante da conquista.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EBOOK -->
+    <section id="ebook" class="py-24 px-4 bg-[#07070f] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(143,0,204,0.22),transparent_65%)] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-12 scroll-animate">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-widest mb-4 bg-white/5 border border-white/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Ebooks avulsos · R$ 49,90 cada</span>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold text-white">Não usa a plataforma? Leve o ebook por <span class="gradient-text">R$ 49,90</span></h2>
+                <p class="text-white/50 mt-4 max-w-xl mx-auto">Escolha o tema que dói hoje. Cada ebook é direto ao ponto, sem enrolação, feito pra você aplicar no mesmo dia. R$ 49,90 cada, comprado direto no WhatsApp.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                <!-- Google Meu Negócio -->
+                <div class="group bg-white rounded-2xl p-7 shadow-[0_30px_70px_-30px_rgba(143,0,204,0.55)] border border-white/5 flex flex-col scroll-animate hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold text-slate-900 leading-tight">Google Meu Negócio</h3>
+                    <p class="text-gray-500 text-sm mt-2 leading-relaxed flex-1">Suba no topo das buscas locais e faça o cliente da sua região achar você primeiro.</p>
+                    <div class="flex items-end justify-between gap-3 mt-6">
+                        <div><span class="block text-[11px] uppercase tracking-widest text-gray-400 font-semibold">Ebook</span><span class="text-2xl font-display font-extrabold text-primary">R$ 49,90</span></div>
+                    </div>
+                    <a href="https://wa.me/5511949360561?text=Quero%20o%20ebook%20de%20Google%20Meu%20Neg%C3%B3cio%20por%20R%24%2049%2C90" target="_blank" rel="noopener noreferrer" class="mt-5 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Comprar no WhatsApp
+                    </a>
+                </div>
+                <!-- Copywriting -->
+                <div class="group bg-white rounded-2xl p-7 shadow-[0_30px_70px_-30px_rgba(143,0,204,0.55)] border border-white/5 flex flex-col scroll-animate hover:-translate-y-1 transition-transform duration-300" style="transition-delay:40ms">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold text-slate-900 leading-tight">Copywriting</h3>
+                    <p class="text-gray-500 text-sm mt-2 leading-relaxed flex-1">Escreva textos que convencem e transformam visita em cliente pagante.</p>
+                    <div class="flex items-end justify-between gap-3 mt-6">
+                        <div><span class="block text-[11px] uppercase tracking-widest text-gray-400 font-semibold">Ebook</span><span class="text-2xl font-display font-extrabold text-primary">R$ 49,90</span></div>
+                    </div>
+                    <a href="https://wa.me/5511949360561?text=Quero%20o%20ebook%20de%20Copywriting%20por%20R%24%2049%2C90" target="_blank" rel="noopener noreferrer" class="mt-5 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Comprar no WhatsApp
+                    </a>
+                </div>
+                <!-- Vendas no WhatsApp -->
+                <div class="group bg-white rounded-2xl p-7 shadow-[0_30px_70px_-30px_rgba(143,0,204,0.55)] border border-white/5 flex flex-col scroll-animate hover:-translate-y-1 transition-transform duration-300" style="transition-delay:80ms">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.3-3.9A7.96 7.96 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold text-slate-900 leading-tight">Vendas no WhatsApp</h3>
+                    <p class="text-gray-500 text-sm mt-2 leading-relaxed flex-1">Feche mais no chat: tire objeção, mande preço e conduza o cliente até o sim.</p>
+                    <div class="flex items-end justify-between gap-3 mt-6">
+                        <div><span class="block text-[11px] uppercase tracking-widest text-gray-400 font-semibold">Ebook</span><span class="text-2xl font-display font-extrabold text-primary">R$ 49,90</span></div>
+                    </div>
+                    <a href="https://wa.me/5511949360561?text=Quero%20o%20ebook%20de%20Vendas%20no%20WhatsApp%20por%20R%24%2049%2C90" target="_blank" rel="noopener noreferrer" class="mt-5 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Comprar no WhatsApp
+                    </a>
+                </div>
+                <!-- Marketing Digital -->
+                <div class="group bg-white rounded-2xl p-7 shadow-[0_30px_70px_-30px_rgba(143,0,204,0.55)] border border-white/5 flex flex-col scroll-animate hover:-translate-y-1 transition-transform duration-300" style="transition-delay:120ms">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold text-slate-900 leading-tight">Marketing Digital</h3>
+                    <p class="text-gray-500 text-sm mt-2 leading-relaxed flex-1">A estratégia completa do zero ao cliente batendo na porta, sem jargão.</p>
+                    <div class="flex items-end justify-between gap-3 mt-6">
+                        <div><span class="block text-[11px] uppercase tracking-widest text-gray-400 font-semibold">Ebook</span><span class="text-2xl font-display font-extrabold text-primary">R$ 49,90</span></div>
+                    </div>
+                    <a href="https://wa.me/5511949360561?text=Quero%20o%20ebook%20de%20Marketing%20Digital%20por%20R%24%2049%2C90" target="_blank" rel="noopener noreferrer" class="mt-5 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Comprar no WhatsApp
+                    </a>
+                </div>
+                <!-- Instagram -->
+                <div class="group bg-white rounded-2xl p-7 shadow-[0_30px_70px_-30px_rgba(143,0,204,0.55)] border border-white/5 flex flex-col scroll-animate hover:-translate-y-1 transition-transform duration-300" style="transition-delay:160ms">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke-width="1.6"/><circle cx="12" cy="12" r="3.5" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+                    <h3 class="text-lg font-display font-bold text-slate-900 leading-tight">Instagram</h3>
+                    <p class="text-gray-500 text-sm mt-2 leading-relaxed flex-1">Monte um perfil que engaja e transforma seguidor em venda de verdade.</p>
+                    <div class="flex items-end justify-between gap-3 mt-6">
+                        <div><span class="block text-[11px] uppercase tracking-widest text-gray-400 font-semibold">Ebook</span><span class="text-2xl font-display font-extrabold text-primary">R$ 49,90</span></div>
+                    </div>
+                    <a href="https://wa.me/5511949360561?text=Quero%20o%20ebook%20de%20Instagram%20por%20R%24%2049%2C90" target="_blank" rel="noopener noreferrer" class="mt-5 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Comprar no WhatsApp
+                    </a>
+                </div>
+                <!-- Link na Bio -->
+                <div class="group bg-white rounded-2xl p-7 shadow-[0_30px_70px_-30px_rgba(143,0,204,0.55)] border border-white/5 flex flex-col scroll-animate hover:-translate-y-1 transition-transform duration-300" style="transition-delay:200ms">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5"><svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5m6.656-.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"/></svg></div>
+                    <h3 class="text-lg font-display font-bold text-slate-900 leading-tight">Link na Bio</h3>
+                    <p class="text-gray-500 text-sm mt-2 leading-relaxed flex-1">Uma página só que leva pra tudo e faz o clique da bio virar cliente.</p>
+                    <div class="flex items-end justify-between gap-3 mt-6">
+                        <div><span class="block text-[11px] uppercase tracking-widest text-gray-400 font-semibold">Ebook</span><span class="text-2xl font-display font-extrabold text-primary">R$ 49,90</span></div>
+                    </div>
+                    <a href="https://wa.me/5511949360561?text=Quero%20o%20ebook%20de%20Link%20na%20Bio%20por%20R%24%2049%2C90" target="_blank" rel="noopener noreferrer" class="mt-5 w-full bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Comprar no WhatsApp
+                    </a>
+                </div>
+            </div>
+            <p class="text-center text-white/40 text-sm mt-10 scroll-animate">R$ 49,90 cada. Fala com a gente no WhatsApp que enviamos o acesso pra você baixar na hora.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 px-4 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-14 scroll-animate">
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Perguntas <span class="gradient-text">frequentes</span></h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">A Academy é paga?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Os cursos são gratuitos pra quem usa a plataforma Axolutions. O ebook você também pode comprar separado, sem precisar da plataforma.</div></div></div>
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Onde fazer um curso de marketing digital?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Na Axo Academy. É um curso de marketing digital grátis dentro da plataforma Axolutions, com aula direta ao ponto, exercício, prova e certificado.</div></div></div>
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Ganho certificado?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim. Ao concluir o curso e passar na prova final, você recebe um certificado de conclusão.</div></div></div>
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Quanto tempo leva pra concluir?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">As aulas são diretas ao ponto. Dá pra concluir um curso em poucas horas e já aplicar no mesmo dia.</div></div></div>
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Preciso já ter um negócio?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Não. Os cursos servem pra quem está começando e pra quem já vende e quer vender mais.</div></div></div>
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Tem curso de Google Meu Negócio?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Tem. Além dele, a trilha traz curso de copywriting, vendas online, Instagram, blog, sites e a estratégia de marketing completa.</div></div></div>
+                <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Como compro só o ebook?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">É só falar com a gente no WhatsApp que enviamos o acesso ao ebook pra você baixar.</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative py-28 px-4 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-purple-600 to-purple-900"></div>
+        <picture><source srcset="images/copa.webp" type="image/webp"><img src="images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
+        <div class="relative z-10 max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6 scroll-animate">Bora aprender e aplicar hoje?</h2>
+            <p class="text-purple-100/80 text-lg mb-10 scroll-animate">Comece pelo curso do seu produto ou leve o ebook completo. A gente te ajuda no primeiro passo.</p>
+            <a href="https://wa.me/5511949360561" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white text-primary px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 scroll-animate">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Falar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- TEIA: resto da Axoplataforma -->
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14 scroll-animate">
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Explore o resto da <span class="gradient-text">Axoplataforma</span></h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">A Academy ensina, o resto da plataforma coloca em prática. Tudo conversa entre si na mesma conta.</p>
+            </div>
+            <!-- Destaque: plataforma (hub) -->
+            <a href="plataforma.html" class="group block mb-6 scroll-animate">
+                <div class="relative rounded-3xl p-8 lg:p-10 bg-[#07070f] overflow-hidden">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_right,rgba(143,0,204,0.35),transparent_60%)] pointer-events-none"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-primary uppercase tracking-widest mb-2">A plataforma inteira</div>
+                            <h3 class="text-2xl lg:text-3xl font-display font-extrabold text-white mb-2">Conheça a Axoplataforma</h3>
+                            <p class="text-white/60 max-w-lg">Site com IA, atendente no WhatsApp, analytics, link na bio, Google Meu Negócio e cursos. Tudo num lugar só.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 text-white font-semibold shrink-0 group-hover:gap-3 transition-all">Ver a plataforma <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></span>
+                    </div>
+                </div>
+            </a>
+            <!-- Grade dos outros produtos -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="cosmos.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Cosmos</div><div class="text-sm text-gray-500">Site com IA</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="orbita.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate" style="transition-delay:60ms">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.3-3.9A7.96 7.96 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Órbita</div><div class="text-sm text-gray-500">Chatbot no WhatsApp</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="analytics.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate" style="transition-delay:120ms">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Analytics</div><div class="text-sm text-gray-500">Mapa de calor</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="link-na-bio.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5m6.656-.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Link na Bio</div><div class="text-sm text-gray-500">Um link pra tudo</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="google-meu-negocio.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate" style="transition-delay:60ms">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Google Meu Negócio</div><div class="text-sm text-gray-500">Analisador grátis</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>window.AXO_CONFIG = { page: 'produtos', navMode: 'transparent' };</script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/footer.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script>
+    (function() {
+        document.querySelectorAll('.faq-question').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var answer = this.nextElementSibling;
+                var icon = this.querySelector('.faq-icon');
+                var isOpen = answer.classList.contains('open');
+                document.querySelectorAll('.faq-answer').forEach(function(a) { a.classList.remove('open'); });
+                document.querySelectorAll('.faq-icon').forEach(function(ic) { ic.style.transform = 'rotate(0deg)'; });
+                if (!isOpen) { answer.classList.add('open'); if (icon) icon.style.transform = 'rotate(45deg)'; }
+            });
+        });
+        var animEls = document.querySelectorAll('.scroll-animate,.scroll-animate-scale');
+        if (animEls.length && 'IntersectionObserver' in window) {
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('animate-in'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            animEls.forEach(function(el) { obs.observe(el); });
+        }
+    })();
+    </script>
+    <script>
+    (function() {
+        var map = document.getElementById('journeyMap');
+        if (!map) return;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) { map.classList.add('go'); return; }
+        if ('IntersectionObserver' in window) {
+            var o = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { if (e.isIntersecting) { map.classList.add('go'); o.unobserve(e.target); } });
+            }, { threshold: 0.25 });
+            o.observe(map);
+        } else {
+            map.classList.add('go');
+        }
+    })();
+    </script>
+</body>
+</html>

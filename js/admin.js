@@ -14,19 +14,29 @@ var Admin = {
 
     login: function() {
         var input = document.getElementById('login-password').value;
-        var codes = [65,100,109,49,50,51,64];
-        var pass = '';
-        for (var i = 0; i < codes.length; i++) pass += String.fromCharCode(codes[i]);
-        if (input === pass) {
-            sessionStorage.setItem('axo_admin_logged', 'true');
-            document.getElementById('login-error').classList.add('hidden');
-            this.showPanel();
-        } else {
+        var self = this;
+        // A senha é verificada no servidor (/api/admin-login). Nada de senha no
+        // cliente: o servidor devolve um cookie de sessão HttpOnly se bater.
+        fetch('/api/admin-login', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: input })
+        }).then(function (r) {
+            if (r.ok) {
+                sessionStorage.setItem('axo_admin_logged', 'true');
+                document.getElementById('login-error').classList.add('hidden');
+                self.showPanel();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }).catch(function () {
             document.getElementById('login-error').classList.remove('hidden');
-        }
+        });
     },
 
     logout: function() {
+        fetch('/api/admin-login', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ logout: true }) }).catch(function () {});
         sessionStorage.removeItem('axo_admin_logged');
         document.getElementById('admin-panel').classList.add('hidden');
         document.getElementById('login-screen').classList.remove('hidden');
@@ -158,12 +168,13 @@ var Admin = {
 
     /* ===== IMAGE UPLOAD ===== */
 
-    /* Compress/resize image via canvas before storing.
-       Max dimension 800px, JPEG quality 0.65 → ~20-60KB for fast page loads */
-    /* Compress an image File → returns a Blob (JPEG, max 800px, 65% quality) */
+    /* Converte/redimensiona a imagem via canvas antes de subir. Sai sempre em
+       WEBP (máx 1920px, qualidade 0.85): nitidez alta com arquivo bem menor que
+       JPEG. O usuário sobe qualquer formato (png/jpg/etc) e vira webp. Imagens
+       menores que 1920px não são ampliadas. */
     _compressToBlob: function(file, maxSize, quality) {
-        maxSize = maxSize || 800;
-        quality = quality || 0.65;
+        maxSize = maxSize || 1920;
+        quality = quality || 0.85;
         return new Promise(function(resolve) {
             var url = URL.createObjectURL(file);
             var img = new Image();
@@ -177,7 +188,7 @@ var Admin = {
                 var c = document.createElement('canvas');
                 c.width = w; c.height = h;
                 c.getContext('2d').drawImage(img, 0, 0, w, h);
-                c.toBlob(function(blob) { resolve(blob || file); }, 'image/jpeg', quality);
+                c.toBlob(function(blob) { resolve(blob || file); }, 'image/webp', quality);
             };
             img.onerror = function() { URL.revokeObjectURL(url); resolve(file); };
             img.src = url;
@@ -186,7 +197,7 @@ var Admin = {
 
     /* Generate a unique storage path: folder/timestamp-random.ext */
     _storagePath: function(file, folder) {
-        var ext = file.type === 'image/gif' ? 'gif' : 'jpg';
+        var ext = file.type === 'image/gif' ? 'gif' : 'webp';
         return folder + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
     },
 
@@ -216,7 +227,7 @@ var Admin = {
             : self._compressToBlob(file);
         uploadPromise.then(function(blob) {
             var path = self._storagePath(file, folder);
-            var uploadFile = new File([blob], path.split('/').pop(), { type: isGif ? 'image/gif' : 'image/jpeg' });
+            var uploadFile = new File([blob], path.split('/').pop(), { type: isGif ? 'image/gif' : 'image/webp' });
             return DataManager.uploadFile(uploadFile, path);
         }).then(function(publicUrl) {
             delete dataEl.dataset.uploading;
@@ -888,10 +899,6 @@ var Admin = {
 
     /* ===== GALLERY ===== */
     addGalleryImage: function(dataUrl) {
-        if (this.projGallery.length >= 10) {
-            alert('Maximo de 10 imagens na galeria');
-            return;
-        }
         this.projGallery.push({ url: dataUrl, caption: '' });
         this.renderGalleryPreview();
     },
@@ -1137,7 +1144,7 @@ var Admin = {
                 }
                 var uploadPromise = isGif ? Promise.resolve(file) : self._compressToBlob(file);
                 uploadPromise.then(function(blob) {
-                    var uploadFile = new File([blob], path.split('/').pop(), { type: isGif ? 'image/gif' : 'image/jpeg' });
+                    var uploadFile = new File([blob], path.split('/').pop(), { type: isGif ? 'image/gif' : 'image/webp' });
                     return DataManager.uploadFile(uploadFile, path);
                 }).then(function(publicUrl) {
                     var tmp = document.getElementById(tempId);

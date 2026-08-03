@@ -14,7 +14,7 @@
     var html =
         '<footer class="bg-[#080810] text-gray-400 pt-20 pb-8 px-4">' +
         '<div class="max-w-7xl mx-auto">' +
-            '<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">' +
+            '<div class="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">' +
                 /* col 1 – brand */
                 '<div>' +
                     '<div class="flex items-center gap-2.5 mb-5">' +
@@ -47,7 +47,20 @@
                         '<a href="/e-commerce.html" class="hover:text-primary transition-colors">E-commerce</a>' +
                     '</nav>' +
                 '</div>' +
-                /* col 4 – seções */
+                /* col 4 – produtos */
+                '<div>' +
+                    '<h4 class="text-white font-display font-semibold mb-5">Axoplataforma</h4>' +
+                    '<nav class="flex flex-col gap-3 text-sm">' +
+                        '<a href="/plataforma.html" class="' + ac('produtos') + '">Plataforma</a>' +
+                        '<a href="/orbita.html" class="hover:text-primary transition-colors">Órbita (WhatsApp IA)</a>' +
+                        '<a href="/cosmos.html" class="hover:text-primary transition-colors">Cosmos (Site com IA)</a>' +
+                        '<a href="/analytics.html" class="hover:text-primary transition-colors">Analytics</a>' +
+                        '<a href="/link-na-bio.html" class="hover:text-primary transition-colors">Link na Bio</a>' +
+                        '<a href="/google-meu-negocio.html" class="hover:text-primary transition-colors">Analisador Google (grátis)</a>' +
+                        '<a href="/academy.html" class="hover:text-primary transition-colors">Academy</a>' +
+                    '</nav>' +
+                '</div>' +
+                /* col 5 – seções */
                 '<div>' +
                     '<h4 class="text-white font-display font-semibold mb-5">Seções</h4>' +
                     '<nav class="flex flex-col gap-3 text-sm">' +

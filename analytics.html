@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Calor e Analytics para Sites | Axolutions</title>
+    <meta name="description" content="Mapa de calor e analytics de site em tempo real: veja onde as pessoas clicam, as páginas mais vistas e os cliques no WhatsApp. Descubra o que o seu site esconde.">
+    <meta name="keywords" content="mapa de calor site, heatmap site, analytics de site, métricas de site, ferramenta de mapa de calor, onde as pessoas clicam no site, como analisar o tráfego do meu site">
+    <meta property="og:title" content="Mapa de Calor e Analytics para Sites | Axolutions">
+    <meta property="og:description" content="Mapa de calor e analytics de site em tempo real: veja onde as pessoas clicam, as páginas mais vistas e os cliques no WhatsApp. Descubra o que o seu site esconde.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.axolutions.com.br/analytics.html">
+    <meta property="og:image" content="https://www.axolutions.com.br/images/logo.png">
+    <meta property="og:site_name" content="Axolutions">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mapa de Calor e Analytics para Sites | Axolutions">
+    <meta name="twitter:description" content="Mapa de calor e analytics de site em tempo real: veja onde as pessoas clicam, as páginas mais vistas e os cliques no WhatsApp. Descubra o que o seu site esconde.">
+    <meta name="twitter:image" content="https://www.axolutions.com.br/images/logo.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.axolutions.com.br/analytics.html">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="css/output.css">
+    <style>
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .scroll-animate.animate-in { opacity: 1 !important; transform: translateY(0) !important; }
+        .gradient-text { background: linear-gradient(135deg, #8f00cc 0%, #cc44ff 50%, #8f00cc 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: #8f00cc; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; border-radius: 1px; }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .menu-panel { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+        .feature-card { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .feature-card:hover { transform: translateY(-6px); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), padding 0.3s; }
+        .faq-answer.open { max-height: 400px; }
+    </style>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Analytics Axolutions", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Analytics de site com mapa de calor de cliques, visitantes em tempo real, páginas mais vistas, jornada do visitante e contatos via WhatsApp, dados de verdade pra transformar visita em cliente.", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }, "provider": { "@type": "Organization", "name": "Axolutions", "url": "https://www.axolutions.com.br/" } }
+    </script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.axolutions.com.br/" }, { "@type": "ListItem", "position": 2, "name": "Analytics", "item": "https://www.axolutions.com.br/analytics.html" } ] }
+    </script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [ { "@type": "Question", "name": "O que é um mapa de calor de site?", "acceptedAnswer": { "@type": "Answer", "text": "É uma imagem colorida do seu site que mostra onde os visitantes mais clicam e passam o mouse. As áreas quentes tiveram muita atenção, as frias quase ninguém tocou." } }, { "@type": "Question", "name": "Como saber onde as pessoas clicam no meu site?", "acceptedAnswer": { "@type": "Answer", "text": "Com o mapa de calor do Analytics da Axolutions você vê, em cores, cada ponto onde as pessoas clicam. Descobre o que dá resultado e o botão que ninguém percebe." } }, { "@type": "Question", "name": "Preciso instalar algo no meu site?", "acceptedAnswer": { "@type": "Answer", "text": "Se seu site é da Axolutions, o analytics já vem junto. Em outros sites, a gente te ajuda a colocar um trechinho de código uma única vez." } }, { "@type": "Question", "name": "Os dados são em tempo real?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Você vê o movimento do seu site conforme ele acontece, além do histórico dos últimos dias." } }, { "@type": "Question", "name": "O mapa de calor funciona no celular?", "acceptedAnswer": { "@type": "Answer", "text": "Funciona. O mapa mostra os cliques tanto no computador quanto no celular, que hoje é a maior parte do tráfego." } }, { "@type": "Question", "name": "Isso respeita a LGPD e a privacidade dos visitantes?", "acceptedAnswer": { "@type": "Answer", "text": "Sim, com foco em respeitar a LGPD. A gente olha comportamento agregado (cliques, páginas, tempo), não expõe dados pessoais de quem visita o seu site." } }, { "@type": "Question", "name": "Quanto custa?", "acceptedAnswer": { "@type": "Answer", "text": "Fale com a Axolutions no WhatsApp que a gente monta o plano certo pro tamanho do seu site." } } ] }
+    </script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+    <!-- HERO -->
+    <section class="pt-40 pb-56 lg:pb-64 px-4 bg-[#07070f] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(143,0,204,0.28),transparent_60%)] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-20">
+            <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-5 py-2 mb-6 scroll-animate">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>
+                <span class="text-xs font-semibold text-primary uppercase tracking-widest">Analytics</span>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6 scroll-animate animate-in text-white">
+                Pare de adivinhar por que seu site <span class="gradient-text">não vende</span>
+            </h1>
+            <p class="text-white/60 text-xl leading-relaxed max-w-2xl mx-auto scroll-animate">Todo dia entra gente no seu site e vai embora sem falar com você. O Analytics da Axolutions mostra, em cores e números claros, onde clicam, onde travam e onde você está perdendo dinheiro. Chega de achismo.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 scroll-animate">
+                <a href="https://wa.me/5511949360561" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-primary-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Quero turbinar meu site
+                </a>
+                <a href="https://app.axolutions.com.br" target="_blank" rel="noopener noreferrer" class="border border-white/25 hover:border-white/50 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/5 inline-flex items-center justify-center gap-2">Acessar plataforma</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRINT EM DESTAQUE (janela macOS, sobreposto ao hero) -->
+    <section class="px-4 bg-white relative z-20">
+        <div class="max-w-5xl mx-auto -mt-40 lg:-mt-48 scroll-animate">
+            <div class="relative rounded-3xl bg-slate-900/95 p-2.5 lg:p-3 shadow-[0_50px_100px_-30px_rgba(143,0,204,0.55)] ring-1 ring-white/10">
+                <div class="flex items-center gap-2 px-3 py-2.5">
+                    <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+                    <span class="ml-3 text-[11px] font-medium text-white/40 tracking-wide">Analytics: o painel do seu site ao vivo</span>
+                </div>
+                <img src="images/print-analytics.webp" alt="Painel de Analytics da Axolutions com mapa de calor e métricas do site em tempo real" width="1600" height="803" class="rounded-2xl shadow-[0_30px_60px_-25px_rgba(0,0,0,0.4)] w-full h-auto ring-1 ring-slate-200/70" loading="lazy" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD VIVO (seção-assinatura do Analytics) -->
+    <style>
+        .axo-dash-wrap { --axo-purple:#8f00cc; }
+        @keyframes axoBarGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+        @keyframes axoLivePulse { 0% { box-shadow: 0 0 0 0 rgba(16,185,129,.55); } 70% { box-shadow: 0 0 0 9px rgba(16,185,129,0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
+        @keyframes axoLiveDot { 0%,100% { opacity:1; transform: scale(1); } 50% { opacity:.45; transform: scale(.7); } }
+        .axo-bar { transform-origin: bottom; transform: scaleY(0); border-radius: 8px 8px 3px 3px; background: linear-gradient(180deg, #cc44ff 0%, #8f00cc 100%); }
+        .axo-dash-panel.axo-live .axo-bar { animation: axoBarGrow 1.1s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .axo-live-badge span.dot { display:inline-block; width:8px; height:8px; border-radius:9999px; background:#10b981; animation: axoLiveDot 1.4s ease-in-out infinite; }
+        .axo-live-badge { animation: axoLivePulse 2.4s ease-out infinite; }
+        .axo-hm-cell { transition: transform .2s ease, filter .2s ease, box-shadow .2s ease; will-change: transform; }
+        .axo-hm-cell:hover { transform: scale(1.22); filter: brightness(1.25) saturate(1.2); box-shadow: 0 6px 18px -4px rgba(0,0,0,.55); z-index: 5; }
+        .axo-kpi-num { font-variant-numeric: tabular-nums; }
+        @media (prefers-reduced-motion: reduce) {
+            .axo-dash-panel .axo-bar { transform: scaleY(1) !important; animation: none !important; }
+            .axo-live-badge, .axo-live-badge span.dot { animation: none !important; }
+            .axo-hm-cell { transition: none !important; }
+        }
+    </style>
+    <section class="py-20 px-4 bg-[#0a0014] relative overflow-hidden">
+        <div class="absolute -top-24 right-0 w-96 h-96 bg-[#8f00cc]/25 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 -left-20 w-80 h-80 bg-[#8f00cc]/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="axo-dash-wrap max-w-6xl mx-auto relative z-10 scroll-animate" data-axo-dash>
+            <div class="text-center mb-12 max-w-2xl mx-auto">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-widest mb-4 bg-white/5 border border-white/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Dashboard vivo</span>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold leading-tight text-white">Assim fica o seu site quando ele <span class="gradient-text">para de esconder as coisas</span></h2>
+                <p class="text-white/55 mt-4">Um gostinho de como o painel respira. Os números abaixo são um exemplo ilustrativo de demonstração, não dados de um cliente real. No seu painel, tudo isso é o movimento verdadeiro do seu site.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-6 items-start">
+                <!-- Painel de métricas -->
+                <div class="axo-dash-panel min-w-0 lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_40px_90px_-45px_rgba(143,0,204,0.6)]">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></span>
+                            <span class="text-white/80 font-display font-semibold">Visão geral</span>
+                        </div>
+                        <span class="axo-live-badge inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-400/30 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-emerald-300"><span class="dot"></span>Ao vivo</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="min-w-0 rounded-xl bg-white/[0.04] border border-white/10 p-4">
+                            <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-1">Visitantes no mês</p>
+                            <p class="axo-kpi-num text-2xl sm:text-3xl leading-none break-words font-display font-bold text-white"><span class="axo-count" data-target="12480" data-dur="1600">0</span></p>
+                            <p class="text-emerald-300 text-xs font-semibold mt-1">+18% vs mês passado</p>
+                        </div>
+                        <div class="min-w-0 rounded-xl bg-white/[0.04] border border-white/10 p-4">
+                            <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-1">Cliques no WhatsApp</p>
+                            <p class="axo-kpi-num text-2xl sm:text-3xl leading-none break-words font-display font-bold text-white"><span class="axo-count" data-target="486" data-dur="1600">0</span></p>
+                            <p class="text-emerald-300 text-xs font-semibold mt-1">+31% vs mês passado</p>
+                        </div>
+                        <div class="min-w-0 rounded-xl bg-white/[0.04] border border-white/10 p-4">
+                            <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-1">Taxa de conversão</p>
+                            <p class="axo-kpi-num text-2xl sm:text-3xl leading-none break-words font-display font-bold text-white"><span class="axo-count" data-target="3.9" data-decimals="1" data-dur="1600">0</span><span class="text-xl align-top text-white/70">%</span></p>
+                            <p class="text-white/40 text-xs mt-1">visita que vira conversa</p>
+                        </div>
+                        <div class="min-w-0 rounded-xl bg-white/[0.04] border border-white/10 p-4">
+                            <p class="text-white/50 text-[11px] font-semibold uppercase tracking-widest mb-1">Páginas vistas</p>
+                            <p class="axo-kpi-num text-2xl sm:text-3xl leading-none break-words font-display font-bold text-white"><span class="axo-count" data-target="41200" data-dur="1600">0</span></p>
+                            <p class="text-white/40 text-xs mt-1">nos últimos 30 dias</p>
+                        </div>
+                    </div>
+
+                    <!-- Mini gráfico de barras -->
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <p class="text-white/60 text-sm font-semibold">Visitantes por dia</p>
+                            <p class="text-white/35 text-xs">última semana</p>
+                        </div>
+                        <div class="flex items-end justify-between gap-2 sm:gap-3 h-36">
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:46%;animation-delay:.05s"></div><span class="text-white/40 text-[11px]">Seg</span></div>
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:63%;animation-delay:.13s"></div><span class="text-white/40 text-[11px]">Ter</span></div>
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:55%;animation-delay:.21s"></div><span class="text-white/40 text-[11px]">Qua</span></div>
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:81%;animation-delay:.29s"></div><span class="text-white/40 text-[11px]">Qui</span></div>
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:72%;animation-delay:.37s"></div><span class="text-white/40 text-[11px]">Sex</span></div>
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:96%;animation-delay:.45s"></div><span class="text-white/40 text-[11px]">Sáb</span></div>
+                            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end"><div class="axo-bar w-full" style="height:67%;animation-delay:.53s"></div><span class="text-white/40 text-[11px]">Dom</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa de calor -->
+                <div class="min-w-0 lg:col-span-2 bg-white/[0.03] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_40px_90px_-45px_rgba(143,0,204,0.6)]">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
+                            <span class="text-white/80 font-display font-semibold">Mapa de calor</span>
+                        </div>
+                    </div>
+                    <p class="text-white/45 text-xs mb-4">Passe o mouse nas células. Onde está vermelho, é onde as pessoas mais tocam.</p>
+                    <div class="grid grid-cols-10 gap-1 sm:gap-1.5 rounded-xl overflow-hidden">
+                        <!-- 6 linhas x 10 colunas, intensidade ilustrativa -->
+                        <div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div>
+                        <div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div>
+                        <div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(239,68,68,.9)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(239,68,68,.9)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div>
+                        <div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(239,68,68,.9)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(239,68,68,.9)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(239,68,68,.9)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div>
+                        <div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(245,158,11,.75)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div>
+                        <div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.5)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div><div class="axo-hm-cell aspect-square rounded-[4px]" style="background:rgba(16,185,129,.12)"></div>
+                    </div>
+                    <!-- Legenda -->
+                    <div class="flex items-center justify-between mt-5">
+                        <span class="text-white/50 text-xs font-medium">Pouco</span>
+                        <div class="flex-1 mx-3 h-2.5 rounded-full" style="background:linear-gradient(90deg,#10b981 0%,#f59e0b 55%,#ef4444 100%)"></div>
+                        <span class="text-white/50 text-xs font-medium">Muito</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O QUE VOCÊ ENXERGA -->
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 max-w-2xl mx-auto scroll-animate">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[12px] font-semibold uppercase tracking-widest mb-4 bg-primary/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>O que você passa a enxergar</span>
+                <h2 class="text-3xl lg:text-4xl font-display font-bold leading-tight">Com mapa de calor e analytics, seu site deixa de ser uma <span class="gradient-text">caixa preta</span></h2>
+                <p class="text-gray-500 mt-4">Cada número aqui é uma decisão que você deixa de tomar no escuro. Sem planilha, sem termo técnico, sem enrolação.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Mapa de calor</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Enxergue em cores exatamente onde as pessoas clicam e onde nem chegam. Aquele botão que você achava importante talvez ninguém veja.</p>
+                </div>
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:60ms">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Visitantes em tempo real</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Veja quem está no seu site agora, de onde chegou e por onde anda. Descubra se aquele post no Instagram virou visita de verdade.</p>
+                </div>
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:120ms">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Páginas mais vistas</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Saiba qual conteúdo prende as pessoas e qual faz elas fugirem. Coloque energia no que já funciona e conserte o que espanta cliente.</p>
+                </div>
+                <div class="feature-card block bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:180ms">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Contatos no WhatsApp</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">A métrica que paga a conta: quantos visitantes clicaram pra te chamar. Não mede curtida, mede conversa que pode virar venda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- POR QUE ISSO IMPORTA -->
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 max-w-2xl mx-auto scroll-animate">
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Por que o analytics do seu site <span class="gradient-text">importa pra você</span></h2>
+                <p class="text-gray-500 mt-4">Site bonito sem dado é aposta. Com o Analytics, cada mudança que você faz tem motivo e tem resultado pra provar.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="feature-card bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Decida com dados</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Chega de mexer no site no escuro e torcer. Você vê o que os visitantes realmente fazem e muda com base em fato, não em palpite de fim de semana.</p>
+                </div>
+                <div class="feature-card bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:60ms">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Ache o gargalo</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Descubra em qual página as pessoas desistem e onde você está perdendo cliente logo antes de ele te chamar. Tapar esse buraco é dinheiro novo, sem gastar mais em anúncio.</p>
+                </div>
+                <div class="feature-card bg-gray-50 rounded-2xl p-8 border border-gray-100 scroll-animate" style="transition-delay:120ms">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5"><svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg></div>
+                    <h3 class="text-lg font-display font-bold mb-2">Prove o que funciona</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Trocou um texto ou um botão? Compare o antes e o depois e saiba, na prática, se rendeu mais contato. Você para de discutir no achismo e passa a mostrar número.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 px-4 bg-gray-50/80">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-14 scroll-animate">
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Perguntas <span class="gradient-text">frequentes</span></h2>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">O que é um mapa de calor de site?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">É uma imagem colorida do seu site que mostra onde os visitantes mais clicam e passam o mouse. As áreas quentes tiveram muita atenção, as frias quase ninguém tocou.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Como saber onde as pessoas clicam no meu site?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Com o mapa de calor do Analytics da Axolutions você vê, em cores, cada ponto onde as pessoas clicam. Descobre o que dá resultado e o botão que ninguém percebe.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Preciso instalar algo no meu site?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Se seu site é da Axolutions, o analytics já vem junto. Em outros sites, a gente te ajuda a colocar um trechinho de código uma única vez.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Os dados são em tempo real?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim. Você vê o movimento do seu site conforme ele acontece, além do histórico dos últimos dias.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">O mapa de calor funciona no celular?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Funciona. O mapa mostra os cliques tanto no computador quanto no celular, que hoje é a maior parte do tráfego.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Isso respeita a LGPD e a privacidade dos visitantes?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Sim, com foco em respeitar a LGPD. A gente olha comportamento agregado (cliques, páginas, tempo), não expõe dados pessoais de quem visita o seu site.</div></div></div>
+                <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden scroll-animate"><button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-gray-100/50 transition-colors"><span class="font-display font-semibold text-lg">Quanto custa?</span><svg class="faq-icon w-5 h-5 text-primary flex-shrink-0 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button><div class="faq-answer px-6 text-gray-600 leading-relaxed"><div class="pb-6">Fale com a Axolutions no WhatsApp que a gente monta o plano certo pro tamanho do seu site.</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative py-28 px-4 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-purple-600 to-purple-900"></div>
+        <picture><source srcset="images/copa.webp" type="image/webp"><img src="images/copa.png" alt="" aria-hidden="true" width="960" height="540" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.06]" loading="lazy" decoding="async"></picture>
+        <div class="relative z-10 max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6 scroll-animate">Quer turbinar seu site com dados de verdade?</h2>
+            <p class="text-purple-100/80 text-lg mb-10 scroll-animate">Me manda o link do seu site que eu te mostro, na hora, o que dá pra descobrir sobre quem entra nele.</p>
+            <a href="https://wa.me/5511949360561" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white text-primary px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 scroll-animate">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Falar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- TEIA: resto da Axoplataforma -->
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14 scroll-animate">
+                <h2 class="text-3xl lg:text-4xl font-display font-bold">Explore o resto da <span class="gradient-text">Axoplataforma</span></h2>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">O Analytics é só uma peça do sistema. Tudo conversa entre si na mesma conta.</p>
+            </div>
+            <!-- Destaque: plataforma (hub) -->
+            <a href="plataforma.html" class="group block mb-6 scroll-animate">
+                <div class="relative rounded-3xl p-8 lg:p-10 bg-[#07070f] overflow-hidden">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_right,rgba(143,0,204,0.35),transparent_60%)] pointer-events-none"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+                        <div>
+                            <div class="text-xs font-semibold text-primary uppercase tracking-widest mb-2">A plataforma inteira</div>
+                            <h3 class="text-2xl lg:text-3xl font-display font-extrabold text-white mb-2">Conheça a Axoplataforma</h3>
+                            <p class="text-white/60 max-w-lg">Site com IA, atendente no WhatsApp, analytics, link na bio, Google Meu Negócio e cursos. Tudo num lugar só.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 text-white font-semibold shrink-0 group-hover:gap-3 transition-all">Ver a plataforma <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></span>
+                    </div>
+                </div>
+            </a>
+            <!-- Grade dos outros produtos -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="cosmos.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Cosmos</div><div class="text-sm text-gray-500">Site com IA</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="orbita.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate" style="transition-delay:60ms">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.3-3.9A7.96 7.96 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Órbita</div><div class="text-sm text-gray-500">Atendente no WhatsApp</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="link-na-bio.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate" style="transition-delay:120ms">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5m6.656-.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Link na Bio</div><div class="text-sm text-gray-500">Um link pra tudo</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="google-meu-negocio.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Google Meu Negócio</div><div class="text-sm text-gray-500">Analisador grátis</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="academy.html" class="feature-card group bg-gray-50 rounded-2xl p-6 border border-gray-100 flex items-center gap-4 scroll-animate" style="transition-delay:60ms">
+                    <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z"/></svg></div>
+                    <div><div class="font-display font-bold text-slate-900">Axo Academy</div><div class="text-sm text-gray-500">Cursos e ebooks</div></div>
+                    <svg class="w-4 h-4 text-primary ml-auto shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>window.AXO_CONFIG = { page: 'produtos', navMode: 'transparent' };</script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/footer.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script>
+    (function() {
+        document.querySelectorAll('.faq-question').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var answer = this.nextElementSibling;
+                var icon = this.querySelector('.faq-icon');
+                var isOpen = answer.classList.contains('open');
+                document.querySelectorAll('.faq-answer').forEach(function(a) { a.classList.remove('open'); });
+                document.querySelectorAll('.faq-icon').forEach(function(ic) { ic.style.transform = 'rotate(0deg)'; });
+                if (!isOpen) { answer.classList.add('open'); if (icon) icon.style.transform = 'rotate(45deg)'; }
+            });
+        });
+        var animEls = document.querySelectorAll('.scroll-animate,.scroll-animate-scale');
+        if (animEls.length && 'IntersectionObserver' in window) {
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('animate-in'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            animEls.forEach(function(el) { obs.observe(el); });
+        }
+    })();
+    </script>
+    <!-- Count-up do Dashboard vivo (observer próprio, independente do IIFE acima) -->
+    <script>
+    (function() {
+        var dash = document.querySelector('[data-axo-dash]');
+        if (!dash) return;
+        var panel = dash.querySelector('.axo-dash-panel');
+        var counters = dash.querySelectorAll('.axo-count');
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function fmt(value, decimals) {
+            var fixed = value.toFixed(decimals);
+            var parts = fixed.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return parts.length > 1 ? parts[0] + ',' + parts[1] : parts[0];
+        }
+        function setFinal(el) {
+            var target = parseFloat(el.getAttribute('data-target')) || 0;
+            var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+            el.textContent = fmt(target, decimals);
+        }
+        function runCountUp(el) {
+            var target = parseFloat(el.getAttribute('data-target')) || 0;
+            var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+            var dur = parseInt(el.getAttribute('data-dur'), 10) || 1600;
+            var start = null;
+            function step(ts) {
+                if (start === null) start = ts;
+                var p = Math.min((ts - start) / dur, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = fmt(target * eased, decimals);
+                if (p < 1) requestAnimationFrame(step); else setFinal(el);
+            }
+            requestAnimationFrame(step);
+        }
+        function activate() {
+            if (panel) panel.classList.add('axo-live');
+            counters.forEach(function(el) { reduce ? setFinal(el) : runCountUp(el); });
+        }
+
+        if (reduce || !('IntersectionObserver' in window)) {
+            if (panel) panel.classList.add('axo-live');
+            counters.forEach(setFinal);
+            return;
+        }
+        var started = false;
+        var dashObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting && !started) {
+                    started = true;
+                    activate();
+                    dashObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.35 });
+        dashObs.observe(dash);
+    })();
+    </script>
+</body>
+</html>
