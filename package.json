@@ -9,7 +9,12 @@
     "css:watch": "tailwindcss -i css/tailwind.css -o css/output.css --watch",
     "sitemap:build": "node scripts/generate-sitemap.js",
     "blog:build": "node scripts/generate-blog.js",
-    "content:build": "npm run sitemap:build && npm run blog:build"
+    "footer:build": "node scripts/build-footer.js",
+    "nav:build": "node scripts/build-nav.js",
+    "reviews:build": "node scripts/build-reviews.js",
+    "noscript:build": "node scripts/build-noscript.js",
+    "chrome:build": "npm run nav:build && npm run footer:build && npm run reviews:build && npm run noscript:build",
+    "content:build": "npm run sitemap:build && npm run blog:build && npm run chrome:build"
   },
   "devDependencies": {
     "sharp": "^0.34.5",

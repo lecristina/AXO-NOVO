@@ -193,17 +193,10 @@
 
         var testimonials = (typeof DataManager !== 'undefined') ? await DataManager.getData(DataManager.keys.TESTIMONIALS) : null;
 
-        // Fallback sample testimonials if none exist in storage
-        if (!testimonials || testimonials.length === 0) {
-            testimonials = [
-                { name: 'Ana Carolina', role: 'CEO, StartupBR', rating: 5, text: 'A Axolutions entregou nosso site em tempo recorde. A qualidade é impressionante e o suporte é incrível.' },
-                { name: 'Ricardo Mendes', role: 'Diretor, TechCorp', rating: 5, text: 'O sistema ERP que desenvolveram transformou completamente nossa operação. Recomendo a todos.' },
-                { name: 'Juliana Silva', role: 'Empreendedora', rating: 5, text: 'Recebi a prévia do meu site no mesmo dia que entrei em contato. Superou todas as expectativas!' },
-                { name: 'Carlos Eduardo', role: 'Fundador, InovaBiz', rating: 5, text: 'Profissionalismo, qualidade e entrega rápida. A Axolutions é referência no mercado.' },
-                { name: 'Fernanda Costa', role: 'Marketing Manager', rating: 5, text: 'Nossa landing page aumentou a conversão em 3x depois que a Axolutions redesenhou tudo.' },
-                { name: 'Thiago Alves', role: 'E-commerce Owner', rating: 5, text: 'A loja online ficou perfeita. Vendas aumentaram desde o primeiro mês. Equipe top!' }
-            ];
-        }
+        /* As avaliações reais do Google já estão no HTML estático do carrossel
+           (geradas por scripts/build-reviews.js), para que crawlers sem JS as
+           leiam. Aqui só substituímos se o painel admin tiver depoimentos
+           cadastrados — nunca apagamos o conteúdo real para deixar vazio. */
 
         /* Google-reviews style card */
         var AVATAR_COLORS = ['#ea4335','#4285f4','#34a853','#fbbc04','#ff6d00','#8f00cc'];
@@ -233,8 +226,9 @@
                 + '</div>';
         }
 
-        var allCards = testimonials.map(buildCard).join('');
-        track.innerHTML = allCards;
+        if (testimonials && testimonials.length > 0) {
+            track.innerHTML = testimonials.map(buildCard).join('');
+        }
 
         // Arrow navigation
         var prevBtn = document.getElementById('dep-prev');
