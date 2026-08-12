@@ -55,7 +55,8 @@ function buildFooter(page) {
                 '<a href="/blog.html" class="' + ac('blog', page) + '">Blog</a>' +
                 '<a href="/projetos.html" class="' + ac('projetos', page) + '">Projetos</a>' +
                 '<a href="/depoimentos.html" class="' + ac('depoimentos', page) + '">Depoimentos</a>' +
-                '<a href="/admin.html" class="' + LINK + '">Painel Admin</a>' +
+                /* Painel Admin NÃO entra aqui: linkar admin.html do rodapé público
+                   o expõe a crawlers e polui o índice sem necessidade. */
             '</nav>' +
         '</div>' +
         '<div>' +
