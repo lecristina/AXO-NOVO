@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./*.html', './js/*.js'],
+  // Inclui blog/ e scripts/: os posts gerados e os geradores de markup
+  // (nav, rodapé, depoimentos) usam classes que precisam sobreviver ao purge.
+  content: ['./*.html', './blog/**/*.html', './js/*.js', './scripts/*.js'],
   darkMode: 'class',
   theme: {
     extend: {
